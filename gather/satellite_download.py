@@ -6,6 +6,12 @@ import logging
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logging.basicConfig(level=LOGLEVEL)
 
+
+class SIDownload:
+    def __init__(self):
+        pass
+
+
 STAC_API_URL = "https://earth-search.aws.element84.com/v0"
 COLLECTION = ["landsat-8-l1-c1"]
 
