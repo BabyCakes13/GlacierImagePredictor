@@ -9,7 +9,13 @@ class GlacierFactory:
 
         self.line = next(self.csv)
 
-    def get_next_glacier(self):
+    def get_next_glacier(self) -> Glacier:
+        """
+        Function which returns a glacier object from a CSV line.
+
+        A line from the provided CSV file is read and converted to a
+        Glacier object.
+        """
         self.line = next(self.csv)
 
         if not self.line:
