@@ -1,5 +1,6 @@
-from gather import glacier_factory
+from gather import glacier_factory, satellite_download
 
 gf = glacier_factory.GlacierFactory("wgi_feb2012.csv")
-glacier = gf.get_next_glacier()
-print(glacier)
+
+downloader = satellite_download.Download(gf)
+downloader.downlad_next_glacier()
