@@ -8,6 +8,7 @@ logging.basicConfig(level=LOGLEVEL)
 
 STAC_API_URL = "https://earth-search.aws.element84.com/v0"
 COLLECTION = ["landsat-8-l1-c1"]
+FILE_TEMPLATE = "test_download/${date}/${id}"
 
 
 class Download:
