@@ -34,5 +34,6 @@ class Download:
         loaded = ItemCollection.open("test_download.json")
         print(loaded.summary(['date', 'id', 'eo:cloud_cover']))
 
-        filenames = items.download_assets(['MTL', 'B3', 'B6'], filename_template='test_download/' + glacier.get_wgi_id() + '/${date}/${id}')
+        download_dir = 'test_download/' + glacier.get_wgi_id()
+        filenames = items.download_assets(['MTL', 'B3', 'B6'], filename_template=download_dir + '/${date}/${id}')
         print(filenames)

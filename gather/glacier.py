@@ -36,6 +36,9 @@ class Glacier:
     def get_longitude(self):
         return self.longitude
 
+    def get_name(self):
+        return self.name
+
     def __str__(self):
         return "Glacier[{}, {}, {}, {}]".format(self.wgi_id,
                                                 self.latitude,
