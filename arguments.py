@@ -51,5 +51,5 @@ def set_download_callback(args) -> None:
     The default function for download sub parser.
     :param args: Arguments passed through command line for download.
     """
-    downloader = satellite_download.Download(args.csv)
+    downloader = satellite_download.Download(args.csv, args.ddir, args.j)
     downloader.download_glaciers()
