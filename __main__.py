@@ -1,4 +1,7 @@
-from gather import glacier_factory, satellite_download
+import arguments
 
-downloader = satellite_download.Download("wgi_feb2012.csv")
-downloader.download_glaciers()
+def main():
+    arguments.activate_arguments()
+
+if __name__ == "__main__":
+    main()
