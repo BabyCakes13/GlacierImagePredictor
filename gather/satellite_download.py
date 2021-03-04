@@ -21,15 +21,14 @@ MINIMUM_SCENE_ENTRIES = 20
 class Download:
     def __init__(self, csv_path):
         csv_file = open(csv_path, 'r')
+
+        # DictReader returns a map of maps.
         self.glaciers_dict = csv.DictReader(csv_file)
         self.glacier_factory = glacier_factory.GlacierFactory()
 
-    # TODO Paralellize
+   
     def download_glaciers(self):
-        for gd in self.glaciers_dict:
-            glacier = gd
-            break
-
+        """Function for parallellising the download of glaciers."""
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             for glacier_data in executor.map(self.downlad_next_glacier, self.glaciers_dict):
                 pass
