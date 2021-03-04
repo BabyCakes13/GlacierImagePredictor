@@ -1,5 +1,8 @@
 from satsearch import Search
 from satstac import ItemCollection
+
+import concurrent.futures
+
 import os
 import logging
 import csv
@@ -24,7 +27,12 @@ class Download:
     # TODO Paralellize
     def download_glaciers(self):
         for gd in self.glaciers_dict:
-            self.downlad_next_glacier(gd)
+            glacier = gd
+            break
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+            for glacier_data in executor.map(self.downlad_next_glacier, self.glaciers_dict):
+                pass
 
     def downlad_next_glacier(self, glacier_row):
         glacier = self.glacier_factory.create_glacier(glacier_row)
@@ -38,11 +46,12 @@ class Download:
 
     def download(self, search, glacier):
         items = search.items()
-        items.save("glaciers_download.json")
+        glacier_json_filename = glacier.get_wgi_id() + ".json"
 
-        loaded = ItemCollection.open("glaciers_download.json")
-        # print(glacier.get_wgi_id(), " with ", len(loaded))
-        print(len(loaded))
+        items.save(glacier_json_filename)
+        loaded = ItemCollection.open(glacier_json_filename)
+
+        print(str(len(loaded)) + " " + glacier.get_wgi_id() + " " + glacier.get_name())
 
         download_dir = 'glaciers/' + glacier.get_wgi_id()
         # filenames = items.download_assets(DOWNLOAD_DATA,  filename_template=download_dir + '/${date}/${id}')
