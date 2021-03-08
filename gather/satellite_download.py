@@ -63,6 +63,5 @@ class Download:
         underscored_glacier_name = glacier.get_name().replace(" ", "_")
 
         glacier_ddir = self.ddir + glacier.get_wgi_id() + "_" + underscored_glacier_name
-        print(glacier_ddir)
         return glacier_ddir
         # TODO Fix this hardcoded Linux slash. Issue  #3.

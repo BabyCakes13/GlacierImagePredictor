@@ -9,6 +9,7 @@ class GlacierFactory:
     def __init__(self, glaciers_CSV):
         self.__glaciers_CSV = open(glaciers_CSV, 'r')
         self.__glaciers_dict = csv.DictReader(self.__glaciers_CSV)
+        self.__glaciers_dict_entries = self.glacier_dict_entries()
         self.__glaciers = []
 
     def create_glacier(self, glacier_data):
@@ -24,6 +25,7 @@ class GlacierFactory:
 
         Data pruning also ensures that no duplicates are allowed in the list.
         """
+        print(self.glacier_dict_entries())
         for count, gd in enumerate(self.__glaciers_dict):
             glacier = self.create_glacier(gd)
 
@@ -32,7 +34,7 @@ class GlacierFactory:
                 continue
 
             self.__glaciers.append(glacier)
-            # utils.progress(count, self.glacier_dict_entries())
+            utils.progress(count + 1, self.__glaciers_dict_entries)
 
     def already_exists(self, glacier):
         """
