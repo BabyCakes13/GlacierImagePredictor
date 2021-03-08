@@ -42,15 +42,27 @@ class Download:
                         query={'eo:cloud_cover': {'lt': 5}},
                         collections=COLLECTION)
 
-        self.download(search, glacier)
+        self.download_glacier(search, glacier)
 
-    def download(self, search, glacier):
+    def download_glacier(self, search, glacier):
         items = search.items()
         glacier_json = self.ddir + "/" + glacier.get_wgi_id() + ".json"
-
         items.save(glacier_json)
         ItemCollection.open(glacier_json)
 
-        download_dir = self.ddir + glacier.get_wgi_id()
         items.download_assets(DOWNLOAD_DATA,
-                              filename_template=download_dir + '/${date}/${id}')
+                              filename_template=self.glacier_dir_name(glacier) + '/${date}/${id}')
+
+    def glacier_dir_name(self, glacier):
+        """
+        Function for creating the download directory for one glacier.
+
+        It will take the following form:
+        ddir/WGI_ID_GLACIER_NAME/
+        """
+        underscored_glacier_name = glacier.get_name().replace(" ", "_")
+
+        glacier_ddir = self.ddir + glacier.get_wgi_id() + "_" + underscored_glacier_name
+        print(glacier_ddir)
+        return glacier_ddir
+        # TODO Fix this hardcoded Linux slash. Issue  #3.
