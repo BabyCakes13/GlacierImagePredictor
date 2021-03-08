@@ -6,9 +6,10 @@ import concurrent.futures
 import os
 import sys
 import logging
-import csv
 
 from gather import glacier_factory
+sys.path.append("..")
+import utils  # noqa: E402
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logging.basicConfig(level=LOGLEVEL)
@@ -31,7 +32,9 @@ class Download:
 
         with concurrent.futures.ThreadPoolExecutor(self.j) as executor:
             for count, glacier in enumerate(executor.map(self.downlad_next_glacier, glaciers)):
-                progress(count, len(glaciers))
+                utils.progress(count + 1, len(glaciers))
+
+        sys.stderr.write("\n")
 
     def downlad_next_glacier(self, glacier):
         search = Search(url=STAC_API_URL,
@@ -42,24 +45,12 @@ class Download:
         self.download(search, glacier)
 
     def download(self, search, glacier):
-        print(str(glacier))
         items = search.items()
         glacier_json = self.ddir + "/" + glacier.get_wgi_id() + ".json"
 
         items.save(glacier_json)
-        loaded = ItemCollection.open(glacier_json)
+        ItemCollection.open(glacier_json)
 
-        # print(str(len(loaded)) + " " + glacier.get_wgi_id() + " " + glacier.get_name())
-        # download_dir = self.ddir + glacier.get_wgi_id()
-        # filenames = items.download_assets(DOWNLOAD_DATA,  filename_template=download_dir + '/${date}/${id}')
-
-
-def progress(count, total, status=''):
-    bar_len = 60
-    filled_len = int(round(bar_len * count / float(total)))
-
-    percents = round(100.0 * count / float(total), 7)
-    bar = '=' * filled_len + '-' * (bar_len - filled_len)
-
-    sys.stderr.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status))
-    sys.stderr.flush()
+        download_dir = self.ddir + glacier.get_wgi_id()
+        items.download_assets(DOWNLOAD_DATA,
+                              filename_template=download_dir + '/${date}/${id}')
