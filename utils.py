@@ -1,7 +1,7 @@
 import sys
 
 
-def progress(count, total):
+def progress(count, total, finished_message):
     bar_len = 60
     filled_len = int(round(bar_len * count / float(total)))
 
@@ -10,3 +10,7 @@ def progress(count, total):
 
     sys.stderr.write('[%s] %3.7f%%\r' % (bar, percents))
     sys.stderr.flush()
+
+    if(count == total):
+        print("\n{}".format(finished_message))
+        return

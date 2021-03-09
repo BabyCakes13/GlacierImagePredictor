@@ -28,30 +28,26 @@ class Download:
 
     def download_glaciers(self):
         """Function for parallellising the download of glaciers."""
-        glaciers = self.glacier_factory.glaciers()
+        glaciers_dict = self.glacier_factory.glaciers_dict()
+        glaciers = glaciers_dict.values()
 
         with concurrent.futures.ThreadPoolExecutor(self.j) as executor:
-            for count, glacier in enumerate(executor.map(self.downlad_next_glacier, glaciers)):
-                utils.progress(count + 1, len(glaciers))
+            for c, g in enumerate(executor.map(self.downlad_glacier, glaciers)):
+                utils.progress(c + 1, len(glaciers), "Finished downloading glaciers.")
 
-        sys.stderr.write("\n")
-
-    def downlad_next_glacier(self, glacier):
-        search = Search(url=STAC_API_URL,
-                        bbox=glacier.get_bbox(),
-                        query={'eo:cloud_cover': {'lt': 5}},
-                        collections=COLLECTION)
-
-        self.download_glacier(search, glacier)
-
-    def download_glacier(self, search, glacier):
-        items = search.items()
-        glacier_json = self.ddir + "/" + glacier.get_wgi_id() + ".json"
-        items.save(glacier_json)
-        ItemCollection.open(glacier_json)
-
-        items.download_assets(DOWNLOAD_DATA,
-                              filename_template=self.glacier_dir_name(glacier) + '/${date}/${id}')
+    def downlad_glacier(self, glacier):
+        pass
+        # search = Search(url=STAC_API_URL,
+        #                 bbox=glacier.get_bbox(),
+        #                 query={'eo:cloud_cover': {'lt': 5}},
+        #                 collections=COLLECTION)
+        #
+        # items = search.items()
+        # glacier_json = self.ddir + "/" + glacier.get_wgi_id() + ".json"
+        # items.save(glacier_json)
+        # ItemCollection.open(glacier_json)
+        # items.download_assets(DOWNLOAD_DATA,
+        #                       filename_template=self.glacier_dir_name(glacier) + '/${date}/${id}')
 
     def glacier_dir_name(self, glacier):
         """

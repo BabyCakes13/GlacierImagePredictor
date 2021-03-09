@@ -3,14 +3,15 @@ import sys
 
 from gather.glacier import Glacier
 sys.path.append("..")
-import utils
+import utils  # noqa: E402
+
 
 class GlacierFactory:
     def __init__(self, glaciers_CSV):
-        self.__glaciers_CSV = open(glaciers_CSV, 'r')
-        self.__glaciers_dict = csv.DictReader(self.__glaciers_CSV)
-        self.__glaciers_dict_entries = self.glacier_dict_entries()
-        self.__glaciers = []
+        self.__csv = open(glaciers_CSV, 'r')
+        self.__csv_dict = csv.DictReader(self.__csv)
+        self.__csv_entries = self.csv_entries()
+        self.__glaciers_dict = {}
 
     def create_glacier(self, glacier_data):
         glacier = Glacier(glacier_data['wgi_glacier_id'],
@@ -19,48 +20,33 @@ class GlacierFactory:
                           glacier_data['glacier_name'])
         return glacier
 
-    def generate_glacier_list(self):
-        """
-        Function for converting CSV glacier data into a list of Glacier objects.
+    def generate_glacier_dict(self):
+        """Function for converting CSV glacier data into a map of Glacier objects."""
+        for c, row in enumerate(self.__csv_dict):
+            glacier = self.create_glacier(row)
+            glacier_wgi_id = glacier.get_wgi_id()
 
-        Data pruning also ensures that no duplicates are allowed in the list.
-        """
-        print(self.glacier_dict_entries())
-        for count, gd in enumerate(self.__glaciers_dict):
-            glacier = self.create_glacier(gd)
+            self.__glaciers_dict[glacier_wgi_id] = glacier
+            utils.progress(c + 1, self.__csv_entries,
+                           "Finished converting CSV rows into glaciers.")
 
-            if self.already_exists(glacier) is True:
-                print("\nDetected duplicate: " + str(glacier))
-                continue
-
-            self.__glaciers.append(glacier)
-            utils.progress(count + 1, self.__glaciers_dict_entries)
-
-    def already_exists(self, glacier):
-        """
-        Checker for duplicate entries in the glacier data.
-        """
-        for g in self.__glaciers:
-            if g.get_wgi_id() == glacier.get_wgi_id():
-                return True
-        return False
-
-    def glacier_dict_entries(self):
+    def csv_entries(self):
         """
         Function to get the number of entries in the glacier CSV.
 
         Since DictReader is used instead of CSV, directly getting the number of entries is not
         possible without reading the entire file. Possibly might need to fix this.
         """
-        glacier_entries = len(list(self.__glaciers_dict))
-        self.__glaciers_CSV.seek(0)
-        next(self.__glaciers_CSV)
+        glacier_entries = len(list(self.__csv_dict))
+        self.__csv.seek(0)
+        next(self.__csv)
         return glacier_entries
 
-    def glaciers(self):
-        self.generate_glacier_list()
-        return self.__glaciers
+    def glaciers_dict(self):
+        self.generate_glacier_dict()
+        # self.print_glaciers_dict()
+        return self.__glaciers_dict
 
-    def print_glaciers(self):
-        for g in self.__glaciers:
-            print(str(g))
+    def print_glaciers_dict(self):
+        for wgi_id, glacier in self.__glaciers_dict.items():
+            print("{}: {}".format(wgi_id, str(glacier)))
