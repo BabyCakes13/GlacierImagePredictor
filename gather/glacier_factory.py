@@ -30,7 +30,7 @@ class GlacierFactory:
             glacier = self.create_glacier(gd)
 
             if self.already_exists(glacier) is True:
-                print("Detected duplicate: " + str(glacier))
+                print("\nDetected duplicate: " + str(glacier))
                 continue
 
             self.__glaciers.append(glacier)
