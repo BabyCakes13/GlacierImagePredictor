@@ -6,9 +6,10 @@ import concurrent.futures
 import os
 import sys
 import logging
-import csv
 
 from gather import glacier_factory
+sys.path.append("..")
+import utils  # noqa: E402
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logging.basicConfig(level=LOGLEVEL)
@@ -20,59 +21,43 @@ MINIMUM_SCENE_ENTRIES = 20
 
 
 class Download:
-    def __init__(self, csv_path, ddir, j):
+    def __init__(self, glacier_CSV, ddir, j):
         self.j = j
         self.ddir = ddir
+        self.glacier_factory = glacier_factory.GlacierFactory(glacier_CSV)
 
-        csv_file = open(csv_path, 'r')
-        self.glaciers_dict = csv.DictReader(csv_file)
-        self.glacier_entries = len(list(self.glaciers_dict))
-        csv_file.seek(0)
-        next(csv_file)
-
-        self.glacier_factory = glacier_factory.GlacierFactory()
-
-   
     def download_glaciers(self):
         """Function for parallellising the download of glaciers."""
+        glaciers_dict = self.glacier_factory.glaciers_dict()
+        glaciers = glaciers_dict.values()
+
         with concurrent.futures.ThreadPoolExecutor(self.j) as executor:
-            for count, glacier_data in enumerate(executor.map(self.downlad_next_glacier, self.glaciers_dict)):
-                progress(count, self.glacier_entries)
+            for c, g in enumerate(executor.map(self.downlad_glacier, glaciers)):
+                utils.progress(c + 1, len(glaciers), "Finished downloading glaciers.")
 
-    def downlad_next_glacier(self, glacier_row):
-        glacier = self.glacier_factory.create_glacier(glacier_row)
+    def downlad_glacier(self, glacier):
+        pass
+        # search = Search(url=STAC_API_URL,
+        #                 bbox=glacier.get_bbox(),
+        #                 query={'eo:cloud_cover': {'lt': 5}},
+        #                 collections=COLLECTION)
+        #
+        # items = search.items()
+        # glacier_json = self.ddir + "/" + glacier.get_wgi_id() + ".json"
+        # items.save(glacier_json)
+        # ItemCollection.open(glacier_json)
+        # items.download_assets(DOWNLOAD_DATA,
+        #                       filename_template=self.glacier_dir_name(glacier) + '/${date}/${id}')
 
-        search = Search(url=STAC_API_URL,
-                        bbox=glacier.get_bbox(),
-                        query={'eo:cloud_cover': {'lt': 5}},
-                        collections=COLLECTION)
-        
-        self.download(search, glacier)
+    def glacier_dir_name(self, glacier):
+        """
+        Function for creating the download directory for one glacier.
 
-    def download(self, search, glacier):
-        items = search.items()
-        glacier_json = self.ddir + "/" + glacier.get_wgi_id() + ".json"
+        It will take the following form:
+        ddir/WGI_ID_GLACIER_NAME/
+        """
+        underscored_glacier_name = glacier.get_name().replace(" ", "_")
 
-        # skip duplicate rows
-        if os.path.exists(glacier_json):
-            sys.stderr.write("Detected duplicate " + glacier.get_wgi_id() + "\n")
-            return
-
-        items.save(glacier_json)
-        loaded = ItemCollection.open(glacier_json)
-
-        print(str(len(loaded)) + " " + glacier.get_wgi_id() + " " + glacier.get_name())
-
-        download_dir = self.ddir + glacier.get_wgi_id()
-        # filenames = items.download_assets(DOWNLOAD_DATA,  filename_template=download_dir + '/${date}/${id}')
-
-
-def progress(count, total, status=''):
-    bar_len = 60
-    filled_len = int(round(bar_len * count / float(total)))
-
-    percents = round(100.0 * count / float(total), 7)
-    bar = '=' * filled_len + '-' * (bar_len - filled_len)
-
-    sys.stderr.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status))
-    sys.stderr.flush()
+        glacier_ddir = self.ddir + glacier.get_wgi_id() + "_" + underscored_glacier_name
+        return glacier_ddir
+        # TODO Fix this hardcoded Linux slash. Issue  #3.
