@@ -2,6 +2,7 @@ import argparse
 
 from gather import satellite_download
 
+
 class CMDArgs:
     """
     Class which handles argument parsing for the command line interface.
@@ -18,7 +19,7 @@ class CMDArgs:
     def add_download_args(self):
         download_parser = self.subparsers.add_parser('download',
                                                      add_help=True)
-        
+
         download_parser.add_argument('--csv',
                                      help='Path to the csv file.',
                                      default=self.DEFAULT_CSV_PATH,
