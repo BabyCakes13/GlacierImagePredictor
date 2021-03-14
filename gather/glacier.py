@@ -6,6 +6,7 @@ class Glacier:
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
+        self.__number_scenes = 0
 
     def define_bounding_box(self):
         """
@@ -38,6 +39,12 @@ class Glacier:
 
     def get_name(self):
         return self.name
+
+    def set_number_scenes(self, number_scenes):
+        self.__number_scenes = number_scenes
+
+    def number_scenes(self):
+        return self.__number_scenes
 
     def __str__(self):
         return "Glacier[{}, {}, {}, {}]".format(self.wgi_id,

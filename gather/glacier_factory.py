@@ -27,6 +27,7 @@ class GlacierFactory:
             glacier_wgi_id = glacier.get_wgi_id()
 
             self.__glaciers_dict[glacier_wgi_id] = glacier
+
             utils.progress(c + 1, self.__csv_entries,
                            "Finished converting CSV rows into glaciers.")
 
@@ -44,7 +45,6 @@ class GlacierFactory:
 
     def glaciers_dict(self):
         self.generate_glacier_dict()
-        # self.print_glaciers_dict()
         return self.__glaciers_dict
 
     def print_glaciers_dict(self):

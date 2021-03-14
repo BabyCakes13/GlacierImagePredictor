@@ -26,12 +26,21 @@ class CMDArgs:
                                      type=str,
                                      dest='csv')
 
-        download_parser.add_argument('--ddir',
+        download_parser.add_argument('-c',
+                                     '--cloud-cover',
+                                     help='Maximum cloud coverage allowed for a scene.',
+                                     default=self.DEFAULT_J,
+                                     type=int,
+                                     dest='c')
+
+        download_parser.add_argument('-d',
+                                     '--download-directory',
                                      help='Path to the output folder which will contain the data set results.',
                                      type=str,
-                                     dest='ddir')
+                                     dest='d')
 
         download_parser.add_argument('-j',
+                                     '--jobs',
                                      help='Number of threads which will search and download.',
                                      default=self.DEFAULT_J,
                                      type=int,
@@ -52,5 +61,5 @@ def set_download_callback(args) -> None:
     The default function for download sub parser.
     :param args: Arguments passed through command line for download.
     """
-    downloader = satellite_download.Download(args.csv, args.ddir, args.j)
+    downloader = satellite_download.Download(args.csv, args.c, args.d, args.j)
     downloader.download_glaciers()
