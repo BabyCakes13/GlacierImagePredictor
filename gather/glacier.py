@@ -7,6 +7,7 @@ class Glacier:
         self.latitude = latitude
         self.longitude = longitude
         self.__number_scenes = 0
+        self.define_bounding_box()
 
     def define_bounding_box(self):
         """
@@ -24,8 +25,15 @@ class Glacier:
                      max_longitude,
                      max_latitude]
 
+    def string_bbox(self):
+        string_bbox = ""
+        for i, coordinate in enumerate(self.bbox):
+            string_bbox += str(coordinate)
+            if i != len(self.bbox) - 1:
+                string_bbox += ","
+        return string_bbox
+
     def get_bbox(self):
-        self.define_bounding_box()
         return self.bbox
 
     def get_wgi_id(self):

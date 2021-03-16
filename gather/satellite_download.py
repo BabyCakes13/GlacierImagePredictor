@@ -1,5 +1,7 @@
 from satsearch import Search
+from satsearch.search import SatSearchError
 from satstac import ItemCollection
+from satstac.thing import STACError
 
 import concurrent.futures
 import json
@@ -14,11 +16,11 @@ import utils  # noqa: E402
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logging.basicConfig(level=LOGLEVEL)
 
-# STAC_API_URL = "https://earth-search.aws.element84.com/v0"
-STAC_API_URL = "https://cmr.earthdata.nasa.gov/stac/USGS_EROS"
-# COLLECTION = ["landsat-8-l1-c1"]
-COLLECTION = ["Landsat_8_OLI_TIRS_C1.v1"]
-DOWNLOAD_DATA = ['MTL', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11']
+STAC_API_URL = "https://sat-api.developmentseed.org/stac"
+COLLECTION = "landsat-8-l1"
+
+DOWNLOAD_DATA = ['MTL', 'B1', 'B2', 'B3', 'B03', 'B04', 'B5', 'B05', 'B6', 'B06', 'B7', 'B07',
+                 'B8', 'B08', 'B9', 'B09', 'B10', 'B11', 'B12']
 MINIMUM_SCENE_ENTRIES = 20
 
 
@@ -39,14 +41,20 @@ class Download:
                 utils.progress(c + 1, len(glaciers), "Finished downloading glaciers.")
 
     def search(self, glacier):
-        search = Search(url=STAC_API_URL,
-                        bbox=glacier.get_bbox(),
-                        query={'eo:cloud_cover': {'lt': self.cloud_cover}},
-                        collections=COLLECTION)
+        try:
+            search = Search(bbox=glacier.get_bbox(),
+                            query={'eo:cloud_cover': {'lt': self.cloud_cover}},
+                            collection=COLLECTION)
 
-        items = search.items()
-        items.save(self.glacier_json_path(glacier))
-        return items
+            items = search.items()
+            # Save the returned JSON to the generated file.
+            items.save(self.glacier_json_path(glacier))
+            return items
+        except SatSearchError | STACError as e:
+            # TODO Handle 'dem errors.
+            print("Error on {} with bbox {}.\n{}".format(str(glacier),
+                                                         glacier.get_bbox(),
+                                                         str(e)))
 
     def cached_search(self, glacier):
         glacier_json = self.glacier_json_path(glacier)
@@ -63,14 +71,14 @@ class Download:
         glacier.set_number_scenes(len(items))
 
         if glacier.number_scenes() < MINIMUM_SCENE_ENTRIES:
-            sys.stderr.write("The number of scenes is too low: {}\n".format(glacier.number_scenes()))
-            sys.stderr.flush()
+            print("Too Low {}: {}\n".format(glacier.get_wgi_id(),
+                                            glacier.number_scenes()))
             return
 
-        print("Found for {}: {}".format(glacier.get_wgi_id(), glacier.number_scenes()))
+        print("{}: {}".format(glacier.get_wgi_id(), glacier.number_scenes()))
 
         # items.download_assets(DOWNLOAD_DATA,
-        #                       filename_template=self.glacier_dir_name(glacier) + '/${date}/${id}')
+        #                       path=self.glacier_dir_name(glacier) + '/${date}/${id}')
 
     def glacier_dir_name(self, glacier):
         """
