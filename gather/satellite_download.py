@@ -8,6 +8,7 @@ import json
 import os
 import sys
 import logging
+import pathlib
 
 from gather import glacier_factory
 sys.path.append("..")
@@ -19,15 +20,16 @@ logging.basicConfig(level=LOGLEVEL)
 STAC_API_URL = "https://sat-api.developmentseed.org/stac"
 COLLECTION = "landsat-8-l1"
 
-DOWNLOAD_DATA = ['MTL', 'B1', 'B2', 'B3', 'B03', 'B04', 'B5', 'B05', 'B6', 'B06', 'B7', 'B07',
-                 'B8', 'B08', 'B9', 'B09', 'B10', 'B11', 'B12']
+DOWNLOAD_DATA = ['MTL', 'B1', 'B01', 'B02', 'B2', 'B3', 'B03', 'B4', 'B04', 'B5', 'B05', 'B6',
+                 'B06', 'B7', 'B07', 'B8', 'B08', 'B9', 'B09', 'B10', 'B11', 'B12']
 
 
 class Download:
     def __init__(self, glacier_CSV, cloud_cover, ddir, j):
         self.j = j
         self.cloud_cover = cloud_cover
-        self.ddir = ddir
+        pathlib.Path(ddir).mkdir(parents=True, exist_ok=True)
+        self.ddir = pathlib.Path(ddir)
         self.glacier_factory = glacier_factory.GlacierFactory(glacier_CSV)
 
     def download_glaciers(self):
@@ -57,15 +59,22 @@ class Download:
             return items
         except (SatSearchError, STACError) as e:
             sys.stderr.write("Error on {} with bbox {}.\n{} ".format(str(glacier),
-                                                                    glacier.get_bbox(),
-                                                                    str(e)))
+                                                                     glacier.get_bbox(),
+                                                                     str(e)))
             sys.stderr.flush()
 
     def cached_search(self, glacier):
+        """
+        Function for speeding searching.
+
+        If the json file representing the result of the search for one glacier already exists it
+        will not be created again, rather reused. In case of failures during download, there is no
+        need to restart the search from 0.
+        """
         glacier_json = self.glacier_json_path(glacier)
         if os.path.exists(glacier_json):
             try:
-                return ItemCollection.open(glacier_json)
+                return ItemCollection.open(str(glacier_json))
             except json.decoder.JSONDecodeError:
                 return self.search(glacier)
         else:
@@ -79,11 +88,15 @@ class Download:
 
     def download_assets(self, glacier):
         items = self.cached_search(glacier)
-        print("Downloading {}: {} ".format(glacier.get_wgi_id(), glacier.number_scenes()))
-        # items.download_assets(DOWNLOAD_DATA,
-        #                       path=self.glacier_dir_name(glacier) + '/${date}/${id}')
+        print("Downloading {}: {}.".format(glacier.get_wgi_id(), glacier.number_scenes()))
 
-    def glacier_dir_name(self, glacier):
+        glacier_download_path = self.glacier_download_path(glacier)
+        items.download_assets(DOWNLOAD_DATA,
+                              path=str(pathlib.Path.joinpath(glacier_download_path,
+                                                             "${date}",
+                                                             "${id}")))
+
+    def glacier_download_path(self, glacier):
         """
         Function for creating the download directory for one glacier.
 
@@ -91,10 +104,10 @@ class Download:
         ddir/WGI_ID_GLACIER_NAME/
         """
         underscored_glacier_name = glacier.get_name().replace(" ", "_")
+        glacier_ddir_name = glacier.get_wgi_id() + "_" + underscored_glacier_name
 
-        glacier_ddir = self.ddir + glacier.get_wgi_id() + "_" + underscored_glacier_name
-        return glacier_ddir
-        # TODO Fix this hardcoded Linux slash. Issue  #3.
+        return pathlib.Path.joinpath(self.ddir, glacier_ddir_name)
 
     def glacier_json_path(self, glacier):
-        return self.ddir + "/" + glacier.get_wgi_id() + "_cloudcover" + str(self.cloud_cover) + ".json"
+        json_ddir_name = glacier.get_wgi_id() + ".json"
+        return pathlib.Path.joinpath(self.ddir, json_ddir_name)
