@@ -1,0 +1,3 @@
+[submodule "sat-stac"]
+	path = sat-stac
+	url = git@github.com:BabyCakes13/sat-stac.git
