@@ -21,7 +21,6 @@ COLLECTION = "landsat-8-l1"
 
 DOWNLOAD_DATA = ['MTL', 'B1', 'B2', 'B3', 'B03', 'B04', 'B5', 'B05', 'B6', 'B06', 'B7', 'B07',
                  'B8', 'B08', 'B9', 'B09', 'B10', 'B11', 'B12']
-MINIMUM_SCENE_ENTRIES = 20
 
 
 class Download:
@@ -34,11 +33,17 @@ class Download:
     def download_glaciers(self):
         """Function for parallellising the download of glaciers."""
         glaciers_dict = self.glacier_factory.glaciers_dict()
-        glaciers = glaciers_dict.values()
+        glaciers = list(glaciers_dict.values())
 
         with concurrent.futures.ThreadPoolExecutor(self.j) as executor:
-            for c, g in enumerate(executor.map(self.downlad_glacier, glaciers)):
-                utils.progress(c + 1, len(glaciers), "Finished downloading glaciers.")
+            for c, g in enumerate(executor.map(self.search_glaciers, glaciers)):
+                utils.progress(c + 1, len(glaciers), "Finished searching glaciers.")
+
+        glaciers.sort(key=lambda x: x.number_scenes(), reverse=True)
+
+        with concurrent.futures.ThreadPoolExecutor(self.j) as executor:
+            for c, g in enumerate(executor.map(self.download_assets, glaciers)):
+                utils.progress(c + 1, len(glaciers), "Finished downloading assets.")
 
     def search(self, glacier):
         try:
@@ -50,11 +55,11 @@ class Download:
             # Save the returned JSON to the generated file.
             items.save(self.glacier_json_path(glacier))
             return items
-        except SatSearchError | STACError as e:
-            # TODO Handle 'dem errors.
-            print("Error on {} with bbox {}.\n{}".format(str(glacier),
-                                                         glacier.get_bbox(),
-                                                         str(e)))
+        except (SatSearchError, STACError) as e:
+            sys.stderr.write("Error on {} with bbox {}.\n{} ".format(str(glacier),
+                                                                    glacier.get_bbox(),
+                                                                    str(e)))
+            sys.stderr.flush()
 
     def cached_search(self, glacier):
         glacier_json = self.glacier_json_path(glacier)
@@ -66,17 +71,15 @@ class Download:
         else:
             return self.search(glacier)
 
-    def downlad_glacier(self, glacier):
+    def search_glaciers(self, glacier):
         items = self.cached_search(glacier)
         glacier.set_number_scenes(len(items))
 
-        if glacier.number_scenes() < MINIMUM_SCENE_ENTRIES:
-            print("Too Low {}: {}\n".format(glacier.get_wgi_id(),
-                                            glacier.number_scenes()))
-            return
+        print("Found {} with {} scenes. ".format(glacier.get_wgi_id(), glacier.number_scenes()))
 
-        print("{}: {}".format(glacier.get_wgi_id(), glacier.number_scenes()))
-
+    def download_assets(self, glacier):
+        items = self.cached_search(glacier)
+        print("Downloading {}: {} ".format(glacier.get_wgi_id(), glacier.number_scenes()))
         # items.download_assets(DOWNLOAD_DATA,
         #                       path=self.glacier_dir_name(glacier) + '/${date}/${id}')
 
