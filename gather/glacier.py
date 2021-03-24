@@ -55,7 +55,8 @@ class Glacier:
         return self.__number_scenes
 
     def __str__(self):
-        return "Glacier[{}, {}, {}, {}]".format(self.wgi_id,
-                                                self.latitude,
-                                                self.longitude,
-                                                self.name)
+        return "Glacier[{}, {}, {}, {}, {}]".format(self.wgi_id,
+                                                    self.latitude,
+                                                    self.longitude,
+                                                    self.__number_scenes,
+                                                    self.name)
