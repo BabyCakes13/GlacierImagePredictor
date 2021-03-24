@@ -47,6 +47,7 @@ class Download:
                 utils.progress(c + 1, len(glaciers), "Finished searching glaciers.")
 
         glaciers.sort(key=lambda x: x.number_scenes(), reverse=True)
+        self.pretty_print_list(glaciers)
 
         with concurrent.futures.ThreadPoolExecutor(self.j) as executor:
             for c, g in enumerate(executor.map(self.download_assets, glaciers)):
@@ -131,3 +132,7 @@ class Download:
     def setup_json_directory(self):
         json_dir = pathlib.Path.joinpath(self.ddir, "geojson")
         return self.create_directory(json_dir)
+
+    def pretty_print_list(self, lst):
+        for element in lst:
+            print(element)
