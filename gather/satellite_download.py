@@ -28,8 +28,13 @@ class Download:
     def __init__(self, glacier_CSV, cloud_cover, ddir, j):
         self.j = j
         self.cloud_cover = cloud_cover
-        pathlib.Path(ddir).mkdir(parents=True, exist_ok=True)
-        self.ddir = pathlib.Path(ddir)
+
+        self.ddir = self.setup_download_directory(ddir)
+        self.json_dir = self.setup_json_directory()
+
+        print(self.ddir)
+        print(self.json_dir)
+
         self.glacier_factory = glacier_factory.GlacierFactory(glacier_CSV)
 
     def download_glaciers(self):
@@ -109,5 +114,17 @@ class Download:
         return pathlib.Path.joinpath(self.ddir, glacier_ddir_name)
 
     def glacier_json_path(self, glacier):
-        json_ddir_name = glacier.get_wgi_id() + ".json"
-        return pathlib.Path.joinpath(self.ddir, json_ddir_name)
+        json_file_name = glacier.get_wgi_id() + ".json"
+        return pathlib.Path.joinpath(self.ddir, "geojson", json_file_name)
+
+    def create_directory(self, name):
+        dir = pathlib.Path(name)
+        dir.mkdir(parents=True, exist_ok=True)
+        return dir
+
+    def setup_download_directory(self, ddir):
+        return self.create_directory(ddir)
+
+    def setup_json_directory(self):
+        json_dir = pathlib.Path.joinpath(self.ddir, "geojson")
+        return self.create_directory(json_dir)
