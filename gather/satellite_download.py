@@ -59,6 +59,7 @@ class Download:
                             collection=COLLECTION)
 
             items = search.items()
+            items.filter("collection", ["landsat-8-l1"])
             # Save the returned JSON to the generated file.
             items.save(self.glacier_json_path(glacier))
             return items
@@ -79,7 +80,9 @@ class Download:
         glacier_json = self.glacier_json_path(glacier)
         if os.path.exists(glacier_json):
             try:
-                return ItemCollection.open(str(glacier_json))
+                items = ItemCollection.open(str(glacier_json))
+                items.filter("collection", ["landsat-8-l1"])
+                return items
             except json.decoder.JSONDecodeError:
                 return self.search(glacier)
         else:
