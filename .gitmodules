@@ -3,4 +3,4 @@
 	url = https://github.com/BabyCakes13/sat-stac.git
 [submodule "sat-search"]
 	path = sat-search
-	url = https://github.com/sat-utils/sat-search.git
+	url = https://github.com/BabyCakes13/sat-search.git
