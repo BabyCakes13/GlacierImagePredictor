@@ -25,6 +25,8 @@ DOWNLOAD_DATA = ['MTL', 'B1', 'B01', 'B02', 'B2', 'B3', 'B03', 'B4', 'B04', 'B5'
 
 
 class Download:
+    RETRY_SEARCH_COUNT = 5
+
     def __init__(self, glacier_CSV, cloud_cover, ddir, j):
         self.j = j
         self.cloud_cover = cloud_cover
@@ -38,7 +40,7 @@ class Download:
         self.glacier_factory = glacier_factory.GlacierFactory(glacier_CSV)
 
     def download_glaciers(self):
-        """Function for parallellising the download of glaciers."""
+        """Function for searching and downloading the glaciers."""
         glaciers_dict = self.glacier_factory.glaciers_dict()
         glaciers = list(glaciers_dict.values())
 
@@ -54,21 +56,28 @@ class Download:
                 utils.progress(c + 1, len(glaciers), "Finished downloading assets.")
 
     def search(self, glacier):
-        try:
-            search = Search(bbox=glacier.get_bbox(),
-                            query={'eo:cloud_cover': {'lt': self.cloud_cover}},
-                            collection=COLLECTION)
+        """
+        Function used for searching glacier scenes based on a given list of Glacier objects.
+        """
+        retry_count = 0
+        while (retry_count <= self.RETRY_SEARCH_COUNT) or (retry_count != -1):
+            try:
+                search = Search(bbox=glacier.get_bbox(),
+                                query={'eo:cloud_cover': {'lt': self.cloud_cover}},
+                                collection=COLLECTION)
 
-            items = search.items()
-            items.filter("collection", ["landsat-8-l1"])
-            # Save the returned JSON to the generated file.
-            items.save(self.glacier_json_path(glacier))
-            return items
-        except (SatSearchError, STACError) as e:
-            sys.stderr.write("Error on {} with bbox {}.\n{} ".format(str(glacier),
-                                                                     glacier.get_bbox(),
-                                                                     str(e)))
-            sys.stderr.flush()
+                items = search.items()
+                items.filter("collection", ["landsat-8-l1"])
+                items.save(self.glacier_json_path(glacier))
+
+                retry_count = -1
+                return items
+            except (SatSearchError, STACError) as e:
+                sys.stderr.write("Error on {} with bbox {}.\n{} ".format(str(glacier),
+                                                                         glacier.get_bbox(),
+                                                                         str(e)))
+                sys.stderr.flush()
+                retry_count += 1
 
     def cached_search(self, glacier):
         """
@@ -118,6 +127,9 @@ class Download:
         return pathlib.Path.joinpath(self.ddir, glacier_ddir_name)
 
     def glacier_json_path(self, glacier):
+        """
+        Function which holds the path to the json file created after a search querry for a glacier.
+        """
         json_file_name = glacier.get_wgi_id() + ".json"
         return pathlib.Path.joinpath(self.ddir, "geojson", json_file_name)
 
@@ -130,9 +142,13 @@ class Download:
         return self.create_directory(ddir)
 
     def setup_json_directory(self):
+        """
+        Function to create the directory which holds all the json files returned after searching.
+        """
         json_dir = pathlib.Path.joinpath(self.ddir, "geojson")
         return self.create_directory(json_dir)
 
     def pretty_print_list(self, lst):
         for element in lst:
             print(element)
+
