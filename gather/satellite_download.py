@@ -21,8 +21,7 @@ logging.basicConfig(level=LOGLEVEL)
 STAC_API_URL = "https://sat-api.developmentseed.org/stac"
 COLLECTION = "landsat-8-l1"
 
-DOWNLOAD_DATA = ['MTL', 'B1', 'B01', 'B02', 'B2', 'B3', 'B03', 'B4', 'B04', 'B5', 'B05', 'B6',
-                 'B06', 'B7', 'B07', 'B8', 'B08', 'B9', 'B09', 'B10', 'B11', 'B12']
+DOWNLOAD_DATA = ['MTL', 'B2', 'B3', 'B4', 'B5', 'B6']
 
 
 class Download:
