@@ -9,6 +9,7 @@ import os
 import sys
 import logging
 import pathlib
+import requests
 
 from gather import glacier_factory
 sys.path.append("..")
@@ -60,7 +61,8 @@ class Download:
         Function used for searching glacier scenes based on a given list of Glacier objects.
         """
         retry_count = 0
-        while (retry_count <= self.RETRY_SEARCH_COUNT) or (retry_count != -1):
+        items = None
+        while (items is None) and (retry_count < self.RETRY_SEARCH_COUNT):
             try:
                 search = Search(bbox=glacier.get_bbox(),
                                 query={'eo:cloud_cover': {'lt': self.cloud_cover}},
@@ -69,8 +71,6 @@ class Download:
                 items = search.items()
                 items.filter("collection", ["landsat-8-l1"])
                 items.save(self.glacier_json_path(glacier))
-
-                retry_count = -1
                 return items
             except (SatSearchError, STACError) as e:
                 sys.stderr.write("Error on {} with bbox {}.\n{} ".format(str(glacier),
@@ -78,6 +78,7 @@ class Download:
                                                                          str(e)))
                 sys.stderr.flush()
                 retry_count += 1
+                print("Hello", str(retry_count))
 
     def cached_search(self, glacier):
         """
@@ -100,12 +101,18 @@ class Download:
 
     def search_glaciers(self, glacier):
         items = self.cached_search(glacier)
+        if items is None:
+            return
+
         glacier.set_number_scenes(len(items))
 
         print("Found {} with {} scenes. ".format(glacier.get_wgi_id(), glacier.number_scenes()))
 
     def download_assets(self, glacier):
         items = self.cached_search(glacier)
+        if items is None:
+            return
+
         print("Downloading {}: {}.".format(glacier.get_wgi_id(), glacier.number_scenes()))
 
         glacier_download_path = self.glacier_download_path(glacier)
@@ -151,4 +158,3 @@ class Download:
     def pretty_print_list(self, lst):
         for element in lst:
             print(element)
-
