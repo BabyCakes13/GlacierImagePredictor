@@ -34,19 +34,19 @@ class Glacier:
                 string_bbox += ","
         return string_bbox
 
-    def get_bbox(self):
+    def bbox(self):
         return self.__bbox
 
-    def get_wgi_id(self):
+    def wgi_id(self):
         return self.__wgi_id
 
-    def get_latitude(self):
+    def latitude(self):
         return self.__latitude
 
-    def get_longitude(self):
+    def longitude(self):
         return self.__longitude
 
-    def get_name(self):
+    def name(self):
         return self.__name
 
     def set_number_scenes(self, number_scenes):

@@ -62,7 +62,7 @@ class Download:
         items = None
         while (items is None) and (retry_count < self.RETRY_SEARCH_COUNT):
             try:
-                search = Search(bbox=glacier.get_bbox(),
+                search = Search(bbox=glacier.bbox(),
                                 query={'eo:cloud_cover': {'lt': self.cloud_cover}},
                                 collection=COLLECTION)
 
@@ -72,7 +72,7 @@ class Download:
                 return items
             except (SatSearchError, STACError) as e:
                 sys.stderr.write("Error on {} with bbox {}.\n{} ".format(str(glacier),
-                                                                         glacier.get_bbox(),
+                                                                         glacier.bbox(),
                                                                          str(e)))
                 sys.stderr.flush()
                 retry_count += 1
@@ -104,14 +104,14 @@ class Download:
 
         glacier.set_number_scenes(len(items))
 
-        print("Found {} with {} scenes. ".format(glacier.get_wgi_id(), glacier.number_scenes()))
+        print("Found {} with {} scenes. ".format(glacier.wgi_id(), glacier.number_scenes()))
 
     def download_assets(self, glacier):
         items = self.cached_search(glacier)
         if items is None:
             return
 
-        print("Downloading {}: {}.".format(glacier.get_wgi_id(), glacier.number_scenes()))
+        print("Downloading {}: {}.".format(glacier.wgi_id(), glacier.number_scenes()))
 
         glacier_download_path = self.glacier_download_path(glacier)
         items.download_assets(DOWNLOAD_DATA,
@@ -126,8 +126,8 @@ class Download:
         It will take the following form:
         ddir/WGI_ID_GLACIER_NAME/
         """
-        underscored_glacier_name = glacier.get_name().replace(" ", "_")
-        glacier_ddir_name = glacier.get_wgi_id() + "_" + underscored_glacier_name
+        underscored_glacier_name = glacier.name().replace(" ", "_")
+        glacier_ddir_name = glacier.wgi_id() + "_" + underscored_glacier_name
 
         return pathlib.Path.joinpath(self.ddir, glacier_ddir_name)
 
@@ -135,7 +135,7 @@ class Download:
         """
         Function which holds the path to the json file created after a search querry for a glacier.
         """
-        json_file_name = glacier.get_wgi_id() + ".json"
+        json_file_name = glacier.wgi_id() + ".json"
         return pathlib.Path.joinpath(self.ddir, "geojson", json_file_name)
 
     def create_directory(self, name):

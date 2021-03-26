@@ -24,7 +24,7 @@ class GlacierFactory:
         """Function for converting CSV glacier data into a map of Glacier objects."""
         for c, row in enumerate(self.__csv_dict):
             glacier = self.create_glacier(row)
-            glacier_wgi_id = glacier.get_wgi_id()
+            glacier_wgi_id = glacier.wgi_id()
 
             self.__glaciers_dict[glacier_wgi_id] = glacier
 
