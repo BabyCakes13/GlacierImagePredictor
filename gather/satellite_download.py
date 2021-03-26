@@ -9,7 +9,6 @@ import os
 import sys
 import logging
 import pathlib
-import requests
 
 from gather import glacier_factory
 sys.path.append("..")
