@@ -1,7 +1,7 @@
 import csv
 import sys
 
-from gather.glacier import Glacier
+from stuff.glacier import Glacier
 sys.path.append("..")
 import utils  # noqa: E402
 
