@@ -116,7 +116,6 @@ class Download:
         glacier_download_path = self.glacier_download_path(glacier)
         items.download_assets(DOWNLOAD_DATA,
                               path=str(pathlib.Path.joinpath(glacier_download_path,
-                                                             "${date}",
                                                              "${id}")))
 
     def glacier_download_path(self, glacier):
