@@ -1,4 +1,5 @@
 from process.crawlers.crawler import Crawler
+from process.crawlers.roi_crawler import RoiCrawler
 from process.entities.glacier import Glacier
 
 import os
@@ -23,8 +24,9 @@ class GlacierCrawler(Crawler):
 
     def crawl_into(self, glacier_dir):
         glacier_path = os.path.join(self._root, glacier_dir)
-        os.chdir(glacier_path)
-        print(os.getcwd())
+
+        roi_crawler = RoiCrawler(root=glacier_path)
+        roi_crawler.crawl()
 
     def create_glacier(self, wgi_id: int):
         return Glacier(wgi_id)
