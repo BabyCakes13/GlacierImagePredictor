@@ -11,5 +11,8 @@ class Glacier:
     def add_roi(self, roi: RegionOfInterest) -> None:
         self.__rois.append(roi)
 
+    def wgi_id(self):
+        return self.__wgi_id
+
     def __str__(self):
         return "Glacier[{}]".format(self.__wgi_id)

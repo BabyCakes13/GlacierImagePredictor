@@ -19,9 +19,11 @@ class GlacierCrawler(Crawler):
         for wgi_id in wgi_ids:
             glacier = self.create_glacier(wgi_id)
             self.__glaciers.append(glacier)
+            self.crawl_into(glacier.wgi_id())
 
     def crawl_into(self, glacier_dir):
-        os.chdir(glacier_dir)
+        glacier_path = os.path.join(self._root, glacier_dir)
+        os.chdir(glacier_path)
         print(os.getcwd())
 
     def create_glacier(self, wgi_id: int):
