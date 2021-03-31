@@ -1,5 +1,6 @@
 from process.crawlers.crawler import Crawler
 from process.entities.roi import RegionOfInterest
+from process.entities.scene_id import SceneID
 
 import os
 
@@ -14,4 +15,5 @@ class RoiCrawler(Crawler):
         scenes = [name for name in os.listdir(".") if os.path.isdir(name)]
 
         for scene in scenes:
-            print(scene)
+            scene_id = SceneID(scene)
+            print(scene_id)
