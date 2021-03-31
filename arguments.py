@@ -80,5 +80,3 @@ def set_download_callback(args) -> None:
 def set_process_callback(args) -> None:
     crawler = GlacierCrawler(args.input)
     crawler.crawl()
-    for glacier in crawler.glaciers():
-        print(glacier)

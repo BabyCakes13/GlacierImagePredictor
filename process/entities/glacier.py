@@ -1,4 +1,4 @@
-from entities.roi import RegionOfInterest
+from process.entities.roi import RegionOfInterest
 
 
 class Glacier:

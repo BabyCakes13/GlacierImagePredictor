@@ -1,5 +1,5 @@
-from crawlers.crawler import Crawler
-from stuff.glacier import Glacier
+from process.crawlers.crawler import Crawler
+from process.entities.glacier import Glacier
 
 import os
 
