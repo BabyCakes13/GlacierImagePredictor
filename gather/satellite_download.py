@@ -12,7 +12,7 @@ import pathlib
 
 from gather import glacier_factory
 sys.path.append("..")
-import utils  # noqa: E402
+from util import utils  # noqa: E402
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logging.basicConfig(level=LOGLEVEL)

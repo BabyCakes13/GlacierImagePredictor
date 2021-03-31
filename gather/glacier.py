@@ -1,10 +1,7 @@
-from stuff.roi import RegionOfInterest
-
-
 class Glacier:
     BBOX_SIZE = 0.00001
 
-    def __init__(self, wgi_id, latitude, longitude, name=None):
+    def __init__(self, wgi_id, latitude=None, longitude=None, name=None):
         """
         Constructor of the Glacier object.
 
@@ -21,10 +18,7 @@ class Glacier:
         self.__longitude = longitude
 
         self.__number_scenes = 0
-        self.__bbox = self.define_bounding_box()
-
-        # Region of Interests representing different path row pairs.
-        self.__rois = []
+        self.__bbox = None
 
     def define_bounding_box(self) -> list:
         """
@@ -58,9 +52,6 @@ class Glacier:
             if i != len(self.__bbox) - 1:
                 string_bbox += ","
         return string_bbox
-
-    def add_roi(self, roi: RegionOfInterest) -> None:
-        self.__rois.append(roi)
 
     def bbox(self) -> list:
         return self.__bbox

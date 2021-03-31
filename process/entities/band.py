@@ -15,7 +15,7 @@ class Band:
 
     def __init__(self, band_path: str):
         self.__band_path = band_path
-        self.__ndarray = self.read()
+        self.__ndarray = None
 
     def read(self) -> numpy.ndarray:
         try:
@@ -28,6 +28,9 @@ class Band:
         except Exception as e:
             print(e)
             return None
+
+    def ndarray(self) -> numpy.ndarray:
+        return self.read()
 
     def band_number(self):
         """

@@ -1,6 +1,7 @@
 import argparse
 
-from gather import satellite_download
+# from gather import satellite_download
+from process.crawlers.glacier_crawler import GlacierCrawler
 
 
 class CMDArgs:
@@ -15,8 +16,9 @@ class CMDArgs:
         self.subparsers = self.parser.add_subparsers()
 
         self.add_download_args()
+        self.add_process_args()
 
-    def add_download_args(self):
+    def add_download_args(self) -> None:
         download_parser = self.subparsers.add_parser('download',
                                                      add_help=True)
 
@@ -48,6 +50,16 @@ class CMDArgs:
 
         download_parser.set_defaults(func=set_download_callback)
 
+    def add_process_args(self) -> None:
+        process_parser = self.subparsers.add_parser('process',
+                                                    add_help=True)
+        process_parser.add_argument('--input',
+                                    help='Path to the input folder which contains the dataset of'
+                                         'glaciers.',
+                                    type=str,
+                                    dest='input')
+        process_parser.set_defaults(func=set_process_callback)
+
 
 def activate_arguments() -> None:
     arguments = CMDArgs()
@@ -61,5 +73,12 @@ def set_download_callback(args) -> None:
     The default function for download sub parser.
     :param args: Arguments passed through command line for download.
     """
-    downloader = satellite_download.Download(args.csv, args.c, args.d, args.j)
-    downloader.download_glaciers()
+    # downloader = satellite_download.Download(args.csv, args.c, args.d, args.j)
+    # downloader.download_glaciers()
+
+
+def set_process_callback(args) -> None:
+    crawler = GlacierCrawler(args.input)
+    crawler.crawl()
+    for glacier in crawler.glaciers():
+        print(glacier)

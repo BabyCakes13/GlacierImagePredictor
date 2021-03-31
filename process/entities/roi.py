@@ -1,4 +1,4 @@
-from scene import Scene
+from entities.scene import Scene
 
 
 class RegionOfInterest:

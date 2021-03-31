@@ -1,4 +1,4 @@
-from band import Band
+from entities.band import Band
 
 
 class Scene:
