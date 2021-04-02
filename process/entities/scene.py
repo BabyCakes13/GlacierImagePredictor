@@ -7,17 +7,11 @@ class Scene:
         self.__scene_id = scene_id
         self.__scene_path = scene_path
 
-        try:
-            self.__red_band = Band(scene_path, scene_id.scene_id(), 'Red')
-            self.__green_band = Band(scene_path, scene_id.scene_id(), 'Green')
-            self.__blue_band = Band(scene_path, scene_id.scene_id(), 'Blue')
-            self.__nir_band = Band(scene_path, scene_id.scene_id(), 'NIR')
-            self.__swir1_band = Band(scene_path, scene_id.scene_id(), 'SWIR1')
-        except FileNotFoundError as e:
-            print(e)
-            print("Aborting scene creation for scene id {}".format(self.__scene_id.scene_id()))
-
-            # TODO Find a way to only create the class if no exception is raised.
+        self.__red_band = Band(scene_path, scene_id.scene_id(), 'Red')
+        self.__green_band = Band(scene_path, scene_id.scene_id(), 'Green')
+        self.__blue_band = Band(scene_path, scene_id.scene_id(), 'Blue')
+        self.__nir_band = Band(scene_path, scene_id.scene_id(), 'NIR')
+        self.__swir1_band = Band(scene_path, scene_id.scene_id(), 'SWIR1')
 
     def red_band(self) -> Band:
         return self.__red_band

@@ -30,27 +30,26 @@ class RoiCrawler(Crawler):
 
         for scene_dir_name in scene_dirs:
             scene = self.create_scene_objects(scene_dir_name)
-            print(scene)
-            scene.print_bands()
+            if scene is not None:
+                scene.print_bands()
 
         return self.__rois
 
     def create_scene_objects(self, scene_dir_name) -> Scene:
         scene_id = SceneID(scene_dir_name)
         scene_path = os.path.join(self._root, scene_dir_name)
-        scene = self.create_scene(scene_id, scene_path)
 
-        roi = self.create_roi(scene_id)
-        roi = self.add_roi(roi)
-        roi.add_scene(scene)
+        print(scene_id)
+        try:
+            scene = Scene(scene_id, scene_path)
+            roi = RegionOfInterest(scene_id.path(), scene_id.row())
+            roi = self.add_roi(roi)
+            roi.add_scene(scene)
+        except FileNotFoundError as e:
+            print(e)
+            return None
 
         return scene
-
-    def create_roi(self, scene: SceneID) -> RegionOfInterest:
-        return RegionOfInterest(scene.path(), scene.row())
-
-    def create_scene(self, scene_id: SceneID, scene_path: str):
-        return Scene(scene_id, scene_path)
 
     def add_roi(self, roi: RegionOfInterest) -> RegionOfInterest:
         """
