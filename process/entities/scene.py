@@ -7,28 +7,17 @@ class Scene:
         self.__scene_id = scene_id
         self.__scene_path = scene_path
 
-        self.__red_band = None
-        self.__green_band = None
-        self.__blue_band = None
-        self.__nir_band = None
-        self.__swir1_band = None
+        try:
+            self.__red_band = Band(scene_path, scene_id.scene_id(), 'Red')
+            self.__green_band = Band(scene_path, scene_id.scene_id(), 'Green')
+            self.__blue_band = Band(scene_path, scene_id.scene_id(), 'Blue')
+            self.__nir_band = Band(scene_path, scene_id.scene_id(), 'NIR')
+            self.__swir1_band = Band(scene_path, scene_id.scene_id(), 'SWIR1')
+        except FileNotFoundError as e:
+            print(e)
+            print("Aborting scene creation for scene id {}".format(self.__scene_id.scene_id()))
 
-    # TODO give scene id and path, from there scene should create its own bands.
-
-    def set_red_band(self, band: Band):
-        self.__red_band = band
-
-    def set_blue_band(self, band: Band):
-        self.__blue_band = band
-
-    def set_green_band(self, band: Band):
-        self.__green_band = band
-
-    def set_nir_band(self, band: Band):
-        self.__nir_band = band
-
-    def set_swir1_band(self, band: Band):
-        self.__swir1_band = band
+            # TODO Find a way to only create the class if no exception is raised.
 
     def red_band(self) -> Band:
         return self.__red_band
@@ -44,6 +33,19 @@ class Scene:
 
     def swir1_band(self) -> Band:
         return self.__swir1_band
+
+    def scene_id(self):
+        return self.__scene_id
+
+    def scene_path(self):
+        return self.__scene_path
+
+    def print_bands(self):
+        print("{}\n{}\n{}\n{}\n{}\n".format(self.__blue_band,
+                                            self.__green_band,
+                                            self.__red_band,
+                                            self.__nir_band,
+                                            self.__swir1_band))
 
     def __str__(self):
         return "Scene[{}]".format(self.__scene_id)

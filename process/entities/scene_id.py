@@ -25,6 +25,9 @@ class SceneID:
     def __init__(self, scene_id: str):
         self.__scene = scene_id
 
+    def scene_id(self):
+        return self.__scene
+
     def year(self) -> int:
         """
         Returns the year of the scene based on the character location.

@@ -29,15 +29,22 @@ class RoiCrawler(Crawler):
         scene_dirs = [name for name in os.listdir(".") if os.path.isdir(name)]
 
         for scene_dir_name in scene_dirs:
-            scene_id = SceneID(scene_dir_name)
-            scene_path = os.path.join(self._root, scene_dir_name)
-            scene = self.create_scene(scene_id, scene_path)
-
-            roi = self.create_roi(scene_id)
-            roi = self.add_roi(roi)
-            roi.add_scene(scene)
+            scene = self.create_scene_objects(scene_dir_name)
+            print(scene)
+            scene.print_bands()
 
         return self.__rois
+
+    def create_scene_objects(self, scene_dir_name) -> Scene:
+        scene_id = SceneID(scene_dir_name)
+        scene_path = os.path.join(self._root, scene_dir_name)
+        scene = self.create_scene(scene_id, scene_path)
+
+        roi = self.create_roi(scene_id)
+        roi = self.add_roi(roi)
+        roi.add_scene(scene)
+
+        return scene
 
     def create_roi(self, scene: SceneID) -> RegionOfInterest:
         return RegionOfInterest(scene.path(), scene.row())

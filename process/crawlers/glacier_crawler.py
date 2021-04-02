@@ -29,6 +29,7 @@ class GlacierCrawler(Crawler):
         rois = roi_crawler.crawl(glacier)
         glacier.set_rois(rois)
 
+    def print_objects(self, glacier):
         print("\nFor glacier {} we found the following rois:".format(glacier))
         for roi in glacier.rois():
             print(roi)
