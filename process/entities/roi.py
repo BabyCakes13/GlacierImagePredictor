@@ -23,6 +23,9 @@ class RegionOfInterest:
     def add_scene(self, scene: Scene) -> None:
         self.__scenes.append(scene)
 
+    def scenes(self) -> list:
+        return self.__scenes
+
     def print_scenes(self) -> None:
         for scene in self.__scenes:
             print(scene)

@@ -114,7 +114,7 @@ class SceneID:
         return int(self.__scene[6:9])
 
     def __str__(self) -> str:
-        return "Scene[{}, {}, {}, {}, {}, {}, {}, {}]".format(
+        return "SceneID[{}, {}, {}, {}, {}, {}, {}, {}]".format(
             self.satellite(),
             self.sensor(),
             self.satellite_number(),
