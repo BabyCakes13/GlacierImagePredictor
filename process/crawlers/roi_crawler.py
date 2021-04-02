@@ -2,6 +2,7 @@ from process.crawlers.crawler import Crawler
 from process.entities.roi import RegionOfInterest
 from process.entities.scene_id import SceneID
 from process.entities.scene import Scene
+from process.entities.glacier import Glacier
 
 import os
 
@@ -16,10 +17,13 @@ class RoiCrawler(Crawler):
         Crawler.__init__(self, root)
         self.__rois = []
 
-    def crawl(self) -> None:
+    def crawl(self, glacier: Glacier) -> list:
         """
         Function which crawls inside the given root directory representing a glacier, extracts and
         creates region of interests and scenes which are appended to their speficic rois.
+
+        :param glacier: Glacier for which we search the rois and scenes.
+        :return: The list of created region of interest objects.
         """
         os.chdir(self._root)
         scene_dirs = [name for name in os.listdir(".") if os.path.isdir(name)]
@@ -33,10 +37,7 @@ class RoiCrawler(Crawler):
             roi = self.add_roi(roi)
             roi.add_scene(scene)
 
-        for roi in self.__rois:
-            print(roi)
-            roi.print_scenes()
-            print("\n")
+        return self.__rois
 
     def create_roi(self, scene: SceneID) -> RegionOfInterest:
         return RegionOfInterest(scene.path(), scene.row())

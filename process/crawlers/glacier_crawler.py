@@ -20,13 +20,18 @@ class GlacierCrawler(Crawler):
         for wgi_id in wgi_ids:
             glacier = self.create_glacier(wgi_id)
             self.__glaciers.append(glacier)
-            self.crawl_into(glacier.wgi_id())
+            self.crawl_into(glacier)
 
-    def crawl_into(self, glacier_dir):
-        glacier_path = os.path.join(self._root, glacier_dir)
+    def crawl_into(self, glacier: Glacier):
+        glacier_path = os.path.join(self._root, glacier.wgi_id())
 
         roi_crawler = RoiCrawler(root=glacier_path)
-        roi_crawler.crawl()
+        rois = roi_crawler.crawl(glacier)
+
+        print("\nFor glacier {} we found the following rois:".format(glacier))
+        for roi in rois:
+            print(roi)
+            roi.print_scenes()
 
     def create_glacier(self, wgi_id: int):
         return Glacier(wgi_id)
