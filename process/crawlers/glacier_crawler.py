@@ -27,9 +27,10 @@ class GlacierCrawler(Crawler):
 
         roi_crawler = RoiCrawler(root=glacier_path)
         rois = roi_crawler.crawl(glacier)
+        glacier.set_rois(rois)
 
         print("\nFor glacier {} we found the following rois:".format(glacier))
-        for roi in rois:
+        for roi in glacier.rois():
             print(roi)
             roi.print_scenes()
 
