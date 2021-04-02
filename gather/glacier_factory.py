@@ -1,9 +1,9 @@
 import csv
 import sys
 
-from stuff.glacier import Glacier
+from gather.glacier import Glacier
 sys.path.append("..")
-import utils  # noqa: E402
+from util import utils  # noqa: E402
 
 
 class GlacierFactory:

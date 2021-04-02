@@ -1,4 +1,4 @@
-from scene import Scene
+from process.entities.scene import Scene
 
 
 class RegionOfInterest:
@@ -9,23 +9,31 @@ class RegionOfInterest:
         :param wgi_path: https://landsat.gsfc.nasa.gov/about/worldwide-reference-system
         :param wgi_row: https://landsat.gsfc.nasa.gov/about/worldwide-reference-system
         """
-        self.__wgi_path = wgi_path
-        self.__wgi_row = wgi_row
+        self.__path = wgi_path
+        self.__row = wgi_row
 
         self.__scenes = []
 
-    def wgi_path(self):
-        return self.__wgi_path
+    def path(self):
+        return self.__path
 
-    def wgi_row(self):
-        return self.__wgi_row
+    def row(self):
+        return self.__row
 
     def add_scene(self, scene: Scene) -> None:
         self.__scenes.append(scene)
+
+    def scenes(self) -> list:
+        return self.__scenes
 
     def print_scenes(self) -> None:
         for scene in self.__scenes:
             print(scene)
 
+    def __eq__(self, other):
+        if isinstance(other, RegionOfInterest):
+            return self.__path == other.path() and self.__row == other.row()
+        return False
+
     def __str__(self):
-        return "RegionOfInterest[{}, {}]".format(self.__wgi_path, self.__wgi_row)
+        return "RegionOfInterest[{}, {}]".format(self.__path, self.__row)
