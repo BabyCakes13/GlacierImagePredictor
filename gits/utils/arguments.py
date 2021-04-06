@@ -1,7 +1,7 @@
 import argparse
 
 # from gather import satellite_download
-from process.crawlers.glacier_crawler import GlacierCrawler
+from preprocess.crawlers.glacier_crawler import GlacierCrawler
 
 
 class CMDArgs:

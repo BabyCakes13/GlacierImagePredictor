@@ -1,6 +1,6 @@
-from process.crawlers.crawler import Crawler
-from process.crawlers.roi_crawler import RoiCrawler
-from process.entities.glacier import Glacier
+from preprocess.crawlers.crawler import Crawler
+from preprocess.crawlers.roi_crawler import RoiCrawler
+from preprocess.entities.glacier import Glacier
 
 import os
 

@@ -1,4 +1,4 @@
-from process.entities.scene import Scene
+from preprocess.entities.scene import Scene
 
 from utils import logging
 logger = logging.getLogger(__name__)

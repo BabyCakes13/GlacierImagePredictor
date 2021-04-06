@@ -1,8 +1,8 @@
-from process.crawlers.crawler import Crawler
-from process.entities.roi import RegionOfInterest
-from process.entities.scene_id import SceneID
-from process.entities.scene import Scene
-from process.entities.glacier import Glacier
+from preprocess.crawlers.crawler import Crawler
+from preprocess.entities.roi import RegionOfInterest
+from preprocess.entities.scene_id import SceneID
+from preprocess.entities.scene import Scene
+from preprocess.entities.glacier import Glacier
 
 import os
 

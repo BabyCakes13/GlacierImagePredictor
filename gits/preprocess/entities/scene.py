@@ -1,5 +1,5 @@
-from process.entities.band import Band
-from process.entities.scene_id import SceneID
+from preprocess.entities.band import Band
+from preprocess.entities.scene_id import SceneID
 
 from utils import logging
 logger = logging.getLogger(__name__)

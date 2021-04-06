@@ -1,4 +1,4 @@
-import arguments
+from utils import arguments
 
 
 def main():
