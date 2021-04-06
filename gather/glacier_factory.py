@@ -5,6 +5,9 @@ from gather.glacier import Glacier
 sys.path.append("..")
 from util import utils  # noqa: E402
 
+from utils import logging
+logger = logging.getLogger(__name__)
+
 
 class GlacierFactory:
     def __init__(self, glaciers_CSV):
@@ -12,6 +15,8 @@ class GlacierFactory:
         self.__csv_dict = csv.DictReader(self.__csv)
         self.__csv_entries = self.csv_entries()
         self.__glaciers_dict = {}
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def create_glacier(self, glacier_data):
         glacier = Glacier(glacier_data['wgi_glacier_id'],
@@ -31,6 +36,8 @@ class GlacierFactory:
             utils.progress(c + 1, self.__csv_entries,
                            "Finished converting CSV rows into glaciers.")
 
+        logger.success("Converted CSV data into glaciers.")
+
     def csv_entries(self):
         """
         Function to get the number of entries in the glacier CSV.
@@ -49,4 +56,4 @@ class GlacierFactory:
 
     def print_glaciers_dict(self):
         for wgi_id, glacier in self.__glaciers_dict.items():
-            print("{}: {}".format(wgi_id, str(glacier)))
+            logger.info("{}: {}".format(wgi_id, str(glacier)))
