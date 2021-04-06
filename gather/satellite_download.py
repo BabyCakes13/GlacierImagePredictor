@@ -7,15 +7,12 @@ import concurrent.futures
 import json
 import os
 import sys
-import logging
 import pathlib
 
+from utils import logging, utils
 from gather import glacier_factory
-sys.path.append("..")
-from util import utils  # noqa: E402
+logger = logging.getLogger(__name__)
 
-LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
-logging.basicConfig(level=LOGLEVEL)
 
 STAC_API_URL = "https://sat-api.developmentseed.org/stac"
 COLLECTION = "landsat-8-l1"
@@ -33,10 +30,9 @@ class Download:
         self.ddir = self.setup_download_directory(ddir)
         self.json_dir = self.setup_json_directory()
 
-        print(self.ddir)
-        print(self.json_dir)
-
         self.glacier_factory = glacier_factory.GlacierFactory(glacier_CSV)
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def download_glaciers(self):
         """Function for searching and downloading the glaciers."""
@@ -76,7 +72,7 @@ class Download:
                                                                          str(e)))
                 sys.stderr.flush()
                 retry_count += 1
-                print("Hello", str(retry_count))
+                logger.warning("Retry {} for fetching querry {}.".format(retry_count, glacier))
 
     def cached_search(self, glacier):
         """
@@ -104,19 +100,22 @@ class Download:
 
         glacier.set_number_scenes(len(items))
 
-        print("Found {} with {} scenes. ".format(glacier.wgi_id(), glacier.number_scenes()))
+        logger.success("Found {} with {} scenes. "
+                       .format(glacier.wgi_id(), glacier.number_scenes()))
 
     def download_assets(self, glacier):
         items = self.cached_search(glacier)
         if items is None:
             return
 
-        print("Downloading {}: {}.".format(glacier.wgi_id(), glacier.number_scenes()))
+        logger.info("Downloading {}: {}.".format(glacier.wgi_id(), glacier.number_scenes()))
 
         glacier_download_path = self.glacier_download_path(glacier)
         items.download_assets(DOWNLOAD_DATA,
                               path=str(pathlib.Path.joinpath(glacier_download_path,
                                                              "${id}")))
+
+        logger.success("Finished downloading assets for glacier{}".format(glacier))
 
     def glacier_download_path(self, glacier):
         """
@@ -154,4 +153,4 @@ class Download:
 
     def pretty_print_list(self, lst):
         for element in lst:
-            print(element)
+            logger.info(element)

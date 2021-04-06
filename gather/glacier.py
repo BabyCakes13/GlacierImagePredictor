@@ -1,3 +1,7 @@
+from utils import logging
+logger = logging.getLogger(__name__)
+
+
 class Glacier:
     BBOX_SIZE = 0.00001
 
@@ -19,6 +23,8 @@ class Glacier:
 
         self.__number_scenes = 0
         self.__bbox = None
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def define_bounding_box(self) -> list:
         """

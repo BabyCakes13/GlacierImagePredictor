@@ -6,6 +6,9 @@ from process.entities.glacier import Glacier
 
 import os
 
+from utils import logging
+logger = logging.getLogger(__name__)
+
 
 class RoiCrawler(Crawler):
     """
@@ -16,6 +19,8 @@ class RoiCrawler(Crawler):
     def __init__(self, root):
         Crawler.__init__(self, root)
         self.__rois = []
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def crawl(self, glacier: Glacier) -> list:
         """
@@ -39,14 +44,14 @@ class RoiCrawler(Crawler):
         scene_id = SceneID(scene_dir_name)
         scene_path = os.path.join(self._root, scene_dir_name)
 
-        print(scene_id)
         try:
             scene = Scene(scene_id, scene_path)
             roi = RegionOfInterest(scene_id.path(), scene_id.row())
             roi = self.add_roi(roi)
             roi.add_scene(scene)
         except FileNotFoundError as e:
-            print(e)
+            logger.warning("Scene with id {} could not be created due to missing band.\n{}"
+                           .format(scene_id, e))
             return None
 
         return scene
