@@ -17,6 +17,7 @@ class CMDArgs:
 
         self.add_download_args()
         self.add_process_args()
+        self.add_gui_args()
 
     def add_download_args(self) -> None:
         download_parser = self.subparsers.add_parser('download',
@@ -37,7 +38,8 @@ class CMDArgs:
 
         download_parser.add_argument('-d',
                                      '--download-directory',
-                                     help='Path to the output folder which will contain the data set results.',
+                                     help='Path to the output folder which will contain the'
+                                     'processed results.',
                                      type=str,
                                      dest='d')
 
@@ -60,6 +62,10 @@ class CMDArgs:
                                     dest='input')
         process_parser.set_defaults(func=set_process_callback)
 
+    def add_gui_args(self) -> None:
+        gui_parser = self.subparsers.add_parser('gui', add_help=True)
+        gui_parser.set_defaults(func=set_gui_callback)
+
 
 def activate_arguments() -> None:
     arguments = CMDArgs()
@@ -80,3 +86,7 @@ def set_download_callback(args) -> None:
 def set_process_callback(args) -> None:
     crawler = GlacierCrawler(args.input)
     crawler.crawl()
+
+
+def set_gui_callback(args) -> None:
+    print("Setup GUI.")
