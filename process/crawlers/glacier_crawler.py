@@ -4,6 +4,9 @@ from process.entities.glacier import Glacier
 
 import os
 
+from utils import logging
+logger = logging.getLogger(__name__)
+
 
 class GlacierCrawler(Crawler):
     GEOJSON_DIR_NAME = "geojson"
@@ -11,6 +14,8 @@ class GlacierCrawler(Crawler):
     def __init__(self, root):
         Crawler.__init__(self, root)
         self.__glaciers = []
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def crawl(self) -> None:
         os.chdir(self._root)
@@ -30,9 +35,11 @@ class GlacierCrawler(Crawler):
         glacier.set_rois(rois)
 
     def print_objects(self, glacier):
-        print("\nFor glacier {} we found the following rois:".format(glacier))
+        logger.info("For glacier {}, the following regions of interest have been found:"
+                    .format(glacier))
         for roi in glacier.rois():
-            print(roi)
+            logger.info("For region of interest {}, the following scenes have been found:"
+                        .format(str(roi)))
             roi.print_scenes()
 
     def create_glacier(self, wgi_id: int):

@@ -5,6 +5,9 @@ import ntpath
 
 import os
 
+from utils import logging
+logger = logging.getLogger(__name__)
+
 
 class Band:
     BAND_NAMING_CONVENTION = {
@@ -27,6 +30,8 @@ class Band:
         self.__band_path = self.create_band_path(scene_path, scene_id, name)
         self.__ndarray = None
 
+        logger.debug("Created {}.".format(self.__str__()))
+
     def create_band_path(self, scene_path: str, scene_id: str, name: str):
         band_path = os.path.join(scene_path, scene_id + self.BAND_FILE_ENDWITH[name])
         if os.path.exists(band_path):
@@ -44,7 +49,7 @@ class Band:
                                             ysize=opened.RasterYSize)
             return numpy_band
         except Exception as e:
-            print(e)
+            logger.warning("Could not read the band {}\n{}".format(self.__str__(), e))
             return None
 
     def ndarray(self) -> numpy.ndarray:

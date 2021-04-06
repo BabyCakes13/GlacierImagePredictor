@@ -1,6 +1,9 @@
 from process.entities.band import Band
 from process.entities.scene_id import SceneID
 
+from utils import logging
+logger = logging.getLogger(__name__)
+
 
 class Scene:
     def __init__(self, scene_id: SceneID, scene_path: str):
@@ -12,6 +15,8 @@ class Scene:
         self.__blue_band = Band(scene_path, scene_id.scene_id(), 'Blue')
         self.__nir_band = Band(scene_path, scene_id.scene_id(), 'NIR')
         self.__swir1_band = Band(scene_path, scene_id.scene_id(), 'SWIR1')
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def red_band(self) -> Band:
         return self.__red_band
@@ -35,11 +40,12 @@ class Scene:
         return self.__scene_path
 
     def print_bands(self):
-        print("{}\n{}\n{}\n{}\n{}\n".format(self.__blue_band,
-                                            self.__green_band,
-                                            self.__red_band,
-                                            self.__nir_band,
-                                            self.__swir1_band))
+        logger.info("Bands for scene with id {}".format(self.__str__()))
+        logger.info("{}\n{}\n{}\n{}\n{}\n".format(self.__blue_band,
+                                                  self.__green_band,
+                                                  self.__red_band,
+                                                  self.__nir_band,
+                                                  self.__swir1_band))
 
     def __str__(self):
-        return "Scene[{}]".format(self.__scene_id)
+        return "Scene[{}]".format(self.__scene_id.scene_id())

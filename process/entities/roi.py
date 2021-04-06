@@ -1,5 +1,8 @@
 from process.entities.scene import Scene
 
+from utils import logging
+logger = logging.getLogger(__name__)
+
 
 class RegionOfInterest:
     def __init__(self, wgi_path: int, wgi_row: int):
@@ -13,6 +16,8 @@ class RegionOfInterest:
         self.__row = wgi_row
 
         self.__scenes = []
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def path(self):
         return self.__path
@@ -28,7 +33,7 @@ class RegionOfInterest:
 
     def print_scenes(self) -> None:
         for scene in self.__scenes:
-            print(scene)
+            logger.info(scene)
 
     def __eq__(self, other):
         if isinstance(other, RegionOfInterest):

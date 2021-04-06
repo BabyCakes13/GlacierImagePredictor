@@ -1,5 +1,8 @@
 import calendar
 
+from utils import logging
+logger = logging.getLogger(__name__)
+
 
 class SceneID:
     """
@@ -24,6 +27,8 @@ class SceneID:
 
     def __init__(self, scene_id: str):
         self.__scene = scene_id
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def scene_id(self):
         return self.__scene
