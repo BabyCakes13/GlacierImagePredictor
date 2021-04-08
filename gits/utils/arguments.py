@@ -93,6 +93,15 @@ def set_process_callback(args) -> None:
     crawler = GlacierCrawler(args.input)
     crawler.crawl()
 
+    glaciers = crawler.glaciers()
+    rois = glaciers[0].rois()
+
+    ui = gui.GUI()
+    ui.setup_glacier_display(glaciers)
+    ui.setup_roi_display(rois)
+    ui.start()
+
 
 def set_gui_callback(args) -> None:
-    pass
+    ui = gui.GUI()
+    ui.start()

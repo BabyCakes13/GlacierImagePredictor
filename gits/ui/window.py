@@ -8,6 +8,8 @@ class Window(qt.QMainWindow):
     def __init__(self):
         super().__init__(parent=None)
 
+        self.__layout = qt.QHBoxLayout()
+        self.__set_central_widget()
         self.__setup_window()
         self.__setup_menu()
         self.__setup_toolbar()
@@ -18,20 +20,24 @@ class Window(qt.QMainWindow):
         self.setWindowTitle("Cool title to be.")
         self.showMaximized()
 
-    def __setup_glacier_display(self):
+    def __set_central_widget(self):
+        widget = qt.QWidget()
+        widget.setLayout(self.__layout)
+        self.setCentralWidget(widget)
+
+    def _setup_list_display(self, items):
+        list_widget = qt.QListWidget()
+        list_widget.addItems(items)
+
+        self.__layout.addWidget(list_widget)
+
+    def _setup_image_display(self):
         pass
 
-    def __setup_scenes_display(self):
-        pass
-
-    def __setup_image_display(self):
-        pass
-
-    def __setup_timeline_display(self):
+    def _setup_timeline_display(self):
         pass
 
     def __setup_menu(self):
-        logger.warning("Setting up menu")
         self.menu = self.menuBar().addMenu("&Menu")
         self.menu.addAction('&Exit', self.close)
 
