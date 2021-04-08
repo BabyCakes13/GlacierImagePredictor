@@ -1,11 +1,7 @@
 import csv
-import sys
 
 from gather.glacier import Glacier
-sys.path.append("..")
-from util import utils  # noqa: E402
-
-from utils import logging
+from utils import logging, utils
 logger = logging.getLogger(__name__)
 
 
