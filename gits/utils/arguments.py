@@ -92,13 +92,8 @@ def set_download_callback(args) -> None:
 def set_process_callback(args) -> None:
     crawler = GlacierCrawler(args.input)
     crawler.crawl()
-
     glaciers = crawler.glaciers()
-    rois = glaciers[0].rois()
-
-    ui = gui.GUI()
-    ui.setup_glacier_display(glaciers)
-    ui.setup_roi_display(rois)
+    ui = gui.GUI(glaciers)
     ui.start()
 
 
