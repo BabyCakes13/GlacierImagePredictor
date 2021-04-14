@@ -45,7 +45,7 @@ class Window(qtw.QMainWindow):
         list_widget = qtw.QListWidget()
         list_widget.addItems(items)
 
-        # TODO find a better way to calculate the width such that each charagter is displayed
+        # TODO find a better way to calculate the width such that each character is displayed
         # for now, the + 26 makes sure that the whole word fits into the list view.
         longest_str_length = max(items, key=len)
         width = list_widget.fontMetrics().boundingRect(longest_str_length).width() + 26
@@ -61,6 +61,11 @@ class Window(qtw.QMainWindow):
         return items
 
     def _setup_image_display(self, image, grid_row, grid_column):
+        """
+        Function which represents the main image screen of the GUI.
+
+        This will hold the glacier high scale image, possible graphs and interaction.
+        """
         image = qg.QPixmap(image)
         label = qtw.QLabel()
         image = image.scaled(self.__image_width(),
@@ -69,6 +74,12 @@ class Window(qtw.QMainWindow):
         label.setPixmap(image)
 
         self.__layout.addWidget(label, grid_row, grid_column)
+
+    def image_width(self) -> int:
+        return (self.width() / 8) * 10
+
+    def __image_height(self) -> int:
+        return (self.height() / 8) * 7
 
     def _setup_timeline_display(self):
         # TODO Not sure whether to display dates or thumbnails here. Would make more sense to
@@ -84,9 +95,3 @@ class Window(qtw.QMainWindow):
         tools = qtw.QToolBar()
         self.addToolBar(tools)
         tools.addAction('Exit', self.close)
-
-    def __image_width(self) -> int:
-        return (self.width() / 8) * 10
-
-    def __image_height(self) -> int:
-        return (self.height() / 8) * 7
