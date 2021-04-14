@@ -71,6 +71,9 @@ class Window(qtw.QMainWindow):
         self.__layout.addWidget(label, grid_row, grid_column)
 
     def _setup_timeline_display(self):
+        # TODO Not sure whether to display dates or thumbnails here. Would make more sense to
+        # display the dates somehow, since the image is super small and we won't notive anyway
+        # details from the thumbnail. But thumbnail looks better. Eh.
         pass
 
     def __setup_menu(self) -> None:
