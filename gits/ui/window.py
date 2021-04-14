@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtGui as qg
+from PyQt5 import QtCore
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -10,19 +11,17 @@ class Window(qtw.QMainWindow):
         super().__init__(parent=None)
 
         self.__setup_layout()
-        self.__setup_elements()
-
-        logger.debug("Created {}.".format(self.__str__()))
-
-    def __setup_elements(self) -> None:
         self.__set_central_widget()
         self.__setup_window("GUI")
         self.__setup_menu()
-        # self.__setup_toolbar()
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def __setup_window(self, title: str) -> None:
         self.setWindowTitle(title)
-        self.showMaximized()
+
+    def _setup_screen_size(self, width, height):
+        self.setFixedSize(width, height)
 
     def __setup_layout(self) -> None:
         self.__layout = qtw.QGridLayout()
@@ -35,6 +34,7 @@ class Window(qtw.QMainWindow):
         self.__layout.setColumnStretch(2, 1)
         # image display
         self.__layout.setColumnStretch(3, 3)
+        self.__layout.setRowStretch(3, 2)
 
     def __set_central_widget(self) -> None:
         widget = qtw.QWidget()
@@ -60,8 +60,15 @@ class Window(qtw.QMainWindow):
 
         return items
 
-    def _setup_image_display(self, image):
-        pass
+    def _setup_image_display(self, image, grid_row, grid_column):
+        image = qg.QPixmap(image)
+        label = qtw.QLabel()
+        image = image.scaled(self.__image_width(),
+                             self.__image_height(),
+                             QtCore.Qt.KeepAspectRatio)
+        label.setPixmap(image)
+
+        self.__layout.addWidget(label, grid_row, grid_column)
 
     def _setup_timeline_display(self):
         pass
@@ -74,3 +81,9 @@ class Window(qtw.QMainWindow):
         tools = qtw.QToolBar()
         self.addToolBar(tools)
         tools.addAction('Exit', self.close)
+
+    def __image_width(self) -> int:
+        return (self.width() / 8) * 10
+
+    def __image_height(self) -> int:
+        return (self.height() / 8) * 7
