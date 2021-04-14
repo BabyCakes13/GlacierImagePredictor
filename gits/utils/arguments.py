@@ -1,7 +1,11 @@
 import argparse
 
-# from gather import satellite_download
+from gather import satellite_download
 from preprocess.crawlers.glacier_crawler import GlacierCrawler
+from ui import gui
+
+from utils import logging
+logger = logging.getLogger(__name__)
 
 
 class CMDArgs:
@@ -18,6 +22,8 @@ class CMDArgs:
         self.add_download_args()
         self.add_process_args()
         self.add_gui_args()
+
+        logger.debug("Created {}.".format(self.__str__()))
 
     def add_download_args(self) -> None:
         download_parser = self.subparsers.add_parser('download',
@@ -79,14 +85,18 @@ def set_download_callback(args) -> None:
     The default function for download sub parser.
     :param args: Arguments passed through command line for download.
     """
-    # downloader = satellite_download.Download(args.csv, args.c, args.d, args.j)
-    # downloader.download_glaciers()
+    downloader = satellite_download.Download(args.csv, args.c, args.d, args.j)
+    downloader.download_glaciers()
 
 
 def set_process_callback(args) -> None:
     crawler = GlacierCrawler(args.input)
     crawler.crawl()
+    glaciers = crawler.glaciers()
+    ui = gui.GUI(glaciers)
+    ui.start()
 
 
 def set_gui_callback(args) -> None:
-    print("Setup GUI.")
+    ui = gui.GUI()
+    ui.start()

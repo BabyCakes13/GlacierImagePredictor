@@ -69,6 +69,9 @@ class Band:
     def band_name(self):
         return self.BAND_NAMING_CONVENTION[self.band_number()]
 
+    def band_path(self):
+        return self.__band_path
+
     def plot_band(self) -> None:
         plt.imshow(self.__ndarray, cmap="gray")
         plt.show()
