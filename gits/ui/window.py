@@ -75,7 +75,7 @@ class Window(qtw.QMainWindow):
 
         self.__layout.addWidget(label, grid_row, grid_column)
 
-    def image_width(self) -> int:
+    def __image_width(self) -> int:
         return (self.width() / 8) * 10
 
     def __image_height(self) -> int:
