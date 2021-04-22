@@ -21,27 +21,28 @@ class Window(qtw.QMainWindow):
         self.setWindowTitle(title)
 
     def _setup_screen_size(self, width, height):
-        self.setFixedSize(width, height)
+        self.__width = width
+        self.__height = height
 
     def __setup_layout(self) -> None:
         self.__layout = qtw.QGridLayout()
 
-        # glacier display
-        self.__layout.setColumnStretch(0, 1)
-        # region of interest display
-        self.__layout.setColumnStretch(1, 1)
-        # scenes display
-        self.__layout.setColumnStretch(2, 1)
-        # image display
-        self.__layout.setColumnStretch(3, 3)
-        self.__layout.setRowStretch(3, 2)
+        # # glacier display
+        # self.__layout.setColumnStretch(0, 1)
+        # # region of interest display
+        # self.__layout.setColumnStretch(1, 1)
+        # # scenes display
+        # self.__layout.setColumnStretch(2, 1)
+        # # image display
+        # self.__layout.setColumnStretch(3, 3)
+        # self.__layout.setRowStretch(3, 2)
 
     def __set_central_widget(self) -> None:
         widget = qtw.QWidget()
         widget.setLayout(self.__layout)
         self.setCentralWidget(widget)
 
-    def _setup_list_display(self, items: list, grid_row: int, grid_column: int) -> None:
+    def _setup_list_display(self, items: list, clicked, grid_row: int, grid_column: int) -> None:
         list_widget = qtw.QListWidget()
         list_widget.addItems(items)
 
@@ -50,8 +51,11 @@ class Window(qtw.QMainWindow):
         longest_str_length = max(items, key=len)
         width = list_widget.fontMetrics().boundingRect(longest_str_length).width() + 26
         list_widget.setFixedWidth(width)
+        list_widget.clicked.connect(clicked)
 
         self.__layout.addWidget(list_widget, grid_row, grid_column)
+
+        return list_widget
 
     def get_items(self, list_widget):
         items = []
@@ -68,18 +72,13 @@ class Window(qtw.QMainWindow):
         """
         image = qg.QPixmap(image)
         label = qtw.QLabel()
-        image = image.scaled(self.__image_width(),
-                             self.__image_height(),
+        image = image.scaled(self.__width,
+                             self.__height,
                              QtCore.Qt.KeepAspectRatio)
+        label.setScaledContents(True)
         label.setPixmap(image)
 
         self.__layout.addWidget(label, grid_row, grid_column)
-
-    def __image_width(self) -> int:
-        return (self.width() / 8) * 10
-
-    def __image_height(self) -> int:
-        return (self.height() / 8) * 7
 
     def _setup_timeline_display(self):
         # TODO Not sure whether to display dates or thumbnails here. Would make more sense to

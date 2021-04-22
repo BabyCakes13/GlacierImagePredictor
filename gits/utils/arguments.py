@@ -92,7 +92,9 @@ def set_download_callback(args) -> None:
 def set_process_callback(args) -> None:
     crawler = GlacierCrawler(args.input)
     crawler.crawl()
+
     glaciers = crawler.glaciers()
+
     ui = gui.GUI(glaciers)
     ui.start()
 
