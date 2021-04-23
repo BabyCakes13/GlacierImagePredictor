@@ -1,12 +1,14 @@
-from PyQt5 import QtWidgets as qtw
-from PyQt5 import QtGui as qg
+from PyQt5 import QtWidgets
+from PyQt5 import QtGui
 from PyQt5 import QtCore
+
+from ui.PyQtImageViewer.QtImageViewer import QtImageViewer
 
 from utils import logging
 logger = logging.getLogger(__name__)
 
 
-class Window(qtw.QMainWindow):
+class Window(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__(parent=None)
 
@@ -25,25 +27,15 @@ class Window(qtw.QMainWindow):
         self.__height = height
 
     def __setup_layout(self) -> None:
-        self.__layout = qtw.QGridLayout()
-
-        # # glacier display
-        # self.__layout.setColumnStretch(0, 1)
-        # # region of interest display
-        # self.__layout.setColumnStretch(1, 1)
-        # # scenes display
-        # self.__layout.setColumnStretch(2, 1)
-        # # image display
-        # self.__layout.setColumnStretch(3, 3)
-        # self.__layout.setRowStretch(3, 2)
+        self.__layout = QtWidgets.QGridLayout()
 
     def __set_central_widget(self) -> None:
-        widget = qtw.QWidget()
+        widget = QtWidgets.QWidget()
         widget.setLayout(self.__layout)
         self.setCentralWidget(widget)
 
     def _setup_list_display(self, items: list, clicked, grid_row: int, grid_column: int) -> None:
-        list_widget = qtw.QListWidget()
+        list_widget = QtWidgets.QListWidget()
         list_widget.addItems(items)
 
         # TODO find a better way to calculate the width such that each character is displayed
@@ -64,21 +56,24 @@ class Window(qtw.QMainWindow):
 
         return items
 
-    def _setup_image_display(self, image, grid_row, grid_column):
+    def _setup_image_display(self, image_filepath, grid_row, grid_column):
         """
         Function which represents the main image screen of the GUI.
 
         This will hold the glacier high scale image, possible graphs and interaction.
         """
-        image = qg.QPixmap(image)
-        label = qtw.QLabel()
-        image = image.scaled(self.__width,
-                             self.__height,
-                             QtCore.Qt.KeepAspectRatio)
-        label.setScaledContents(True)
-        label.setPixmap(image)
+        viewer = QtImageViewer()
+        viewer.aspectRatioMode = QtCore.Qt.KeepAspectRatio
+        viewer.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        viewer.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        viewer.canZoom = True
+        viewer.canPan = True
 
-        self.__layout.addWidget(label, grid_row, grid_column)
+        image = QtGui.QImage(image_filepath)
+        viewer.setImage(image)
+        viewer.show()
+
+        self.__layout.addWidget(viewer, grid_row, grid_column)
 
     def _setup_timeline_display(self):
         # TODO Not sure whether to display dates or thumbnails here. Would make more sense to
@@ -91,6 +86,6 @@ class Window(qtw.QMainWindow):
         self.menu.addAction('&Exit', self.close)
 
     def __setup_toolbar(self):
-        tools = qtw.QToolBar()
+        tools = QtWidgets.QToolBar()
         self.addToolBar(tools)
         tools.addAction('Exit', self.close)
