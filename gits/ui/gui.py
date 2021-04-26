@@ -113,7 +113,8 @@ class GUI():
         self.__active_scenes_qlist = self.__window.lists_window().scenes_list_widget()
 
     def __set_image_display(self):
-        self.__window._set_image_display(self.__active_scene.red_band().band_path(), 0, 3)
+        self.__window.main_display_window()._set_image_viewer(self.__active_scene.red_band()
+                                                              .band_path(), 0, 3)
 
     def __set_default_elements(self):
         self.__set_glacier_display()

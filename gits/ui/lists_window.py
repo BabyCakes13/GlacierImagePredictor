@@ -6,7 +6,7 @@ from ui import roi_list_widget
 from ui import scene_list_widget
 
 
-class ListsWindow():
+class ListsWindow:
     def __init__(self, layout):
         self.__layout = layout
         self.__glacier_list_widget = None

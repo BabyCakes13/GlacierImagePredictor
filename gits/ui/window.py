@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 
-from ui import image_viewer
 from ui import lists_window
+from ui import main_display_window
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -13,7 +13,7 @@ class Window():
         self.__setup_elements()
 
         self.__lists_window = lists_window.ListsWindow(self.__layout)
-        self.__image_display = None
+        self.__main_display_windw = main_display_window.MainDisplayWindow(self.__layout)
 
         logger.debug("Created {}.".format(self.__str__()))
 
@@ -34,10 +34,6 @@ class Window():
         widget.setLayout(self.__layout)
         self.__window.setCentralWidget(widget)
 
-    def _set_image_display(self, image_filepath, grid_row, grid_column):
-        self.__image_viewer = image_viewer.ImageViewer(image_filepath)
-        self.__layout.addWidget(self.__image_viewer.viewer(), grid_row, grid_column)
-
     def _set_timeline_display(self):
         # TODO Not sure whether to display dates or thumbnails here. Would make more sense to
         # display the dates somehow, since the image is super small and we won't notive anyway
@@ -55,6 +51,9 @@ class Window():
 
     def lists_window(self) -> lists_window.ListsWindow:
         return self.__lists_window
+
+    def main_display_window(self) -> main_display_window.MainDisplayWindow:
+        return self.__main_display_windw
 
     def show(self):
         self.__window.show()
