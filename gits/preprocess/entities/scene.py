@@ -49,3 +49,10 @@ class Scene:
 
     def __str__(self):
         return "Scene[{}]".format(self.__scene_id.scene_id())
+
+
+def find_scene_by_wgi_id(scene_id: str, scenes: list) -> Scene:
+    for scene in scenes:
+        if scene.scene_id().scene_id() == scene_id:
+            return scene
+    return None

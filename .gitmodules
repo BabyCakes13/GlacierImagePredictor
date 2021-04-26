@@ -4,3 +4,6 @@
 [submodule "sat-search"]
 	path = sat-search
 	url = https://github.com/BabyCakes13/sat-search.git
+[submodule "gits/ui/PyQtImageViewer"]
+	path = gits/ui/PyQtImageViewer
+	url = https://github.com/marcel-goldschen-ohm/PyQtImageViewer.git

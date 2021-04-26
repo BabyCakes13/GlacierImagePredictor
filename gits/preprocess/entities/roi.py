@@ -35,6 +35,9 @@ class RegionOfInterest:
         for scene in self.__scenes:
             logger.info(scene)
 
+    def str_path_row(self) -> str:
+        return str(self.__path) + ":" + str(self.__row)
+
     def __eq__(self, other):
         if isinstance(other, RegionOfInterest):
             return self.__path == other.path() and self.__row == other.row()
@@ -42,3 +45,10 @@ class RegionOfInterest:
 
     def __str__(self):
         return "RegionOfInterest[{}, {}]".format(self.__path, self.__row)
+
+
+def find_roi_by_path_row(roi: RegionOfInterest, rois: list) -> RegionOfInterest:
+    for r in rois:
+        if roi == r.str_path_row():
+            return r
+    return None

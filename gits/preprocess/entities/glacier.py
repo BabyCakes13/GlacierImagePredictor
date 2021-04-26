@@ -22,3 +22,10 @@ class Glacier:
 
     def __str__(self):
         return "Glacier[{}]".format(self.__wgi_id)
+
+
+def find_glacier_by_wgi_id(glacier_wgi_id: str, glaciers: list) -> Glacier:
+    for glacier in glaciers:
+        if glacier.wgi_id() == glacier_wgi_id:
+            return glacier
+    return None
