@@ -56,3 +56,7 @@ def find_scene_by_wgi_id(scene_id: str, scenes: list) -> Scene:
         if scene.scene_id().scene_id() == scene_id:
             return scene
     return None
+
+
+def get_scene_id_list_from(scenes: list) -> list:
+    return [scene.scene_id().scene_id() for scene in scenes]

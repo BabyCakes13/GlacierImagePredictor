@@ -31,7 +31,7 @@ class GUI():
         logger.debug("Created {}.".format(self.__str__()))
 
     def start(self):
-        self.__setup_elements()
+        self.__set_default_elements()
         self.__window.show()
         sys.exit(self.__app.exec_())
 
@@ -55,19 +55,21 @@ class GUI():
 
     def __update_rois(self) -> None:
         self.__update_active_roi(self.__active_glacier.rois()[0])
-        self.__setup_roi_display()
+
+        rois_str_format = ro.get_path_row_str_from(self.__active_rois())
+        self.__window._update_rois_display(rois_str_format)
 
         self.__update_scenes()
 
     def __update_scenes(self) -> None:
         self.__update_active_scene(self.__active_roi.scenes()[0])
-        self.__setup_scenes_display()
+
+        scenes_str_fromat = sc.get_scene_id_list_from(self.__active_scenes())
+        self.__window._update_scenes_display(scenes_str_fromat)
 
     def __glacier_clicked(self, item):
         item = self.__active_glaciers_qlist.currentItem()
         glacier = gl.find_glacier_by_wgi_id(item.text(), self.__glaciers)
-
-        print(glacier)
 
         self.__update_active_glacier(glacier)
         self.__update_rois()
@@ -84,36 +86,35 @@ class GUI():
         scene = sc.find_scene_by_wgi_id(item.text(), self.__active_scenes())
 
         self.__update_active_scene(scene)
-        self.__setup_image_display()
+        self.__set_image_display()
 
-    def __setup_glacier_display(self):
-        glaciers_str = [glacier.wgi_id() for glacier in self.__glaciers]
+    def __set_glacier_display(self):
+        glaciers_str = gl.get_wgi_id_list_from(self.__glaciers)
         self.__window._set_default_glaciers_display(glaciers_str,
                                                     self.__glacier_clicked,
                                                     0, 0)
         self.__active_glaciers_qlist = self.__window._glaciers_display()
 
-    def __setup_roi_display(self):
-        rois_str = [roi.str_path_row() for roi in self.__active_glacier.rois()]
+    def __set_roi_display(self):
+        rois_str = ro.get_path_row_str_from(self.__active_rois())
         self.__window._set_default_rois_display(rois_str,
                                                 self.__roi_clicked,
                                                 0, 1)
         self.__active_rois_qlist = self.__window._rois_display()
 
-    def __setup_scenes_display(self):
-        scenes_str = [scene.scene_id().scene_id() for scene in self.__active_roi.scenes()]
+    def __set_scenes_display(self):
+        scenes_str = sc.get_scene_id_list_from(self.__active_scenes())
         self.__window._set_default_scenes_display(scenes_str,
                                                   self.__scene_clicked,
                                                   0, 2)
-        self.__setup_image_display()
+        self.__set_image_display()
         self.__active_scenes_qlist = self.__window._scenes_display()
 
-    def __setup_image_display(self):
-        print("Active scene is {} with red band path {}".format(self.__active_scene, self.__active_scene.red_band().band_path()))
+    def __set_image_display(self):
         self.__window._set_image_display(self.__active_scene.red_band().band_path(), 0, 3)
 
-    def __setup_elements(self):
-        self.__setup_glacier_display()
-        self.__setup_roi_display()
-        self.__setup_scenes_display()
-        self.__setup_image_display()
+    def __set_default_elements(self):
+        self.__set_glacier_display()
+        self.__set_roi_display()
+        self.__set_scenes_display()
+        self.__set_image_display()

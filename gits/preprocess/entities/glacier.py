@@ -29,3 +29,7 @@ def find_glacier_by_wgi_id(glacier_wgi_id: str, glaciers: list) -> Glacier:
         if glacier.wgi_id() == glacier_wgi_id:
             return glacier
     return None
+
+
+def get_wgi_id_list_from(glaciers: list) -> list:
+    return [glacier.wgi_id() for glacier in glaciers]

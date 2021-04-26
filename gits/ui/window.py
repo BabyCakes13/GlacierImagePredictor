@@ -64,6 +64,16 @@ class Window(QtWidgets.QMainWindow):
         self.__set_list_widget_width(scenes, self.__scenes_display)
         self.__layout.addWidget(self.__scenes_display, grid_row, grid_column)
 
+    def _update_rois_display(self, rois_str_format: list) -> None:
+        self.__rois_display.clear()
+        self.__rois_display.addItems(rois_str_format)
+        self.__rois_display.repaint()
+
+    def _update_scenes_display(self, scenes_str_format: list) -> None:
+        self.__scenes_display.clear()
+        self.__scenes_display.addItems(scenes_str_format)
+        self.__scenes_display.repaint()
+
     def __set_list_widget_width(self, items, list_widget):
         # TODO find a better way to calculate the width such that each character is displayed
         # for now, the + 26 makes sure that the whole word fits into the list view.

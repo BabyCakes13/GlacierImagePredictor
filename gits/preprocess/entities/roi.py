@@ -52,3 +52,7 @@ def find_roi_by_path_row(roi: RegionOfInterest, rois: list) -> RegionOfInterest:
         if roi == r.str_path_row():
             return r
     return None
+
+
+def get_path_row_str_from(rois: list) -> list:
+    return [roi.str_path_row() for roi in rois]
