@@ -23,6 +23,11 @@ class EntityListWidget():
         self._items = items
         self._list_widget.repaint()
 
+    def _add_to_layout(self, layout) -> None:
+        layout.addWidget(self._list_widget,
+                         self._grid_row,
+                         self._grid_column)
+
     def __set_list_widget_width(self, items, list_widget):
         longest_str_length = max(items, key=len)
         width = list_widget.fontMetrics().boundingRect(longest_str_length).width() + 26
