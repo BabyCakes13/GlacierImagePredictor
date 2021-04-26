@@ -47,7 +47,7 @@ class RegionOfInterest:
         return "RegionOfInterest[{}, {}]".format(self.__path, self.__row)
 
 
-def find_roi_by_path_row(roi, rois) -> RegionOfInterest:
+def find_roi_by_path_row(roi: RegionOfInterest, rois: list) -> RegionOfInterest:
     for r in rois:
         if roi == r.str_path_row():
             return r
