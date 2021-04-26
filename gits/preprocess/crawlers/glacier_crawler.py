@@ -23,7 +23,7 @@ class GlacierCrawler(Crawler):
                    and name != self.GEOJSON_DIR_NAME]
 
         for wgi_id in wgi_ids:
-            glacier = self.create_glacier(wgi_id)
+            glacier = self.__create_glacier(wgi_id)
             self.__glaciers.append(glacier)
             self.crawl_into(glacier)
 
@@ -42,7 +42,7 @@ class GlacierCrawler(Crawler):
                         .format(str(roi)))
             roi.print_scenes()
 
-    def create_glacier(self, wgi_id: int):
+    def __create_glacier(self, wgi_id: int):
         return Glacier(wgi_id)
 
     def glaciers(self):

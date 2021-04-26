@@ -34,20 +34,20 @@ class RoiCrawler(Crawler):
         scene_dirs = [name for name in os.listdir(".") if os.path.isdir(name)]
 
         for scene_dir_name in scene_dirs:
-            scene = self.create_scene_objects(scene_dir_name)
+            scene = self.__create_scene_objects(scene_dir_name)
             if scene is not None:
                 scene.print_bands()
 
         return self.__rois
 
-    def create_scene_objects(self, scene_dir_name) -> Scene:
+    def __create_scene_objects(self, scene_dir_name) -> Scene:
         scene_id = SceneID(scene_dir_name)
         scene_path = os.path.join(self._root, scene_dir_name)
 
         try:
             scene = Scene(scene_id, scene_path)
             roi = RegionOfInterest(scene_id.path(), scene_id.row())
-            roi = self.add_roi(roi)
+            roi = self.__add_roi(roi)
             roi.add_scene(scene)
         except FileNotFoundError as e:
             logger.warning("Scene with id {} could not be created due to missing band.\n{}"
@@ -56,7 +56,7 @@ class RoiCrawler(Crawler):
 
         return scene
 
-    def add_roi(self, roi: RegionOfInterest) -> RegionOfInterest:
+    def __add_roi(self, roi: RegionOfInterest) -> RegionOfInterest:
         """
         Function to check whether a region of interest was already found, adding it if not.
 
@@ -72,14 +72,14 @@ class RoiCrawler(Crawler):
         # TODO The logic here can be implemented better. Should not return a roi in a function
         # which is adding one to a list. Or should I?
 
-        alread_existing_roi = self.roi_exists(roi)
+        alread_existing_roi = self.__roi_exists(roi)
         if alread_existing_roi is None:
             self.__rois.append(roi)
             return roi
         else:
             return alread_existing_roi
 
-    def roi_exists(self, roi) -> RegionOfInterest:
+    def __roi_exists(self, roi) -> RegionOfInterest:
         for r in self.__rois:
             if roi == r:
                 return r
