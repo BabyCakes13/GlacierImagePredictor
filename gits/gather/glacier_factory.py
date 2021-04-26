@@ -19,6 +19,8 @@ class GlacierFactory:
                           glacier_data['lat'],
                           glacier_data['lon'],
                           glacier_data['glacier_name'])
+
+        logger.debug("Created glacier {}.".format(glacier))
         return glacier
 
     def generate_glacier_dict(self):

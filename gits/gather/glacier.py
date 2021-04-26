@@ -43,6 +43,8 @@ class Glacier:
                 max_longitude,
                 max_latitude]
 
+        logger.debug("Defined bounding box {}".format(bbox))
+
         return bbox
 
     def string_bbox(self) -> str:
@@ -82,6 +84,8 @@ class Glacier:
                               search step.
         """
         self.__number_scenes = number_scenes
+
+        logger.debug("Found {} scenes for glacier {}".format(number_scenes, self.wgi_id()))
 
     def number_scenes(self) -> int:
         return self.__number_scenes
