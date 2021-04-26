@@ -3,6 +3,7 @@ from PyQt5 import QtWidgets
 import sys
 
 from ui import window as w
+from ui import lists_window
 from utils import logging
 
 from preprocess.entities import scene as sc
@@ -57,7 +58,7 @@ class GUI():
         self.__update_active_roi(self.__active_glacier.rois()[0])
 
         rois_str_format = ro.get_path_row_str_from(self.__active_rois())
-        self.__window._rois_display()._update_list_widget_items(rois_str_format)
+        self.__window.lists_window().rois_list_widget()._update_list_widget_items(rois_str_format)
 
         self.__update_scenes()
 
@@ -66,7 +67,7 @@ class GUI():
         self.__set_image_display()
 
         scenes_str_fromat = sc.get_scene_id_list_from(self.__active_scenes())
-        self.__window._scenes_display()._update_list_widget_items(scenes_str_fromat)
+        self.__window.lists_window().scenes_list_widget()._update_list_widget_items(scenes_str_fromat)
 
     def __glacier_clicked(self, item):
         item = self.__active_glaciers_qlist.current_item()
@@ -91,25 +92,25 @@ class GUI():
 
     def __set_glacier_display(self):
         glaciers_str = gl.get_wgi_id_list_from(self.__glaciers)
-        self.__window._set_default_glaciers_display(glaciers_str,
-                                                    self.__glacier_clicked,
-                                                    0, 0)
-        self.__active_glaciers_qlist = self.__window._glaciers_display()
+        self.__window.lists_window()._set_default_glaciers_display(glaciers_str,
+                                                                   self.__glacier_clicked,
+                                                                   0, 0)
+        self.__active_glaciers_qlist = self.__window.lists_window().glaciers_list_widget()
 
     def __set_roi_display(self):
         rois_str = ro.get_path_row_str_from(self.__active_rois())
-        self.__window._set_default_rois_display(rois_str,
-                                                self.__roi_clicked,
-                                                0, 1)
-        self.__active_rois_qlist = self.__window._rois_display()
+        self.__window.lists_window()._set_default_rois_display(rois_str,
+                                                               self.__roi_clicked,
+                                                               0, 1)
+        self.__active_rois_qlist = self.__window.lists_window().rois_list_widget()
 
     def __set_scenes_display(self):
         scenes_str = sc.get_scene_id_list_from(self.__active_scenes())
-        self.__window._set_default_scenes_display(scenes_str,
-                                                  self.__scene_clicked,
-                                                  0, 2)
+        self.__window.lists_window()._set_default_scenes_display(scenes_str,
+                                                                 self.__scene_clicked,
+                                                                 0, 2)
         self.__set_image_display()
-        self.__active_scenes_qlist = self.__window._scenes_display()
+        self.__active_scenes_qlist = self.__window.lists_window().scenes_list_widget()
 
     def __set_image_display(self):
         self.__window._set_image_display(self.__active_scene.red_band().band_path(), 0, 3)
