@@ -1,8 +1,8 @@
 from PyQt5 import QtWidgets
 
-from ui import lists_window
-from ui import main_display_window
-from ui import bands_window
+from ui.lists_display import lists_window
+from ui.main_display import main_display_window
+from ui.lists_display.bands import bands_window
 
 from utils import logging
 logger = logging.getLogger(__name__)

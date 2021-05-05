@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from ui import image_viewer
+from ui.main_display import image_viewer
 
 
 class MainDisplayWindow:

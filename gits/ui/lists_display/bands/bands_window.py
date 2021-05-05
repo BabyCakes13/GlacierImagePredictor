@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from ui.band_list_widget import BandListWidget
+from ui.lists_display.bands import band_list_widget
 
 
 class BandWindow:
@@ -10,9 +10,11 @@ class BandWindow:
 
     def _set_bands_display(self, items: list, clicked,
                            grid_row: int, grid_column: int):
-        self.__band_list_widget = BandListWidget(items, clicked, grid_row, grid_column)
+        self.__band_list_widget = band_list_widget.BandListWidget(items, clicked,
+                                                                  grid_row,
+                                                                  grid_column)
         self.__band_list_widget.vertical_widget()
         self.__layout.addWidget(self.__band_list_widget.widget(), grid_row, grid_column)
 
-    def band_list_widget(self) -> BandListWidget:
+    def band_list_widget(self) -> band_list_widget.BandListWidget:
         return self.__band_list_widget

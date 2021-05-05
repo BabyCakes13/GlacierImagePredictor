@@ -3,9 +3,9 @@ from PyQt5 import QtWidgets
 import sys
 
 from ui import window as w
-from ui import lists_gui
-from ui import main_display_gui
-from ui import bands_gui
+from ui.lists_display import lists_gui
+from ui.main_display import main_display_gui
+from ui.lists_display.bands import bands_gui
 
 from utils import logging
 

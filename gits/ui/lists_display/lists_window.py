@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 from PyQt5 import QtWidgets
 
-from ui import glacier_list_widget
-from ui import roi_list_widget
-from ui import scene_list_widget
+from ui.lists_display.glaciers import glacier_list_widget
+from ui.lists_display.rois import roi_list_widget
+from ui.lists_display.scenes import scene_list_widget
 
 
 class ListsWindow:
