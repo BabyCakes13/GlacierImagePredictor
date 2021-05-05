@@ -5,11 +5,13 @@ import ntpath
 
 import os
 
+from preprocess.entities import image
+
 from utils import logging
 logger = logging.getLogger(__name__)
 
 
-class Band:
+class Band(image.Image):
     BAND_NAMING_CONVENTION = {
         '2': 'Blue',
         '3': 'Green',
@@ -27,6 +29,8 @@ class Band:
     }
 
     def __init__(self, scene_path: str, scene_id: str, name: str):
+        super().__init__()
+
         self.__band_path = self.create_band_path(scene_path, scene_id, name)
         self.__ndarray = None
 
@@ -43,10 +47,7 @@ class Band:
     def read(self) -> numpy.ndarray:
         try:
             opened = gdal.Open(self.__band_path)
-            numpy_band = opened.ReadAsArray(xoff=0,
-                                            yoff=0,
-                                            xsize=opened.RasterXSize,
-                                            ysize=opened.RasterYSize)
+            numpy_band = opened.ReadAsArray()
             return numpy_band
         except Exception as e:
             logger.warning("Could not read the band {}\n{}".format(self.__str__(), e))
@@ -66,26 +67,26 @@ class Band:
         band_filename = ntpath.basename(self.__band_path)
         return band_filename[-5:-4]
 
-    def band_name(self):
+    def name(self):
         return self.BAND_NAMING_CONVENTION[self.band_number()]
 
     def band_path(self):
         return self.__band_path
 
-    def plot_band(self) -> None:
-        plt.imshow(self.__ndarray, cmap="gray")
+    def plot_band(self, ndarray) -> None:
+        plt.imshow(ndarray, cmap="gray")
         plt.show()
 
     def __str__(self):
-        return "Band[{}, {}]".format(self.band_name(), self.__band_path)
+        return "Band[{}, {}]".format(self.name(), self.__band_path)
 
 
 def find_band_by_name(band_name: str, bands: list) -> Band:
     for band in bands:
-        if band.band_name() == band_name:
+        if band.name() == band_name:
             return band
     return None
 
 
 def get_name_list_from(bands: list) -> list:
-    return [band.band_name() for band in bands]
+    return [band.name() for band in bands]

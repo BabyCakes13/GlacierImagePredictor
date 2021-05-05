@@ -38,7 +38,7 @@ class ListsGui:
 
     def __update_active_scene(self, scene) -> None:
         self.__active_scene = scene
-        self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail_path())
+        self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
         logger.info("Active scene changed to {}".format(str(self.__active_scene)))
 
     def __update_rois(self) -> None:
@@ -94,7 +94,7 @@ class ListsGui:
         self.__window.lists_window()._set_default_scenes_display(scenes_str,
                                                                  self.__scene_clicked,
                                                                  0, 2)
-        self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail().band_path())
+        self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
         self.__active_scenes_qlist = self.__window.lists_window().scenes_list_widget()
 
     def active_scene(self) -> sc.Scene:

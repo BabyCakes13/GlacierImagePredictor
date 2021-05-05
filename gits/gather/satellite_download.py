@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 STAC_API_URL = "https://sat-api.developmentseed.org/stac"
 COLLECTION = "landsat-8-l1"
 
-DOWNLOAD_DATA = ['MTL', 'B2', 'B3', 'B4', 'B5', 'B6']
+DOWNLOAD_DATA = ['MTL', 'B2', 'B3', 'B4', 'B5', 'B6', 'thumbnail']
 
 
 class Download:

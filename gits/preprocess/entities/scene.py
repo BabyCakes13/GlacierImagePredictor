@@ -1,5 +1,7 @@
 from preprocess.entities.band import Band
 from preprocess.entities.scene_id import SceneID
+from preprocess.entities.true_color import TrueColor
+from preprocess.entities.image import Image
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -16,28 +18,30 @@ class Scene:
         self.__nir_band = Band(scene_path, scene_id.scene_id(), 'NIR')
         self.__swir1_band = Band(scene_path, scene_id.scene_id(), 'SWIR1')
 
+        self.__true_color = TrueColor(self.__red_band, self.__green_band, self.__blue_band)
+
         logger.debug("Created {}.".format(self.__str__()))
 
-    def red_band(self) -> Band:
+    def red_band(self) -> Image:
         return self.__red_band
 
-    def blue_band(self) -> Band:
+    def blue_band(self) -> Image:
         return self.__blue_band
 
-    def green_band(self) -> Band:
+    def green_band(self) -> Image:
         return self.__green_band
 
-    def nir_band(self) -> Band:
+    def nir_band(self) -> Image:
         return self.__nir_band
 
-    def swir1_band(self) -> Band:
+    def swir1_band(self) -> Image:
         return self.__swir1_band
 
-    def thumbnail(self) -> Band:
-        return self.__red_band
+    def true_color(self) -> Image:
+        return self.__true_color
 
-    def thumbnail_path(self) -> str:
-        return self.__red_band.band_path()
+    def thumbnail(self) -> Image:
+        return self.true_color()
 
     def scene_id(self):
         return self.__scene_id
@@ -51,7 +55,8 @@ class Scene:
             self.__green_band,
             self.__blue_band,
             self.__nir_band,
-            self.__swir1_band
+            self.__swir1_band,
+            self.__true_color
         ]
 
     def print_bands(self):

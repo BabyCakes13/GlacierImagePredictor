@@ -22,9 +22,25 @@ class ImageViewer:
 
         return viewer
 
-    def _update_image(self, image_filepath):
-        image = QtGui.QImage(image_filepath)
-        self.__viewer.setImage(image)
+    def _update_image(self, image):
+        ndarray = image.ndarray()
+        ndarray_dimension = len(ndarray.shape)
+        width = ndarray.shape[1]
+        height = ndarray.shape[0]
+
+        if(ndarray_dimension == 3):
+            bytes_per_line = width * 3
+            image_format = QtGui.QImage.Format_RGB888
+        elif (ndarray_dimension == 2):
+            bytes_per_line = width * 2
+            image_format = QtGui.QImage.Format_Grayscale16
+        else:
+            print("Cannot handle image on {} channels.".format(ndarray_dimension))
+            # TODO handle this error properly
+            return
+
+        qimage = QtGui.QImage(ndarray, width, height, bytes_per_line, image_format)
+        self.__viewer.setImage(qimage)
         self.__viewer.show()
 
     def viewer(self) -> QtImageViewer:

@@ -28,7 +28,7 @@ class BandsGui:
         clicked_band = band.find_band_by_name(clicked_item.text(), self.__scene.bands())
 
         self.__update_active_band(clicked_band)
-        self.__gui.main_display_gui().set_image_display(clicked_band.band_path())
+        self.__gui.main_display_gui().set_image_display(clicked_band)
 
     def __default_scene(self, glaciers):
         default_glacier = glaciers[0]
