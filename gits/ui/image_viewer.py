@@ -9,11 +9,8 @@ logger = logging.getLogger(__name__)
 
 
 class ImageViewer:
-    def __init__(self, image_filepath):
+    def __init__(self):
         self.__viewer = self.__set_image_viewer()
-        self.__image_filepath = image_filepath
-
-        self._update_image(self.__image_filepath)
 
     def __set_image_viewer(self) -> QtImageViewer:
         viewer = QtImageViewer()
@@ -26,8 +23,7 @@ class ImageViewer:
         return viewer
 
     def _update_image(self, image_filepath):
-        self.__image_filepath = image_filepath
-        image = QtGui.QImage(self.__image_filepath)
+        image = QtGui.QImage(image_filepath)
         self.__viewer.setImage(image)
         self.__viewer.show()
 

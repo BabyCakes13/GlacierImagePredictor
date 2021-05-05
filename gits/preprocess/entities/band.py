@@ -78,3 +78,14 @@ class Band:
 
     def __str__(self):
         return "Band[{}, {}]".format(self.band_name(), self.__band_path)
+
+
+def find_band_by_name(band_name: str, bands: list) -> Band:
+    for band in bands:
+        if band.band_name() == band_name:
+            return band
+    return None
+
+
+def get_name_list_from(bands: list) -> list:
+    return [band.band_name() for band in bands]

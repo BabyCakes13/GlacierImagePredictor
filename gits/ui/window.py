@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets
 
 from ui import lists_window
 from ui import main_display_window
+from ui import bands_window
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -14,6 +15,7 @@ class Window():
 
         self.__lists_window = lists_window.ListsWindow(self.__layout)
         self.__main_display_windw = main_display_window.MainDisplayWindow(self.__layout)
+        self.__bands_window = bands_window.BandWindow(self.__layout)
 
         logger.debug("Created {}.".format(self.__str__()))
 
@@ -54,6 +56,9 @@ class Window():
 
     def main_display_window(self) -> main_display_window.MainDisplayWindow:
         return self.__main_display_windw
+
+    def bands_window(self) -> bands_window.BandWindow:
+        return self.__bands_window
 
     def show(self):
         self.__window.show()

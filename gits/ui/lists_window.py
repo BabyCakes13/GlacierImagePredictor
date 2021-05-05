@@ -17,19 +17,22 @@ class ListsWindow:
                                       grid_row: int, grid_column: int):
         self.__glacier_list_widget = glacier_list_widget.GlacierListWidget(items, clicked,
                                                                            grid_row, grid_column)
-        self.__layout.addWidget(self.__glacier_list_widget.list_widget(), grid_row, grid_column)
+        self.__glacier_list_widget.vertical_widget()
+        self.__layout.addWidget(self.__glacier_list_widget.widget(), grid_row, grid_column)
 
     def _set_default_rois_display(self, items: list, clicked,
                                   grid_row: int, grid_column: int):
         self.__roi_list_widget = roi_list_widget.RoiListWidget(items, clicked,
                                                                grid_row, grid_column)
-        self.__layout.addWidget(self.__roi_list_widget.list_widget(), grid_row, grid_column)
+        self.__roi_list_widget.vertical_widget()
+        self.__layout.addWidget(self.__roi_list_widget.widget(), grid_row, grid_column)
 
     def _set_default_scenes_display(self, items: list, clicked,
                                     grid_row: int, grid_column: int):
         self.__scene_list_widget = scene_list_widget.SceneListWidget(items, clicked,
                                                                      grid_row, grid_column)
-        self.__layout.addWidget(self.__scene_list_widget.list_widget(), grid_row, grid_column)
+        self.__scene_list_widget.vertical_widget()
+        self.__layout.addWidget(self.__scene_list_widget.widget(), grid_row, grid_column)
 
     def glaciers_list_widget(self) -> QtWidgets.QListWidget:
         return self.__glacier_list_widget

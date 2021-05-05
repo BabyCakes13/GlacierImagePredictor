@@ -33,11 +33,26 @@ class Scene:
     def swir1_band(self) -> Band:
         return self.__swir1_band
 
+    def thumbnail(self) -> Band:
+        return self.__red_band
+
+    def thumbnail_path(self) -> str:
+        return self.__red_band.band_path()
+
     def scene_id(self):
         return self.__scene_id
 
     def scene_path(self):
         return self.__scene_path
+
+    def bands(self) -> list:
+        return [
+            self.__red_band,
+            self.__green_band,
+            self.__blue_band,
+            self.__nir_band,
+            self.__swir1_band
+        ]
 
     def print_bands(self):
         logger.info("Bands for scene with id {}".format(self.__str__()))
