@@ -20,7 +20,7 @@ class BandsGui:
         band_names = band.get_name_list_from(self.__scene.bands())
         self.__window.bands_window()._set_bands_display(band_names,
                                                         self.__band_clicked,
-                                                        0, 3)
+                                                        1, 3)
         self.__band_list_widget = self.__window.bands_window().band_list_widget()
 
     def __band_clicked(self, item: str):

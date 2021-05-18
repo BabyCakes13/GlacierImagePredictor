@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from ui.lists_display.bands import band_list_widget
+from ui.bands_display import band_list_widget
 
 
 class BandWindow:

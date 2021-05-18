@@ -1,5 +1,5 @@
 from entities.scene import Scene
-
+from entities.aligned_scene import AlignedScene
 from utils import logging
 logger = logging.getLogger(__name__)
 
@@ -16,6 +16,7 @@ class RegionOfInterest:
         self.__row = wgi_row
 
         self.__scenes = []
+        self.__aligned_scenes = []
         self.__reference_scene = None
 
         logger.debug("Created {}.".format(self.__str__()))
@@ -42,9 +43,14 @@ class RegionOfInterest:
 
     def add_scene(self, scene: Scene) -> None:
         self.__scenes.append(scene)
+        aligned_scene = AlignedScene(scene)
+        self.__aligned_scenes.append(aligned_scene)
 
     def scenes(self) -> list:
         return self.__scenes
+
+    def aligned_scenes(self) -> list:
+        return self.__aligned_scenes
 
     def print_scenes(self) -> None:
         for scene in self.__scenes:
