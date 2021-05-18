@@ -5,7 +5,7 @@ import ntpath
 
 import os
 
-from preprocess.entities import image
+from entities import image
 
 from utils import logging
 logger = logging.getLogger(__name__)

@@ -1,4 +1,4 @@
-from preprocess.entities.scene import Scene
+from entities.scene import Scene
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -18,6 +18,9 @@ class RegionOfInterest:
         self.__scenes = []
 
         logger.debug("Created {}.".format(self.__str__()))
+
+    def set_reference(self, scene):
+        pass
 
     def path(self):
         return self.__path

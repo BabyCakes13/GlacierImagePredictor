@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 from utils import logging
 
-from preprocess.entities import scene as sc
-from preprocess.entities import roi as ro
-from preprocess.entities import glacier as gl
+from entities import scene as sc
+from entities import roi as ro
+from entities import glacier as gl
 
 logger = logging.getLogger(__name__)
 

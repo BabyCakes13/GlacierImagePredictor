@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import numpy
-from preprocess.entities import image
+from entities import image
 
 
 class TrueColor(image.Image):

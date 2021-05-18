@@ -1,14 +1,16 @@
-from preprocess.entities.band import Band
-from preprocess.entities.scene_id import SceneID
-from preprocess.entities.true_color import TrueColor
-from preprocess.entities.image import Image
+from entities.band import Band
+from entities.scene_id import SceneID
+from entities.true_color import TrueColor
+from entities.image import Image
+from entities.scene_interface import SceneInterface
 
 from utils import logging
 logger = logging.getLogger(__name__)
 
 
-class Scene:
+class Scene(SceneInterface):
     def __init__(self, scene_id: SceneID, scene_path: str):
+        SceneInterface.__init__(self)
         self.__scene_id = scene_id
         self.__scene_path = scene_path
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from preprocess.entities import band
+from entities import band
 from utils import logging
 logger = logging.getLogger(__name__)
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from preprocess.entities import image
+from entities import image
 from ui.main_display import image_viewer
 
 
