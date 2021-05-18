@@ -43,7 +43,8 @@ class Scene(SceneInterface):
         return self.__true_color
 
     def thumbnail(self) -> Image:
-        return self.true_color()
+        #  return self.true_color()
+        return self.red_band()
 
     def scene_id(self):
         return self.__scene_id
