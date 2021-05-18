@@ -65,6 +65,7 @@ class ListsGui:
     def __roi_clicked(self):
         item = self.__active_rois_qlist.current_item()
         roi = ro.find_roi_by_path_row(item.text(), self.__active_rois())
+        roi.update_reference_scene()
 
         self.__update_active_roi(roi)
         self.__update_scenes()

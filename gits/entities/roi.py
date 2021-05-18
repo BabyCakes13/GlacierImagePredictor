@@ -16,11 +16,23 @@ class RegionOfInterest:
         self.__row = wgi_row
 
         self.__scenes = []
+        self.__reference_scene = None
 
         logger.debug("Created {}.".format(self.__str__()))
 
     def set_reference(self, scene):
-        pass
+        if self.__reference_scene is None:
+            self.__reference_scene = scene
+
+    def update_reference_scene(self):
+        first_scene = self.__scenes[0]
+        self.set_reference(first_scene)
+
+        logger.info("Updated reference scene for region of interest {} with {}."
+                    .format(self.__str__(), first_scene))
+
+    def reference_scene(self) -> Scene:
+        return self.__reference_scene
 
     def path(self):
         return self.__path
