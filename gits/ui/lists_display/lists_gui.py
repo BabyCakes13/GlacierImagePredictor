@@ -5,8 +5,6 @@ from entities import scene as sc
 from entities import roi as ro
 from entities import glacier as gl
 
-from utils.utils import debug_trace
-
 logger = logging.getLogger(__name__)
 
 
