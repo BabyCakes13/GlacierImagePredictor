@@ -18,15 +18,20 @@ class ListsGui:
         self.__active_roi = self.__active_glacier.rois()[0]
         self.__active_scene = self.__active_roi.scenes()[0]
 
-        self.__active_glaciers_qlist = None
-        self.__active_rois_qlist = None
-        self.__active_scenes_qlist = None
+        self.__glaciers_list_widget = None
+        self.__rois_list_widget = None
+        self.__scenes_list_widget = None
+
+    def state_changed(self):
+        self.__glacier_clicked()
 
     def __active_rois(self) -> list:
         return self.__active_glacier.rois()
 
     def __active_scenes(self) -> list:
-        return self.__active_roi.scenes()
+        state_gui = self.__gui.state_gui()
+        return state_gui.select_state(self.__active_roi.aligned_scenes(),
+                                      self.__active_roi.scenes())
 
     def __update_active_glacier(self, glacier) -> None:
         self.__active_glacier = glacier
@@ -50,27 +55,28 @@ class ListsGui:
         self.__update_scenes()
 
     def __update_scenes(self) -> None:
-        self.__update_active_scene(self.__active_roi.scenes()[0])
+        self.__update_active_scene(self.__active_scenes()[0])
 
         scenes_id_list = sc.get_scene_id_list_from(self.__active_scenes())
         self.__window.lists_window().scenes_list_widget()._update_widget_items(scenes_id_list)
 
-    def __glacier_clicked(self, item):
-        item = self.__active_glaciers_qlist.current_item()
+    def __glacier_clicked(self):
+        item = self.__window.lists_window().glaciers_list_widget().current_item()
         glacier = gl.find_glacier_by_wgi_id(item.text(), self.__glaciers)
 
         self.__update_active_glacier(glacier)
         self.__update_rois()
 
     def __roi_clicked(self):
-        item = self.__active_rois_qlist.current_item()
+        item = self.__window.lists_window().rois_list_widget().current_item()
         roi = ro.find_roi_by_path_row(item.text(), self.__active_rois())
+        roi.update_reference_scene()
 
         self.__update_active_roi(roi)
         self.__update_scenes()
 
-    def __scene_clicked(self, item: str):
-        item = self.__active_scenes_qlist.current_item()
+    def __scene_clicked(self):
+        item = self.__window.lists_window().scenes_list_widget().current_item()
         scene = sc.find_scene_by_wgi_id(item.text(), self.__active_scenes())
 
         self.__update_active_scene(scene)
@@ -79,23 +85,20 @@ class ListsGui:
         glaciers_str = gl.get_wgi_id_list_from(self.__glaciers)
         self.__window.lists_window()._set_default_glaciers_display(glaciers_str,
                                                                    self.__glacier_clicked,
-                                                                   0, 0)
-        self.__active_glaciers_qlist = self.__window.lists_window().glaciers_list_widget()
+                                                                   1, 0)
 
     def _set_roi_display(self):
         rois_str = ro.get_path_row_str_from(self.__active_rois())
         self.__window.lists_window()._set_default_rois_display(rois_str,
                                                                self.__roi_clicked,
-                                                               0, 1)
-        self.__active_rois_qlist = self.__window.lists_window().rois_list_widget()
+                                                               1, 1)
 
     def _set_scenes_display(self):
         scenes_str = sc.get_scene_id_list_from(self.__active_scenes())
         self.__window.lists_window()._set_default_scenes_display(scenes_str,
                                                                  self.__scene_clicked,
-                                                                 0, 2)
+                                                                 1, 2)
         self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
-        self.__active_scenes_qlist = self.__window.lists_window().scenes_list_widget()
 
     def active_scene(self) -> sc.Scene:
         return self.__active_scene

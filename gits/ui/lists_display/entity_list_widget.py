@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets
 
 class EntityListWidget():
 
-    DEFAULT_FONT_SIZE = 26
+    DEFAULT_FONT_SIZE = 30
 
     def __init__(self, items: list, clicked, grid_row: int, grid_column: int):
         self._grid_row = grid_row

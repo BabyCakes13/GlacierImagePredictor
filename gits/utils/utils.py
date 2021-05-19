@@ -14,3 +14,11 @@ def progress(count, total, finished_message):
     if(count == total):
         print("\n{}".format(finished_message))
         return
+
+
+def debug_trace():
+    from PyQt5.QtCore import pyqtRemoveInputHook
+
+    from pdb import set_trace
+    pyqtRemoveInputHook()
+    set_trace()

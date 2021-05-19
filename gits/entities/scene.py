@@ -1,7 +1,6 @@
 from entities.band import Band
 from entities.scene_id import SceneID
 from entities.true_color import TrueColor
-from entities.image import Image
 from entities.scene_interface import SceneInterface
 
 from utils import logging
@@ -10,71 +9,27 @@ logger = logging.getLogger(__name__)
 
 class Scene(SceneInterface):
     def __init__(self, scene_id: SceneID, scene_path: str):
-        SceneInterface.__init__(self)
-        self.__scene_id = scene_id
-        self.__scene_path = scene_path
+        self._scene_id = scene_id
+        self._scene_path = scene_path
 
-        self.__red_band = Band(scene_path, scene_id.scene_id(), 'Red')
-        self.__green_band = Band(scene_path, scene_id.scene_id(), 'Green')
-        self.__blue_band = Band(scene_path, scene_id.scene_id(), 'Blue')
-        self.__nir_band = Band(scene_path, scene_id.scene_id(), 'NIR')
-        self.__swir1_band = Band(scene_path, scene_id.scene_id(), 'SWIR1')
+        self._red_band = Band(scene_path, scene_id.scene_id(), 'Red')
+        self._green_band = Band(scene_path, scene_id.scene_id(), 'Green')
+        self._blue_band = Band(scene_path, scene_id.scene_id(), 'Blue')
+        self._nir_band = Band(scene_path, scene_id.scene_id(), 'NIR')
+        self._swir1_band = Band(scene_path, scene_id.scene_id(), 'SWIR1')
 
-        self.__true_color = TrueColor(self.__red_band, self.__green_band, self.__blue_band)
+        self._true_color = TrueColor(self._red_band, self._green_band, self._blue_band)
 
         logger.debug("Created {}.".format(self.__str__()))
 
-    def red_band(self) -> Image:
-        return self.__red_band
-
-    def blue_band(self) -> Image:
-        return self.__blue_band
-
-    def green_band(self) -> Image:
-        return self.__green_band
-
-    def nir_band(self) -> Image:
-        return self.__nir_band
-
-    def swir1_band(self) -> Image:
-        return self.__swir1_band
-
-    def true_color(self) -> Image:
-        return self.__true_color
-
-    def thumbnail(self) -> Image:
-        #  return self.true_color()
-        return self.red_band()
-
     def scene_id(self):
-        return self.__scene_id
+        return self._scene_id
 
     def scene_path(self):
-        return self.__scene_path
-
-    def bands(self) -> list:
-        return [
-            self.__red_band,
-            self.__green_band,
-            self.__blue_band,
-            self.__nir_band,
-            self.__swir1_band,
-            self.__true_color
-        ]
-
-    def print_bands(self):
-        logger.info("Bands for scene with id {}".format(self.__str__()))
-        logger.info("{}\n{}\n{}\n{}\n{}\n".format(self.__blue_band,
-                                                  self.__green_band,
-                                                  self.__red_band,
-                                                  self.__nir_band,
-                                                  self.__swir1_band))
-
-    def __str__(self):
-        return "Scene[{}]".format(self.__scene_id.scene_id())
+        return self._scene_path
 
 
-def find_scene_by_wgi_id(scene_id: str, scenes: list) -> Scene:
+def find_scene_by_wgi_id(scene_id: str, scenes: list):
     for scene in scenes:
         if scene.scene_id().scene_id() == scene_id:
             return scene

@@ -6,8 +6,5 @@ class Image:
     def __init__(self):
         pass
 
-    def read(self) -> numpy.ndarray:
-        pass
-
-    def name(self) -> str:
+    def ndarray(self) -> numpy.ndarray:
         pass

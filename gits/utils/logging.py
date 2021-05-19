@@ -8,7 +8,7 @@ def initialize_logger():
 
     dateformat = "%H:%M:%S"
 
-    coloredlogs.install(level='SPAM', milliseconds=True, datefmt=dateformat)
+    coloredlogs.install(level='INFO', milliseconds=True, datefmt=dateformat)
 
 
 def getLogger(name):
