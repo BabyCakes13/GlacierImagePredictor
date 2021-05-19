@@ -40,12 +40,12 @@ class SceneInterface:
         ]
 
     def print_bands(self):
-        logger.info("Bands for scene with id {}".format(self.__str__()))
-        logger.info("{}\n{}\n{}\n{}\n{}\n".format(self._blue_band,
-                                                  self._green_band,
-                                                  self._red_band,
-                                                  self._nir_band,
-                                                  self._swir1_band))
+        logger.debug("Bands for scene with id {}".format(self.__str__()))
+        logger.debug("{}\n{}\n{}\n{}\n{}\n".format(self._blue_band,
+                                                   self._green_band,
+                                                   self._red_band,
+                                                   self._nir_band,
+                                                   self._swir1_band))
 
     def __str__(self):
         return "Scene[{}]".format(self.scene_id().scene_id())
