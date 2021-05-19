@@ -26,3 +26,16 @@ class StateGui:
     def __state_clicked(self):
         state = self.__state_list_widget.current_item().text()
         self.__update_active_state(state)
+
+        self.__gui.lists_gui().state_changed()
+
+    def select_state(self, aligned, unaligned):
+        if self.__active_state == self.AVAILABLE_STATES[0]:
+            return aligned
+        elif self.__active_state == self.AVAILABLE_STATES[1]:
+            return unaligned
+        else:
+            return None
+
+    def active_state(self):
+        return self.__active_state

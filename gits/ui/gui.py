@@ -46,3 +46,6 @@ class GUI():
 
     def main_display_gui(self) -> main_display_gui.MainDisplayGui:
         return self.__main_display_gui
+
+    def state_gui(self) -> state_gui.StateGui:
+        return self.__state_gui
