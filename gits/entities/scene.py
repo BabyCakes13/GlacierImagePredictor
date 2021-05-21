@@ -22,11 +22,27 @@ class Scene(SceneInterface):
 
         logger.debug("Created {}.".format(self.__str__()))
 
+    def true_color(self) -> TrueColor:
+        return self._true_color
+
     def scene_id(self):
         return self._scene_id
 
     def scene_path(self):
         return self._scene_path
+
+    def bands(self) -> list:
+        return [
+            self._red_band,
+            self._green_band,
+            self._blue_band,
+            self._nir_band,
+            self._swir1_band,
+            self._true_color
+        ]
+
+    def __str__(self):
+        return "Scene[{}]".format(self.scene_id().scene_id())
 
 
 def find_scene_by_wgi_id(scene_id: str, scenes: list):
@@ -38,3 +54,10 @@ def find_scene_by_wgi_id(scene_id: str, scenes: list):
 
 def get_scene_id_list_from(scenes: list) -> list:
     return [scene.scene_id().scene_id() for scene in scenes]
+
+
+def bands_names(scene) -> list:
+    bands_names = []
+    for band in scene.bands():
+        bands_names.append(band.name())
+    return bands_names

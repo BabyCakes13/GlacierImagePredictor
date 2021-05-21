@@ -12,14 +12,16 @@ class AlignedImage(Image):
         self.__reference = reference
 
     def ndarray(self) -> numpy.ndarray:
-        unaligned_image = self.__image.read()
-        return self.align(unaligned_image)
+        return self.align()
 
-    def align(self, image):
-        # TODO get affine matrix and warp it
+    def _raw_ndarray(self) -> numpy.ndarray:
+        return self.__image._raw_ndarray()
+
+    def align(self):
         logger.info("Aligning {}".format(self.__image.name()))
-        print(self.__reference.who())
-        return image * 100000
+
+        keypoints = self.__image.keypoints()
+        return self._raw_ndarray() * 100000
 
     def __match(self):
         pass

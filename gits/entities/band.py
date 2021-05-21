@@ -56,6 +56,9 @@ class Band(Image):
     def ndarray(self) -> numpy.ndarray:
         return self.read()
 
+    def _raw_ndarray(self) -> numpy.ndarray:
+        return self.ndarray()
+
     def band_number(self):
         """
         Function which extracts the number of the band from the band filename.
