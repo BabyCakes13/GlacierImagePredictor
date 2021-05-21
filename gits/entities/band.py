@@ -5,13 +5,13 @@ import ntpath
 
 import os
 
-from entities import image
+from entities.image import Image
 
 from utils import logging
 logger = logging.getLogger(__name__)
 
 
-class Band(image.Image):
+class Band(Image):
     BAND_NAMING_CONVENTION = {
         '2': 'Blue',
         '3': 'Green',

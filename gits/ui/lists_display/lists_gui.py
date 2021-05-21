@@ -18,11 +18,7 @@ class ListsGui:
         self.__active_roi = self.__active_glacier.rois()[0]
         self.__active_scene = self.__active_roi.scenes()[0]
 
-        self.__glaciers_list_widget = None
-        self.__rois_list_widget = None
-        self.__scenes_list_widget = None
-
-    def state_changed(self):
+    def alignment_state_changed(self):
         self.__glacier_clicked()
 
     def __active_rois(self) -> list:
@@ -39,6 +35,7 @@ class ListsGui:
 
     def __update_active_roi(self, roi) -> None:
         self.__active_roi = roi
+        self.__active_roi.update_reference_scene()
         logger.info("Active roi changed to {}".format(str(self.__active_roi)))
 
     def __update_active_scene(self, scene) -> None:
@@ -70,7 +67,6 @@ class ListsGui:
     def __roi_clicked(self):
         item = self.__window.lists_window().rois_list_widget().current_item()
         roi = ro.find_roi_by_path_row(item.text(), self.__active_rois())
-        roi.update_reference_scene()
 
         self.__update_active_roi(roi)
         self.__update_scenes()
