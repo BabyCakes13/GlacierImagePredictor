@@ -21,13 +21,18 @@ class Image:
     def _raw_ndarray(self) -> numpy.ndarray:
         pass
 
+    def normalized_downsampled_ndarray(self) -> numpy.ndarray:
+        image = self.normalize(self._raw_ndarray())
+        image = self.downsample(image)
+
+        return image
+
     def descriptors(self):
         if self.__descriptors is None:
             self.__compute_keypoint_descriptors()
         return self.__descriptors
 
     def keypoints(self):
-        logger.warning("This class is {}".format(self))
         if self.__keypoints is None:
             self.__compute_keypoint_descriptors()
         return self.__keypoints
@@ -35,11 +40,10 @@ class Image:
     def __compute_keypoint_descriptors(self) -> None:
         orb = cv2.ORB_create(nfeatures=self.FEATURES // self.BOXES // self.BOXES,
                              scaleFactor=2, patchSize=100)
-        image = self.normalize(self._raw_ndarray())
-        image = self.downsample(image)
+        normalized_downsampled_ndarray = self.normalized_downsampled_ndarray()
 
-        keypoints = self.__compute_boxed_keypoint_descriptors(image, orb)
-        self.__keypoints, self.__descriptors = orb.compute(image, keypoints)
+        keypoints = self.__compute_boxed_keypoint_descriptors(normalized_downsampled_ndarray, orb)
+        self.__keypoints, self.__descriptors = orb.compute(normalized_downsampled_ndarray, keypoints)
 
     def __compute_boxed_keypoint_descriptors(self, image, orb):
         """
