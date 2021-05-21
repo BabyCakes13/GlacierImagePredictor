@@ -2,7 +2,6 @@ from PyQt5 import QtWidgets
 
 from ui.lists_display import lists_window
 from ui.main_display import main_display_window
-from ui.bands_display import bands_window
 from ui.state_display import state_window
 
 from utils import logging
@@ -16,7 +15,6 @@ class Window():
 
         self.__lists_window = lists_window.ListsWindow(self.__layout)
         self.__main_display_windw = main_display_window.MainDisplayWindow(self.__layout)
-        self.__bands_window = bands_window.BandWindow(self.__layout)
         self.__state_window = state_window.StateWindow(self.__layout)
 
         logger.debug("Created {}.".format(self.__str__()))
@@ -58,9 +56,6 @@ class Window():
 
     def main_display_window(self) -> main_display_window.MainDisplayWindow:
         return self.__main_display_windw
-
-    def bands_window(self) -> bands_window.BandWindow:
-        return self.__bands_window
 
     def state_window(self) -> state_window.StateWindow:
         return self.__state_window

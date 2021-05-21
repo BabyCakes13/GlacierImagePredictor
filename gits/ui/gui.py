@@ -5,7 +5,6 @@ import sys
 from ui import window as w
 from ui.lists_display import lists_gui
 from ui.main_display import main_display_gui
-from ui.bands_display import bands_gui
 from ui.state_display import state_gui
 
 from utils import logging
@@ -21,7 +20,6 @@ class GUI():
 
         self.__lists_gui = lists_gui.ListsGui(glaciers, self)
         self.__main_display_gui = main_display_gui.MainDisplayGui(self)
-        self.__bands_gui = bands_gui.BandsGui(glaciers, self)
         self.__state_gui = state_gui.StateGui(self)
 
         logger.debug("Created {}.".format(self.__str__()))
@@ -35,7 +33,7 @@ class GUI():
         self.__lists_gui._set_glacier_display()
         self.__lists_gui._set_roi_display()
         self.__lists_gui._set_scenes_display()
-        self.__bands_gui._set_band_display()
+        self.__lists_gui._set_band_display()
         self.__state_gui._set_state_display()
 
     def window(self) -> QtWidgets.QMainWindow:

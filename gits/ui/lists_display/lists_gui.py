@@ -4,6 +4,7 @@ from utils import logging
 from entities import scene as sc
 from entities import roi as ro
 from entities import glacier as gl
+from entities import band
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +18,7 @@ class ListsGui:
         self.__active_glacier = self.__glaciers[0]
         self.__active_roi = self.__active_glacier.rois()[0]
         self.__active_scene = self.__active_roi.scenes()[0]
+        self.__active_band = self.__active_scene.thumbnail()
 
     def alignment_state_changed(self):
         self.__glacier_clicked()
@@ -28,6 +30,9 @@ class ListsGui:
         state_gui = self.__gui.state_gui()
         return state_gui.select_state(self.__active_roi.aligned_scenes(),
                                       self.__active_roi.scenes())
+
+    def __active_band(self) -> band.Band:
+        return self.__active_band
 
     def __update_active_glacier(self, glacier) -> None:
         self.__active_glacier = glacier
@@ -42,6 +47,10 @@ class ListsGui:
         self.__active_scene = scene
         self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
         logger.info("Active scene changed to {}".format(str(self.__active_scene)))
+
+    def __update_active_band(self, band) -> None:
+        self.__active_band = band
+        logger.info("Active band changed to {}".format(str(self.__active_band)))
 
     def __update_rois(self) -> None:
         self.__update_active_roi(self.__active_glacier.rois()[0])
@@ -77,6 +86,13 @@ class ListsGui:
 
         self.__update_active_scene(scene)
 
+    def __band_clicked(self, item: str):
+        clicked_item = self.__band_list_widget.current_item()
+        clicked_band = band.find_band_by_name(clicked_item.text(), self.__active_scene.bands())
+
+        self.__update_active_band(clicked_band)
+        self.__gui.main_display_gui().set_image_display(clicked_band)
+
     def _set_glacier_display(self):
         glaciers_str = gl.get_wgi_id_list_from(self.__glaciers)
         self.__window.lists_window()._set_default_glaciers_display(glaciers_str,
@@ -95,6 +111,13 @@ class ListsGui:
                                                                  self.__scene_clicked,
                                                                  1, 2)
         self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
+
+    def _set_band_display(self):
+        band_names = band.get_name_list_from(self.__active_scene.bands())
+        self.__window.lists_window()._set_default_bands_display(band_names,
+                                                                self.__band_clicked,
+                                                                1, 3)
+        self.__band_list_widget = self.__window.lists_window().band_list_widget()
 
     def active_scene(self) -> sc.Scene:
         return self.__active_scene
