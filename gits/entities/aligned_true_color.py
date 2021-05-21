@@ -7,3 +7,6 @@ class AlignedTrueColor(AlignedImage):
     def __init__(self, true_color: TrueColor):
         AlignedImage.__init__(self, true_color)
         self.__true_color = true_color
+
+    def name(self):
+        return self.__true_color.name()
