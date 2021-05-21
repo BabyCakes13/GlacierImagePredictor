@@ -4,8 +4,8 @@ from entities.true_color import TrueColor
 
 
 class AlignedTrueColor(AlignedImage):
-    def __init__(self, true_color: TrueColor):
-        AlignedImage.__init__(self, true_color)
+    def __init__(self, true_color: TrueColor, reference):
+        AlignedImage.__init__(self, true_color, reference)
         self.__true_color = true_color
 
     def name(self):

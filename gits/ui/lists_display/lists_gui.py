@@ -40,7 +40,6 @@ class ListsGui:
 
     def __update_active_roi(self, roi) -> None:
         self.__active_roi = roi
-        self.__active_roi.update_reference_scene()
         logger.info("Active roi changed to {}".format(str(self.__active_roi)))
 
     def __update_active_scene(self, scene) -> None:

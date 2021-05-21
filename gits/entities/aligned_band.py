@@ -7,8 +7,8 @@ logger = logging.getLogger(__name__)
 
 
 class AlignedBand(AlignedImage):
-    def __init__(self, band):
-        AlignedImage.__init__(self, band)
+    def __init__(self, band, reference_band):
+        AlignedImage.__init__(self, band, reference_band)
         self.__band = band
 
     def name(self):
