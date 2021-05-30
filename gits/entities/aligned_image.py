@@ -16,6 +16,8 @@ class AlignedImage(Image):
         self.__image = image
         self.__reference = reference
 
+        self.__matches = None
+
     def ndarray(self) -> numpy.ndarray:
         return self.align()
 
@@ -25,42 +27,28 @@ class AlignedImage(Image):
     def align(self):
         logger.info("Aligning {}".format(self.__image.name()))
 
-        matches = self.__match()
+        self.__match()
+        self.__prune_low_score_matches()
+        reference_points, image_points = self.__prune_matches_by_distance()
 
-        reference_points, image_points, matches_pruned = \
-            self.__prune_matches_by_distance(matches)
-
-        matches_image = self.__draw_matches(matches_pruned)
+        matches_image = self.__draw_matches()
         return matches_image
 
     def __match(self):
         matcher = cv2.DescriptorMatcher_create(cv2.DESCRIPTOR_MATCHER_BRUTEFORCE_HAMMING)
-        matches = matcher.match(self.__reference.descriptors(), self.descriptors())
-        matches = self.__prune_low_score_matches(matches)
+        self.__matches = matcher.match(self.__reference.descriptors(), self.descriptors())
 
-        return matches
+    def __prune_low_score_matches(self):
+        self.__matches.sort(key=lambda x: x.distance, reverse=False)
+        matches_included = int(len(self.__matches) * self.MATCHES_INCLUDED_PERCENT)
+        self.__matches = self.__matches[:matches_included]
 
-    def __prune_low_score_matches(self, matches):
-        matches.sort(key=lambda x: x.distance, reverse=False)
-        matches_included = int(len(matches) * self.MATCHES_INCLUDED_PERCENT)
-        matches_pruned = matches[:matches_included]
-
-        return matches_pruned
-
-    def __prune_matches_by_distance(self, matches):
-        """
-        Method which prunes the feature points pairs which are not valid (too far away from each
-        other in the euclidean distance. This ensures that the remaining feature points are valid
-        matches and the match line as straight as possible, which would be a 1 to 1 match.
-
-        :return: Returns the reference and current image keypoint pairs which were left after the
-        pruning, as well as the pruned matches cv2 image.
-        """
+    def __prune_matches_by_distance(self):
         matches_pruned = []
         reference_points = []
         image_points = []
 
-        for match in matches:
+        for match in self.__matches:
             reference_point = self.__reference.keypoints()[match.queryIdx].pt
             image_point = self.__image.keypoints()[match.trainIdx].pt
 
@@ -71,22 +59,14 @@ class AlignedImage(Image):
                 image_points.append(image_point)
                 matches_pruned.append(match)
 
+        self.__matches = matches_pruned
         reference_points = numpy.array(reference_points)
         image_points = numpy.array(image_points)
 
-        return reference_points, image_points, matches_pruned
+        return reference_points, image_points
 
     @staticmethod
     def validate_euclidean_distance(reference_point, image_point) -> bool:
-        """
-        Calculates the difference between the reference and image coordinates. If the euclidean
-        difference is too big, that means that the feature points are not correctly matched.
-        If correctly matched, the distance should be as small as possible, and the match should be
-        a straight line. The euclidean distance comparison allows the degree of match misalignment.
-        :param reference_point: A 2D point with the coordinates of a reference feature point.
-        :param image_point: A 2D point with the coordinates of a image feature point.
-        :return: True, if the distance is smaller than the allowed euclidean distance, False else.
-        """
         x_difference = abs(reference_point[0] - image_point[0])
         y_difference = abs(reference_point[1] - image_point[1])
 
@@ -96,12 +76,12 @@ class AlignedImage(Image):
         else:
             return False
 
-    def __draw_matches(self, matches):
+    def __draw_matches(self):
         pruned_matches_image = cv2.drawMatches(self.__reference.normalized_downsampled_ndarray(),
                                                self.__reference.keypoints(),
                                                self.__image.normalized_downsampled_ndarray(),
                                                self.__image.keypoints(),
-                                               matches,
+                                               self.__matches,
                                                None, matchColor=(0, 255, 255),
                                                singlePointColor=(100, 0, 0),
                                                flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
