@@ -12,18 +12,22 @@ class EntityListWidget():
         self._clicked = clicked
         self._items = items
 
+        self._widget = self.__create_basic_widget()
+
+    def __create_basic_widget(self):
+        widget = QtWidgets.QListWidget()
+        widget.clicked.connect(self._clicked)
+        widget.addItems(self._items)
+
+        return widget
+
     def vertical_widget(self):
-        self._widget = QtWidgets.QListWidget()
-        self._widget.clicked.connect(self._clicked)
-        self.__set_fixed_widget_width(self._items, self._widget)
-        self._widget.addItems(self._items)
+        self.__fixed_vertical_width()
 
     def horizontal_widget(self):
-        self._widget = QtWidgets.QListWidget()
         self._widget.setFlow(QtWidgets.QListView.LeftToRight)
-        self.__set_fixed_height(self._widget)
-        self._widget.clicked.connect(self._clicked)
-        self._widget.addItems(self._items)
+        self.__fixed_horizontal_width()
+        self._widget.setFixedHeight(self.DEFAULT_FONT_SIZE)
 
     def _update_widget_items(self, items: list):
         self._widget.clear()
@@ -35,14 +39,17 @@ class EntityListWidget():
                          self._grid_row,
                          self._grid_column)
 
-    def __set_fixed_widget_width(self, items, widget):
-        longest_str_length = max(items, key=len)
-        width = widget.fontMetrics().boundingRect(longest_str_length).width() + \
+    def __fixed_vertical_width(self):
+        longest_item = max(self._items, key=len)
+        width = self._widget.fontMetrics().boundingRect(longest_item).width() + \
             self.DEFAULT_FONT_SIZE
-        widget.setFixedWidth(width)
+        self._widget.setFixedWidth(width)
 
-    def __set_fixed_height(self, widget):
-        widget.setFixedHeight(self.DEFAULT_FONT_SIZE)
+    def __fixed_horizontal_width(self):
+        concatenated_items = ''.join(self._items)
+        width = self._widget.fontMetrics().boundingRect(concatenated_items).width() + \
+            self.DEFAULT_FONT_SIZE
+        self._widget.setFixedWidth(width)
 
     def widget(self) -> QtWidgets.QListWidget:
         return self._widget
