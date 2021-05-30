@@ -32,9 +32,9 @@ class AlignedImage(Image):
         reference_points, image_points = self.__prune_matches_by_distance()
 
         affine, inliers = self.__affine_transform_matrix(image_points, reference_points)
-        logger.warning("\n{}".format(affine))
-        matches_image = self.__draw_matches()
-        return matches_image
+        aligned_image = self.__wrap_affine_matrix_to_image(affine)
+
+        return aligned_image
 
     def __match(self):
         matcher = cv2.DescriptorMatcher_create(cv2.DESCRIPTOR_MATCHER_BRUTEFORCE_HAMMING)
@@ -78,25 +78,32 @@ class AlignedImage(Image):
         else:
             return False
 
-    def __draw_matches(self):
-        pruned_matches_image = cv2.drawMatches(self.__reference.normalized_downsampled_ndarray(),
-                                               self.__reference.keypoints(),
-                                               self.__image.normalized_downsampled_ndarray(),
-                                               self.__image.keypoints(),
-                                               self.__matches,
-                                               None, matchColor=(0, 255, 255),
-                                               singlePointColor=(100, 0, 0),
-                                               flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-        return pruned_matches_image
-
     def __affine_transform_matrix(self, image_points, reference_points):
         try:
             affine, inliers = cv2.estimateAffine2D(image_points,
                                                    reference_points,
-                                                   inliers=None,
-                                                   method=cv2.RANSAC)
+                                                   None,
+                                                   cv2.RANSAC)
+            logger.warning(affine)
             return affine, inliers
         except Exception as e:
             logger.ERROR("Affine transformation failed.")
             logger.ERROR(e)
             return None
+
+    def __wrap_affine_matrix_to_image(self, affine_matrix):
+        height, width = self.__image.ndarray().shape
+        print("Height: {}\nWidth: {}\nAffine: {}".format(height, width, affine_matrix))
+        aligned_image = cv2.warpAffine(self.__image.ndarray(), affine_matrix, (width, height))
+        return aligned_image
+
+    def __drawn_matches_image(self):
+        drawn_matches_image = cv2.drawMatches(self.__reference.normalized_downsampled_ndarray(),
+                                              self.__reference.keypoints(),
+                                              self.__image.normalized_downsampled_ndarray(),
+                                              self.__image.keypoints(),
+                                              self.__matches,
+                                              None, matchColor=(0, 255, 255),
+                                              singlePointColor=(100, 0, 0),
+                                              flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+        return drawn_matches_image

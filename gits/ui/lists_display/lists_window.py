@@ -35,7 +35,6 @@ class ListsWindow:
 
     def _set_default_bands_display(self, items: list, clicked,
                                    grid_row: int, grid_column: int):
-        print(items)
         self.__band_list_widget = BandListWidget(items, clicked,
                                                  grid_row, grid_column)
         self.__band_list_widget.vertical_widget()
