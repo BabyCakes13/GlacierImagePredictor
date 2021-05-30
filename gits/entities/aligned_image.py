@@ -31,6 +31,8 @@ class AlignedImage(Image):
         self.__prune_low_score_matches()
         reference_points, image_points = self.__prune_matches_by_distance()
 
+        affine, inliers = self.__affine_transform_matrix(image_points, reference_points)
+        logger.warning("\n{}".format(affine))
         matches_image = self.__draw_matches()
         return matches_image
 
@@ -87,5 +89,14 @@ class AlignedImage(Image):
                                                flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         return pruned_matches_image
 
-    def __affine_transform_matrix(self):
-        pass
+    def __affine_transform_matrix(self, image_points, reference_points):
+        try:
+            affine, inliers = cv2.estimateAffine2D(image_points,
+                                                   reference_points,
+                                                   inliers=None,
+                                                   method=cv2.RANSAC)
+            return affine, inliers
+        except Exception as e:
+            logger.ERROR("Affine transformation failed.")
+            logger.ERROR(e)
+            return None
