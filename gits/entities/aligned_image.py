@@ -53,26 +53,33 @@ class AlignedImage(Image):
             reference_point = self.__reference.keypoints()[match.queryIdx].pt
             image_point = self.__image.keypoints()[match.trainIdx].pt
 
-            valid_euclidean_distance = self.validate_euclidean_distance(reference_point,
-                                                                        image_point)
-            if valid_euclidean_distance:
+            if self.__valid_euclidean_distance(reference_point, image_point):
                 reference_points.append(reference_point)
                 image_points.append(image_point)
-                matches_pruned.append(match)
+                pruned_matches.append(match)
 
-        self.__matches = matches_pruned
+        self.__matches = pruned_matches
         reference_points = numpy.array(reference_points)
         image_points = numpy.array(image_points)
 
         return reference_points, image_points
 
+    def __valid_euclidean_distance(self, reference_point, image_point) -> bool:
+        euclidean_distance = self.__euclidean_distance(reference_point, image_point)
+        if self.__euclidean_distance_valid(euclidean_distance):
+            return True
+        else:
+            return False
     @staticmethod
-    def validate_euclidean_distance(reference_point, image_point) -> bool:
-        x_difference = abs(reference_point[0] - image_point[0])
-        y_difference = abs(reference_point[1] - image_point[1])
+    def __euclidean_distance(image_point, reference_point) -> float:
+        x_distance = abs(reference_point[0] - image_point[0])
+        y_distance = abs(reference_point[1] - image_point[1])
+        distance = math.sqrt(math.pow(x_distance, 2) + (math.pow(y_distance, 2)))
+        return distance
 
-        if (x_difference < AlignedImage.EUCLIDIAN_DISTANCE) and \
-           (y_difference < AlignedImage.EUCLIDIAN_DISTANCE):
+    @staticmethod
+    def __euclidean_distance_valid(euclidean_distance) -> bool:
+        if euclidean_distance < AlignedImage.ALLOWED_SHIFTING_DISTANCE:
             return True
         else:
             return False
