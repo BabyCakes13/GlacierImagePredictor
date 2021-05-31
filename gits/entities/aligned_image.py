@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import numpy
+import math
 import cv2
 from entities.image import Image
 
@@ -8,44 +9,55 @@ logger = logging.getLogger(__name__)
 
 
 class AlignedImage(Image):
+
     MATCHES_INCLUDED_PERCENT = 0.25
-    EUCLIDIAN_DISTANCE = 200
+    ALLOWED_SHIFTING_DISTANCE = 200
 
     def __init__(self, image, reference):
         Image.__init__(self)
+        # display numpy values using decimal instead of scientific notation
+        numpy.set_printoptions(suppress=True, precision=5)
+
         self.__image = image
         self.__reference = reference
-
         self.__matches = None
+        self.__affine_transform_matrix = None
+        self.__aligned_image = None
 
     def ndarray(self) -> numpy.ndarray:
-        return self.align()
-
-    def _raw_ndarray(self) -> numpy.ndarray:
-        return self.__image._raw_ndarray()
+        self.align()
+        return self.__aligned_image
 
     def align(self):
         logger.info("Aligning {}".format(self.__image.name()))
 
-        self.__match()
+        self.__matches = self.__match_descriptors()
         self.__prune_low_score_matches()
-        reference_points, image_points = self.__prune_matches_by_distance()
+        reference_points, image_points = self.__prune_matches_by_euclidean_distance()
 
         self.__calculate_affine_transform_matrix(image_points, reference_points)
+        self.__wrap_affine_transform_matrix()
 
-        return aligned_image
+        return self.__aligned_image
 
-    def __match(self):
-        matcher = cv2.DescriptorMatcher_create(cv2.DESCRIPTOR_MATCHER_BRUTEFORCE_HAMMING)
-        self.__matches = matcher.match(self.__reference.descriptors(), self.descriptors())
+    def __match_descriptors(self) -> list:
+        descriptor_match = cv2.DescriptorMatcher_create(cv2.DESCRIPTOR_MATCHER_BRUTEFORCE_HAMMING)
+        reference_descriptors = self.__reference.descriptors()
+        image_descriptors = self.descriptors()
+        matches = descriptor_match.match(reference_descriptors, image_descriptors)
+        return matches
 
-    def __prune_low_score_matches(self):
+    def __prune_low_score_matches(self) -> None:
         self.__matches.sort(key=lambda x: x.distance, reverse=False)
-        matches_included = int(len(self.__matches) * self.MATCHES_INCLUDED_PERCENT)
-        self.__matches = self.__matches[:matches_included]
+        matches_count = len(self.__matches)
+        pruned_matches_count = int(matches_count * self.MATCHES_INCLUDED_PERCENT)
+        self.__matches = self.__matches[:pruned_matches_count]
 
-    def __prune_matches_by_distance(self):
-        matches_pruned = []
+    def __prune_matches_by_euclidean_distance(self) -> tuple:
+        # TODO This function should not also append the reference and image points when pruning the
+        # matches by distance. Another function should do this. Not sure how to better fix it
+        # without duplicate code yet,
+        pruned_matches = []
         reference_points = []
         image_points = []
 
@@ -70,6 +82,7 @@ class AlignedImage(Image):
             return True
         else:
             return False
+
     @staticmethod
     def __euclidean_distance(image_point, reference_point) -> float:
         x_distance = abs(reference_point[0] - image_point[0])
@@ -95,11 +108,10 @@ class AlignedImage(Image):
         except Exception as e:
             logger.ERROR("Affine transformation failed.\n{}".format(e))
 
-    def __wrap_affine_matrix_to_image(self, affine_matrix):
+    def __wrap_affine_transform_matrix(self):
         height, width = self.__image.ndarray().shape
-        print("Height: {}\nWidth: {}\nAffine: {}".format(height, width, affine_matrix))
-        aligned_image = cv2.warpAffine(self.__image.ndarray(), affine_matrix, (width, height))
-        return aligned_image
+        self.__aligned_image = cv2.warpAffine(self.__image.ndarray(),
+                                              self.__affine_transform_matrix, (width, height))
 
     def __drawn_matches_image(self):
         drawn_matches_image = cv2.drawMatches(self.__reference.normalized_downsampled_ndarray(),
@@ -111,3 +123,6 @@ class AlignedImage(Image):
                                               singlePointColor=(100, 0, 0),
                                               flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         return drawn_matches_image
+
+    def _raw_ndarray(self) -> numpy.ndarray:
+        return self.__image._raw_ndarray()
