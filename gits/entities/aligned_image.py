@@ -22,13 +22,13 @@ class AlignedImage(Image):
         self.__reference = reference
         self.__matches = None
         self.__affine_transform_matrix = None
-        self.__aligned_image = None
+        self.__aligned_ndarray = None
 
     def ndarray(self) -> numpy.ndarray:
         self.align()
-        return self.__aligned_image
+        return self.__aligned_ndarray
 
-    def align(self):
+    def align(self) -> None:
         logger.info("Aligning {}".format(self.__image.name()))
 
         self.__matches = self.__match_descriptors()
@@ -36,9 +36,7 @@ class AlignedImage(Image):
         reference_points, image_points = self.__prune_matches_by_euclidean_distance()
 
         self.__calculate_affine_transform_matrix(image_points, reference_points)
-        self.__wrap_affine_transform_matrix()
-
-        return self.__aligned_image
+        self.__warp_affine_transform_matrix()
 
     def __match_descriptors(self) -> list:
         descriptor_match = cv2.DescriptorMatcher_create(cv2.DESCRIPTOR_MATCHER_BRUTEFORCE_HAMMING)
@@ -65,7 +63,7 @@ class AlignedImage(Image):
             reference_point = self.__reference.keypoints()[match.queryIdx].pt
             image_point = self.__image.keypoints()[match.trainIdx].pt
 
-            if self.__valid_euclidean_distance(reference_point, image_point):
+            if self.__valid_shifting_distance(reference_point, image_point):
                 reference_points.append(reference_point)
                 image_points.append(image_point)
                 pruned_matches.append(match)
@@ -76,9 +74,9 @@ class AlignedImage(Image):
 
         return reference_points, image_points
 
-    def __valid_euclidean_distance(self, reference_point, image_point) -> bool:
+    def __valid_shifting_distance(self, reference_point, image_point) -> bool:
         euclidean_distance = self.__euclidean_distance(reference_point, image_point)
-        if self.__euclidean_distance_valid(euclidean_distance):
+        if euclidean_distance < AlignedImage.ALLOWED_SHIFTING_DISTANCE:
             return True
         else:
             return False
@@ -89,13 +87,6 @@ class AlignedImage(Image):
         y_distance = abs(reference_point[1] - image_point[1])
         distance = math.sqrt(math.pow(x_distance, 2) + (math.pow(y_distance, 2)))
         return distance
-
-    @staticmethod
-    def __euclidean_distance_valid(euclidean_distance) -> bool:
-        if euclidean_distance < AlignedImage.ALLOWED_SHIFTING_DISTANCE:
-            return True
-        else:
-            return False
 
     def __calculate_affine_transform_matrix(self, image_points, reference_points) -> None:
         try:
@@ -108,12 +99,12 @@ class AlignedImage(Image):
         except Exception as e:
             logger.ERROR("Affine transformation failed.\n{}".format(e))
 
-    def __wrap_affine_transform_matrix(self):
+    def __warp_affine_transform_matrix(self) -> None:
         height, width = self.__image.ndarray().shape
-        self.__aligned_image = cv2.warpAffine(self.__image.ndarray(),
-                                              self.__affine_transform_matrix, (width, height))
+        self.__aligned_ndarray = cv2.warpAffine(self.__image.ndarray(),
+                                                self.__affine_transform_matrix, (width, height))
 
-    def __drawn_matches_image(self):
+    def __matches_from_reference_to_image(self):
         drawn_matches_image = cv2.drawMatches(self.__reference.normalized_downsampled_ndarray(),
                                               self.__reference.keypoints(),
                                               self.__image.normalized_downsampled_ndarray(),
