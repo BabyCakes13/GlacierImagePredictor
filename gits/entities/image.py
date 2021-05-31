@@ -21,12 +21,6 @@ class Image:
     def _raw_ndarray(self) -> numpy.ndarray:
         pass
 
-    def normalized_downsampled_ndarray(self) -> numpy.ndarray:
-        image = self.normalize(self._raw_ndarray())
-        image = self.downsample(image)
-
-        return image
-
     def descriptors(self):
         if self.__descriptors is None:
             self.__compute_keypoint_descriptors()
@@ -40,20 +34,20 @@ class Image:
     def __compute_keypoint_descriptors(self) -> None:
         orb = cv2.ORB_create(nfeatures=self.FEATURES // self.BOXES // self.BOXES,
                              scaleFactor=2, patchSize=100)
-        normalized_downsampled_ndarray = self.normalized_downsampled_ndarray()
 
-        keypoints = self.__compute_boxed_keypoint_descriptors(normalized_downsampled_ndarray, orb)
-        self.__keypoints, self.__descriptors = orb.compute(normalized_downsampled_ndarray, keypoints)
+        keypoints = self.__compute_boxed_keypoints(self._normalized_downsampled_ndarray(), orb)
+        self.__keypoints, self.__descriptors = orb.compute(self._normalized_downsampled_ndarray(),
+                                                           keypoints)
 
-    def __compute_boxed_keypoint_descriptors(self, image, orb):
+    def __compute_boxed_keypoints(self, image, orb):
         """
-        Splits the image in n boxes and applies feature finding in each, so that the points are
-        evenly distributed, avoiding image distortion in the case there are feature points only in
-        one part of the image.
+        Splits the image in n boxes and applies feature finding in each, such that the keypoints
+        are evenly distributed throughout the image, avoiding warp distortion in the case there are
+        feature points only in one part of the image.
         :param image: The image which will be split.
         :param rows: Number of rows in which the image will be split
         :param columns: Number of columns in which the image will be split
-        :return: The keypoints and descriptors of the whole image
+        :return: The keypoints found in all the boxes
         """
         keypoints = []
         for x in range(0, self.BOXES):
@@ -72,22 +66,15 @@ class Image:
 
         return keypoints
 
-    def downsample(self, image_16bit: numpy.ndarray):
-        """
-        Transforms the depth of the input image to 8 bit.
-        :param image_16bit:
-        :return:
-        """
-        image_8bit = (image_16bit >> 8).astype(numpy.uint8)
-
-        return image_8bit
-
-    def normalize(self, image: numpy.ndarray, bits=16):
-        """
-        Normalizes the input image between 0 and 2^bits.
-        :param image: numpy.ndarray
-        :param bits: int: number of bits for each pixel
-        :return:
-        """
-        image = cv2.normalize(image, None, 0, (1 << bits) - 1, cv2.NORM_MINMAX)
+    def _normalized_downsampled_ndarray(self) -> numpy.ndarray:
+        normalized_image = self.__normalize_to_16bit(self._raw_ndarray())
+        image = self.__downsample_16bit_to_8bit(normalized_image)
         return image
+
+    def __normalize_to_16bit(self, image: numpy.ndarray) -> numpy.ndarray:
+        image = cv2.normalize(self._raw_ndarray(), None, 0, (1 << 16) - 1, cv2.NORM_MINMAX)
+        return image
+
+    def __downsample_16bit_to_8bit(self, image_16bit: numpy.ndarray) -> numpy.ndarray:
+        image_8bit = (image_16bit >> 8).astype(numpy.uint8)
+        return image_8bit
