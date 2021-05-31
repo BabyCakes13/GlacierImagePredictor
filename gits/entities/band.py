@@ -2,7 +2,6 @@ from osgeo import gdal
 from matplotlib import pyplot as plt
 import numpy
 import ntpath
-
 import os
 
 from entities.image import Image

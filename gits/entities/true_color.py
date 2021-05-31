@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import numpy
-from entities import image
+from entities.image import Image
 
 
-class TrueColor(image.Image):
+class TrueColor(Image):
 
     NAME = "True Color"
 

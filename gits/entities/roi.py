@@ -1,5 +1,5 @@
 from entities.scene import Scene
-from entities.aligned_scene import AlignedScene
+from entities.aligned.aligned_scene import AlignedScene
 from utils import logging
 logger = logging.getLogger(__name__)
 

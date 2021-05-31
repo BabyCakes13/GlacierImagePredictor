@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from entities.aligned_image import AlignedImage
+from entities.aligned.aligned_image import AlignedImage
 
 
 from utils import logging

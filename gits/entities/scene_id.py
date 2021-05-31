@@ -1,4 +1,3 @@
-
 import calendar
 
 from utils import logging

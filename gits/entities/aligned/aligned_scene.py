@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from entities.scene_interface import SceneInterface
-from entities.aligned_band import AlignedBand
+from entities.interfaces.scene_interface import SceneInterface
+from entities.aligned.aligned_band import AlignedBand
 
 
 class AlignedScene(SceneInterface):

@@ -1,7 +1,7 @@
 from entities.band import Band
 from entities.scene_id import SceneID
 from entities.true_color import TrueColor
-from entities.scene_interface import SceneInterface
+from entities.interfaces.scene_interface import SceneInterface
 
 from utils import logging
 logger = logging.getLogger(__name__)
