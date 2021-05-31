@@ -31,8 +31,7 @@ class AlignedImage(Image):
         self.__prune_low_score_matches()
         reference_points, image_points = self.__prune_matches_by_distance()
 
-        affine, inliers = self.__affine_transform_matrix(image_points, reference_points)
-        aligned_image = self.__wrap_affine_matrix_to_image(affine)
+        self.__calculate_affine_transform_matrix(image_points, reference_points)
 
         return aligned_image
 
@@ -78,18 +77,16 @@ class AlignedImage(Image):
         else:
             return False
 
-    def __affine_transform_matrix(self, image_points, reference_points):
+    def __calculate_affine_transform_matrix(self, image_points, reference_points) -> None:
         try:
-            affine, inliers = cv2.estimateAffine2D(image_points,
-                                                   reference_points,
-                                                   None,
-                                                   cv2.RANSAC)
-            logger.warning(affine)
-            return affine, inliers
+            affine_transform_matrix, inliers = cv2.estimateAffine2D(image_points,
+                                                                    reference_points,
+                                                                    None,
+                                                                    cv2.RANSAC)
+            self.__affine_transform_matrix = affine_transform_matrix
+            logger.notice("\nAffine transformation matrix\n{}".format(affine_transform_matrix))
         except Exception as e:
-            logger.ERROR("Affine transformation failed.")
-            logger.ERROR(e)
-            return None
+            logger.ERROR("Affine transformation failed.\n{}".format(e))
 
     def __wrap_affine_matrix_to_image(self, affine_matrix):
         height, width = self.__image.ndarray().shape
