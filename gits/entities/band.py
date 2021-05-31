@@ -2,16 +2,15 @@ from osgeo import gdal
 from matplotlib import pyplot as plt
 import numpy
 import ntpath
-
 import os
 
-from entities import image
+from entities.image import Image
 
 from utils import logging
 logger = logging.getLogger(__name__)
 
 
-class Band(image.Image):
+class Band(Image):
     BAND_NAMING_CONVENTION = {
         '2': 'Blue',
         '3': 'Green',
@@ -55,6 +54,9 @@ class Band(image.Image):
 
     def ndarray(self) -> numpy.ndarray:
         return self.read()
+
+    def _raw_ndarray(self) -> numpy.ndarray:
+        return self.ndarray()
 
     def band_number(self):
         """

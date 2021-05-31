@@ -27,7 +27,7 @@ class StateGui:
         state = self.__state_list_widget.current_item().text()
         self.__update_active_state(state)
 
-        self.__gui.lists_gui().state_changed()
+        self.__gui.lists_gui().alignment_state_changed()
 
     def select_state(self, aligned, unaligned):
         if self.__active_state == self.AVAILABLE_STATES[0]:

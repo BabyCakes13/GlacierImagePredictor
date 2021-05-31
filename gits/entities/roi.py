@@ -1,5 +1,5 @@
 from entities.scene import Scene
-from entities.aligned_scene import AlignedScene
+from entities.aligned.aligned_scene import AlignedScene
 from utils import logging
 logger = logging.getLogger(__name__)
 
@@ -21,19 +21,12 @@ class RegionOfInterest:
 
         logger.debug("Created {}.".format(self.__str__()))
 
-    def set_reference(self, scene):
+    def __set_reference(self, scene):
         if self.__reference_scene is None:
             self.__reference_scene = scene
 
-    def update_reference_scene(self):
-        first_scene = self.__scenes[0]
-        self.set_reference(first_scene)
-
-        logger.info("Updated reference scene for region of interest {} with {}."
-                    .format(self.__str__(), first_scene))
-
-    def reference_scene(self) -> Scene:
-        return self.__reference_scene
+            logger.info("Updated reference scene for region of interest {} with {}."
+                        .format(self.__str__(), scene))
 
     def path(self):
         return self.__path
@@ -42,9 +35,9 @@ class RegionOfInterest:
         return self.__row
 
     def add_scene(self, scene: Scene) -> None:
+        self.__set_reference(scene)
         self.__scenes.append(scene)
-        aligned_scene = AlignedScene(scene)
-        self.__aligned_scenes.append(aligned_scene)
+        self.__aligned_scenes.append(AlignedScene(scene, self.__reference_scene))
 
     def scenes(self) -> list:
         return self.__scenes

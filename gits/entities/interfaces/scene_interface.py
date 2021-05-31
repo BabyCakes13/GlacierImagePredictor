@@ -22,22 +22,9 @@ class SceneInterface:
     def swir1_band(self) -> Image:
         return self._swir1_band
 
-    def true_color(self) -> Image:
-        return self._true_color
-
     def thumbnail(self) -> Image:
         #  return self.true_color()
         return self.red_band()
-
-    def bands(self) -> list:
-        return [
-            self._red_band,
-            self._green_band,
-            self._blue_band,
-            self._nir_band,
-            self._swir1_band,
-            self._true_color
-        ]
 
     def print_bands(self):
         logger.debug("Bands for scene with id {}".format(self.__str__()))
@@ -46,6 +33,3 @@ class SceneInterface:
                                                    self._red_band,
                                                    self._nir_band,
                                                    self._swir1_band))
-
-    def __str__(self):
-        return "Scene[{}]".format(self.scene_id().scene_id())
