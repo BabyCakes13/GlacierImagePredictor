@@ -52,9 +52,6 @@ class AlignedImage(Image):
         self.__matches = self.__matches[:pruned_matches_count]
 
     def __prune_matches_by_euclidean_distance(self) -> tuple:
-        # TODO This function should not also append the reference and image points when pruning the
-        # matches by distance. Another function should do this. Not sure how to better fix it
-        # without duplicate code yet,
         pruned_matches = []
         reference_points = []
         image_points = []
