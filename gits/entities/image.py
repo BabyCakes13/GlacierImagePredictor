@@ -67,12 +67,12 @@ class Image:
         return keypoints
 
     def _normalized_downsampled_ndarray(self) -> numpy.ndarray:
-        normalized_image = self.__normalize_to_16bit(self._raw_ndarray())
+        normalized_image = self._normalize_to_16bit(self._raw_ndarray())
         image = self.__downsample_16bit_to_8bit(normalized_image)
         return image
 
-    def __normalize_to_16bit(self, image: numpy.ndarray) -> numpy.ndarray:
-        image = cv2.normalize(self._raw_ndarray(), None, 0, (1 << 16) - 1, cv2.NORM_MINMAX)
+    def _normalize_to_16bit(self, image: numpy.ndarray) -> numpy.ndarray:
+        image = cv2.normalize(image, None, 0, (1 << 16) - 1, cv2.NORM_MINMAX)
         return image
 
     def __downsample_16bit_to_8bit(self, image_16bit: numpy.ndarray) -> numpy.ndarray:
