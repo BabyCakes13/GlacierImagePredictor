@@ -86,6 +86,10 @@ class AlignedImage(Image):
         return distance
 
     def __calculate_affine_transform_matrix(self, image_points, reference_points) -> None:
+        if any(element is None for element in [image_points, reference_points]):
+            logger.error("Affine transformation matrix could not be computed due to insufficient \
+                         valid matches.")
+            self.__affine_transform_matrix = None
         try:
             affine_transform_matrix, inliers = cv2.estimateAffine2D(image_points,
                                                                     reference_points,
@@ -94,7 +98,7 @@ class AlignedImage(Image):
             self.__affine_transform_matrix = affine_transform_matrix
             logger.notice("\nAffine transformation matrix\n{}".format(affine_transform_matrix))
         except Exception as e:
-            logger.ERROR("Affine transformation failed.\n{}".format(e))
+            logger.error("Affine transformation failed.\n{}".format(e))
 
     def __warp_affine_transform_matrix(self) -> None:
         height, width = self.__image.ndarray().shape
