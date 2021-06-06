@@ -33,5 +33,8 @@ class AlignedScene(SceneInterface):
             self.__ndsi
         ]
 
+    def thumnbail(self):
+        return self.__ndsi
+
     def __str__(self):
         return "AlignedScene[{}]".format(self.scene_id().scene_id())
