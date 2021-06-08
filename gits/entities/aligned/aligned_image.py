@@ -30,15 +30,14 @@ class AlignedImage(Image):
         optical_flow.movement()
 
     def ndarray(self) -> numpy.ndarray:
-        self.align()
-        logger.notice("Aligned: {}, {}".format(self.__image._raw_ndarray().shape[0],
-                                               self.__image._raw_ndarray().shape[1]))
-        logger.notice("Reference: {}, {}".format(self.__reference._raw_ndarray().shape[0],
-                                                 self.__reference._raw_ndarray().shape[1]))
+        if self.__aligned_ndarray is not None:
+            return self.__aligned_ndarray
 
-        padded = self.__resize_to_reference()
-        self.optical_flow(padded, self.__reference._raw_ndarray())
-        return padded
+        self.align()
+        self.__aligned_ndarray = self.__resize_aligned_to_reference()
+
+        # self.optical_flow(self.__aligned_ndarray, self.__reference.ndarray())
+        return self.__aligned_ndarray
 
     def align(self) -> None:
         logger.info("Aligning {}".format(self.__image.name()))
@@ -131,11 +130,11 @@ class AlignedImage(Image):
     def _raw_ndarray(self) -> numpy.ndarray:
         return self.__image._raw_ndarray()
 
-    def __resize_to_reference(self):
-        reference_width, reference_height = self.__get_width_height(self.__reference)
-        image_width, image_height = self.__get_width_height(self.__image)
+    def __resize_aligned_to_reference(self):
+        reference_width, reference_height = self.__get_width_height(self.__reference.ndarray())
+        image_width, image_height = self.__get_width_height(self.__aligned_ndarray)
 
-        cropped = self.__image._raw_ndarray()[0: reference_height, 0: reference_width]
+        cropped = self.__aligned_ndarray[0: reference_height, 0: reference_width]
         logger.notice("Image: height {}, width {}".format(cropped.shape[0],
                                                           cropped.shape[1]))
 
@@ -149,11 +148,18 @@ class AlignedImage(Image):
         logger.notice("Image: height {}, width {}".format(padded.shape[0],
                                                           padded.shape[1]))
 
+        self.print_shape(self.__reference.ndarray(), "Reference")
+        self.print_shape(padded, "Padded")
+
         return padded
 
-    def __get_width_height(self, image):
-        image_ndarray = image._raw_ndarray()
-        height = image_ndarray.shape[0]
-        width = image_ndarray.shape[1]
+    def __get_width_height(self, ndarray):
+        height = ndarray.shape[0]
+        width = ndarray.shape[1]
 
         return width, height
+
+    def print_shape(self, image, image_name):
+        logger.notice("{}: {}, {}".format(image_name,
+                                          image.shape[0],
+                                          image.shape[1]))
