@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 from entities.interfaces.scene_interface import SceneInterface
 from entities.aligned.aligned_band import AlignedBand
+from entities.optical_flow import OpticalFlow
 from entities.ndsi import NDSI
+
+from utils import logging
+logger = logging.getLogger(__name__)
 
 
 class AlignedScene(SceneInterface):
-    def __init__(self, scene, reference_scene):
+    def __init__(self, scene, reference_scene, previous_scene):
         SceneInterface.__init__(self)
         self.__scene = scene
 
@@ -15,7 +19,22 @@ class AlignedScene(SceneInterface):
         self._nir_band = AlignedBand(scene.nir_band(), reference_scene.nir_band())
         self._swir1_band = AlignedBand(scene.swir1_band(), reference_scene.swir1_band())
 
+        self.__bands = [
+            self._red_band,
+            self._green_band,
+            self._blue_band,
+            self._nir_band,
+            self._swir1_band,
+        ]
+
         self.__ndsi = NDSI(self._green_band, self._swir1_band)
+        self.__bands.append(self.__ndsi)
+
+        if previous_scene is not None:
+            logger.error(previous_scene)
+            logger.notice("{}; {}".format(self.__ndsi, previous_scene))
+            self.__optical_flow_image = OpticalFlow(self.__ndsi, previous_scene.ndsi())
+            self.__bands.append(self.__optical_flow_image)
 
     def scene_id(self):
         return self.__scene.scene_id()
@@ -24,16 +43,12 @@ class AlignedScene(SceneInterface):
         return self.__scene.scene_path()
 
     def bands(self) -> list:
-        return [
-            self._red_band,
-            self._green_band,
-            self._blue_band,
-            self._nir_band,
-            self._swir1_band,
-            self.__ndsi
-        ]
+        return self.__bands
 
     def thumnbail(self):
+        return self.__ndsi
+
+    def ndsi(self) -> NDSI:
         return self.__ndsi
 
     def __str__(self):

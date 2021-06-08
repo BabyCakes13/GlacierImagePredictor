@@ -17,18 +17,15 @@ class NDSI(Image):
         self.__green_band = green_band
         self.__swir1_band = swir1_band
 
+        self.__ndsi = None
+
     def ndarray(self) -> numpy.ndarray:
-        ndsi = self.__ndsi()
+        if self.__ndsi is not None:
+            return self.__ndsi
+
+        ndsi = self.__calculate_ndsi()
         ndsi = self.__filter_snow(ndsi)
         ndsi = self.__convert_to_16bit(ndsi)
-        return ndsi
-
-    def __ndsi(self):
-        float32_green_ndarray = self.__convert_band_to_float32(self.__green_band)
-        float32_swir1_ndarray = self.__convert_band_to_float32(self.__swir1_band)
-
-        ndsi = self.__calculate_ndsi(float32_green_ndarray, float32_swir1_ndarray)
-        logger.info("NDSI completed.")
         return ndsi
 
     def __convert_band_to_float32(self, band: AlignedBand) -> numpy.ndarray:
@@ -37,13 +34,18 @@ class NDSI(Image):
         ndarray_float32[ndarray_float32 == 0] = numpy.nan
         return ndarray_float32
 
-    def __calculate_ndsi(self, green_ndarray, swir1_ndarray) -> numpy.ndarray:
+    def __calculate_ndsi(self) -> numpy.ndarray:
         # ignore division by zero because image has borders with 0 values
         numpy.seterr(divide='ignore', invalid='ignore')
 
-        numerator = numpy.subtract(green_ndarray, swir1_ndarray)
-        denominator = numpy.add(green_ndarray, swir1_ndarray)
+        float32_green_ndarray = self.__convert_band_to_float32(self.__green_band)
+        float32_swir1_ndarray = self.__convert_band_to_float32(self.__swir1_band)
+
+        numerator = numpy.subtract(float32_green_ndarray, float32_swir1_ndarray)
+        denominator = numpy.add(float32_green_ndarray, float32_swir1_ndarray)
         ndsi = numpy.divide(numerator, denominator)
+
+        logger.info("NDSI completed.")
         return ndsi
 
     def __filter_snow(self, ndsi) -> numpy.ndarray:

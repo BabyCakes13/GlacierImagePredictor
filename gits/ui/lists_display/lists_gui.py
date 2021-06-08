@@ -44,6 +44,7 @@ class ListsGui:
 
     def __update_active_scene(self, scene) -> None:
         self.__active_scene = scene
+        self.__update_bands()
         self.__update_active_band(scene.thumbnail())
         self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
         logger.info("Active scene changed to {}".format(str(self.__active_scene)))
