@@ -3,6 +3,7 @@ import numpy
 import math
 import cv2
 from entities.image import Image
+from entities.optical_flow import OpticalFlow
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -24,9 +25,20 @@ class AlignedImage(Image):
         self.__affine_transform_matrix = None
         self.__aligned_ndarray = None
 
+    def optical_flow(self, first_image, second_image):
+        optical_flow = OpticalFlow(first_image, second_image)
+        optical_flow.movement()
+
     def ndarray(self) -> numpy.ndarray:
         self.align()
-        return self.__aligned_ndarray
+        logger.notice("Aligned: {}, {}".format(self.__image._raw_ndarray().shape[0],
+                                               self.__image._raw_ndarray().shape[1]))
+        logger.notice("Reference: {}, {}".format(self.__reference._raw_ndarray().shape[0],
+                                                 self.__reference._raw_ndarray().shape[1]))
+
+        padded = self.__resize_to_reference()
+        self.optical_flow(padded, self.__reference._raw_ndarray())
+        return padded
 
     def align(self) -> None:
         logger.info("Aligning {}".format(self.__image.name()))
@@ -118,3 +130,30 @@ class AlignedImage(Image):
 
     def _raw_ndarray(self) -> numpy.ndarray:
         return self.__image._raw_ndarray()
+
+    def __resize_to_reference(self):
+        reference_width, reference_height = self.__get_width_height(self.__reference)
+        image_width, image_height = self.__get_width_height(self.__image)
+
+        cropped = self.__image._raw_ndarray()[0: reference_height, 0: reference_width]
+        logger.notice("Image: height {}, width {}".format(cropped.shape[0],
+                                                          cropped.shape[1]))
+
+        difference_height = max(0, reference_height - image_height)
+        difference_width = max(0, reference_width - image_width)
+
+        padded = numpy.pad(cropped,
+                           ((0, difference_height), (0, difference_width)),
+                           mode='constant',
+                           constant_values=0)
+        logger.notice("Image: height {}, width {}".format(padded.shape[0],
+                                                          padded.shape[1]))
+
+        return padded
+
+    def __get_width_height(self, image):
+        image_ndarray = image._raw_ndarray()
+        height = image_ndarray.shape[0]
+        width = image_ndarray.shape[1]
+
+        return width, height
