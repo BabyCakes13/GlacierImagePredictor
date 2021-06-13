@@ -22,10 +22,6 @@ class SceneInterface:
     def swir1_band(self) -> Image:
         return self._swir1_band
 
-    def thumbnail(self) -> Image:
-        #  return self.true_color()
-        return self.red_band()
-
     def print_bands(self):
         logger.debug("Bands for scene with id {}".format(self.__str__()))
         logger.debug("{}\n{}\n{}\n{}\n{}\n".format(self._blue_band,

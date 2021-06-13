@@ -23,9 +23,12 @@ class OpticalFlow(Image):
         self.__optical_flow_image = None
 
     def ndarray(self) -> numpy.ndarray:
-        return self.hsv_optical_flow()
+        if self.__optical_flow_image is None:
+            self.__optical_flow_image = self.hsv_optical_flow()
+        return self.__optical_flow_image
 
     def optical_flow(self, first_image_ndarray, second_image_ndarray):
+        logger.notice("Computing optical flow...")
         flow = cv2.calcOpticalFlowFarneback(first_image_ndarray,
                                             second_image_ndarray,
                                             None, 0.5, 3, 15, 3, 5, 1.2, 0)

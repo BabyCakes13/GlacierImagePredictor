@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 
 class StateGui:
     AVAILABLE_STATES = ["Aligned", "Unaligned"]
-    ACTIVE_STATE = "Unaligned"
+    ACTIVE_STATE = "Aligned"
 
     def __init__(self, gui):
         self.__gui = gui

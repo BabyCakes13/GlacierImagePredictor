@@ -36,17 +36,17 @@ class ListsGui:
 
     def __update_active_glacier(self, glacier) -> None:
         self.__active_glacier = glacier
+        self.__update_rois()
         logger.info("Active glacier changed to {}".format(str(self.__active_glacier)))
 
     def __update_active_roi(self, roi) -> None:
         self.__active_roi = roi
+        self.__update_scenes()
         logger.info("Active roi changed to {}".format(str(self.__active_roi)))
 
     def __update_active_scene(self, scene) -> None:
         self.__active_scene = scene
         self.__update_bands()
-        self.__update_active_band(scene.thumbnail())
-        self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
         logger.info("Active scene changed to {}".format(str(self.__active_scene)))
 
     def __update_active_band(self, band) -> None:
@@ -71,22 +71,22 @@ class ListsGui:
         self.__update_bands()
 
     def __update_bands(self) -> None:
+        self.__update_active_band(self.__active_scene.thumbnail())
         bands_names = sc.bands_names(self.__active_scene)
         self.__window.lists_window().bands_list_widget()._update_widget_items(bands_names)
+        self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
 
     def __glacier_clicked(self):
         item = self.__window.lists_window().glaciers_list_widget().current_item()
         glacier = gl.find_glacier_by_wgi_id(item.text(), self.__glaciers)
 
         self.__update_active_glacier(glacier)
-        self.__update_rois()
 
     def __roi_clicked(self):
         item = self.__window.lists_window().rois_list_widget().current_item()
         roi = ro.find_roi_by_path_row(item.text(), self.__active_rois())
 
         self.__update_active_roi(roi)
-        self.__update_scenes()
 
     def __scene_clicked(self):
         item = self.__window.lists_window().scenes_list_widget().current_item()
@@ -125,6 +125,9 @@ class ListsGui:
                                                                 self.__band_clicked,
                                                                 1, 3)
         self.__bands_list_widget = self.__window.lists_window().bands_list_widget()
+
+        # TODO get rid of this hack
+        self.__update_active_glacier(self.__active_glacier)
 
     def active_scene(self) -> sc.Scene:
         return self.__active_scene

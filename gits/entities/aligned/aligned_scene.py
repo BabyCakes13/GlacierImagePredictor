@@ -31,10 +31,10 @@ class AlignedScene(SceneInterface):
         self.__bands.append(self.__ndsi)
 
         if previous_scene is not None:
-            logger.error(previous_scene)
-            logger.notice("{}; {}".format(self.__ndsi, previous_scene))
             self.__optical_flow_image = OpticalFlow(self.__ndsi, previous_scene.ndsi())
             self.__bands.append(self.__optical_flow_image)
+        else:
+            self.__optical_flow_image = None
 
     def scene_id(self):
         return self.__scene.scene_id()
@@ -45,8 +45,11 @@ class AlignedScene(SceneInterface):
     def bands(self) -> list:
         return self.__bands
 
-    def thumnbail(self):
-        return self.__ndsi
+    def thumbnail(self):
+        if self.__optical_flow_image is not None:
+            return self.__optical_flow_image
+        else:
+            return self.__ndsi
 
     def ndsi(self) -> NDSI:
         return self.__ndsi
