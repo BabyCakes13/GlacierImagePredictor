@@ -20,13 +20,11 @@ class NDSI(Image):
         self.__ndsi = None
 
     def ndarray(self) -> numpy.ndarray:
-        if self.__ndsi is not None:
-            return self.__ndsi
-
-        ndsi = self.__calculate_ndsi()
-        ndsi = self.__filter_snow(ndsi)
-        ndsi = self.__convert_to_16bit(ndsi)
-        return ndsi
+        if self.__ndsi is None:
+            self.__ndsi = self.__calculate_ndsi()
+            self.__ndsi = self.__filter_snow(self.__ndsi)
+            self.__ndsi = self.__convert_to_16bit(self.__ndsi)
+        return self.__ndsi
 
     def __convert_band_to_float32(self, band: AlignedBand) -> numpy.ndarray:
         ndarray_float32 = band.ndarray().astype(numpy.float32)
