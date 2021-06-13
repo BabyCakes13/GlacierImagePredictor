@@ -28,10 +28,8 @@ class CreatedImage(Image):
         self.__image = numpy.zeros_like(self.__previous_image.ndarray())
         self.__absolute_coodrinates = self.__generate_absolute_coordinates()
 
-        for y in range(0, self.__height - 1):
-            for x in range(0, self.__width - 1):
-                self.__compute_pixel(x, y)
-            logger.notice("Computed pixel on line {}".format(y))
+        self.__image[self.__absolute_coodrinates[..., 1],
+                     self.__absolute_coodrinates[..., 0]] = self.__previous_image.ndarray()
 
     def __generate_absolute_coordinates(self) -> numpy.ndarray:
         xarr = numpy.tile(numpy.arange(self.__width), (self.__height, 1))
