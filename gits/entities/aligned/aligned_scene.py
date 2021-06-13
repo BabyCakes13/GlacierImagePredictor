@@ -3,6 +3,7 @@ from entities.interfaces.scene_interface import SceneInterface
 from entities.aligned.aligned_band import AlignedBand
 from entities.optical_flow import OpticalFlow
 from entities.ndsi import NDSI
+from entities.created_image import CreatedImage
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -33,8 +34,12 @@ class AlignedScene(SceneInterface):
         if previous_scene is not None:
             self.__optical_flow_image = OpticalFlow(self.__ndsi, previous_scene.ndsi())
             self.__bands.append(self.__optical_flow_image)
+
+            self.__created_image = CreatedImage(self.__optical_flow_image, previous_scene.ndsi())
+            self.__bands.append(self.__created_image)
         else:
             self.__optical_flow_image = None
+            self.__created_image = None
 
     def scene_id(self):
         return self.__scene.scene_id()

@@ -27,10 +27,10 @@ class OpticalFlow(Image):
             self.__optical_flow_image = self.hsv_optical_flow()
         return self.__optical_flow_image
 
-    def optical_flow(self, first_image_ndarray, second_image_ndarray):
+    def optical_flow(self):
         logger.notice("Computing optical flow...")
-        flow = cv2.calcOpticalFlowFarneback(first_image_ndarray,
-                                            second_image_ndarray,
+        flow = cv2.calcOpticalFlowFarneback(self.__first_image.ndarray(),
+                                            self.__second_image.ndarray(),
                                             None, 0.5, 3, 15, 3, 5, 1.2, 0)
         logger.notice("Maximum element from flow: {}.".format(numpy.amax(flow)))
         logger.notice("0 from flow: {}".format(flow[5000][4000][0]))
@@ -41,8 +41,7 @@ class OpticalFlow(Image):
         first_mask = self.create_mask(self.__first_image.ndarray())
         second_mask = self.create_mask(self.__second_image.ndarray())
 
-        optical_flow = self.optical_flow(self.__first_image.ndarray(),
-                                         self.__second_image.ndarray())
+        optical_flow = self.optical_flow()
         magnitude, angle = cv2.cartToPolar(optical_flow[..., 0], optical_flow[..., 1])
 
         magnitude = numpy.ma.masked_array(magnitude, mask=first_mask).filled(0)
