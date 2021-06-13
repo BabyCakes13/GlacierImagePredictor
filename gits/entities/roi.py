@@ -37,7 +37,15 @@ class RegionOfInterest:
     def add_scene(self, scene: Scene) -> None:
         self.__set_reference(scene)
         self.__scenes.append(scene)
-        self.__aligned_scenes.append(AlignedScene(scene, self.__reference_scene))
+
+        if len(self.__aligned_scenes) > 0:
+            previous_scene = self.__aligned_scenes[-1]
+        else:
+            previous_scene = None
+
+        self.__aligned_scenes.append(AlignedScene(scene,
+                                                  self.__reference_scene,
+                                                  previous_scene))
 
     def scenes(self) -> list:
         return self.__scenes
