@@ -2,8 +2,6 @@
 import cv2
 import numpy
 
-from utils.utils import debug_trace
-
 from entities.image import Image
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -16,10 +14,6 @@ class OpticalFlow(Image):
     def __init__(self, first_image: Image, second_image: Image):
         self.__first_image = first_image
         self.__second_image = second_image
-
-        logger.notice("First image: {}\nSecond image: {}".format(self.__first_image,
-                                                                 self.__second_image))
-
         self.__optical_flow_image = None
 
     def ndarray(self) -> numpy.ndarray:
@@ -32,9 +26,6 @@ class OpticalFlow(Image):
         flow = cv2.calcOpticalFlowFarneback(self.__first_image.ndarray(),
                                             self.__second_image.ndarray(),
                                             None, 0.5, 3, 15, 3, 5, 1.2, 0)
-        logger.notice("Maximum element from flow: {}.".format(numpy.amax(flow)))
-        logger.notice("0 from flow: {}".format(flow[5000][4000][0]))
-        logger.notice("1 from flow: {}".format(flow[5000][4000][1]))
         return flow
 
     def hsv_optical_flow(self):
