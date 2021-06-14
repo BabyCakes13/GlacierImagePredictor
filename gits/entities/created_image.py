@@ -27,7 +27,7 @@ class CreatedImage(Image):
             self.__generate_image()
             self.__zero_out_edges()
             self.__filter_by_average()
-            self.__image = self.__image.astype(numpy.uint16)
+            self.__image = self.__image.astype(numpy.uint16) * 2
         return self.__image
 
     def __generate_image(self) -> None:
@@ -85,7 +85,9 @@ class CreatedImage(Image):
         image_chunk = image_chunk[y - self.KERNEL_SIZE // 2:y + self.KERNEL_SIZE // 2 + 1,
                                   x - self.KERNEL_SIZE // 2:x + self.KERNEL_SIZE // 2 + 1]
 
-        value = numpy.average(image_chunk, weights=self.__kernel)
+        weights_sum = numpy.sum(self.__kernel)
+        nominator = numpy.sum(image_chunk * self.__kernel)
+        value = nominator / weights_sum
 
         return value
 
