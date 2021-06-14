@@ -95,8 +95,10 @@ class CreatedImage(Image):
         self.__image = masked_image
 
     def __generate_kernel(self, kernel_size):
-        kernel1d = signal.gaussian(kernel_size, std=kernel_size / 3).reshape(kernel_size, 1)
+        kernel1d = [abs(abs((kernel_size+1)//2 - x) - (kernel_size+1)//2)
+                    for x in range(1, kernel_size+1)]
         kernel2d = numpy.outer(kernel1d, kernel1d)
+        kernel2d[kernel_size // 2 + 1][kernel_size // 2 + 1] = 0
         return kernel2d
 
     def name(self) -> str:
