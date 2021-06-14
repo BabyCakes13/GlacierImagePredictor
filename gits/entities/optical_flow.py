@@ -15,18 +15,20 @@ class OpticalFlow(Image):
         self.__first_image = first_image
         self.__second_image = second_image
         self.__optical_flow_image = None
+        self.__optical_flow = None
 
     def ndarray(self) -> numpy.ndarray:
         if self.__optical_flow_image is None:
             self.__optical_flow_image = self.hsv_optical_flow()
         return self.__optical_flow_image
 
-    def optical_flow(self):
-        logger.notice("Computing optical flow...")
-        flow = cv2.calcOpticalFlowFarneback(self.__first_image.ndarray(),
-                                            self.__second_image.ndarray(),
-                                            None, 0.5, 3, 15, 3, 5, 1.2, 0)
-        return flow
+    def optical_flow(self) -> numpy.ndarray:
+        if self.__optical_flow is None:
+            logger.notice("Computing optical flow...")
+            self.__optical_flow = cv2.calcOpticalFlowFarneback(self.__first_image.ndarray(),
+                                                               self.__second_image.ndarray(),
+                                                               None, 0.5, 3, 15, 3, 5, 1.2, 0)
+        return self.__optical_flow
 
     def hsv_optical_flow(self):
         first_mask = self.create_mask(self.__first_image.ndarray())
