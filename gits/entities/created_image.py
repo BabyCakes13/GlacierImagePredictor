@@ -20,7 +20,7 @@ class CreatedImage(Image):
         self.__previous_image = previous_image
         self.__width, self.__height = self.__get_shape()
         self.__absolute_coordinates = None
-        self.__kernel = self.__generate_kernel(5)
+        self.__kernel = self.__generate_kernel()
 
     def ndarray(self) -> numpy.ndarray:
         if self.__image is None:
@@ -84,10 +84,16 @@ class CreatedImage(Image):
         image_chunk = self.__image
         image_chunk = image_chunk[y - self.KERNEL_SIZE // 2:y + self.KERNEL_SIZE // 2 + 1,
                                   x - self.KERNEL_SIZE // 2:x + self.KERNEL_SIZE // 2 + 1]
+        kernel = self.__remove_number_from_kernel(image_chunk, self.__kernel, 0)
+        kernel = self.__remove_number_from_kernel(image_chunk, kernel, -1)
 
-        weights_sum = numpy.sum(self.__kernel)
-        nominator = numpy.sum(image_chunk * self.__kernel)
-        value = nominator / weights_sum
+        weights_sum = numpy.sum(kernel)
+
+        if weights_sum == 0:
+            return 0
+        nominator = numpy.sum(image_chunk * kernel)
+
+        value = nominator // weights_sum
 
         return value
 
@@ -96,12 +102,18 @@ class CreatedImage(Image):
         masked_image = numpy.ma.masked_array(self.__image, mask=mask).filled(0)
         self.__image = masked_image
 
-    def __generate_kernel(self, kernel_size):
-        kernel1d = [abs(abs((kernel_size+1)//2 - x) - (kernel_size+1)//2)
-                    for x in range(1, kernel_size+1)]
+    def __generate_kernel(self):
+        kernel1d = [abs(abs((self.KERNEL_SIZE+1)//2 - x) - (self.KERNEL_SIZE+1)//2)
+                    for x in range(1, self.KERNEL_SIZE+1)]
         kernel2d = numpy.outer(kernel1d, kernel1d)
-        kernel2d[kernel_size // 2 + 1][kernel_size // 2 + 1] = 0
+        kernel2d[self.KERNEL_SIZE // 2][self.KERNEL_SIZE // 2] = 0
         return kernel2d
+
+    def __remove_number_from_kernel(self, image_chunk, kernel, number):
+        number_coordinates = numpy.where(image_chunk == number)
+        kernel_without_number = numpy.copy(kernel)
+        kernel_without_number[number_coordinates[0], number_coordinates[1]] = 0
+        return kernel_without_number
 
     def name(self) -> str:
         return self.NAME
