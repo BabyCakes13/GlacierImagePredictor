@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import numpy
 import cv2
+import concurrent.futures
+import multiprocessing
 
 from entities.image import Image
-from utils.utils import progress
+from utils.utils import progress, debug_trace
 from utils import logging
 logger = logging.getLogger(__name__)
 
@@ -19,6 +21,9 @@ class CreatedImage(Image):
         self.__previous_image = previous_image
         self.__width, self.__height = self.__get_shape()
         self.__kernel = self.__generate_kernel()
+
+        self.__finished = 0
+        self.__total_zero_points = 0
 
     def __get_shape(self) -> tuple:
         height = self.__previous_image.ndarray().shape[0]
@@ -82,17 +87,24 @@ class CreatedImage(Image):
         self.__image = masked_image
 
     def __filter_by_average(self) -> None:
-        logger.notice("Filtering by average...")
+        cores = multiprocessing.cpu_count()
+        logger.notice("Filtering by average on {} cores...".format(cores))
+
         zero_points = numpy.where(self.__image == -1)
         zero_point_pairs = tuple(zip(*zero_points))
-        total_zero_points = len(zero_point_pairs)
+        self.__total_zero_points = len(zero_point_pairs)
 
-        finished = 0
-        for y, x in zero_point_pairs:
-            if self.__point_inside_boundary(y, x):
-                self.__image[y][x] = self.__average_pixel(y, x)
-                finished += 1
-                progress(finished, total_zero_points, "Finished generating image.")
+        debug_trace()
+        with multiprocessing.Pool(processes=cores) as executor:
+            executor.map(hardcoded_filter, [(point, self.__image, self.__height, self.__width) for point in zero_point_pairs])
+
+    def _filter_pixel_by_average(self, pixel):
+        y, x = pixel
+        if self.__point_inside_boundary(y, x):
+            self.__image[y][x] = self.__average_pixel(y, x)
+            self.__finished += 1
+            if self.__finished % 10000 == 0:
+                progress(self.__finished, self.__total_zero_points, "Finished generating image.")
 
     def __point_inside_boundary(self, y, x) -> bool:
         if y < (self.__height - self.KERNEL_SIZE // 2) and y >= (self.KERNEL_SIZE // 2) and \
@@ -123,3 +135,31 @@ class CreatedImage(Image):
 
     def name(self) -> str:
         return self.NAME
+
+
+def hardcoded_filter(arg):
+    point, image, height, width = arg
+    y, x = point
+    if y < (height - 5 // 2) and y >= (5 // 2) and \
+       x < (width - 5 // 2) and x >= (5 // 2):
+        image_chunk = image
+        image_chunk = image_chunk[y - 5 // 2:y + 5 // 2 + 1,
+                                  x - 5 // 2:x + 5 // 2 + 1]
+
+        kernel1d = [abs(abs((5+1)//2 - x) - (5+1)//2)
+                    for x in range(1, 5+1)]
+        kernel = numpy.outer(kernel1d, kernel1d)
+        kernel[5 // 2][5 // 2] = 0
+            
+        number_coordinates = numpy.where(image_chunk == 0)
+        kernel[number_coordinates[0], number_coordinates[1]] = 0
+        
+        number_coordinates = numpy.where(image_chunk == -1)
+        kernel[number_coordinates[0], number_coordinates[1]] = 0
+        
+        weights_sum = numpy.sum(kernel)
+        if weights_sum == 0:
+            return 0
+        nominator = numpy.sum(image_chunk * kernel)
+        value = nominator // weights_sum
+        image[y][x] = value
