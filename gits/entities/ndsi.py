@@ -24,6 +24,7 @@ class NDSI(Image):
             self.__ndsi = self.__calculate_ndsi()
             self.__ndsi = self.__filter_snow(self.__ndsi)
             self.__ndsi = self.__convert_to_16bit(self.__ndsi)
+            self.__snow_percentage()
         return self.__ndsi
 
     def __convert_band_to_float32(self, band: AlignedBand) -> numpy.ndarray:
@@ -58,6 +59,21 @@ class NDSI(Image):
         ndsi_normalized = ndsi * maximum_16bit_value/2
         ndsi_16bit = ndsi_normalized.astype(numpy.uint16)
         return ndsi_16bit
+
+    def __snow_percentage(self) -> float:
+        percentage = self.__snow_ratio() * 100
+        percentage = round(percentage, 4)
+        logger.notice("Snow percentage: {}%".format(percentage))
+        return percentage
+
+    def __snow_ratio(self) -> float:
+        total_snow_pixels = self.__total_snow_pixels()
+        total_pixels = self.__ndsi.size
+        ratio = total_snow_pixels / total_pixels
+        return ratio
+
+    def __total_snow_pixels(self) -> int:
+        return self.__ndsi[self.__ndsi > self.THRESHOLD].size
 
     def name(self) -> str:
         return self.NAME
