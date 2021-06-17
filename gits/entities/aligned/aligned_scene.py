@@ -51,10 +51,7 @@ class AlignedScene(SceneInterface):
         return self.__bands
 
     def thumbnail(self):
-        if self.__optical_flow_image is not None:
-            return self.__optical_flow_image
-        else:
-            return self.__ndsi
+        return self.__ndsi
 
     def ndsi(self) -> NDSI:
         return self.__ndsi
