@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
+import time
 import numpy
 import cv2
-import concurrent.futures
 import multiprocessing
+from multiprocessing import shared_memory
 
 from entities.image import Image
 from utils.utils import progress, debug_trace
@@ -47,7 +48,7 @@ class CreatedImage(Image):
         self.__initialise_image()
         self.__generate_image_based_on_movement()
         self.__mask_image()
-        self.__filter_by_average()
+        self.__paralelfilter_by_average()
         self.__image = self.__image.astype(numpy.uint16) * 2
 
     def __initialise_image(self) -> None:
@@ -86,7 +87,10 @@ class CreatedImage(Image):
         masked_image = numpy.ma.masked_array(self.__image, mask=mask).filled(0)
         self.__image = masked_image
 
+        logger.success("Finished masking image.")
+
     def __filter_by_average(self) -> None:
+        tic = time.process_time()
         cores = multiprocessing.cpu_count()
         logger.notice("Filtering by average on {} cores...".format(cores))
 
@@ -94,9 +98,24 @@ class CreatedImage(Image):
         zero_point_pairs = tuple(zip(*zero_points))
         self.__total_zero_points = len(zero_point_pairs)
 
-        debug_trace()
+        shm = shared_memory.SharedMemory(create=True, size=self.__image.nbytes)
+        shm_image = numpy.ndarray(self.__image.shape, dtype=self.__image.dtype, buffer=shm.buf)
+        shm_image[:][:] = self.__image[:][:]
+
         with multiprocessing.Pool(processes=cores) as executor:
-            executor.map(hardcoded_filter, [(point, self.__image, self.__height, self.__width) for point in zero_point_pairs])
+            executor.map(hardcoded_filter, [(point, shm,
+                                             self.__image.shape,
+                                             self.__image.dtype,
+                                             self.__height,
+                                             self.__width) for point in zero_point_pairs])
+
+        shm.close()
+        shm.unlink()
+
+        self.__image[:][:] = shm_image[:][:]
+
+        tok = time.process_time()
+        logger.success("Finished filtering in {}".format(tok - tic))
 
     def _filter_pixel_by_average(self, pixel):
         y, x = pixel
@@ -138,11 +157,13 @@ class CreatedImage(Image):
 
 
 def hardcoded_filter(arg):
-    point, image, height, width = arg
+    point, shm, shape, dtype, height, width = arg
+    shm_image = numpy.ndarray(shape, dtype, buffer=shm.buf)
+
     y, x = point
     if y < (height - 5 // 2) and y >= (5 // 2) and \
        x < (width - 5 // 2) and x >= (5 // 2):
-        image_chunk = image
+        image_chunk = shm_image
         image_chunk = image_chunk[y - 5 // 2:y + 5 // 2 + 1,
                                   x - 5 // 2:x + 5 // 2 + 1]
 
@@ -162,4 +183,4 @@ def hardcoded_filter(arg):
             return 0
         nominator = numpy.sum(image_chunk * kernel)
         value = nominator // weights_sum
-        image[y][x] = value
+        shm_image[y][x] = value
