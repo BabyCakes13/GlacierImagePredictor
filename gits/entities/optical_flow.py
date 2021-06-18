@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import time
 import cv2
 import numpy
 
@@ -29,15 +30,22 @@ class OpticalFlow(Image):
         return first_mask, second_mask
 
     def optical_flow(self) -> numpy.ndarray:
-        masked_first_image = numpy.ma.masked_array(self.__first_image.ndarray(), mask=self.__second_mask).filled(0)
-        masked_second_image = numpy.ma.masked_array(self.__second_image.ndarray(), mask=self.__first_mask).filled(0)
-
         if self.__optical_flow is None:
-            logger.notice("Computing optical flow...")
-            self.__optical_flow = cv2.calcOpticalFlowFarneback(masked_first_image,
-                                                               masked_second_image,
-                                                               None, 0.5, 6, 15, 3, 5, 1.2, 0)
+            self.__compute_optical_flow()
         return self.__optical_flow
+
+    def __compute_optical_flow(self):
+        tik = time.process_time()
+        masked_first_image = numpy.ma.masked_array(self.__first_image.ndarray(),
+                                                   mask=self.__second_mask).filled(0)
+        masked_second_image = numpy.ma.masked_array(self.__second_image.ndarray(),
+                                                    mask=self.__first_mask).filled(0)
+
+        self.__optical_flow = cv2.calcOpticalFlowFarneback(masked_first_image,
+                                                           masked_second_image,
+                                                           None, 0.5, 6, 15, 3, 5, 1.2, 0)
+        tok = time.process_time()
+        logger.success("Finished optical flow in {} seconds.".format(tok - tik))
 
     def hsv_optical_flow(self):
         optical_flow = self.optical_flow()
