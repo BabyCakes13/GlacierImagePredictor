@@ -103,11 +103,12 @@ class CreatedImage(Image):
         shm_image[:][:] = self.__image[:][:]
 
         with multiprocessing.Pool(processes=cores) as executor:
-            executor.map(hardcoded_filter, [(point, shm,
-                                             self.__image.shape,
-                                             self.__image.dtype,
-                                             self.__height,
-                                             self.__width) for point in zero_point_pairs])
+            executor.map(filter_pixel, [(point, shm,
+                                         self.__image.shape,
+                                         self.__image.dtype,
+                                         self.__height,
+                                         self.__width,
+                                         self.KERNEL_SIZE) for point in zero_point_pairs])
 
         shm.close()
         shm.unlink()
@@ -156,28 +157,27 @@ class CreatedImage(Image):
         return self.NAME
 
 
-def hardcoded_filter(arg):
-    point, shm, shape, dtype, height, width = arg
+def filter_pixel(arg):
+    point, shm, shape, dtype, height, width, kernel_size = arg
     shm_image = numpy.ndarray(shape, dtype, buffer=shm.buf)
 
     y, x = point
-    if y < (height - 5 // 2) and y >= (5 // 2) and \
-       x < (width - 5 // 2) and x >= (5 // 2):
+    if y < (height - kernel_size // 2) and y >= (kernel_size // 2) and \
+       x < (width - kernel_size // 2) and x >= (kernel_size // 2):
         image_chunk = shm_image
-        image_chunk = image_chunk[y - 5 // 2:y + 5 // 2 + 1,
-                                  x - 5 // 2:x + 5 // 2 + 1]
+        image_chunk = image_chunk[y - kernel_size // 2:y + kernel_size // 2 + 1,
+                                  x - kernel_size // 2:x + kernel_size // 2 + 1]
 
-        kernel1d = [abs(abs((5+1)//2 - x) - (5+1)//2)
-                    for x in range(1, 5+1)]
+        kernel1d = [abs(abs((kernel_size+1)//2 - x) - (kernel_size+1)//2)
+                    for x in range(1, kernel_size+1)]
         kernel = numpy.outer(kernel1d, kernel1d)
-        kernel[5 // 2][5 // 2] = 0
-            
-        number_coordinates = numpy.where(image_chunk == 0)
-        kernel[number_coordinates[0], number_coordinates[1]] = 0
-        
-        number_coordinates = numpy.where(image_chunk == -1)
-        kernel[number_coordinates[0], number_coordinates[1]] = 0
-        
+        kernel[kernel_size // 2][kernel_size // 2] = 0
+
+        zero_coordinates = numpy.where(image_chunk == 0)
+        kernel[zero_coordinates[0], zero_coordinates[1]] = 0
+        minus_one_coordinates = numpy.where(image_chunk == -1)
+        kernel[minus_one_coordinates[0], minus_one_coordinates[1]] = 0
+
         weights_sum = numpy.sum(kernel)
         if weights_sum == 0:
             return 0
