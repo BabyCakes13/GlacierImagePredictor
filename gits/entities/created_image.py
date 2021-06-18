@@ -48,7 +48,7 @@ class CreatedImage(Image):
         self.__initialise_image()
         self.__generate_image_based_on_movement()
         self.__mask_image()
-        self.__paralelfilter_by_average()
+        self.__filter_by_average()
         self.__image = self.__image.astype(numpy.uint16) * 2
 
     def __initialise_image(self) -> None:
@@ -110,10 +110,9 @@ class CreatedImage(Image):
                                          self.__width,
                                          self.KERNEL_SIZE) for point in zero_point_pairs])
 
+        self.__image[:][:] = shm_image[:][:]
         shm.close()
         shm.unlink()
-
-        self.__image[:][:] = shm_image[:][:]
 
         tok = time.process_time()
         logger.success("Finished filtering in {}".format(tok - tic))
