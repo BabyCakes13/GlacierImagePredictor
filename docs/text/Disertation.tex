@@ -1,0 +1,141 @@
+\documentclass[10pt, a4paper]{report}
+\special{papersize=210mm, 297mm}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[left=2.5cm, right=2.5cm, top=2.5cm]{geometry}
+\renewcommand{\baselinestretch}{1.4}
+\usepackage[toc,page]{appendix}
+\pagenumbering{alph}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\graphicspath{{images/} {diagrams/}}
+
+%\usepackage{showframe}
+\usepackage{fullpage}
+
+\usepackage{url}
+%\usepackage{natbib} % for author-date citation \citep{}, \citet[]
+%\usepackage{hyperref}
+%\usepackage[nottoc]{tocbibind}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=java,
+	aboveskip=5mm, belowskip=3mm, showstringspaces=false,
+	columns=flexible, basicstyle={\small\ttfamily},
+	numbers=none, numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+
+\usepackage{multirow}
+\usepackage{array}
+\newcolumntype{L}[1]{> {\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\pagenumbering{arabic}
+
+\begin{document}
+	
+	%======================================================================
+	
+	\begin{titlepage}
+		
+		\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+		
+		\center
+		
+		\vspace{-20pt}
+		\includegraphics[width=100pt]{FMI-03.png}\\[1.0cm]
+		
+		\textsc{\LARGE West University of  Timisoara}\\[0.5cm]
+		\textsc{\Large Faculty of Mathematics and Computer Science}\\[0.5cm]
+		\textsc{\large Study Program: \\Computer Science in English}\\[3cm]
+		\textsc{\Huge Master Dissertation}\\[5cm]
+		
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushleft} \large
+				\textbf{COORDINATOR:}\\
+				Associate Prof. Marc Eduard \textsc{Frîncu}
+			\end{flushleft}
+		\end{minipage}
+		~
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushright} \large
+				\textbf{GRADUATE:} \\
+				Maria Minerva \textsc{Vonica}
+			\end{flushright}
+		\end{minipage}\\[0.5cm]
+			
+		\vfill
+		{\large Timi\c{s}oara \\2021}\\
+		\vfill
+		
+	\end{titlepage}
+	
+	% =====================================================================
+	
+	\begin{titlepage}
+		
+		\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+		
+		\center
+		
+		\textsc{}\\[.7cm]
+		
+		\textsc{\LARGE West University of  Timi\c{s}oara}\\[0.5cm]
+		\textsc{\Large Faculty of Mathematics and Computer Science}\\[0.5cm]
+		\textsc{\large Study Program: \\Computer Science in English}\\[4.5cm]
+		
+		\textsc{\Huge Master Dissertation}\\[2cm]
+		
+		{\Huge \bfseries Name}\\[6cm]
+		
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushleft} \large
+				\textbf{COORDINATOR:}\\
+				Associate Prof. Marc Eduard \textsc{Frîncu}
+			\end{flushleft}
+		\end{minipage}
+		~
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushright} \large
+				\textbf{GRADUATE:} \\
+				Maria-Minerva \textsc{Vonica}
+			\end{flushright}
+		\end{minipage}\\[0.5cm]
+		\vfill
+		{\large Timi\c{s}oara\\ 2021}\\
+		
+		\vfill
+		
+	\end{titlepage}
+
+	% =====================================================================
+	
+	\tableofcontents{}
+	\addcontentsline{toc}{chapter}{List Of Figures}
+	\listoffigures{}
+	\addcontentsline{toc}{chapter}{List Of Tables}
+	\listoftables{}
+	\begin{thebibliography} {10}
+	\end{thebibliography}
+		
+		\chapter{Glossary}
+		\section{Acronyms}
+	
+	\end{document}
