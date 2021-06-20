@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Disertation.aux
+The style file: alpha.bst
+Database file #1: references.bib
+Warning--to sort, need author or key in C1L1
+Warning--to sort, need author or key in WGI
+Warning--to sort, need author or key in STAC
+You've used 3 entries,
+            2543 wiz_defined-function locations,
+            570 strings with 4786 characters,
+and the built_in function-call counts, 680 in all, are:
+= -- 69
+> -- 3
+< -- 0
++ -- 0
+- -- 0
+* -- 32
+:= -- 84
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 12
+chr.to.int$ -- 3
+cite$ -- 9
+duplicate$ -- 30
+empty$ -- 82
+format.name$ -- 0
+if$ -- 158
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 18
+num.names$ -- 0
+pop$ -- 36
+preamble$ -- 1
+purify$ -- 15
+quote$ -- 0
+skip$ -- 22
+stack$ -- 0
+substring$ -- 24
+swap$ -- 3
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 24
+warning$ -- 3
+while$ -- 0
+width$ -- 4
+write$ -- 35
+(There were 3 warnings)

@@ -1,0 +1,19 @@
+\begin{thebibliography}{WGI}
+
+\bibitem[C1L]{C1L1}
+Landsat collection 1.
+\newblock
+  \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-1?qt-science_support_page_related_con=1#qt-science_support_page_related_con}.
+\newblock Accessed: 2021-06-20.
+
+\bibitem[STA]{STAC}
+Stac.
+\newblock \url{https://stacspec.org/STAC-api.html}.
+\newblock Accessed: 2021-06-20.
+
+\bibitem[WGI]{WGI}
+World glacier inventory.
+\newblock \url{http://nsidc.org/data/glacier_inventory/index.html}.
+\newblock Accessed: 2021-06-20.
+
+\end{thebibliography}

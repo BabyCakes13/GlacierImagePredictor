@@ -1,5 +1,11 @@
 \babel@toc {english}{}
-\contentsline {chapter}{List Of Figures}{1}%
-\contentsline {chapter}{List Of Tables}{2}%
-\contentsline {chapter}{\numberline {1}Glossary}{5}%
-\contentsline {section}{\numberline {1.1}Acronyms}{5}%
+\contentsline {chapter}{\numberline {1}Application}{1}%
+\contentsline {section}{\numberline {1.1}Dataset}{1}%
+\contentsline {subsection}{\numberline {1.1.1}World Glacier Inventory}{1}%
+\contentsline {subsection}{\numberline {1.1.2}Download}{2}%
+\contentsline {chapter}{\numberline {2}Implementation}{3}%
+\contentsline {section}{\numberline {2.1}Download}{3}%
+\contentsline {chapter}{List Of Figures}{4}%
+\contentsline {chapter}{List Of Tables}{5}%
+\contentsline {chapter}{\numberline {3}Glossary}{8}%
+\contentsline {section}{\numberline {3.1}Acronyms}{8}%
