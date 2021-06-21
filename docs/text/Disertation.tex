@@ -158,9 +158,42 @@
 		\item \textit{lon}: longitude of the glacier.
 	\end{itemize}
 
-	\subsection{Download}
+	\subsection{Asset Acquisition}	
 	
-	Through the ASCII WGI text file we can pick which glacier we want to download based on its coordinates, by implementing an endpoint of the the SpatioTemporal Asset Catalog API: \url{http://nsidc.org/data/glacier_inventory/index.html} \cite{STAC}. We will also specify the maximum allowed cloud coverage and the bounding box for the searched area, which is calculated based on the latitude and longitude values extracted from the ASCII WGI text file.
+	Landsat 8 acquires about 740 scenes a day on the Worldwide Reference System-2 (WRS-2) path/row system and has been running since February 11, 2013 \cite{LANDSAT}. This means that there are over two million scenes available for download, either making use of already built user friendly tools or by simply querying for them directly.
+	
+	\subsubsection{USGS Earth Explorer}
+	
+	One of the most popular services for satellite imagery downloading is USGS Earth Explorer. This is used for querying and ordering of satellite images, aerial photographs, and cartographic products through the U.S. Geological Survey. The tool is particularly useful when the main focus is to analyse a specific area rather than trying to acquire a large dataset of scenes. One can easily search for assets based on criteria such as world reference system path and row variables, latitude, longitude, cloud coverage, capture date and many others \cite{USGS}.
+	
+	However, downloading a large set of assets proves to be rather difficult by using this tool alone, since the parameters for each scene need to be manually set. On top of this, the query results have to be picked by hand and then passed for downloading through another application which handles their bulk download. This makes the process of building the dataset rather slow, frustrating and error prone. Such an example can be viewed in Figure 1.2, for the Belvedere glacier (45.9830, 6.888).
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.25]{../images/EarthExplorer.png}
+		\caption{EarthExplorer}
+		\label{fig:EarthExplorer}
+	\end{figure}
+	
+	\subsubsection{SpatioTemporal Asset Catalog API}
+	
+	In order to fix the problem of excessive manual labour which appeared by using the USGS Earth Explorer, we rather implemented an endpoint of the SpatioTemporal Asset Catalog API, specifically, the following: \textbf{\url{http://nsidc.org/data/glacier_inventory/index.html}} \cite{STAC}. The main idea of searching by using parameters still remains, but instead of manual inputting data for the search data, we rely on using the above-mentioned World Glacier Inventory ASCII text file, since it already has all the required information for each glacier.
+	
+	By using this method we can pick which glaciers we want to download based on their coordinates and calculate a bounding box representing the area we want to search, required for the STAC API query. Since there might be clouds which could obfuscate the area of interest in the image, we also add a maximum allowed cloud coverage along the bounding box.
+	
+	The STAC API query also requires a name for the collection of assets we want our queries to be made on, which for us is landsat-8-l1 (Landsat 8 Collection 1, Level 1). Using these three parameters we can now easily acquire a large number of assets with minimal manual labour, as compared to the more user friendly tool provided by USGS.
+	
+	The downloaded assets will be stored at a user specified disk location and they will be structured as shown in the Figure 1.3.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.55]{../images/DownloadDirectory.png}
+		\caption{Download Directory}
+		\label{fig:DownloadDirectory}
+	\end{figure}
+
+	\section{Crawling}
+	\section{NDSI}
 
 	\chapter{Implementation}
 	\section{Download}

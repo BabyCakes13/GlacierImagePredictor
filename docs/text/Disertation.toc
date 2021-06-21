@@ -2,10 +2,12 @@
 \contentsline {chapter}{\numberline {1}Application}{1}%
 \contentsline {section}{\numberline {1.1}Dataset}{1}%
 \contentsline {subsection}{\numberline {1.1.1}World Glacier Inventory}{1}%
-\contentsline {subsection}{\numberline {1.1.2}Download}{2}%
-\contentsline {chapter}{\numberline {2}Implementation}{3}%
-\contentsline {section}{\numberline {2.1}Download}{3}%
-\contentsline {chapter}{List Of Figures}{4}%
-\contentsline {chapter}{List Of Tables}{5}%
-\contentsline {chapter}{\numberline {3}Glossary}{8}%
-\contentsline {section}{\numberline {3.1}Acronyms}{8}%
+\contentsline {subsection}{\numberline {1.1.2}Asset Acquisition}{2}%
+\contentsline {subsubsection}{USGS Earth Explorer}{2}%
+\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{2}%
+\contentsline {chapter}{\numberline {2}Implementation}{5}%
+\contentsline {section}{\numberline {2.1}Download}{5}%
+\contentsline {chapter}{List Of Figures}{6}%
+\contentsline {chapter}{List Of Tables}{7}%
+\contentsline {chapter}{\numberline {3}Glossary}{10}%
+\contentsline {section}{\numberline {3.1}Acronyms}{10}%

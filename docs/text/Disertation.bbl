@@ -6,10 +6,21 @@ Landsat collection 1.
   \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-1?qt-science_support_page_related_con=1#qt-science_support_page_related_con}.
 \newblock Accessed: 2021-06-20.
 
+\bibitem[LAN]{LANDSAT}
+Landsat.
+\newblock
+  \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-8?qt-science_support_page_related_con=0#}.
+\newblock Accessed: 2021-06-21.
+
 \bibitem[STA]{STAC}
 Stac.
 \newblock \url{https://stacspec.org/STAC-api.html}.
 \newblock Accessed: 2021-06-20.
+
+\bibitem[USG]{USGS}
+Usgs.
+\newblock \url{https://earthexplorer.usgs.gov/}.
+\newblock Accessed: 2021-06-21.
 
 \bibitem[WGI]{WGI}
 World glacier inventory.
