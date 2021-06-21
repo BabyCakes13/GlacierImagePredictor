@@ -1,13 +1,19 @@
 \babel@toc {english}{}
 \contentsline {chapter}{\numberline {1}Application}{1}%
 \contentsline {section}{\numberline {1.1}Dataset}{1}%
-\contentsline {subsection}{\numberline {1.1.1}World Glacier Inventory}{1}%
-\contentsline {subsection}{\numberline {1.1.2}Asset Acquisition}{2}%
-\contentsline {subsubsection}{USGS Earth Explorer}{2}%
-\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{2}%
-\contentsline {chapter}{\numberline {2}Implementation}{5}%
-\contentsline {section}{\numberline {2.1}Download}{5}%
-\contentsline {chapter}{List Of Figures}{6}%
-\contentsline {chapter}{List Of Tables}{7}%
-\contentsline {chapter}{\numberline {3}Glossary}{10}%
-\contentsline {section}{\numberline {3.1}Acronyms}{10}%
+\contentsline {subsection}{\numberline {1.1.1}Landsat 8}{1}%
+\contentsline {subsubsection}{Operational Land Imager}{1}%
+\contentsline {subsubsection}{Thermal Infrared Sensor}{2}%
+\contentsline {subsubsection}{OLI and TIRS bands}{2}%
+\contentsline {subsection}{\numberline {1.1.2}World Glacier Inventory}{2}%
+\contentsline {subsection}{\numberline {1.1.3}Asset Acquisition}{4}%
+\contentsline {subsubsection}{USGS Earth Explorer}{4}%
+\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{4}%
+\contentsline {section}{\numberline {1.2}Crawling}{5}%
+\contentsline {section}{\numberline {1.3}NDSI}{5}%
+\contentsline {chapter}{\numberline {2}Implementation}{7}%
+\contentsline {section}{\numberline {2.1}Download}{7}%
+\contentsline {chapter}{List Of Figures}{8}%
+\contentsline {chapter}{List Of Tables}{9}%
+\contentsline {chapter}{\numberline {3}Glossary}{12}%
+\contentsline {section}{\numberline {3.1}Acronyms}{12}%

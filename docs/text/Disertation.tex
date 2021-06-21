@@ -1,4 +1,4 @@
-\documentclass[10pt, a4paper]{report}
+\documentclass[11pt, a4paper]{report}
 \special{papersize=210mm, 297mm}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
@@ -131,6 +131,66 @@
 	\section{Dataset}
 	In order to build the dataset, we made use of the freely available data from the Landsat Archive, specifically from collection 1, level 1. This consists of data products generated from Landsat 8 Operational Land Imager/Thermal Infrared Sensor, Landsat 7 Enhanced Thematic Mapper Plus, Landsat 4-5 Thematic Mapper, and Landsat 1-5 Multispectral Scanner instruments \cite{C1L1}. For the purpose of this paper, we will focus only on images collected from the Landsat 8 satellite.
 	
+	\subsection{Landsat 8}
+
+	For the purpose of this paper, we will use images collected by the Landsat 8 satellite (Figure 1.1), which was launched on an Atlas-V rocket from Vandenberg Air Force Base, California on February 11, 2013. Landsat 8 is the most recently launched Landsat satellite and carries the Operational Land Imager (OLI) and the Thermal Infrared Sensor (TIRS) instruments.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.25]{../images/LandsatSatellite.png}
+		\caption{LandsatSatellite \cite{LANDSATPIC}}
+		\label{fig:LandsatSatellite}
+	\end{figure}
+	
+	Landsat 8 orbits the Earth in a sun-synchronous, near-polar orbit, at an altitude of 705 km, inclined at 98.2 degrees, and completes one Earth orbit every 99 minutes.  The satellite has a 16-day repeat cycle with an equatorial crossing time: 10:00 a.m. +/- 15 minutes. It acquires about 740 scenes a day on the Worldwide Reference System-2 (WRS-2) path/row system, with a swath overlap (or sidelap) varying from 7\% at the equator to a maximum of approximately 85\% at extreme latitudes. A Landsat 8 scene size is 185 km x 180 km \cite{LANDSAT}.
+	
+	\subsubsection{Operational Land Imager}
+	
+	The Operational Land Imager (OLI) is a remote sensing instrument aboard Landsat 8, built by Ball Aerospace \& Technologies. The sensor collects moderate resolution data that is used to monitor changing trends on the surface and evaluate how land usage changes over time. The images and data that OLI has helped collect have practical applications today in agriculture, mapping, and monitoring changes in snow, ice, and water \cite{lolidcp}. 
+
+	The OLI operates in the visible (VIS) and short wave infrared (SWIR) spectral region, having a width of 185 km. It uses nine channels, which range from wavelengths of 443 nm to 2,200 nm. Of these nine channels, eight are multispectral and one is panchromatic. The eight multispectral channels have a 30-meter spatial resolution, and the panchromatic channel has a 15 meters one.
+	
+	\subsubsection{Thermal Infrared Sensor}
+	
+	The Thermal Infrared Sensor (TIRS) measures land surface temperature in two thermal bands with a new technology that uses Quantum Well Infrared Photodetectors to detect long wavelengths of light emitted by the Earth whose intensity depends on surface temperature. These wavelengths, called thermal infrared, are well beyond the range of human vision \cite{tirs}.
+	
+	\subsubsection{OLI and TIRS bands}
+	
+	Landsat 8 acquires data from these sensors in in 11 bands, as following in table \ref{table:bands_table}.
+	
+	\begin{table} [h]
+		\center
+		\begin{tabular} {|  l | l | l |}
+			\hline
+			\textbf{Bands} & \textbf{Wavelength (micrometers)} & \textbf{Resolution (meters)} \\ [0.2ex]
+			\hline
+			Band 1 - Coastal aerosol & 0.43-0.45 & 30 \\ [0.2ex]
+			\hline
+			Band 2 - Blue & 0.45-0.51 & 30 \\ [0.2ex]
+			\hline
+			Band 3 - Green & 0.53-0.59 & 30 \\ [0.2ex]
+			\hline
+			Band 4 - Red & 0.64-0.67 & 30 \\ [0.2ex]
+			\hline
+			Band 5 - Near Infrared (NIR) & 0.85-0.88 & 30 \\ [0.2ex]
+			\hline
+			Band 6 - SWIR 1 & 1.57-1.65 & 30 \\ [0.2ex]
+			\hline
+			Band 7 - SWIR 2 & 2.11-2.29 & 30 \\ [0.2ex]
+			\hline
+			Band 8 - Panchromatic & 0.50-0.68 & 15 \\ [0.2ex]
+			\hline
+			Band 9 - Cirrus & 1.36-1.38 & 30 \\ [0.2ex]
+			\hline
+			Band 10 - Thermal Infrared (TIRS) 1 & 10.6-11.19 & 100 \\ [0.2ex]
+			\hline
+			Band 11 - Thermal Infrared (TIRS) 2 & 11.50-12.51 & 100 \\ [0.2ex]
+			\hline
+		\end{tabular}
+		\caption{Landsat 8-9 Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) bands \cite{bands}.}
+		\label{table:bands_table}
+	\end{table}
+	
 	\subsection{World Glacier Inventory}
 	The World Glacier Inventory (WGI) proves to be a useful resource for building our dataset, since it contains information for over 130,000 glaciers. Inventory parameters include geographic location, area, length, orientation, elevation, and classification. The WGI is based primarily on aerial photographs and maps with most glaciers having one data entry only. Hence, the data set can be viewed as a snapshot of the glacier distribution in the second half of the 20th century. It is based on the original WGI (WGMS 1989) from the World Glacier Monitoring Service \cite{WGI}.  
 	
@@ -160,7 +220,7 @@
 
 	\subsection{Asset Acquisition}	
 	
-	Landsat 8 acquires about 740 scenes a day on the Worldwide Reference System-2 (WRS-2) path/row system and has been running since February 11, 2013 \cite{LANDSAT}. This means that there are over two million scenes available for download, either making use of already built user friendly tools or by simply querying for them directly.
+	Since Landsat 8 acquires over 700 scenes per day, this means that there are over two million scenes available for download, either making use of already built user friendly tools or by simply querying for them directly.
 	
 	\subsubsection{USGS Earth Explorer}
 	
