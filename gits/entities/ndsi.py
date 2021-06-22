@@ -22,7 +22,7 @@ class NDSI(Image):
     def ndarray(self) -> numpy.ndarray:
         if self.__ndsi is None:
             self.__ndsi = self.__calculate_ndsi()
-            self.__ndsi = self.__filter_snow(self.__ndsi)
+            # self.__ndsi = self.__filter_snow(self.__ndsi)
             self.__ndsi = self.__convert_to_16bit(self.__ndsi)
             self.__snow_percentage()
         return self.__ndsi
