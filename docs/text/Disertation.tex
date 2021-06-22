@@ -150,9 +150,27 @@
 
 	The OLI operates in the visible (VIS) and short wave infrared (SWIR) spectral region, having a width of 185 km. It uses nine channels, which range from wavelengths of 443 nm to 2,200 nm. Of these nine channels, eight are multispectral and one is panchromatic. The eight multispectral channels have a 30-meter spatial resolution, and the panchromatic channel has a 15 meters one.
 	
+	The OLI generates 9 bands for Landsat as shown in \ref{fig:L8OLI}.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.5]{../images/Landsat8-OLI-Bands.png}
+		\caption{Landsat 8 OLI generated bands \cite{l8otb}}
+		\label{fig:L8OLI}
+	\end{figure}
+	
 	\subsubsection{Thermal Infrared Sensor}
 	
-	The Thermal Infrared Sensor (TIRS) measures land surface temperature in two thermal bands with a new technology that uses Quantum Well Infrared Photodetectors to detect long wavelengths of light emitted by the Earth whose intensity depends on surface temperature. These wavelengths, called thermal infrared, are well beyond the range of human vision \cite{tirs}.
+	The Thermal Infrared Sensor (TIRS) measures land surface temperature in two thermal bands with a new technology that uses Quantum Well Infrared Photodetectors to detect long wavelengths of light emitted by the Earth whose intensity depends on surface temperature. These wavelengths, called thermal infrared, are well beyond the range of human vision \cite{lgng}.
+	
+	The thermal infrared sensor generates 2 bands for Landsat as shown in \ref{fig:L8TIRS}.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.5]{../images/Landsat8-TIRS-Bands.png}
+		\caption{Landsat 8 TIRS generated bands \cite{l8otb}}
+		\label{fig:L8TIRS}
+	\end{figure}
 	
 	\subsubsection{OLI and TIRS bands}
 	
@@ -160,31 +178,31 @@
 	
 	\begin{table} [h]
 		\center
-		\begin{tabular} {|  l | l | l |}
+		\begin{tabular} {|  l | l | l | l |}
 			\hline
-			\textbf{Bands} & \textbf{Wavelength (micrometers)} & \textbf{Resolution (meters)} \\ [0.2ex]
+			\textbf{Bands} & \textbf{Wavelength (micrometers)} & \textbf{Resolution (meters)} & Usual mapping uses \\ [0.2ex]
 			\hline
-			Band 1 - Coastal aerosol & 0.43-0.45 & 30 \\ [0.2ex]
+			Band 1 - Coastal aerosol & 0.43-0.45 & 30 &  Coastal and aerosol studies\\ [0.2ex]
 			\hline
-			Band 2 - Blue & 0.45-0.51 & 30 \\ [0.2ex]
+			Band 2 - Blue & 0.45-0.51 & 30 &  Bathymetric mapping, distinguishing soil from vegetation and deciduous from coniferous vegetation\\ [0.2ex]
 			\hline
-			Band 3 - Green & 0.53-0.59 & 30 \\ [0.2ex]
+			Band 3 - Green & 0.53-0.59 & 30 & Emphasizes peak vegetation, which is useful for assessing plant vigor \\ [0.2ex]
 			\hline
-			Band 4 - Red & 0.64-0.67 & 30 \\ [0.2ex]
+			Band 4 - Red & 0.64-0.67 & 30 & Discriminates vegetation slopes\\ [0.2ex]
 			\hline
-			Band 5 - Near Infrared (NIR) & 0.85-0.88 & 30 \\ [0.2ex]
+			Band 5 - Near Infrared (NIR) & 0.85-0.88 & 30 &  	Emphasizes biomass content and shorelines\\ [0.2ex]
 			\hline
-			Band 6 - SWIR 1 & 1.57-1.65 & 30 \\ [0.2ex]
+			Band 6 - SWIR 1 & 1.57-1.65 & 30 & Discriminates moisture content of soil and vegetation; penetrates thin clouds\\ [0.2ex]
 			\hline
-			Band 7 - SWIR 2 & 2.11-2.29 & 30 \\ [0.2ex]
+			Band 7 - SWIR 2 & 2.11-2.29 & 30 & Improved moisture content of soil and vegetation; penetrates thin clouds\\ [0.2ex]
 			\hline
-			Band 8 - Panchromatic & 0.50-0.68 & 15 \\ [0.2ex]
+			Band 8 - Panchromatic & 0.50-0.68 & 15 & 15 meter resolution, sharper image definition\\ [0.2ex]
 			\hline
-			Band 9 - Cirrus & 1.36-1.38 & 30 \\ [0.2ex]
+			Band 9 - Cirrus & 1.36-1.38 & 30 &  	Improved detection of cirrus cloud contamination\\ [0.2ex]
 			\hline
-			Band 10 - Thermal Infrared (TIRS) 1 & 10.6-11.19 & 100 \\ [0.2ex]
+			Band 10 - Thermal Infrared (TIRS) 1 & 10.6-11.19 & 100 &  	100 meter resolution, thermal mapping and estimated soil moisture \\ [0.2ex]
 			\hline
-			Band 11 - Thermal Infrared (TIRS) 2 & 11.50-12.51 & 100 \\ [0.2ex]
+			Band 11 - Thermal Infrared (TIRS) 2 & 11.50-12.51 & 100 & 100 meter resolution, improved thermal mapping and estimated soil moisture\\ [0.2ex]
 			\hline
 		\end{tabular}
 		\caption{Landsat 8-9 Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) bands \cite{bands}.}
@@ -212,10 +230,10 @@
 	
 	The \emph{parameters} which will be extracted for the dataset construction are the following:
 	\begin{itemize}
-		\item \textit{wgi\_glacier\_id}: unique id representing one glacier (or part of it, if the coverage area is larger);
-		\item \textit{glacier\_name}: name of the glacier (if it has one);
-		\item \textit{lat}: latitude of the glacier;
-		\item \textit{lon}: longitude of the glacier.
+		\item \textbf{wgi\_glacier\_id}: unique id representing one glacier (or part of it, if the coverage area is larger);
+		\item \textbf{glacier\_name}: name of the glacier (if it has one);
+		\item \textbf{lat}: latitude of the glacier;
+		\item \textbf{lon}: longitude of the glacier.
 	\end{itemize}
 
 	\subsection{Asset Acquisition}	
@@ -245,15 +263,93 @@
 	
 	The downloaded assets will be stored at a user specified disk location and they will be structured as shown in the Figure 1.3.
 	
+	\subsubsection{Landsat 8 Collection 1, Tier 1}
+	
+	To support analysis  of the Landsat long-term data record, the Landsat data archive was reorganized  into a formal tiered data collection  structure, which ensures that all Landsat Level 1 products provide a consistent archive of data quality to support time-series analysis and data “stacking”, while controlling continuous improvement of the archive, and access to all data as they are acquired. The implementation of collections ensures consistent and known radiometric and geometric quality through time and across instruments while improving control in the calibration and processing parameters \cite{lc1l1}. By using data from this collection, we ensure that our images are fit for accurate pixel-to-pixel processing.
+	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.55]{../images/DownloadDirectory.png}
 		\caption{Download Directory}
 		\label{fig:DownloadDirectory}
 	\end{figure}
-
-	\section{Crawling}
-	\section{NDSI}
+	
+	\section{Dataset entities}
+	
+	TODO better make this intro...
+	We will further describe which are the bands necessary for the image generation and what are their uses. On top of this, we will further explain what is the normalized snow difference index and what is the optical flow used for.
+	
+	\subsection{Bands}
+	
+	Each Landsat 8 band is represented by a 16 bit grayscale image with a resolution between 7000 and 10000 pixels, each pixel representing 30 meters. We can conclude, therefore, that one scene covers around 200 and 300 km of Earth. Only the green and SWIR1 bands will be used for the purpose of this thesis and below we will discuss the specifications of each. 
+	
+	\subsubsection{Band 3 - Green Band}
+	
+	\begin{table} [h]
+		\center
+		\begin{tabular} {| l | l |}
+			\hline
+			\textbf{Wavelength} & {0.53- 0.59 micrometers} \\ [0.2ex]
+			\hline
+			\textbf{Spacial resolution} & {30 meters} \\ [0.2ex]
+			\hline
+			\textbf{Resolution} & {between 7000x7000 pixels and 10000x10000 pixels} \\ [0.2ex]
+			\hline
+			\textbf{Depth} & {16-bit}\\ [0.2ex]
+			\hline
+			\textbf{Format} & {grayscale}\\ [0.2ex]
+			\hline
+		\end{tabular}
+		\caption{Landsat 8 green band specifications.}
+		\label{table:green_table}
+	\end{table}
+	The green band, alongside with the red and blue ones, fall in the visible spectrum and it is usually used for mapping peak vegetation. Figure \ref{fig:belvedere_green} is an example of the green band for the Belvedere glacier, specifically taken from scene LC81950282015098LGN01.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{../images/LC81950282015098LGN01_B3.png}
+		\caption{Green band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}
+		\label{fig:belvedere_green}
+	\end{figure}
+	
+	\subsubsection{Band 6 - SWIR1 Band}
+	
+	\begin{table} [h]
+		\center
+		\begin{tabular} {| l | l |}
+			\hline
+			\textbf{Wavelength} & {1.57 - 1.65 micrometers} \\ [0.2ex]
+			\hline
+			\textbf{Spacial resolution} & {30 meters} \\ [0.2ex]
+			\hline
+			\textbf{Resolution} & {between 7000x7000 pixels and 10000x10000 pixels} \\ [0.2ex]
+			\hline
+			\textbf{Depth} & {16-bit}\\ [0.2ex]
+			\hline
+			\textbf{Format} & {grayscale}\\ [0.2ex]
+			\hline
+		\end{tabular}
+		\caption{Landsat 8 SWIR1 band specifications.}
+		\label{table:swir1_table}
+	\end{table}
+	
+	The shortwave infrared 1 band is particularly useful for enhancing geology objects such as rocks and soils which look similar in other bands \cite{bd}. Alongside this, it also discriminates moisture content of soil and vegetation and penetrates thin clouds \cite{bands}. Figure \ref{fig:belvedere_swir1} is illustrated below as an example of a SWIR1 band taken from the same scene as the green one above.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{../images/LC81950282015098LGN01_B6.png}
+		\caption{SWIR1 band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}
+		\label{fig:belvedere_swir1}
+	\end{figure}
+	
+	
+	\subsubsection{Normalized Snow Difference Index}
+	
+	\subsubsection{Optical Flow Vector}
+	
+	\subsubsection{Optical Flow Generated Image}
+	
+	
+	For the purpose of this paper we will be making use of the green and SWIR1 bands from \ref{table:bands_table}.
 
 	\chapter{Implementation}
 	\section{Download}

@@ -4,16 +4,22 @@
 \contentsline {subsection}{\numberline {1.1.1}Landsat 8}{1}%
 \contentsline {subsubsection}{Operational Land Imager}{1}%
 \contentsline {subsubsection}{Thermal Infrared Sensor}{2}%
-\contentsline {subsubsection}{OLI and TIRS bands}{2}%
-\contentsline {subsection}{\numberline {1.1.2}World Glacier Inventory}{2}%
+\contentsline {subsubsection}{OLI and TIRS bands}{3}%
+\contentsline {subsection}{\numberline {1.1.2}World Glacier Inventory}{3}%
 \contentsline {subsection}{\numberline {1.1.3}Asset Acquisition}{4}%
-\contentsline {subsubsection}{USGS Earth Explorer}{4}%
-\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{4}%
-\contentsline {section}{\numberline {1.2}Crawling}{5}%
-\contentsline {section}{\numberline {1.3}NDSI}{5}%
-\contentsline {chapter}{\numberline {2}Implementation}{7}%
-\contentsline {section}{\numberline {2.1}Download}{7}%
-\contentsline {chapter}{List Of Figures}{8}%
-\contentsline {chapter}{List Of Tables}{9}%
-\contentsline {chapter}{\numberline {3}Glossary}{12}%
-\contentsline {section}{\numberline {3.1}Acronyms}{12}%
+\contentsline {subsubsection}{USGS Earth Explorer}{5}%
+\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{5}%
+\contentsline {subsubsection}{Landsat 8 Collection 1, Tier 1}{6}%
+\contentsline {section}{\numberline {1.2}Dataset entities}{7}%
+\contentsline {subsection}{\numberline {1.2.1}Bands}{7}%
+\contentsline {subsubsection}{Band 3 - Green Band}{7}%
+\contentsline {subsubsection}{Band 6 - SWIR1 Band}{7}%
+\contentsline {subsubsection}{Normalized Snow Difference Index}{8}%
+\contentsline {subsubsection}{Optical Flow Vector}{8}%
+\contentsline {subsubsection}{Optical Flow Generated Image}{8}%
+\contentsline {chapter}{\numberline {2}Implementation}{10}%
+\contentsline {section}{\numberline {2.1}Download}{10}%
+\contentsline {chapter}{List Of Figures}{11}%
+\contentsline {chapter}{List Of Tables}{12}%
+\contentsline {chapter}{\numberline {3}Glossary}{16}%
+\contentsline {section}{\numberline {3.1}Acronyms}{16}%

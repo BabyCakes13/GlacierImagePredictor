@@ -3,8 +3,13 @@
 \bibitem[ban]{bands}
 bands.
 \newblock
-  \url{https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites?qt-news_science_products=0#qt-news_science_products}.
+  \url{https://www.usgs.gov/faqs/what-are-best-landsat-spectral-bands-use-my-research/}.
 \newblock Accessed: 2021-06-21.
+
+\bibitem[bd]{bd}
+bd.
+\newblock \url{https://landsat.gsfc.nasa.gov/landsat-8/landsat-8-bands/}.
+\newblock Accessed: 2021-06-22.
 
 \bibitem[C1L]{C1L1}
 Landsat collection 1.
@@ -20,6 +25,11 @@ Edward~J Knight and Geir Kvaran.
   Evolutionary Algorithms}. Landsat-8 Sensor Characterization and Calibration,
   2014.
 
+\bibitem[l8o]{l8otb}
+l8otb.
+\newblock \url{https://gisgeography.com/landsat-8-bands-combinations/}.
+\newblock Accessed: 2021-06-22.
+
 \bibitem[LANa]{LANDSAT}
 Landsat.
 \newblock
@@ -31,16 +41,21 @@ Landsatpic.
 \newblock \url{https://landsat.gsfc.nasa.gov/sites/landsat/files/2013/01}.
 \newblock Accessed: 2021-06-21.
 
+\bibitem[lc1]{lc1l1}
+lc1l1.
+\newblock
+  \url{https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1656_%20Landsat_Collection1_L1_Product_Definition-v2.pdf}.
+\newblock Accessed: 2021-06-22.
+
+\bibitem[lgn]{lgng}
+lgng.
+\newblock \url{https://landsat.gsfc.nasa.gov/}.
+\newblock Accessed: 2021-06-21.
+
 \bibitem[STA]{STAC}
 Stac.
 \newblock \url{https://stacspec.org/STAC-api.html}.
 \newblock Accessed: 2021-06-20.
-
-\bibitem[tir]{tirs}
-Tirs.
-\newblock
-  \url{https://landsat.gsfc.nasa.gov/landsat-8/thermal-infrared-sensor-tirs}.
-\newblock Accessed: 2021-06-21.
 
 \bibitem[USG]{USGS}
 Usgs.
