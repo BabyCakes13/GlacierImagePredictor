@@ -1,9 +1,10 @@
+import numpy
 from entities.band import Band
 from entities.scene_id import SceneID
 from entities.true_color import TrueColor
 from entities.interfaces.scene_interface import SceneInterface
 
-from utils import logging
+from utils import logging, utils
 logger = logging.getLogger(__name__)
 
 
@@ -46,6 +47,24 @@ class Scene(SceneInterface):
 
     def __str__(self):
         return "Scene[{}]".format(self.scene_id().scene_id())
+
+    def descriptors(self):
+        descriptors = self.bands()[0].descriptors()
+        for band in self.bands()[1:-1]:
+            descriptors = numpy.vstack((descriptors, band.descriptors()))
+        return descriptors
+
+    def keypoints(self):
+        keypoints = []
+        for band in self.bands()[:-1]:
+            keypoints += band.keypoints()
+        return keypoints
+
+    def width(self):
+        return self._red_band.ndarray().shape[1]
+
+    def height(self):
+        return self._red_band.ndarray().shape[0]
 
 
 def find_scene_by_wgi_id(scene_id: str, scenes: list):
