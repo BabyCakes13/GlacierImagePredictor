@@ -15,7 +15,6 @@ class OpticalFlow(Image):
     def __init__(self, first_image: Image, second_image: Image):
         self.__first_image = first_image
         self.__second_image = second_image
-        self.__first_mask, self.__second_mask = self.mask_images()
         self.__optical_flow_image = None
         self.__optical_flow = None
 
@@ -36,6 +35,7 @@ class OpticalFlow(Image):
 
     def __compute_optical_flow(self):
         tik = time.process_time()
+        self.__first_mask, self.__second_mask = self.mask_images()
         masked_first_image = numpy.ma.masked_array(self.__first_image.ndarray(),
                                                    mask=self.__second_mask).filled(0)
         masked_second_image = numpy.ma.masked_array(self.__second_image.ndarray(),
@@ -50,6 +50,8 @@ class OpticalFlow(Image):
     def hsv_optical_flow(self):
         optical_flow = self.optical_flow()
         magnitude, angle = cv2.cartToPolar(optical_flow[..., 0], optical_flow[..., 1])
+
+        self.__first_mask, self.__second_mask = self.mask_images()
 
         magnitude = numpy.ma.masked_array(magnitude, mask=self.__first_mask).filled(0)
         magnitude = numpy.ma.masked_array(magnitude, mask=self.__second_mask).filled(0)
