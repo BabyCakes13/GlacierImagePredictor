@@ -37,7 +37,10 @@ class AlignedImage(Image):
     def align(self) -> None:
         logger.info("Aligning {}".format(self.__image.name()))
 
-        affine_matrix = self.__this_scene.affine_transform_matrix()
+        if self.__reference_scene == self.__this_scene:
+            affine_matrix = [[1,0,0],[0,1,0]]
+        else:
+            affine_matrix = self.__this_scene.affine_transform_matrix()
         self.__warp_affine_transform_matrix(affine_matrix)
 
     def __warp_affine_transform_matrix(self, atm) -> None:
