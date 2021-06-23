@@ -17,6 +17,11 @@ Landsat collection 1.
   \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-1?qt-science_support_page_related_con=1#qt-science_support_page_related_con}.
 \newblock Accessed: 2021-06-20.
 
+\bibitem[Hal15]{viirs}
+Dr. Dorothy~K Hall.
+\newblock Viirs snow cover algorithm theoretical basis document (atbd).
+\newblock 2015.
+
 \bibitem[KK14]{lolidcp}
 Edward~J Knight and Geir Kvaran.
 \newblock Landsat-8 operational land imager design, characterization and
@@ -52,6 +57,17 @@ lgng.
 \newblock \url{https://landsat.gsfc.nasa.gov/}.
 \newblock Accessed: 2021-06-21.
 
+\bibitem[nds]{ndsi}
+ndsi.
+\newblock
+  \url{https://nsidc.org/support/faq/what-ndsi-snow-cover-and-how-does-it-compare-fsc}.
+\newblock Accessed: 2021-06-22.
+
+\bibitem[sn]{sn}
+sn.
+\newblock \url{https://gisgeography.com/landsat-file-naming-convention/}.
+\newblock Accessed: 2021-06-22.
+
 \bibitem[STA]{STAC}
 Stac.
 \newblock \url{https://stacspec.org/STAC-api.html}.
@@ -66,5 +82,11 @@ Usgs.
 World glacier inventory.
 \newblock \url{http://nsidc.org/data/glacier_inventory/index.html}.
 \newblock Accessed: 2021-06-20.
+
+\bibitem[wrs]{wrs}
+wrs.
+\newblock
+  \url{https://landsat.gsfc.nasa.gov/about/worldwide-reference-system/}.
+\newblock Accessed: 2021-06-22.
 
 \end{thebibliography}

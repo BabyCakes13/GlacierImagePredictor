@@ -2,24 +2,31 @@
 \contentsline {chapter}{\numberline {1}Application}{1}%
 \contentsline {section}{\numberline {1.1}Dataset}{1}%
 \contentsline {subsection}{\numberline {1.1.1}Landsat 8}{1}%
-\contentsline {subsubsection}{Operational Land Imager}{1}%
-\contentsline {subsubsection}{Thermal Infrared Sensor}{2}%
+\contentsline {paragraph}{Worldwide Reference System-2}{1}%
+\contentsline {subsubsection}{Landsat scene naming convention}{2}%
+\contentsline {subsubsection}{Operational Land Imager}{2}%
+\contentsline {subsubsection}{Thermal Infrared Sensor}{3}%
 \contentsline {subsubsection}{OLI and TIRS bands}{3}%
-\contentsline {subsection}{\numberline {1.1.2}World Glacier Inventory}{3}%
-\contentsline {subsection}{\numberline {1.1.3}Asset Acquisition}{4}%
-\contentsline {subsubsection}{USGS Earth Explorer}{5}%
-\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{5}%
-\contentsline {subsubsection}{Landsat 8 Collection 1, Tier 1}{6}%
-\contentsline {section}{\numberline {1.2}Dataset entities}{7}%
-\contentsline {subsection}{\numberline {1.2.1}Bands}{7}%
-\contentsline {subsubsection}{Band 3 - Green Band}{7}%
-\contentsline {subsubsection}{Band 6 - SWIR1 Band}{7}%
-\contentsline {subsubsection}{Normalized Snow Difference Index}{8}%
-\contentsline {subsubsection}{Optical Flow Vector}{8}%
-\contentsline {subsubsection}{Optical Flow Generated Image}{8}%
-\contentsline {chapter}{\numberline {2}Implementation}{10}%
-\contentsline {section}{\numberline {2.1}Download}{10}%
-\contentsline {chapter}{List Of Figures}{11}%
-\contentsline {chapter}{List Of Tables}{12}%
-\contentsline {chapter}{\numberline {3}Glossary}{16}%
-\contentsline {section}{\numberline {3.1}Acronyms}{16}%
+\contentsline {subsection}{\numberline {1.1.2}World Glacier Inventory}{4}%
+\contentsline {subsection}{\numberline {1.1.3}Asset Acquisition}{5}%
+\contentsline {subsubsection}{USGS Earth Explorer}{6}%
+\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{6}%
+\contentsline {subsubsection}{Landsat 8 Collection 1, Tier 1}{7}%
+\contentsline {section}{\numberline {1.2}Dataset entities}{8}%
+\contentsline {subsection}{\numberline {1.2.1}Bands}{8}%
+\contentsline {subsubsection}{Band 3 - Green Band}{8}%
+\contentsline {subsubsection}{Band 6 - SWIR1 Band}{9}%
+\contentsline {subsubsection}{Normalized Snow Difference Index}{9}%
+\contentsline {section}{\numberline {1.3}Alignment}{10}%
+\contentsline {subsubsection}{Optical Flow Vector}{12}%
+\contentsline {subsubsection}{Optical Flow Generated Image}{12}%
+\contentsline {section}{\numberline {1.4}Graphical User Interface}{12}%
+\contentsline {chapter}{\numberline {2}Design and Implementation}{15}%
+\contentsline {section}{\numberline {2.1}Search and Download}{15}%
+\contentsline {section}{\numberline {2.2}Normalized Snow Difference Index}{15}%
+\contentsline {chapter}{List Of Figures}{17}%
+\contentsline {chapter}{List Of Tables}{18}%
+\contentsline {section}{\numberline {2.3}Processing}{21}%
+\contentsline {subsection}{\numberline {2.3.1}Alignment}{21}%
+\contentsline {chapter}{\numberline {3}Glossary}{22}%
+\contentsline {section}{\numberline {3.1}Acronyms}{22}%

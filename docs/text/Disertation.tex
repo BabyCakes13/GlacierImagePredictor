@@ -11,6 +11,8 @@
 \usepackage{graphicx}
 \usepackage{float}
 \graphicspath{{images/} {diagrams/}}
+\usepackage{tabularx}
+\usepackage{booktabs}
 
 %\usepackage{showframe}
 \usepackage{fullpage}
@@ -134,24 +136,61 @@
 	\subsection{Landsat 8}
 
 	For the purpose of this paper, we will use images collected by the Landsat 8 satellite (Figure 1.1), which was launched on an Atlas-V rocket from Vandenberg Air Force Base, California on February 11, 2013. Landsat 8 is the most recently launched Landsat satellite and carries the Operational Land Imager (OLI) and the Thermal Infrared Sensor (TIRS) instruments.
-	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.25]{../images/LandsatSatellite.png}
 		\caption{LandsatSatellite \cite{LANDSATPIC}}
 		\label{fig:LandsatSatellite}
 	\end{figure}
-	
 	Landsat 8 orbits the Earth in a sun-synchronous, near-polar orbit, at an altitude of 705 km, inclined at 98.2 degrees, and completes one Earth orbit every 99 minutes.  The satellite has a 16-day repeat cycle with an equatorial crossing time: 10:00 a.m. +/- 15 minutes. It acquires about 740 scenes a day on the Worldwide Reference System-2 (WRS-2) path/row system, with a swath overlap (or sidelap) varying from 7\% at the equator to a maximum of approximately 85\% at extreme latitudes. A Landsat 8 scene size is 185 km x 180 km \cite{LANDSAT}.
+	
+	\paragraph{Worldwide Reference System-2}
+	
+	We will be referring to each scene's location based on its path and row coordinates from the worldwide reference system-2, which is a global notation system for Landsat data. It enables a user to inquire about satellite imagery over any portion of the world by specifying a nominal scene center designated by path and row numbers. The WRS has proven valuable for the cataloguing, referencing, and day-to-day use of imagery transmitted from the Landsat sensors \cite{wrs}. Landsat's trajectory projected on the world map can be seen in figure \ref{fig:wrs2}.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.2]{../images/wrs2.png}
+		\caption{WRS-2 Path/Row for Landsat \cite{wrs}.}
+		\label{fig:wrs2}
+	\end{figure}
+	
+	\subsubsection{Landsat scene naming convention}
+	
+	Each Landsat scene is named after a well-defined convention in order to easily check information such as the WRS path, row and the date of acquisition. Having access to this information without the need to download the scene itself or the metadata file which holds this information represents a valuable asset, since we can easily filter the data based on the naming convention itself. In the table \ref{table:scene_naming} below we represent what each part of a Landsat scene of the form \textbf{LXS PPPRRR YYYYDDD  GSIVV} means.
+	\begin{table} [h]
+		\center
+		\begin{tabularx}{480pt}{|X|X|}
+			\toprule
+			\textbf{L} & Landsat \\ [0.2ex]
+			\midrule
+			\textbf{X} & Sensor \\ [0.2ex]
+			\midrule
+			\textbf{SS} & Satellite \\ [0.2ex]
+			\midrule
+			\textbf{PPP} & WRS path \\ [0.2ex]
+			\midrule
+			\textbf{RRR} & WRS row \\ [0.2ex]
+			\midrule
+			\textbf{YYYY} & Acquisition year \\ [0.2ex]
+			\midrule
+			\textbf{DDD} & Julian day of the acquisition year \\ [0.2ex]
+			\midrule
+			\textbf{GSI} & Ground station identifier \\ [0.2ex]
+			\midrule
+			\textbf{VV} & Archive version number \\ [0.2ex]
+			\midrule
+			\midrule
+			\bottomrule
+		\end{tabularx}
+		\caption{Landsat 8 scene naming convention \cite{sn}.}
+		\label{table:bands_table}
+	\end{table}\label{table:scene_naming}
 	
 	\subsubsection{Operational Land Imager}
 	
 	The Operational Land Imager (OLI) is a remote sensing instrument aboard Landsat 8, built by Ball Aerospace \& Technologies. The sensor collects moderate resolution data that is used to monitor changing trends on the surface and evaluate how land usage changes over time. The images and data that OLI has helped collect have practical applications today in agriculture, mapping, and monitoring changes in snow, ice, and water \cite{lolidcp}. 
-
 	The OLI operates in the visible (VIS) and short wave infrared (SWIR) spectral region, having a width of 185 km. It uses nine channels, which range from wavelengths of 443 nm to 2,200 nm. Of these nine channels, eight are multispectral and one is panchromatic. The eight multispectral channels have a 30-meter spatial resolution, and the panchromatic channel has a 15 meters one.
-	
 	The OLI generates 9 bands for Landsat as shown in \ref{fig:L8OLI}.
-	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.5]{../images/Landsat8-OLI-Bands.png}
@@ -178,33 +217,35 @@
 	
 	\begin{table} [h]
 		\center
-		\begin{tabular} {|  l | l | l | l |}
+		\begin{tabularx}{480pt}{|p{0.2\linewidth}|X|X|p{0.5\linewidth}|}
+			\toprule
+			\textbf{Bands} & \textbf{Wavelength (micrometers)} & \textbf{Resolution (meters)} & \textbf{Usual mapping uses} \\ [0.2ex]
+			\midrule
+			\midrule
+			Band 1 (Coastal aerosol) & 0.43-0.45 & 30 &  Coastal and aerosol studies\\ [0.2ex]
+			\midrule
+			Band 2 (Blue) & 0.45-0.51 & 30 &  Bathymetric mapping, distinguishing soil from vegetation and deciduous from coniferous vegetation\\ [0.2ex]
+			\midrule
+			Band 3 (Green) & 0.53-0.59 & 30 & Emphasizes peak vegetation, which is useful for assessing plant vigor \\ [0.2ex]
+			\midrule
+			Band 4 (Red) & 0.64-0.67 & 30 & Discriminates vegetation slopes\\ [0.2ex]
 			\hline
-			\textbf{Bands} & \textbf{Wavelength (micrometers)} & \textbf{Resolution (meters)} & Usual mapping uses \\ [0.2ex]
-			\hline
-			Band 1 - Coastal aerosol & 0.43-0.45 & 30 &  Coastal and aerosol studies\\ [0.2ex]
-			\hline
-			Band 2 - Blue & 0.45-0.51 & 30 &  Bathymetric mapping, distinguishing soil from vegetation and deciduous from coniferous vegetation\\ [0.2ex]
-			\hline
-			Band 3 - Green & 0.53-0.59 & 30 & Emphasizes peak vegetation, which is useful for assessing plant vigor \\ [0.2ex]
-			\hline
-			Band 4 - Red & 0.64-0.67 & 30 & Discriminates vegetation slopes\\ [0.2ex]
-			\hline
-			Band 5 - Near Infrared (NIR) & 0.85-0.88 & 30 &  	Emphasizes biomass content and shorelines\\ [0.2ex]
-			\hline
-			Band 6 - SWIR 1 & 1.57-1.65 & 30 & Discriminates moisture content of soil and vegetation; penetrates thin clouds\\ [0.2ex]
-			\hline
-			Band 7 - SWIR 2 & 2.11-2.29 & 30 & Improved moisture content of soil and vegetation; penetrates thin clouds\\ [0.2ex]
-			\hline
-			Band 8 - Panchromatic & 0.50-0.68 & 15 & 15 meter resolution, sharper image definition\\ [0.2ex]
-			\hline
-			Band 9 - Cirrus & 1.36-1.38 & 30 &  	Improved detection of cirrus cloud contamination\\ [0.2ex]
-			\hline
-			Band 10 - Thermal Infrared (TIRS) 1 & 10.6-11.19 & 100 &  	100 meter resolution, thermal mapping and estimated soil moisture \\ [0.2ex]
-			\hline
-			Band 11 - Thermal Infrared (TIRS) 2 & 11.50-12.51 & 100 & 100 meter resolution, improved thermal mapping and estimated soil moisture\\ [0.2ex]
-			\hline
-		\end{tabular}
+			Band 5 (Near Infrared) & 0.85-0.88 & 30 & Emphasizes biomass content and shorelines\\ [0.2ex]
+			\midrule
+			Band 6 (SWIR1) & 1.57-1.65 & 30 & Discriminates moisture content of soil and vegetation; penetrates thin clouds\\ [0.2ex]
+			\midrule
+			Band 7 (SWIR2) & 2.11-2.29 & 30 & Improved moisture content of soil and vegetation; penetrates thin clouds\\ [0.2ex]
+			\midrule
+			Band 8 (Panchromatic) & 0.50-0.68 & 15 & Sharper image definition\\ [0.2ex]
+			\midrule
+			Band 9 (Cirrus) & 1.36-1.38 & 30 &  	Improved detection of cirrus cloud contamination\\ [0.2ex]
+			\midrule
+			Band 10 (Thermal Infrared) 1 & 10.6-11.19 & 100 &  	Thermal mapping and estimated soil moisture \\ [0.2ex]
+			\midrule
+			Band 11 (Thermal Infrared) 2 & 11.50-12.51 & 100 & Improved thermal mapping and estimated soil moisture\\ [0.2ex]
+			\midrule
+			\bottomrule
+		\end{tabularx}
 		\caption{Landsat 8-9 Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) bands \cite{bands}.}
 		\label{table:bands_table}
 	\end{table}
@@ -254,6 +295,7 @@
 	\end{figure}
 	
 	\subsubsection{SpatioTemporal Asset Catalog API}
+	\label{seq:STAC}
 	
 	In order to fix the problem of excessive manual labour which appeared by using the USGS Earth Explorer, we rather implemented an endpoint of the SpatioTemporal Asset Catalog API, specifically, the following: \textbf{\url{http://nsidc.org/data/glacier_inventory/index.html}} \cite{STAC}. The main idea of searching by using parameters still remains, but instead of manual inputting data for the search data, we rely on using the above-mentioned World Glacier Inventory ASCII text file, since it already has all the required information for each glacier.
 	
@@ -306,7 +348,7 @@
 	The green band, alongside with the red and blue ones, fall in the visible spectrum and it is usually used for mapping peak vegetation. Figure \ref{fig:belvedere_green} is an example of the green band for the Belvedere glacier, specifically taken from scene LC81950282015098LGN01.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=0.4]{../images/LC81950282015098LGN01_B3.png}
+		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_B3.png}
 		\caption{Green band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}
 		\label{fig:belvedere_green}
 	\end{figure}
@@ -331,29 +373,99 @@
 		\caption{Landsat 8 SWIR1 band specifications.}
 		\label{table:swir1_table}
 	\end{table}
-	
 	The shortwave infrared 1 band is particularly useful for enhancing geology objects such as rocks and soils which look similar in other bands \cite{bd}. Alongside this, it also discriminates moisture content of soil and vegetation and penetrates thin clouds \cite{bands}. Figure \ref{fig:belvedere_swir1} is illustrated below as an example of a SWIR1 band taken from the same scene as the green one above.
-	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=0.4]{../images/LC81950282015098LGN01_B6.png}
+		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_B6.png}
 		\caption{SWIR1 band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}
 		\label{fig:belvedere_swir1}
 	\end{figure}
 	
 	
 	\subsubsection{Normalized Snow Difference Index}
+	\label{seq:NDSI_functional}
 	
+	The normalized snow difference index (NDSI) is an index which relates to the presence of snow/ice in a pixel. Snow and ice usually have a very high reflectance in the visible spectrum and very low one in the shortwave infrared one, which is useful for mapping out most types of clouds from the scene \cite{ndsi}. We can therefore use the formula from equation \ref{eq:ndsi_formula} in order to highlight the snow and ice pixels from a Landsat 8 image.
+	\begin{equation}\label{eq:ndsi_formula}
+		NDSI = \frac{green - SWIR1}{green + SWIR1}
+	\end{equation}
+	By combining the snow reflectance behaviour of snow and ice for each of these bands, we can create a normalized snow difference index image which has values in the range [-1, 1]. We can then apply a threshold on the pixels which states that if the NDSI value for a pixel is larger than 0.0, then that pixel represents snow/ice covered land; similarly, if its value is smaller than 0.0, that pixel represents snow/ice free land \cite{ndsi}, \cite{viirs}, as represented in equation \ref{eq:ndsi_threshold}. Of course, this represents the general value for the threshold, but with the increase of its value, we can more accurately differentiate between snow and ice. With larger threshold values we can state that a pixel represents ice covered land rather than just snow fall land \cite{viirs}. We have tried different values for the threshold and came to the conclusion that a value of 0.3 is best suited for our needs.
+	\begin{equation}
+		\begin{cases}\label{eq:ndsi_threshold}
+			\text{snow/ice land} & \text{if } NDSI \geq 0.0\\
+			\text{snow-free land}, & \text{NDSI < 0.0}
+		\end{cases}
+	\end{equation}
+	An example of a generated NDSI for the Belvedere glacier, scene LC81950282015098LGN01, can be viewed in Figure \ref{fig:belvedere_ndsi}.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_ndsi.png}
+		\caption{NDSI of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}
+		\label{fig:belvedere_ndsi}
+	\end{figure}
+
+	\section{Alignment}
+	Landsat's trajectory orbiting Earth is not fully precise, therefore not all images will be pixel-to-pixel aligned, which is a problem for image processing. Since we want to track each pixel's movement, we must be sure that its coordinates in the image do not change between any two given scenes. Figures \ref{fig:unaligned} highlights the discrepancy from scene TODO to scene TODO, as an example.
+  	\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.36\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/unaligned.png}
+		\label{fig:unaligned}
+	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/unaligned_part.png}
+		\label{fig:unaligned_part}
+	\end{minipage}
+	\caption{Overlapped unaligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}
+	\end{figure}
+	Since the bands we work with have a spacial resolution of 30 meters, which means that each pixel in the image represents 30 meters. Even with a misalignment of just 50 pixels we would end up with a 1.5 km difference between two scenes. Tracking pixels through the image without aligning them first would mean that we could never be sure that what we are looking at is indeed the same location. We have used different approaches on alignment which will be described in \ref{seq:alignment}. Figure \ref{fig:aligned}  highlights the alignment corrected scene from \ref{fig:unaligned}. 
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.36\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/aligned.png}
+		\end{minipage}
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/aligned_part.png}
+		\end{minipage}
+		\caption{Overlapped aligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}
+		\label{fig:aligned}
+	\end{figure}
+
 	\subsubsection{Optical Flow Vector}
+	
+	
 	
 	\subsubsection{Optical Flow Generated Image}
 	
-	
-	For the purpose of this paper we will be making use of the green and SWIR1 bands from \ref{table:bands_table}.
+	\section{Graphical User Interface}
+	\label{seq:gui}
 
-	\chapter{Implementation}
-	\section{Download}
+	\chapter{Design and Implementation}
 	
+	The design of the application will be discussed while focusing on two different aspects:
+	\begin{itemize}
+		\item \textbf{search and download}
+		\item \textbf{processing}
+	\end{itemize}
+	The first section is optional and can be run independently from the processing, since the user can have an already created database of images. However, we have focused on simplifying the process of satellite imagery downloading as described in \ref{seq:STAC} through using the sat-search library as a helper for searching and downloading assets. More information on querying can be found in \ref{seq:sd_implementation}. 
+	Given an existing set of data, the next step is to pass the root folder which contains the glacier directories to the processing unit, also designed as a plug-in mechanism which will trigger the graphical user interface to pop up and allow for the processing options to appear. More information on this section can be found at \ref{seq:processing}. From there, one can start processing by simply making use of the predefined buttons described in \ref{seq:gui}.
+	
+	\section{Search and Download}
+	\label{seq:sd_implementation}
+	
+	\section{Normalized Snow Difference Index}
+
+	The NDSI is generated by using the formula \ref{eq:ndsi_formula} described in section \ref{seq:NDSI_functional} on the green and shortwave infrared bands from a specific scene. Each band pixel is converted to \textbf{float32} in order to increase the \textbf{precision} of calculation; as each band is read as a n-dimensional array we can use numpy's optimised processing for generating the NDSI index image, since it converts the data and runs on native code rather than going through Python's interpretor. We then \textbf{filter} the generated image such that everything which is snow-free land will be 0 (\textbf{black}), but this is only applied for better visual analysis. In the background, we work with the full range of the image for better precision. Figure \ref{fig:ndsi_class} holds the technical diagram for the NDSI.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.6]{../images/ndsi_class.png}
+		\caption{Technical diagram for the NDSI class.}
+		\label{fig:ndsi_class}
+	\end{figure}
 	
 	\tableofcontents{}
 	\addcontentsline{toc}{chapter}{List Of Figures}
@@ -363,6 +475,13 @@
 	
 	\bibliographystyle{alpha}
 	\bibliography{references}
+	
+	\section{Processing}
+	\label{seq:processing}
+	\subsection{Alignment}
+	\label{seq:alignment}
+	
+	
 		
 	\chapter{Glossary}
 	
@@ -375,6 +494,8 @@
 		\begin{tabular} {|  l | L{10cm} |}
 			\hline
 			WGI & World Glacier Inventory \\ [0.2ex]
+			\hline
+			NDSI & Normalized Snow Difference Index \\ [0.2ex]
 			\hline
 		\end{tabular}
 		\caption{Acronyms table }
