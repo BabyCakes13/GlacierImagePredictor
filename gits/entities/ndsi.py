@@ -48,7 +48,7 @@ class NDSI(Image):
         return ndsi
 
     def __filter_snow(self, ndsi) -> numpy.ndarray:
-        ndsi[ndsi < self.THRESHOLD] = 0
+        ndsi[ndsi < self.THRESHOLD] = -1
         return ndsi
 
     def __convert_to_16bit(self, ndsi) -> numpy.ndarray:
