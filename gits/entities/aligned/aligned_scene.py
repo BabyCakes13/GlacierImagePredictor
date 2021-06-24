@@ -45,7 +45,7 @@ class AlignedScene(SceneInterface):
             self.__optical_flow_image = OpticalFlow(self.__ndsi, previous_scene.ndsi())
             self.__bands.append(self.__optical_flow_image)
 
-            self.__created_image = CreatedImage(self.__optical_flow_image, previous_scene.ndsi())
+            self.__created_image = CreatedImage(self.__optical_flow_image, self.ndsi())
             self.__bands.append(self.__created_image)
         else:
             self.__optical_flow_image = None
