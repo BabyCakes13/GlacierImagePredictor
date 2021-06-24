@@ -19,7 +19,13 @@ class AlignedImage(Image):
         self.__this_scene = this_scene
         self.__reference_scene = reference_scene
 
-    def ndarray(self) -> numpy.ndarray:
+    def raw_data(self) -> numpy.ndarray:
+        return self.__ndarray()
+
+    def visual_data(self) -> numpy.ndarray:
+        return self.__ndarray()
+
+    def __ndarray(self) -> numpy.ndarray:
         if self.__aligned_ndarray is not None:
             return self.__aligned_ndarray
 
@@ -27,9 +33,6 @@ class AlignedImage(Image):
         self.__aligned_ndarray = self.__resize_aligned_to_reference()
 
         return self.__aligned_ndarray
-
-    def _raw_ndarray(self) -> numpy.ndarray:
-        return self.__image._raw_ndarray()
 
     def __align(self) -> None:
         logger.info("Aligning {}".format(self.__image.name()))
@@ -40,11 +43,10 @@ class AlignedImage(Image):
             affine_matrix = self.__this_scene.affine_transform_matrix()
         self.__warp_affine_transform_matrix(affine_matrix)
 
-    def __warp_affine_transform_matrix(self, affine_transform_matrix) -> None:
-        height, width = self.__image.ndarray().shape
-        self.__aligned_ndarray = cv2.warpAffine(self.__image.ndarray(),
-                                                affine_transform_matrix,
-                                                (width, height))
+    def __warp_affine_transform_matrix(self, affine_transformation_matrix) -> None:
+        height, width = self.__image.raw_data().shape
+        self.__aligned_ndarray = cv2.warpAffine(self.__image.raw_data(),
+                                                affine_transformation_matrix, (width, height))
 
     def __resize_aligned_to_reference(self) -> numpy.ndarray:
         reference_width = self.__reference_scene.width()
@@ -62,8 +64,6 @@ class AlignedImage(Image):
                            mode='constant',
                            constant_values=0)
         logger.debug("Image: height {}, width {}".format(padded.shape[0], padded.shape[1]))
-
-        self.print_shape(padded, "Padded")
 
         return padded
 

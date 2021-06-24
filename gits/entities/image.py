@@ -15,10 +15,10 @@ class Image:
         self.__keypoints = None
         self.__descriptors = None
 
-    def ndarray(self) -> numpy.ndarray:
+    def raw_data(self) -> numpy.ndarray:
         pass
 
-    def _raw_ndarray(self) -> numpy.ndarray:
+    def visual_data(self) -> numpy.ndarray:
         pass
 
     def descriptors(self) -> numpy.ndarray:
@@ -67,7 +67,7 @@ class Image:
         return keypoints
 
     def _normalized_downsampled_ndarray(self) -> numpy.ndarray:
-        normalized_image = self._normalize_to_16bit(self._raw_ndarray())
+        normalized_image = self._normalize_to_16bit(self.raw_data())
         image = self.__downsample_16bit_to_8bit(normalized_image)
         return image
 

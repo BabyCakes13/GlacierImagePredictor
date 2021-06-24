@@ -61,10 +61,10 @@ class Scene(SceneInterface):
         return keypoints
 
     def width(self):
-        return self._red_band.ndarray().shape[1]
+        return self._red_band.raw_data().shape[1]
 
     def height(self):
-        return self._red_band.ndarray().shape[0]
+        return self._red_band.raw_data().shape[0]
 
 
 def find_scene_by_wgi_id(scene_id: str, scenes: list):

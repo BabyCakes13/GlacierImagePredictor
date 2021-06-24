@@ -5,16 +5,18 @@ import cv2
 import multiprocessing
 from multiprocessing import shared_memory
 
-from entities.image import Image
+from entities.ndsi import NDSI
 from utils.utils import progress, debug_trace
 from utils import logging
 logger = logging.getLogger(__name__)
 
 
-class CreatedImage(Image):
+class CreatedImage(NDSI):
 
     NAME = "Created Image"
     KERNEL_SIZE = 5
+
+    INITIAL_VALUE = -1234
 
     def __init__(self, optical_flow, previous_image):
         self.__image = None
@@ -41,8 +43,8 @@ class CreatedImage(Image):
         return self.__h
 
     def __get_shape(self) -> tuple:
-        height = self.__previous_image.ndarray().shape[0]
-        width = self.__previous_image.ndarray().shape[1]
+        height = self.__previous_image.raw_data().shape[0]
+        width = self.__previous_image.raw_data().shape[1]
         logger.notice("Width ({}) and  height ({}) of the created image.".format(width, height))
         return width, height
 
@@ -53,7 +55,10 @@ class CreatedImage(Image):
         kernel2d[self.KERNEL_SIZE // 2][self.KERNEL_SIZE // 2] = 0
         return kernel2d
 
-    def ndarray(self) -> numpy.ndarray:
+    def raw_data(self) -> numpy.ndarray:
+        return self.__ndarray()
+
+    def __ndarray(self) -> numpy.ndarray:
         if self.__image is None:
             self.__create_image()
         return self.__image
@@ -63,17 +68,16 @@ class CreatedImage(Image):
         self.__generate_image_based_on_movement()
         self.__mask_image()
         self.__filter_by_average()
-        self.__image = self.__image.astype(numpy.uint16) * 2
 
     def __initialise_image(self) -> None:
-        self.__image = numpy.zeros_like(self.__previous_image.ndarray()).astype(numpy.int16)
-        self.__image -= 1
+        previous_image = self.__previous_image.raw_data()
+        self.__image = numpy.full_like(previous_image, CreatedImage.INITIAL_VALUE)
 
     def __generate_image_based_on_movement(self) -> None:
         logger.notice("Generating image...")
-        absolute_coodrinates = self.__generate_absolute_coordinates()
-        self.__image[absolute_coodrinates[..., 1],
-                     absolute_coodrinates[..., 0]] = self.__previous_image.ndarray() / 2
+        absolute_coordinates = self.__generate_absolute_coordinates()
+        self.__image[absolute_coordinates[..., 1],
+                     absolute_coordinates[..., 0]] = self.__previous_image.raw_data()
 
     def __generate_absolute_coordinates(self) -> numpy.ndarray:
         index_array = self.__generate_index_array()
@@ -97,8 +101,14 @@ class CreatedImage(Image):
 
     def __mask_image(self) -> None:
         logger.notice("Masking image...")
-        ret, mask = cv2.threshold(self.__previous_image.ndarray(), 1, 0xFFFF, cv2.THRESH_BINARY_INV)
-        masked_image = numpy.ma.masked_array(self.__image, mask=mask).filled(0)
+        previous_image = self.__previous_image.raw_data()
+
+        mask = numpy.copy(previous_image)
+
+        mask[mask == mask] = 0
+        mask[mask != mask] = 1
+
+        masked_image = numpy.ma.masked_array(self.__image, mask=mask).filled(numpy.nan)
         self.__image = masked_image
 
         logger.success("Finished masking image.")
@@ -108,13 +118,15 @@ class CreatedImage(Image):
         cores = multiprocessing.cpu_count()
         logger.notice("Filtering by average on {} cores...".format(cores))
 
-        zero_points = numpy.where(self.__image == -1)
+        zero_points = numpy.where(self.__image == CreatedImage.INITIAL_VALUE)
         zero_point_pairs = tuple(zip(*zero_points))
         self.__total_zero_points = len(zero_point_pairs)
 
         shm = shared_memory.SharedMemory(create=True, size=self.__image.nbytes)
         shm_image = numpy.ndarray(self.__image.shape, dtype=self.__image.dtype, buffer=shm.buf)
         shm_image[:][:] = self.__image[:][:]
+
+        self.__finished = multiprocessing.Value('i', 0)
 
         with multiprocessing.Pool(processes=cores) as executor:
             executor.map(filter_pixel, [(point, shm,
@@ -149,12 +161,12 @@ class CreatedImage(Image):
         image_chunk = self.__image
         image_chunk = image_chunk[y - self.KERNEL_SIZE // 2:y + self.KERNEL_SIZE // 2 + 1,
                                   x - self.KERNEL_SIZE // 2:x + self.KERNEL_SIZE // 2 + 1]
-        kernel = self.__remove_weight_for_number(image_chunk, self.__kernel, 0)
-        kernel = self.__remove_weight_for_number(image_chunk, kernel, -1)
+        kernel = self.__remove_weight_for_number(image_chunk, self.__kernel, numpy.nan)
+        kernel = self.__remove_weight_for_number(image_chunk, kernel, CreatedImage.INITIAL_VALUE)
 
         weights_sum = numpy.sum(kernel)
         if weights_sum == 0:
-            return 0
+            return NDSI.VALUE_INTERVAL[0]
         nominator = numpy.sum(image_chunk * kernel)
         value = nominator // weights_sum
 
@@ -177,6 +189,7 @@ def filter_pixel(arg):
     y, x = point
     if y < (height - kernel_size // 2) and y >= (kernel_size // 2) and \
        x < (width - kernel_size // 2) and x >= (kernel_size // 2):
+
         image_chunk = shm_image
         image_chunk = image_chunk[y - kernel_size // 2:y + kernel_size // 2 + 1,
                                   x - kernel_size // 2:x + kernel_size // 2 + 1]
@@ -186,14 +199,16 @@ def filter_pixel(arg):
         kernel = numpy.outer(kernel1d, kernel1d)
         kernel[kernel_size // 2][kernel_size // 2] = 0
 
-        zero_coordinates = numpy.where(image_chunk == 0)
+        zero_coordinates = numpy.where(image_chunk != image_chunk)
         kernel[zero_coordinates[0], zero_coordinates[1]] = 0
-        minus_one_coordinates = numpy.where(image_chunk == -1)
+        minus_one_coordinates = numpy.where(image_chunk == CreatedImage.INITIAL_VALUE)
         kernel[minus_one_coordinates[0], minus_one_coordinates[1]] = 0
+
+        image_chunk[image_chunk != image_chunk] = 0
 
         weights_sum = numpy.sum(kernel)
         if weights_sum == 0:
-            return 0
+            return NDSI.VALUE_INTERVAL[0]
         nominator = numpy.sum(image_chunk * kernel)
-        value = nominator // weights_sum
+        value = nominator / weights_sum
         shm_image[y][x] = value

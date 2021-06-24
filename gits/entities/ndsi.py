@@ -13,22 +13,57 @@ class NDSI(Image):
     NAME = "NDSI"
     THRESHOLD = 0.2
 
+    VALUE_INTERVAL = (-1, 1)
+
     def __init__(self, green_band: AlignedBand, swir1_band: AlignedBand):
         self.__green_band = green_band
         self.__swir1_band = swir1_band
 
-        self.__ndsi = None
+        self.__ndsi_data = None
 
-    def ndarray(self) -> numpy.ndarray:
+    def __ndsi(self):
+        if self.__ndsi_data is None:
+            self.__ndsi_data = self.__calculate_ndsi()
+        return self.__ndsi_data
+
+    def raw_data(self) -> numpy.ndarray:
+        return self.__ndsi()
+
+    def raw_data_16bit(self) -> numpy.ndarray:
+        ndsi_16bit = self.__convert_to_16bit(self.raw_data())
+        return ndsi_16bit
+
+    def visual_data(self) -> numpy.ndarray:
+        ndsi_16bit = self.__convert_to_16bit(self.raw_data())
+
+        colored_clone = cv2.cvtColor(ndsi_16bit, cv2.COLOR_GRAY2BGR)
+        ndsi_colored = numpy.zeros_like(colored_clone).astype(numpy.uint8)
+
+        image_8bit = ndsi_16bit >> 8
+        image_8bit = image_8bit.astype(numpy.uint8)
+
+        red   = numpy.copy(image_8bit)
+        green = numpy.copy(image_8bit)
+        blue  = numpy.copy(image_8bit)
+
+        red[red < 180] = 0
+        blue[blue < 180] = 0
+
+        ndsi_colored[..., 0] = blue
+        ndsi_colored[..., 1] = green
+        ndsi_colored[..., 2] = red
+
+        return ndsi_colored
+
+    def __ndarray(self) -> numpy.ndarray:
         if self.__ndsi is None:
             self.__ndsi = self.__calculate_ndsi()
-            # self.__ndsi = self.__filter_snow(self.__ndsi)
             self.__ndsi = self.__convert_to_16bit(self.__ndsi)
             self.__snow_percentage()
         return self.__ndsi
 
     def __convert_band_to_float32(self, band: AlignedBand) -> numpy.ndarray:
-        ndarray_float32 = band.ndarray().astype(numpy.float32)
+        ndarray_float32 = band.raw_data().astype(numpy.float32)
         ndarray_float32 = cv2.normalize(ndarray_float32, None, 0, 1, cv2.NORM_MINMAX)
         ndarray_float32[ndarray_float32 == 0] = numpy.nan
         return ndarray_float32

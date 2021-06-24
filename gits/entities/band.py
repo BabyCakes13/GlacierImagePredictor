@@ -52,11 +52,11 @@ class Band(Image):
             logger.warning("Could not read the band {}\n{}".format(self.__str__(), e))
             return None
 
-    def ndarray(self) -> numpy.ndarray:
+    def raw_data(self) -> numpy.ndarray:
         return self.read()
 
-    def _raw_ndarray(self) -> numpy.ndarray:
-        return self.ndarray()
+    def visual_data(self) -> numpy.ndarray:
+        return self.read()
 
     def band_number(self):
         """
