@@ -20,11 +20,25 @@ class CreatedImage(Image):
         self.__image = None
         self.__optical_flow = optical_flow
         self.__previous_image = previous_image
-        self.__width, self.__height = self.__get_shape()
+        self.__w, self.__h = None, None
         self.__kernel = self.__generate_kernel()
 
         self.__finished = 0
         self.__total_zero_points = 0
+
+    @property
+    def __width(self):
+        if self.__w is None:
+            self.__w, self.__h = self.__get_shape()
+
+        return self.__w
+
+    @property
+    def __height(self):
+        if self.__h is None:
+            self.__h, self.__h = self.__get_shape()
+
+        return self.__h
 
     def __get_shape(self) -> tuple:
         height = self.__previous_image.ndarray().shape[0]
