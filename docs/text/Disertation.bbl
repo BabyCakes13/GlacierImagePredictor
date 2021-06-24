@@ -17,6 +17,17 @@ Landsat collection 1.
   \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-1?qt-science_support_page_related_con=1#qt-science_support_page_related_con}.
 \newblock Accessed: 2021-06-20.
 
+\bibitem[Der10]{ransac2}
+Konstantinos~G. Derpanis.
+\newblock Overview of the ransac algorithm.
+\newblock 2010.
+
+\bibitem[FB81]{ransac}
+M.A. Fischler and R.C. Bolles.
+\newblock Random sample consensus: A paradigm for modelfitting with
+  applications to image analysis and automated cartography.
+\newblock 1981.
+
 \bibitem[Hal15]{viirs}
 Dr. Dorothy~K Hall.
 \newblock Viirs snow cover algorithm theoretical basis document (atbd).
@@ -62,6 +73,11 @@ ndsi.
 \newblock
   \url{https://nsidc.org/support/faq/what-ndsi-snow-cover-and-how-does-it-compare-fsc}.
 \newblock Accessed: 2021-06-22.
+
+\bibitem[orb]{orb}
+orb.
+\newblock \url{https://docs.opencv.org/4.5.2/d1/d89/tutorial_py_orb.html}.
+\newblock Accessed: 2021-06-24.
 
 \bibitem[sn]{sn}
 sn.

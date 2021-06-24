@@ -17,46 +17,49 @@ Warning--to sort, need author or key in STAC
 Warning--to sort, need author or key in lc1l1
 Warning--to sort, need author or key in bd
 Warning--to sort, need author or key in ndsi
+Warning--to sort, need author or key in orb
+Warning--empty booktitle in ransac2
+Warning--empty booktitle in ransac
 Warning--empty booktitle in viirs
-You've used 16 entries,
+You've used 19 entries,
             2543 wiz_defined-function locations,
-            607 strings with 6047 characters,
-and the built_in function-call counts, 3736 in all, are:
-= -- 384
-> -- 41
-< -- 1
-+ -- 9
-- -- 8
-* -- 176
-:= -- 458
-add.period$ -- 49
-call.type$ -- 16
-change.case$ -- 67
-chr.to.int$ -- 15
-cite$ -- 45
-duplicate$ -- 174
-empty$ -- 439
-format.name$ -- 11
-if$ -- 869
+            618 strings with 6353 characters,
+and the built_in function-call counts, 4586 in all, are:
+= -- 463
+> -- 69
+< -- 2
++ -- 17
+- -- 16
+* -- 218
+:= -- 584
+add.period$ -- 58
+call.type$ -- 19
+change.case$ -- 82
+chr.to.int$ -- 18
+cite$ -- 52
+duplicate$ -- 217
+empty$ -- 524
+format.name$ -- 22
+if$ -- 1052
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 2
-newline$ -- 83
-num.names$ -- 6
-pop$ -- 186
+missing$ -- 4
+newline$ -- 98
+num.names$ -- 12
+pop$ -- 218
 preamble$ -- 1
-purify$ -- 83
+purify$ -- 101
 quote$ -- 0
-skip$ -- 119
+skip$ -- 150
 stack$ -- 0
-substring$ -- 126
-swap$ -- 17
-text.length$ -- 1
-text.prefix$ -- 1
+substring$ -- 148
+swap$ -- 20
+text.length$ -- 2
+text.prefix$ -- 2
 top$ -- 0
-type$ -- 128
-warning$ -- 15
-while$ -- 5
-width$ -- 19
-write$ -- 180
-(There were 15 warnings)
+type$ -- 152
+warning$ -- 18
+while$ -- 10
+width$ -- 22
+write$ -- 213
+(There were 18 warnings)

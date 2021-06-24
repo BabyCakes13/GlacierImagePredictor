@@ -48,13 +48,13 @@ class Scene(SceneInterface):
     def __str__(self):
         return "Scene[{}]".format(self.scene_id().scene_id())
 
-    def descriptors(self):
+    def descriptors(self) -> numpy.ndarray:
         descriptors = self.bands()[0].descriptors()
         for band in self.bands()[1:-1]:
             descriptors = numpy.vstack((descriptors, band.descriptors()))
         return descriptors
 
-    def keypoints(self):
+    def keypoints(self) -> list:
         keypoints = []
         for band in self.bands()[:-1]:
             keypoints += band.keypoints()

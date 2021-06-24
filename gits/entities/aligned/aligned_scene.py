@@ -42,79 +42,19 @@ class AlignedScene(SceneInterface):
         self.__bands.append(self.__ndsi)
 
         if previous_scene is not None:
-            self.__optical_flow_image = OpticalFlow(self.__ndsi, previous_scene.ndsi())
-            self.__bands.append(self.__optical_flow_image)
+            self.__optical_flow = OpticalFlow(self.__ndsi, previous_scene.ndsi())
+            self.__bands.append(self.__optical_flow)
 
-            self.__created_image = CreatedImage(self.__optical_flow_image, self.ndsi())
+            self.__created_image = CreatedImage(self.__optical_flow, self.ndsi())
             self.__bands.append(self.__created_image)
         else:
-            self.__optical_flow_image = None
+            self.__optical_flow = None
             self.__created_image = None
 
-    def scene_id(self):
-        return self.__scene.scene_id()
-
-    def scene_path(self):
-        return self.__scene.scene_path()
-
-    def bands(self) -> list:
-        return self.__bands
-
-    def thumbnail(self):
-        return self._red_band
-
-    def ndsi(self) -> NDSI:
-        return self.__ndsi
-
-    def __str__(self):
-        return "AlignedScene[{}]".format(self.scene_id().scene_id())
-
-    def __match_descriptors(self) -> list:
-        descriptor_match = cv2.DescriptorMatcher_create(cv2.DESCRIPTOR_MATCHER_BRUTEFORCE_HAMMING)
-        reference_descriptors = self.__reference_scene.descriptors()
-        image_descriptors = self.__scene.descriptors()
-        matches = descriptor_match.match(reference_descriptors, image_descriptors)
-        return matches
-
-    @staticmethod
-    def __euclidean_distance(image_point, reference_point) -> float:
-        x_distance = abs(reference_point[0] - image_point[0])
-        y_distance = abs(reference_point[1] - image_point[1])
-        distance = math.sqrt(math.pow(x_distance, 2) + (math.pow(y_distance, 2)))
-        return distance
-
-    def __prune_low_score_matches(self) -> None:
-        self.__matches.sort(key=lambda x: x.distance, reverse=False)
-        matches_count = len(self.__matches)
-        pruned_matches_count = int(matches_count * self.MATCHES_INCLUDED_PERCENT)
-        self.__matches = self.__matches[:pruned_matches_count]
-
-    def __valid_shifting_distance(self, reference_point, image_point) -> bool:
-        euclidean_distance = self.__euclidean_distance(reference_point, image_point)
-        if euclidean_distance < AlignedScene.ALLOWED_SHIFTING_DISTANCE:
-            return True
-        else:
-            return False
-
-    def __prune_matches_by_euclidean_distance(self) -> tuple:
-        pruned_matches = []
-        reference_points = []
-        image_points = []
-
-        for match in self.__matches:
-            reference_point = self.__reference_scene.keypoints()[match.queryIdx].pt
-            image_point = self.__scene.keypoints()[match.trainIdx].pt
-
-            if self.__valid_shifting_distance(reference_point, image_point):
-                reference_points.append(reference_point)
-                image_points.append(image_point)
-                pruned_matches.append(match)
-
-        self.__matches = pruned_matches
-        reference_points = numpy.array(reference_points)
-        image_points = numpy.array(image_points)
-
-        return reference_points, image_points
+    def affine_transform_matrix(self) -> numpy.ndarray:
+        if self.__affine_transform_matrix is None:
+            self.__calculate_affine_transform_matrix()
+        return self.__affine_transform_matrix
 
     def __calculate_affine_transform_matrix(self) -> None:
 
@@ -138,11 +78,70 @@ class AlignedScene(SceneInterface):
         except Exception as e:
             logger.error("Affine transformation failed.\n{}".format(e))
 
-    def affine_transform_matrix(self):
-        if self.__affine_transform_matrix is None:
-            self.__calculate_affine_transform_matrix()
+    def __match_descriptors(self) -> list:
+        descriptor_match = cv2.DescriptorMatcher_create(cv2.DESCRIPTOR_MATCHER_BRUTEFORCE_HAMMING)
+        reference_descriptors = self.__reference_scene.descriptors()
+        image_descriptors = self.__scene.descriptors()
+        matches = descriptor_match.match(reference_descriptors, image_descriptors)
+        return matches
 
-        return self.__affine_transform_matrix
+    def __prune_low_score_matches(self) -> None:
+        self.__matches.sort(key=lambda x: x.distance, reverse=False)
+        matches_count = len(self.__matches)
+        pruned_matches_count = int(matches_count * self.MATCHES_INCLUDED_PERCENT)
+        self.__matches = self.__matches[:pruned_matches_count]
+
+    def __prune_matches_by_euclidean_distance(self) -> tuple:
+        pruned_matches = []
+        reference_points = []
+        image_points = []
+
+        for match in self.__matches:
+            reference_point = self.__reference_scene.keypoints()[match.queryIdx].pt
+            image_point = self.__scene.keypoints()[match.trainIdx].pt
+
+            if self.__valid_shifting_distance(reference_point, image_point):
+                reference_points.append(reference_point)
+                image_points.append(image_point)
+                pruned_matches.append(match)
+
+        self.__matches = pruned_matches
+        reference_points = numpy.array(reference_points)
+        image_points = numpy.array(image_points)
+
+        return reference_points, image_points
+
+    def __valid_shifting_distance(self, reference_point, image_point) -> bool:
+        euclidean_distance = self.__euclidean_distance(reference_point, image_point)
+        if euclidean_distance < AlignedScene.ALLOWED_SHIFTING_DISTANCE:
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def __euclidean_distance(image_point, reference_point) -> float:
+        x_distance = abs(reference_point[0] - image_point[0])
+        y_distance = abs(reference_point[1] - image_point[1])
+        distance = math.sqrt(math.pow(x_distance, 2) + (math.pow(y_distance, 2)))
+        return distance
+
+    def scene_id(self) -> str:
+        return self.__scene.scene_id()
+
+    def scene_path(self) -> str:
+        return self.__scene.scene_path()
+
+    def bands(self) -> list:
+        return self.__bands
+
+    def thumbnail(self) -> AlignedBand:
+        return self._red_band
+
+    def ndsi(self) -> NDSI:
+        return self.__ndsi
+
+    def __str__(self):
+        return "AlignedScene[{}]".format(self.scene_id().scene_id())
 
     def __matches_from_reference_to_image(self):
         drawn_matches_image = cv2.drawMatches(self.__reference_scene.normalized_downsampled_ndarray(),

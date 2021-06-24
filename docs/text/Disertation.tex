@@ -134,6 +134,7 @@
 	In order to build the dataset, we made use of the freely available data from the Landsat Archive, specifically from collection 1, level 1. This consists of data products generated from Landsat 8 Operational Land Imager/Thermal Infrared Sensor, Landsat 7 Enhanced Thematic Mapper Plus, Landsat 4-5 Thematic Mapper, and Landsat 1-5 Multispectral Scanner instruments \cite{C1L1}. For the purpose of this paper, we will focus only on images collected from the Landsat 8 satellite.
 	
 	\subsection{Landsat 8}
+	\label{seq:landsat8_section}
 
 	For the purpose of this paper, we will use images collected by the Landsat 8 satellite (Figure 1.1), which was launched on an Atlas-V rocket from Vandenberg Air Force Base, California on February 11, 2013. Landsat 8 is the most recently launched Landsat satellite and carries the Operational Land Imager (OLI) and the Thermal Infrared Sensor (TIRS) instruments.
 	\begin{figure}[h]
@@ -217,32 +218,32 @@
 	
 	\begin{table} [h]
 		\center
-		\begin{tabularx}{480pt}{|p{0.2\linewidth}|X|X|p{0.5\linewidth}|}
+		\begin{tabularx}{480pt}{|p{0.3\linewidth}|X|X|}
 			\toprule
-			\textbf{Bands} & \textbf{Wavelength (micrometers)} & \textbf{Resolution (meters)} & \textbf{Usual mapping uses} \\ [0.2ex]
+			\textbf{Bands} & \textbf{Wavelength (micrometers)} & \textbf{Resolution (meters)} \\ [0.2ex]
 			\midrule
 			\midrule
-			Band 1 (Coastal aerosol) & 0.43-0.45 & 30 &  Coastal and aerosol studies\\ [0.2ex]
+			Band 1 (Coastal aerosol) & 0.43-0.45 & 30 \\ [0.2ex]
 			\midrule
-			Band 2 (Blue) & 0.45-0.51 & 30 &  Bathymetric mapping, distinguishing soil from vegetation and deciduous from coniferous vegetation\\ [0.2ex]
+			Band 2 (Blue) & 0.45-0.51 & 30 \\ [0.2ex]
 			\midrule
-			Band 3 (Green) & 0.53-0.59 & 30 & Emphasizes peak vegetation, which is useful for assessing plant vigor \\ [0.2ex]
+			Band 3 (Green) & 0.53-0.59 & 30 \\ [0.2ex]
 			\midrule
-			Band 4 (Red) & 0.64-0.67 & 30 & Discriminates vegetation slopes\\ [0.2ex]
+			Band 4 (Red) & 0.64-0.67 & 30 \\ [0.2ex]
 			\hline
-			Band 5 (Near Infrared) & 0.85-0.88 & 30 & Emphasizes biomass content and shorelines\\ [0.2ex]
+			Band 5 (Near Infrared) & 0.85-0.88 & 30 \\ [0.2ex]
 			\midrule
-			Band 6 (SWIR1) & 1.57-1.65 & 30 & Discriminates moisture content of soil and vegetation; penetrates thin clouds\\ [0.2ex]
+			Band 6 (SWIR1) & 1.57-1.65 & 30 \\ [0.2ex]
 			\midrule
-			Band 7 (SWIR2) & 2.11-2.29 & 30 & Improved moisture content of soil and vegetation; penetrates thin clouds\\ [0.2ex]
+			Band 7 (SWIR2) & 2.11-2.29 & 30 \\ [0.2ex]
 			\midrule
-			Band 8 (Panchromatic) & 0.50-0.68 & 15 & Sharper image definition\\ [0.2ex]
+			Band 8 (Panchromatic) & 0.50-0.68 & 15 \\ [0.2ex]
 			\midrule
-			Band 9 (Cirrus) & 1.36-1.38 & 30 &  	Improved detection of cirrus cloud contamination\\ [0.2ex]
+			Band 9 (Cirrus) & 1.36-1.38 & 30 \\ [0.2ex]
 			\midrule
-			Band 10 (Thermal Infrared) 1 & 10.6-11.19 & 100 &  	Thermal mapping and estimated soil moisture \\ [0.2ex]
+			Band 10 (TIR 1) & 10.6-11.19 & 100  \\ [0.2ex]
 			\midrule
-			Band 11 (Thermal Infrared) 2 & 11.50-12.51 & 100 & Improved thermal mapping and estimated soil moisture\\ [0.2ex]
+			Band 11 (TIR 2) & 11.50-12.51 & 100 \\ [0.2ex]
 			\midrule
 			\bottomrule
 		\end{tabularx}
@@ -405,18 +406,18 @@
 	\end{figure}
 
 	\section{Alignment}
-	Landsat's trajectory orbiting Earth is not fully precise, therefore not all images will be pixel-to-pixel aligned, which is a problem for image processing. Since we want to track each pixel's movement, we must be sure that its coordinates in the image do not change between any two given scenes. Figures \ref{fig:unaligned} highlights the discrepancy from scene TODO to scene TODO, as an example.
-  	\begin{figure}[h]
+	Landsat's trajectory orbiting Earth is not fully precise, therefore not all images will be pixel-to-pixel aligned, which is a problem for image processing. Since we want to track each pixel's movement, we must be sure that its coordinates in the image do not change between any two given scenes. Figure~\ref{fig:unaligned_scenes} and Figure~\ref{fig:unaligned_scene_small} highlight the discrepancy from scene TODO to scene TODO, as an example.
+	\begin{figure}[h]
 	\centering
 	\begin{minipage}{0.36\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../images/unaligned.png}
-		\label{fig:unaligned}
+		\label{fig:unaligned_scene_big}
 	\end{minipage}
 	\begin{minipage}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../images/unaligned_part.png}
-		\label{fig:unaligned_part}
+		\label{fig:unaligned_scene_small}
 	\end{minipage}
 	\caption{Overlapped unaligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}
 	\end{figure}
@@ -476,17 +477,42 @@
 	\end{figure}
 	\paragraph{Data corruption verification}
 	Both the searching and the downloading functions are executed concurrently, since they are time intensive tasks. Each band has around 60 MB, which would make one scene approximately 360 MB. For the Belvedere glaciers, we found 78 scenes with a cloud coverage of 10\%. This means that the size of the entire glacier data will be around 28 GB. Given that the size of the assets is quite large, it takes a lot of time to finish the download. In this time, even a small connection interruption might result in corrupted data files, which would interfere with processing. Therefore, we implemented an extra security measure in the sat-stac library which verifies whether a file with the same name already exists at the download location. If it does, its size will be compared to the size taken from the STAC-API servers. In case the two file sizes don't match, it means that the file got corrupted during download and it will be downloaded again. If the sizes match, the downloader will skip the file and continue when it finds one requested file which was not yet found on the disk, such that we do not end up unnecessarily overwriting the already existing files.
+	
+	\section{Processing}
+	\label{seq:processing}
+	\subsection{Normalized Snow Difference Index}
+	\label{seq:ndsi}
 
-	\section{Normalized Snow Difference Index}
-
-	The NDSI is generated by using the formula \ref{eq:ndsi_formula} described in section \ref{seq:NDSI_functional} on the green and shortwave infrared bands from a specific scene. Each band pixel is converted to \textbf{float32} in order to increase the \textbf{precision} of calculation; as each band is read as a n-dimensional array we can use numpy's optimised processing for generating the NDSI index image, since it converts the data and runs on native code rather than going through Python's interpretor. We then \textbf{filter} the generated image such that everything which is snow-free land will be -1 (\textbf{black}), but this is only applied for better visual analysis. In the background, we work with the full range of the image for better precision. Figure \ref{fig:ndsi_diagram} holds the technical diagram for the NDSI.
+	The NDSI is generated by using the Formula~\ref{eq:ndsi_formula} described in section \ref{seq:NDSI_functional} on the green and shortwave infrared bands from a specific scene. Each band pixel is converted to \textbf{float32} in order to increase the \textbf{precision} of calculation; as each band is read as a n-dimensional array we can use numpy's optimised processing for generating the NDSI index image, since it converts the data and runs on native code rather than going through Python's interpretor. We then \textbf{filter} the generated image such that everything which is snow-free land will be -1 (\textbf{black}), but this is only applied for better visual analysis. In the background, we work with the full range of the image for better precision, which is the raw image. Figure~\ref{fig:ndsi_diagram} holds the technical diagram for the NDSI.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.6]{../images/ndsi_diagram.png}
 		\caption{Technical diagram for the NDSI class.}
 		\label{fig:ndsi_diagram}
 	\end{figure}
+
+	\subsection{Alignment}
+	\label{seq:alignment}
 	
+	In order to keep a high level of abstraction, we have split each scene into aligned and unaligned: Scene and AlignedScene objects. These and their children are created when crawling through the glaciers directory, specifically for each region of interest. However, aligning all the images when crawling would result into a lot of idle time for the user when starting the application and it would not be overall feasible to do so. Therefore, a scene is aligned only when it is specifically being selected in the graphical user interface (or when another entity needs it, such as optical flow and image generation). By doing this, we ensure that there is no unnecessary extra waiting time for each scene that we have when powering up the interface.
+	As for the actual alignment, we have used an algorithm which \textbf{collects features} from each band of a scene and tries to match them with a given reference one's features. The obtained \textbf{matches} can be then used to create an \textbf{affine transformation matrix} which specifies by how much did the current image \textbf{rotated and translated} in comparison to its reference. The affine transformation matrix will be then applied to the current image by a \textbf{warping} algorithm with the goal of ensuring as much as possible that there is no misalignment between any pixel of two different images from the same time series. Section~\ref{seq:alignment_algorithm} describes more technically how we built this and what were the computer vision algorithms used for that matter.
+	
+	\subsubsection{Alignment algorithms}
+	\label{seq:alignment_algorithm}
+	
+	As we have seen in Section~\ref{seq:landsat8_section}, the Landsat 8 satellite does not have a perfect trajectory, which results into misaligned images. These changes are not obvious to the naked eye from scene to scene, but overlapping two scenes highlights this problem, as we can see in Figure~\ref{fig:unaligned_scene_big}. Even so the scenes are almost similar, which means that aligning them does not prove to be very hard and it is done by using a strong \textbf{keypoint detection algorithm} which in our case detects edges formed by mountains and other geographical features present in the scenes. The \textbf{computer vision algorithms} used for this are \textbf{ORB (Oriented FAST and Rotated BRIEF)}, \textbf{Harris Corner Detector} and \textbf{RANSAC (Random Sample Consensus)} and they are applied on the raw 16bit grayscale image.
+	
+	\textbf{ORB} represents a fusion between the features from accelerated segment test (\textbf{FAST}) keypoint detector and binary robust independent elementary features (\textbf{BRIEF}) descriptor. The FAST detector finds keypoints in the image and uses Harris corner measure to select the a number of top points from the list (25\%, in our case) \cite{orb}. In order to use the detector we must first normalize and downsample the 16bit raw image to 8 bit, as it is required by ORB. Each keypoint is then represented by a circle of 16 pixels. The descriptors must then identify these keypoints and pair with each other.
+	We compute for each scene its \textbf{keypoints and descriptors} taken from \textbf{each band}, in order to increase the precision of alignment later on. Also, since we are working with satellite imagery there might be cases when the algorithm only finds keypoints in a small part of the image, resulting in erroneous distortion. \textbf{Splitting} the image into multiple boxes and applying the orb detect algorithm on each separate part of the image proved to solve this problem and create much better results. 
+	
+	After ensuring that we have good enough keypoints we will be aligning each scene with its reference by simply comparing the keypoint-descriptor pairs between the two scenes and checking which are equal. If two pairs are found to be equal, it means that the algorithm has found the same feature in both images and can calculate by how much it \textbf{rotated and shifted}. However, not all of these matches represent good results in our case, since the trajectory Landsat 8 can vary. We have found that selecting only \textbf{5000 keypoints} in the \textbf{top 25\% matches} from the total yielded in the better results overall. We then set the \textbf{maximum allowed shifting euclidean distance} between any two pixels to be at most 200, so 6km on the map, therefore getting rid of outlier matches based on the distance.
+	The \textbf{matches} from the reference and image to be aligned will be used alongside the \textbf{Random Sample Consensus (RANSAC)} algorithm in order to create the \textbf{affine transformation matrix} using the cv2 library. RANSAC, proposed by Fischler and Bolles \cite{ransac}, is a general parameter estimation approach designed to handle a large proportion of outliers in the input data \cite{ransac2}. After we have the transformation matrix, we can \textbf{warp} it on the image to be aligned in order to get the result. Figure~\ref{fig:alignment_diagram} contains the technical details of each class which takes part into the alignment process.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.45]{../images/alignment_diagram.png}
+		\caption{Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}
+		\label{fig:alignment_diagram}
+	\end{figure}
 	\tableofcontents{}
 	\addcontentsline{toc}{chapter}{List Of Figures}
 	\listoffigures{}
@@ -495,13 +521,6 @@
 	
 	\bibliographystyle{alpha}
 	\bibliography{references}
-	
-	\section{Processing}
-	\label{seq:processing}
-	\subsection{Alignment}
-	\label{seq:alignment}
-	
-	
 		
 	\chapter{Glossary}
 	

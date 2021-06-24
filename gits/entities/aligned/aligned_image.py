@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 import numpy
-import math
 import cv2
 from entities.image import Image
-from entities.optical_flow import OpticalFlow
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -21,36 +19,34 @@ class AlignedImage(Image):
         self.__this_scene = this_scene
         self.__reference_scene = reference_scene
 
-    def optical_flow(self, first_image, second_image):
-        optical_flow = OpticalFlow(first_image, second_image)
-        optical_flow.movement()
-
     def ndarray(self) -> numpy.ndarray:
         if self.__aligned_ndarray is not None:
             return self.__aligned_ndarray
 
-        self.align()
+        self.__align()
         self.__aligned_ndarray = self.__resize_aligned_to_reference()
 
         return self.__aligned_ndarray
 
-    def align(self) -> None:
+    def _raw_ndarray(self) -> numpy.ndarray:
+        return self.__image._raw_ndarray()
+
+    def __align(self) -> None:
         logger.info("Aligning {}".format(self.__image.name()))
 
         if self.__reference_scene == self.__this_scene:
-            affine_matrix = [[1,0,0],[0,1,0]]
+            affine_matrix = [[1, 0, 0], [0, 1, 0]]
         else:
             affine_matrix = self.__this_scene.affine_transform_matrix()
         self.__warp_affine_transform_matrix(affine_matrix)
 
-    def __warp_affine_transform_matrix(self, atm) -> None:
+    def __warp_affine_transform_matrix(self, affine_transform_matrix) -> None:
         height, width = self.__image.ndarray().shape
-        self.__aligned_ndarray = cv2.warpAffine(self.__image.ndarray(), atm, (width, height))
+        self.__aligned_ndarray = cv2.warpAffine(self.__image.ndarray(),
+                                                affine_transform_matrix,
+                                                (width, height))
 
-    def _raw_ndarray(self) -> numpy.ndarray:
-        return self.__image._raw_ndarray()
-
-    def __resize_aligned_to_reference(self):
+    def __resize_aligned_to_reference(self) -> numpy.ndarray:
         reference_width = self.__reference_scene.width()
         reference_height = self.__reference_scene.height()
         image_width, image_height = self.__get_width_height(self.__aligned_ndarray)
@@ -71,11 +67,8 @@ class AlignedImage(Image):
 
         return padded
 
-    def __get_width_height(self, ndarray):
+    def __get_width_height(self, ndarray) -> tuple:
         height = ndarray.shape[0]
         width = ndarray.shape[1]
 
         return width, height
-
-    def print_shape(self, image, image_name):
-        logger.debug("{}: {}, {}".format(image_name, image.shape[0], image.shape[1]))
