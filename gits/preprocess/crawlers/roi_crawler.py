@@ -33,12 +33,25 @@ class RoiCrawler(Crawler):
         os.chdir(self._root)
         scene_dirs = [name for name in os.listdir(".") if os.path.isdir(name)]
 
+        allscenes = []
         for scene_dir_name in scene_dirs:
             scene = self.__create_scene_objects(scene_dir_name)
             if scene is not None:
                 scene.print_bands()
+                allscenes.append(scene)
+
+        allscenes.sort(key=lambda x: x.scene_id().scene_id())
+
+        for scene in allscenes:
+            self.__create_roi_objects(scene)
 
         return self.__rois
+
+    def __create_roi_objects(self, scene):
+        scene_id = scene.scene_id()
+        roi = RegionOfInterest(scene_id.path(), scene_id.row())
+        roi = self.__add_roi(roi)
+        roi.add_scene(scene)
 
     def __create_scene_objects(self, scene_dir_name) -> Scene:
         scene_id = SceneID(scene_dir_name)
@@ -46,9 +59,6 @@ class RoiCrawler(Crawler):
 
         try:
             scene = Scene(scene_id, scene_path)
-            roi = RegionOfInterest(scene_id.path(), scene_id.row())
-            roi = self.__add_roi(roi)
-            roi.add_scene(scene)
         except FileNotFoundError as e:
             logger.warning("Scene with id {} could not be created due to missing band.\n{}"
                            .format(scene_id, e))
