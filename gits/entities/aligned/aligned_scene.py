@@ -5,7 +5,7 @@ import math
 
 from entities.interfaces.scene_interface import SceneInterface
 from entities.aligned.aligned_band import AlignedBand
-from entities.optical_flow import OpticalFlow
+from entities.motion_vectors import MotionVectors
 from entities.ndsi import NDSI
 from entities.created_image import CreatedImage
 
@@ -42,13 +42,13 @@ class AlignedScene(SceneInterface):
         self.__bands.append(self.__ndsi)
 
         if previous_scene is not None:
-            self.__optical_flow = OpticalFlow(self.__ndsi, previous_scene.ndsi())
-            self.__bands.append(self.__optical_flow)
+            self.__motion_vectors = MotionVectors(self.__ndsi, previous_scene.ndsi())
+            self.__bands.append(self.__motion_vectors)
 
-            self.__created_image = CreatedImage(self.__optical_flow, self.ndsi())
+            self.__created_image = CreatedImage(self.__motion_vectors, self.ndsi())
             self.__bands.append(self.__created_image)
         else:
-            self.__optical_flow = None
+            self.__motion_vectors = None
             self.__created_image = None
 
     def affine_transform_matrix(self) -> numpy.ndarray:

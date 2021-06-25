@@ -18,9 +18,9 @@ class CreatedImage(NDSI):
 
     INITIAL_VALUE = -1234
 
-    def __init__(self, optical_flow, previous_image):
+    def __init__(self, motion_vectors, previous_image):
         self.__image = None
-        self.__optical_flow = optical_flow
+        self.__motion_vectors = motion_vectors
         self.__previous_image = previous_image
         self.__w, self.__h = None, None
         self.__kernel = self.__generate_kernel()
@@ -82,7 +82,7 @@ class CreatedImage(NDSI):
     def __generate_absolute_coordinates(self) -> numpy.ndarray:
         index_array = self.__generate_index_array()
 
-        absolute_coordinates = self.__optical_flow.optical_flow() + index_array
+        absolute_coordinates = self.__motion_vectors.raw_data() + index_array
         absolute_coordinates = absolute_coordinates.astype(numpy.int)
         absolute_coordinates[..., 0] = numpy.clip(absolute_coordinates[..., 0], 0,
                                                   self.__width - 1)

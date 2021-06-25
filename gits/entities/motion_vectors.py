@@ -8,40 +8,37 @@ from utils import logging
 logger = logging.getLogger(__name__)
 
 
-class OpticalFlow(Image):
+class MotionVectors(Image):
 
-    NAME = "Optical Flow"
+    NAME = "Motion Vectros"
 
     def __init__(self, first_image: Image, second_image: Image):
         self.__first_image = first_image
         self.__second_image = second_image
-        self.__optical_flow_image = None
         self.__optical_flow = None
+        self.__first_mask = None
+        self.__second_mask = None
+
+        self.__mask_images()
+
+    def __mask_images(self) -> None:
+        self.__first_mask = self.__create_mask(self.__first_image.raw_data_16bit())
+        self.__second_mask = self.__create_mask(self.__second_image.raw_data_16bit())
+
+    def __create_mask(self, image) -> numpy.ndarray:
+        ret, threshold = cv2.threshold(image, 1, 0xFFFF, cv2.THRESH_BINARY_INV)
+        return threshold
 
     def raw_data(self) -> numpy.ndarray:
-        return self.__ndarray()
-
-    def visual_data(self) -> numpy.ndarray:
-        return self.__ndarray()
-
-    def __ndarray(self) -> numpy.ndarray:
-        if self.__optical_flow_image is None:
-            self.__optical_flow_image = self.hsv_optical_flow()
-        return self.__optical_flow_image
-
-    def mask_images(self) -> None:
-        first_mask = self.create_mask(self.__first_image.raw_data_16bit())
-        second_mask = self.create_mask(self.__second_image.raw_data_16bit())
-        return first_mask, second_mask
-
-    def optical_flow(self) -> numpy.ndarray:
         if self.__optical_flow is None:
             self.__compute_optical_flow()
         return self.__optical_flow
 
-    def __compute_optical_flow(self):
+    def visual_data(self) -> numpy.ndarray:
+        return self.__colored_optical_flow()
+
+    def __compute_optical_flow(self) -> None:
         tik = time.process_time()
-        self.__first_mask, self.__second_mask = self.mask_images()
         masked_first_image = numpy.ma.masked_array(self.__first_image.raw_data_16bit(),
                                                    mask=self.__second_mask).filled(0)
         masked_second_image = numpy.ma.masked_array(self.__second_image.raw_data_16bit(),
@@ -53,11 +50,9 @@ class OpticalFlow(Image):
         tok = time.process_time()
         logger.success("Finished optical flow in {} seconds.".format(tok - tik))
 
-    def hsv_optical_flow(self):
-        optical_flow = self.optical_flow()
+    def __colored_optical_flow(self) -> numpy.ndarray:
+        optical_flow = self.raw_data()
         magnitude, angle = cv2.cartToPolar(optical_flow[..., 0], optical_flow[..., 1])
-
-        self.__first_mask, self.__second_mask = self.mask_images()
 
         magnitude = numpy.ma.masked_array(magnitude, mask=self.__first_mask).filled(0)
         magnitude = numpy.ma.masked_array(magnitude, mask=self.__second_mask).filled(0)
@@ -68,25 +63,17 @@ class OpticalFlow(Image):
         hsv[..., 0] = angle * 180 / numpy.pi / 2
         hsv[..., 1] = 255
         hsv[..., 2] = cv2.normalize(magnitude, None, 0, 255, cv2.NORM_MINMAX)
-        hsv[..., 2] = self.scale(hsv[..., 2], 3)
-        # hsv[..., 2] = 255
+        hsv[..., 2] = self.scale_to_8bit(hsv[..., 2], 3)
 
         bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-
         return bgr
 
     @staticmethod
-    def scale(image, value) -> numpy.ndarray:
+    def scale_to_8bit(image, value) -> numpy.ndarray:
         image32 = image.astype(numpy.int32)
         image32 = image32 * value
         numpy.clip(image32, 0, 255, out=image32)
-
         return image32.astype(numpy.uint8)
 
     def name(self) -> str:
         return self.NAME
-
-    def create_mask(self, image):
-        ret, threshold = cv2.threshold(image, 1, 0xFFFF, cv2.THRESH_BINARY_INV)
-
-        return threshold
