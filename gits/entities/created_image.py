@@ -56,9 +56,6 @@ class CreatedImage(NDSI):
         return kernel2d
 
     def raw_data(self) -> numpy.ndarray:
-        return self.__ndarray()
-
-    def __ndarray(self) -> numpy.ndarray:
         if self.__image is None:
             self.__create_image()
         return self.__image
