@@ -64,7 +64,7 @@
 		\vspace{-20pt}
 		\includegraphics[width=100pt]{../images/FMI-03.png}\\[1.0cm]
 		
-		\textsc{\LARGE West University of  Timisoara}\\[0.5cm]
+		\textsc{\LARGE West University of Timisoara}\\[0.5cm]
 		\textsc{\Large Faculty of Mathematics and Computer Science}\\[0.5cm]
 		\textsc{\large Study Program: \\Computer Science in English}\\[3cm]
 		\textsc{\Huge Master Dissertation}\\[5cm]
@@ -136,18 +136,19 @@
 	\subsection{Landsat 8}
 	\label{seq:landsat8_section}
 
-	For the purpose of this paper, we will use images collected by the Landsat 8 satellite (Figure 1.1), which was launched on an Atlas-V rocket from Vandenberg Air Force Base, California on February 11, 2013. Landsat 8 is the most recently launched Landsat satellite and carries the Operational Land Imager (OLI) and the Thermal Infrared Sensor (TIRS) instruments.
+	For the purpose of this paper, we will use images collected by the Landsat 8 satellite Figure~\ref{fig:landsat_satellite}, which was launched on an Atlas-V rocket from Vandenberg Air Force Base, California on February 11, 2013. Landsat 8 is the most recently launched Landsat satellite and carries the Operational Land Imager (OLI) and the Thermal Infrared Sensor (TIRS) instruments.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.25]{../images/LandsatSatellite.png}
-		\caption{LandsatSatellite \cite{LANDSATPIC}}
-		\label{fig:LandsatSatellite}
+		\caption{Landsat 8 satellite \cite{LANDSATPIC}}
+		\label{fig:landsat_satellite}
 	\end{figure}
 	Landsat 8 orbits the Earth in a sun-synchronous, near-polar orbit, at an altitude of 705 km, inclined at 98.2 degrees, and completes one Earth orbit every 99 minutes.  The satellite has a 16-day repeat cycle with an equatorial crossing time: 10:00 a.m. +/- 15 minutes. It acquires about 740 scenes a day on the Worldwide Reference System-2 (WRS-2) path/row system, with a swath overlap (or sidelap) varying from 7\% at the equator to a maximum of approximately 85\% at extreme latitudes. A Landsat 8 scene size is 185 km x 180 km \cite{LANDSAT}.
 	
 	\paragraph{Worldwide Reference System-2}
+	\label{par:wrs-2}
 	
-	We will be referring to each scene's location based on its path and row coordinates from the worldwide reference system-2, which is a global notation system for Landsat data. It enables a user to inquire about satellite imagery over any portion of the world by specifying a nominal scene center designated by path and row numbers. The WRS has proven valuable for the cataloguing, referencing, and day-to-day use of imagery transmitted from the Landsat sensors \cite{wrs}. Landsat's trajectory projected on the world map can be seen in figure \ref{fig:wrs2}.
+	We will be referring to each scene's location based on its path and row coordinates from the worldwide reference system-2, which is a global notation system for Landsat data. It enables a user to inquire about satellite imagery over any portion of the world by specifying a nominal scene center designated by path and row numbers. The WRS has proven valuable for the cataloguing, referencing, and day-to-day use of imagery transmitted from the Landsat sensors \cite{wrs}. Landsat's trajectory projected on the world map can be seen in Figure~\ref{fig:wrs2}.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.2]{../images/wrs2.png}
@@ -156,6 +157,7 @@
 	\end{figure}
 	
 	\subsubsection{Landsat scene naming convention}
+	\label{seq:landsat_naming}
 	
 	Each Landsat scene is named after a well-defined convention in order to easily check information such as the WRS path, row and the date of acquisition. Having access to this information without the need to download the scene itself or the metadata file which holds this information represents a valuable asset, since we can easily filter the data based on the naming convention itself. In the table \ref{table:scene_naming} below we represent what each part of a Landsat scene of the form \textbf{LXS PPPRRR YYYYDDD  GSIVV} means.
 	\begin{table} [h]
@@ -191,7 +193,7 @@
 	
 	The Operational Land Imager (OLI) is a remote sensing instrument aboard Landsat 8, built by Ball Aerospace \& Technologies. The sensor collects moderate resolution data that is used to monitor changing trends on the surface and evaluate how land usage changes over time. The images and data that OLI has helped collect have practical applications today in agriculture, mapping, and monitoring changes in snow, ice, and water \cite{lolidcp}. 
 	The OLI operates in the visible (VIS) and short wave infrared (SWIR) spectral region, having a width of 185 km. It uses nine channels, which range from wavelengths of 443 nm to 2,200 nm. Of these nine channels, eight are multispectral and one is panchromatic. The eight multispectral channels have a 30-meter spatial resolution, and the panchromatic channel has a 15 meters one.
-	The OLI generates 9 bands for Landsat as shown in \ref{fig:L8OLI}.
+	The OLI generates 9 bands for Landsat as shown in Figure~\ref{fig:L8OLI}.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.5]{../images/Landsat8-OLI-Bands.png}
@@ -202,9 +204,7 @@
 	\subsubsection{Thermal Infrared Sensor}
 	
 	The Thermal Infrared Sensor (TIRS) measures land surface temperature in two thermal bands with a new technology that uses Quantum Well Infrared Photodetectors to detect long wavelengths of light emitted by the Earth whose intensity depends on surface temperature. These wavelengths, called thermal infrared, are well beyond the range of human vision \cite{lgng}.
-	
-	The thermal infrared sensor generates 2 bands for Landsat as shown in \ref{fig:L8TIRS}.
-	
+	The thermal infrared sensor generates 2 bands for Landsat as shown in Figure~\ref{fig:L8TIRS}.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.5]{../images/Landsat8-TIRS-Bands.png}
@@ -214,7 +214,7 @@
 	
 	\subsubsection{OLI and TIRS bands}
 	
-	Landsat 8 acquires data from these sensors in in 11 bands, as following in table \ref{table:bands_table}.
+	Landsat 8 acquires data from these sensors in in 11 bands, as following in Table~\ref{table:bands_table}.
 	
 	\begin{table} [h]
 		\center
@@ -254,7 +254,6 @@
 	\subsection{World Glacier Inventory}
 	\label{seq:wgi}
 	The World Glacier Inventory (WGI) proves to be a useful resource for building our dataset, since it contains information for over 130,000 glaciers. Inventory parameters include geographic location, area, length, orientation, elevation, and classification. The WGI is based primarily on aerial photographs and maps with most glaciers having one data entry only. Hence, the data set can be viewed as a snapshot of the glacier distribution in the second half of the 20th century. It is based on the original WGI (WGMS 1989) from the World Glacier Monitoring Service \cite{WGI}.  
-	
 	There are a number of ways to retrieve data from the inventory:
 	\begin{itemize}
 		\item download the entire database in a single ASCII text file (wgi\_feb2012.csv);
@@ -262,12 +261,12 @@
 		\item extract regions through the Extract Selected Regions interface.
 	\end{itemize}
 
-	The ASCII text file will be used with the purpose to define which are the glaciers to be included in the dataset to be built. An example of how this file looks like can be found in Figure 1.1.
+	The ASCII text file will be used with the purpose to define which are the glaciers to be included in the dataset to be built. An example of how this file looks like can be found in Figure~\ref{fig:WGI_ASCII}.
 	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.5]{../images/wgi_ASCII_file.png}
-		\caption{WGI ASCII}
+		\caption{World glacier inventory ASCII text file, as CSV}
 		\label{fig:WGI_ASCII}
 	\end{figure}
 	
@@ -287,7 +286,7 @@
 	
 	One of the most popular services for satellite imagery downloading is USGS Earth Explorer. This is used for querying and ordering of satellite images, aerial photographs, and cartographic products through the U.S. Geological Survey. The tool is particularly useful when the main focus is to analyse a specific area rather than trying to acquire a large dataset of scenes. One can easily search for assets based on criteria such as world reference system path and row variables, latitude, longitude, cloud coverage, capture date and many others \cite{USGS}.
 	
-	However, downloading a large set of assets proves to be rather difficult by using this tool alone, since the parameters for each scene need to be manually set. On top of this, the query results have to be picked by hand and then passed for downloading through another application which handles their bulk download. This makes the process of building the dataset rather slow, frustrating and error prone. Such an example can be viewed in Figure 1.2, for the Belvedere glacier (45.942, 7.908).
+	However, downloading a large set of assets proves to be rather difficult by using this tool alone, since the parameters for each scene need to be manually set. On top of this, the query results have to be picked by hand and then passed for downloading through another application which handles their bulk download. This makes the process of building the dataset rather slow, frustrating and error prone. Such an example can be viewed in Figure~\ref{fig:EarthExplorer}, for the Belvedere glacier (45.942, 7.908).
 	
 	\begin{figure}[h]
 		\centering
@@ -305,17 +304,17 @@
 	
 	The STAC API query also requires a name for the collection of assets we want our queries to be made on, which for us is landsat-8-l1 (Landsat 8 Collection 1, Level 1). Using these three parameters we can now easily acquire a large number of assets with minimal manual labour, as compared to the more user friendly tool provided by USGS.
 	
-	The downloaded assets will be stored at a user specified disk location and they will be structured as shown in the Figure 1.3.
+	The downloaded assets will be stored at a user specified disk location and they will be structured as shown in the Figure~\ref{fig:DownloadDirectory}.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{../images/DownloadDirectory.png}
+		\caption{Download Directory}
+		\label{fig:DownloadDirectory}
+	\end{figure}
 	
 	\subsubsection{Landsat 8 Collection 1, Tier 1}
 	
 	To support analysis  of the Landsat long-term data record, the Landsat data archive was reorganized  into a formal tiered data collection  structure, which ensures that all Landsat Level 1 products provide a consistent archive of data quality to support time-series analysis and data “stacking”, while controlling continuous improvement of the archive, and access to all data as they are acquired. The implementation of collections ensures consistent and known radiometric and geometric quality through time and across instruments while improving control in the calibration and processing parameters \cite{lc1l1}. By using data from this collection, we ensure that our images are fit for accurate pixel-to-pixel processing.
-	\begin{figure}[h]
-		\centering
-		\includegraphics[scale=0.55]{../images/DownloadDirectory.png}
-		\caption{Download Directory}
-		\label{fig:DownloadDirectory}
-	\end{figure}
 	
 	\section{Dataset entities}
 	
@@ -346,7 +345,7 @@
 		\caption{Landsat 8 green band specifications.}
 		\label{table:green_table}
 	\end{table}
-	The green band, alongside with the red and blue ones, fall in the visible spectrum and it is usually used for mapping peak vegetation. Figure \ref{fig:belvedere_green} is an example of the green band for the Belvedere glacier, specifically taken from scene LC81950282015098LGN01.
+	The green band, alongside with the red and blue ones, fall in the visible spectrum and it is usually used for mapping peak vegetation. Figure~\ref{fig:belvedere_green} is an example of the green band for the Belvedere glacier, specifically taken from scene LC81950282015098LGN01.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_B3.png}
@@ -374,7 +373,7 @@
 		\caption{Landsat 8 SWIR1 band specifications.}
 		\label{table:swir1_table}
 	\end{table}
-	The shortwave infrared 1 band is particularly useful for enhancing geology objects such as rocks and soils which look similar in other bands \cite{bd}. Alongside this, it also discriminates moisture content of soil and vegetation and penetrates thin clouds \cite{bands}. Figure \ref{fig:belvedere_swir1} is illustrated below as an example of a SWIR1 band taken from the same scene as the green one above.
+	The shortwave infrared 1 band is particularly useful for enhancing geology objects such as rocks and soils which look similar in other bands \cite{bd}. Alongside this, it also discriminates moisture content of soil and vegetation and penetrates thin clouds \cite{bands}. Figure~\ref{fig:belvedere_swir1} is illustrated below as an example of a SWIR1 band taken from the same scene as the green one above.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_B6.png}
@@ -384,20 +383,20 @@
 	
 	
 	\subsubsection{Normalized Snow Difference Index}
-	\label{seq:NDSI_functional}
+	\label{seq:ndsi_functional}
 	
-	The normalized snow difference index (NDSI) is an index which relates to the presence of snow/ice in a pixel. Snow and ice usually have a very high reflectance in the visible spectrum and very low one in the shortwave infrared one, which is useful for mapping out most types of clouds from the scene \cite{ndsi}. We can therefore use the formula from equation \ref{eq:ndsi_formula} in order to highlight the snow and ice pixels from a Landsat 8 image.
+	The normalized snow difference index (NDSI) is an index which relates to the presence of snow/ice in a pixel. Snow and ice usually have a very high reflectance in the visible spectrum and very low one in the shortwave infrared one, which is useful for mapping out most types of clouds from the scene \cite{ndsi}. We can therefore use the formula from Equation~\ref{eq:ndsi_formula} in order to highlight the snow and ice pixels from a Landsat 8 image.
 	\begin{equation}\label{eq:ndsi_formula}
 		NDSI = \frac{green - SWIR1}{green + SWIR1}
 	\end{equation}
-	By combining the snow reflectance behaviour of snow and ice for each of these bands, we can create a normalized snow difference index image which has values in the range [-1, 1]. We can then apply a threshold on the pixels which states that if the NDSI value for a pixel is larger than 0.0, then that pixel represents snow/ice covered land; similarly, if its value is smaller than 0.0, that pixel represents snow/ice free land \cite{ndsi}, \cite{viirs}, as represented in equation \ref{eq:ndsi_threshold}. Of course, this represents the general value for the threshold, but with the increase of its value, we can more accurately differentiate between snow and ice. With larger threshold values we can state that a pixel represents ice covered land rather than just snow fall land \cite{viirs}. We have tried different values for the threshold and came to the conclusion that a value of 0.3 is best suited for our needs.
+	By combining the snow reflectance behaviour of snow and ice for each of these bands, we can create a normalized snow difference index image which has values in the range [-1, 1]. We can then apply a threshold on the pixels which states that if the NDSI value for a pixel is larger than 0.0, then that pixel represents snow/ice covered land; similarly, if its value is smaller than 0.0, that pixel represents snow/ice free land \cite{ndsi}, \cite{viirs}, as represented in Equation~\ref{eq:ndsi_threshold}. Of course, this represents the general value for the threshold, but with the increase of its value, we can more accurately differentiate between snow and ice. With larger threshold values we can state that a pixel represents ice covered land rather than just snow fall land \cite{viirs}. We have tried different values for the threshold and came to the conclusion that a value of 0.3 is best suited for our needs.
 	\begin{equation}
 		\begin{cases}\label{eq:ndsi_threshold}
 			\text{snow/ice land} & \text{if } NDSI \geq 0.0\\
 			\text{snow-free land}, & \text{NDSI < 0.0}
 		\end{cases}
 	\end{equation}
-	An example of a generated NDSI for the Belvedere glacier, scene LC81950282015098LGN01, can be viewed in Figure \ref{fig:belvedere_ndsi}.
+	An example of a generated NDSI for the Belvedere glacier, scene LC81950282015098LGN01, can be viewed in Figure~\ref{fig:belvedere_ndsi}.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_ndsi.png}
@@ -406,22 +405,22 @@
 	\end{figure}
 
 	\section{Alignment}
-	Landsat's trajectory orbiting Earth is not fully precise, therefore not all images will be pixel-to-pixel aligned, which is a problem for image processing. Since we want to track each pixel's movement, we must be sure that its coordinates in the image do not change between any two given scenes. Figure~\ref{fig:unaligned_scenes} and Figure~\ref{fig:unaligned_scene_small} highlight the discrepancy from scene TODO to scene TODO, as an example.
+	\label{seq:alignment_functional}
+	Landsat's trajectory orbiting Earth is not fully precise, therefore not all images will be pixel-to-pixel aligned, which is a problem for image processing. Since we want to track each pixel's movement, we must be sure that its coordinates in the image do not change between any two given scenes. Figure~\ref{fig:unaligned} highlights the misalignment from scene between scenes LC81950282013316 and LC81950282013364, as an example.
 	\begin{figure}[h]
 	\centering
 	\begin{minipage}{0.36\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../images/unaligned.png}
-		\label{fig:unaligned_scene_big}
 	\end{minipage}
 	\begin{minipage}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../images/unaligned_part.png}
-		\label{fig:unaligned_scene_small}
 	\end{minipage}
 	\caption{Overlapped unaligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}
+	\label{fig:unaligned}	
 	\end{figure}
-	Since the bands we work with have a spacial resolution of 30 meters, which means that each pixel in the image represents 30 meters. Even with a misalignment of just 50 pixels we would end up with a 1.5 km difference between two scenes. Tracking pixels through the image without aligning them first would mean that we could never be sure that what we are looking at is indeed the same location. We have used different approaches on alignment which will be described in \ref{seq:alignment}. Figure \ref{fig:aligned}  highlights the alignment corrected scene from \ref{fig:unaligned}. 
+	Since the bands we work with have a spacial resolution of 30 meters, which means that each pixel in the image represents 30 meters. Even with a misalignment of just 50 pixels we would end up with a 1.5 km difference between two scenes. Tracking pixels through the image without aligning them first would mean that we could never be sure that what we are looking at is indeed the same location. We have used different approaches on alignment which will be described in Section~\ref{seq:alignment}. Figure~\ref{fig:aligned} highlights the alignment corrected scene from Figure~\ref{fig:unaligned}. 
 	\begin{figure}[h]
 		\centering
 		\begin{minipage}{0.36\textwidth}
@@ -436,18 +435,19 @@
 		\label{fig:aligned}
 	\end{figure}
 
-	\subsubsection{Optical Flow Vector}
-	
-	
-	
-	\subsubsection{Optical Flow Generated Image}
-	
+	\subsubsection{NDSI's Motion Matrix}
+	\label{seq:ndsi_motion_matrix}
+	TODO
+	\subsubsection{Motion Generated NDSI}
+	\label{seq:motion_generated_gui}
+	TODO
 	\section{Graphical User Interface}
 	\label{seq:gui}
 	\subsection{Search and Download}
 	\label{seq:search_download})
 
 	\chapter{Design and Implementation}
+	\label{cha:design_and_implementation}
 	
 	The design of the application will be discussed while focusing on two different aspects:
 	\begin{itemize}
@@ -459,15 +459,15 @@
 	
 	\section{Search and Download}
 	
-	Searching as well as downloading have been implemented on top of the sat-search library and it is used directly from the command line interface by running the script described in \ref{seq:search_download}.
-	As an input we will be using a CSV file which will have the form as described in \ref{seq:wgi}. Mainly we will need just four attributes to be specified for each desired glacier in order to create a query for searching, as follows: \textit{wgi\_glacier\_id, glacier\_name, lat and lon}.
+	Searching as well as downloading have been implemented on top of the sat-search library and it is used directly from the command line interface by running the script described in Section~\ref{seq:search_download}.
+	As an input we will be using a CSV file which will have the form as described in Section~\ref{seq:wgi}. Mainly we will need just four attributes to be specified for each desired glacier in order to create a query for searching, as follows: \textit{wgi\_glacier\_id, glacier\_name, lat and lon}.
 	The CSV file will be intercepted by the \textbf{Download } class and sent for processing row by row (glacier by glacier) to the \textbf{GlacierFactory} class. This one is responsible for parsing each row of the input CSV file and transforming the information in \textbf{Glacier} objects, which will be passed back to the \textbf{Download} class.
-	Using the newly created Glacier object we can construct its \textbf{search query} by calculating its bounding box, specifying the asset collection from which we request data and setting other parameters (maximum allowed cloud coverage, in our case). Listing \ref{lst:query} represents an example of querying for glacier Belvedere, with the following parameters set in the CSV file: \textit{"IT4L01211009","BELVEDERE","45.942","7.908"}.
+	Using the newly created Glacier object we can construct its \textbf{search query} by calculating its bounding box, specifying the asset collection from which we request data and setting other parameters (maximum allowed cloud coverage, in our case). Listing~\ref{lst:query} represents an example of querying for glacier Belvedere, with the following parameters set in the CSV file: \textit{"IT4L01211009","BELVEDERE","45.942","7.908"}.
 	\begin{lstlisting}[caption={Search query created by sat-search},label={lst:query},language=Bash]
 		{"page": 1, "limit": 170, "bbox": [7.907990000000001, 45.94199, 7.90801, 45.94201], "query": {"eo:cloud_cover": {"lt": 10}}, "collection": "landsat-8-l1"}
 	\end{lstlisting}
 	The result of each glacier query will be automatically saved in a \textbf{JSON file} which is used as a data buffer between the search and download. The downloader takes each JSON file generated by the search engine and sends the command for getting that asset.
-	The technical specifications of the Download, GlacierFactory and Glacier classes can be found in Figure \ref{fig:sd_diagram}.
+	The technical specifications of the Download, GlacierFactory and Glacier classes can be found in Figure~\ref{fig:sd_diagram}.
 	\label{seq:sd_implementation}
 	\begin{figure}[h]
 		\centering
@@ -476,23 +476,24 @@
 		\label{fig:sd_diagram}
 	\end{figure}
 	\paragraph{Data corruption verification}
-	Both the searching and the downloading functions are executed concurrently, since they are time intensive tasks. Each band has around 60 MB, which would make one scene approximately 360 MB. For the Belvedere glaciers, we found 78 scenes with a cloud coverage of 10\%. This means that the size of the entire glacier data will be around 28 GB. Given that the size of the assets is quite large, it takes a lot of time to finish the download. In this time, even a small connection interruption might result in corrupted data files, which would interfere with processing. Therefore, we implemented an extra security measure in the sat-stac library which verifies whether a file with the same name already exists at the download location. If it does, its size will be compared to the size taken from the STAC-API servers. In case the two file sizes don't match, it means that the file got corrupted during download and it will be downloaded again. If the sizes match, the downloader will skip the file and continue when it finds one requested file which was not yet found on the disk, such that we do not end up unnecessarily overwriting the already existing files.
+	Both the searching and downloading functions are executed concurrently, since they are \textbf{time intensive} tasks. Each band has around 60 MB, which would make one scene approximately 360 MB. For the Belvedere glaciers, we found 78 scenes with a cloud coverage of 10\%. This means that the size of the entire glacier data will be around 28 GB. Given that one asset's size is quite large, it takes a lot of time to finish the download. In this time, even a small connection interruption might result in corrupted data files, which would interfere with processing. Therefore, we implemented an \textbf{extra security measure} in the sat-stac library which verifies whether a file with the same name already exists at the download location. If it does, its size will be compared to the size taken from the STAC-API servers. In case the two file sizes don't match, it means that the file got corrupted during download and it will be downloaded again. If the sizes match, the downloader will skip the file and continue when it finds one requested file which was not yet found on the disk, such that we do not end up unnecessarily overwriting the already existing files in case of failure.
 	
 	\section{Processing}
 	\label{seq:processing}
-	\subsection{Normalized Snow Difference Index}
-	\label{seq:ndsi}
-
-	The NDSI is generated by using the Formula~\ref{eq:ndsi_formula} described in section \ref{seq:NDSI_functional} on the green and shortwave infrared bands from a specific scene. Each band pixel is converted to \textbf{float32} in order to increase the \textbf{precision} of calculation; as each band is read as a n-dimensional array we can use numpy's optimised processing for generating the NDSI index image, since it converts the data and runs on native code rather than going through Python's interpretor. We then \textbf{filter} the generated image such that everything which is snow-free land will be -1 (\textbf{black}), but this is only applied for better visual analysis. In the background, we work with the full range of the image for better precision, which is the raw image. Figure~\ref{fig:ndsi_diagram} holds the technical diagram for the NDSI.
-	\begin{figure}[h]
-		\centering
-		\includegraphics[scale=0.6]{../images/ndsi_diagram.png}
-		\caption{Technical diagram for the NDSI class.}
-		\label{fig:ndsi_diagram}
-	\end{figure}
-
+	Processing can be viewed as four different entities, as following:
+	\begin{itemize}
+		\item Image alignment;
+		\item Normalized snow difference index;
+		\item NDSI's motion matrix;
+		\item Motion generated NDSI.
+	\end{itemize}
+	Before generating any images, we first need to make sure that the pixels between any two scenes are not misaligned. The details of the alignment process are described in Section~\ref{seq:alignment_implementation}. After we ensure that out images are fit, we move on to creating the normalized snow difference index image in order to enhance the ice through a set threshold (see Section~\ref{seq:ndsi_implementation}). We then create the matrix of pixel motions calculated between two consecutive (date-wise) scenes, process described in Section~\ref{seq:motion_matrix_implementation}. Based on the information of where each pixel has moved between two consecutive images, we can then create our future NDSI image by applying the motion vectors on each pixel from a scene. More details on the design and implementation of this part can be found in Section~\ref{seq:motion_ndsi_implementation}.
+	The normalized snow difference index image will be computed for each scene as described in Section~\ref{seq:ndsi_functional}.
+	
+	%========================================================================================
+	
 	\subsection{Alignment}
-	\label{seq:alignment}
+	\label{seq:alignment_implementation}
 	
 	In order to keep a high level of abstraction, we have split each scene into aligned and unaligned: Scene and AlignedScene objects. These and their children are created when crawling through the glaciers directory, specifically for each region of interest. However, aligning all the images when crawling would result into a lot of idle time for the user when starting the application and it would not be overall feasible to do so. Therefore, a scene is aligned only when it is specifically being selected in the graphical user interface (or when another entity needs it, such as optical flow and image generation). By doing this, we ensure that there is no unnecessary extra waiting time for each scene that we have when powering up the interface.
 	As for the actual alignment, we have used an algorithm which \textbf{collects features} from each band of a scene and tries to match them with a given reference one's features. The obtained \textbf{matches} can be then used to create an \textbf{affine transformation matrix} which specifies by how much did the current image \textbf{rotated and translated} in comparison to its reference. The affine transformation matrix will be then applied to the current image by a \textbf{warping} algorithm with the goal of ensuring as much as possible that there is no misalignment between any pixel of two different images from the same time series. Section~\ref{seq:alignment_algorithm} describes more technically how we built this and what were the computer vision algorithms used for that matter.
@@ -513,6 +514,30 @@
 		\caption{Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}
 		\label{fig:alignment_diagram}
 	\end{figure}
+
+	%========================================================================================
+	
+	\subsection{Normalized Snow Difference Index}
+	\label{seq:ndsi_implementation}
+
+	The NDSI is generated by using the Formula~\ref{eq:ndsi_formula} described in section \ref{seq:NDSI_functional} on the green and shortwave infrared bands from a specific scene. Each band pixel is converted to \textbf{float32} in order to increase the \textbf{precision} of calculation; as each band is read as a n-dimensional array we can use numpy's optimised processing for generating the NDSI index image, since it converts the data and runs on native code rather than going through Python's interpretor. We then \textbf{filter} the generated image such that everything which is snow-free land will be -1 (\textbf{black}), but this is only applied for better visual analysis. In the background, we work with the full range of the image for better precision, which is the raw image. Figure~\ref{fig:ndsi_diagram} holds the technical diagram for the NDSI.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.6]{../images/ndsi_diagram.png}
+		\caption{Technical diagram for the NDSI class.}
+		\label{fig:ndsi_diagram}
+	\end{figure}
+
+	%========================================================================================
+
+	\subsection{NDSI Motion Matrix}
+	\label{seq:motion_matrix_implementation}
+	
+	%========================================================================================
+
+	\subsection{Motion Generated NDSI}
+	\label{seq:motion_ndsi_implementation}
+	
 	\tableofcontents{}
 	\addcontentsline{toc}{chapter}{List Of Figures}
 	\listoffigures{}
