@@ -19,19 +19,19 @@
 \contentsline {subsubsection}{Normalized Snow Difference Index}{10}%
 \contentsline {section}{\numberline {1.3}Alignment}{12}%
 \contentsline {subsubsection}{NDSI's Motion Matrix}{12}%
-\contentsline {subsubsection}{Motion Generated NDSI}{12}%
-\contentsline {section}{\numberline {1.4}Graphical User Interface}{13}%
-\contentsline {subsection}{\numberline {1.4.1}Search and Download}{13}%
-\contentsline {chapter}{\numberline {2}Design and Implementation}{14}%
-\contentsline {section}{\numberline {2.1}Search and Download}{14}%
-\contentsline {paragraph}{Data corruption verification}{15}%
-\contentsline {section}{\numberline {2.2}Processing}{16}%
-\contentsline {subsection}{\numberline {2.2.1}Normalized Snow Difference Index}{16}%
-\contentsline {subsection}{\numberline {2.2.2}Alignment}{17}%
-\contentsline {subsection}{\numberline {2.2.3}Alignment algorithms}{18}%
-\contentsline {subsection}{\numberline {2.2.4}NDSI Motion Matrix}{19}%
-\contentsline {subsection}{\numberline {2.2.5}Motion Generated NDSI}{19}%
-\contentsline {chapter}{List Of Figures}{20}%
-\contentsline {chapter}{List Of Tables}{21}%
-\contentsline {chapter}{\numberline {3}Glossary}{25}%
-\contentsline {section}{\numberline {3.1}Acronyms}{25}%
+\contentsline {subsubsection}{Motion Generated NDSI}{14}%
+\contentsline {section}{\numberline {1.4}Graphical User Interface}{14}%
+\contentsline {subsection}{\numberline {1.4.1}Search and Download}{14}%
+\contentsline {chapter}{\numberline {2}Design and Implementation}{15}%
+\contentsline {section}{\numberline {2.1}Search and Download}{15}%
+\contentsline {paragraph}{Data corruption verification}{16}%
+\contentsline {section}{\numberline {2.2}Processing}{17}%
+\contentsline {subsection}{\numberline {2.2.1}Alignment}{17}%
+\contentsline {subsubsection}{Alignment algorithms}{18}%
+\contentsline {subsection}{\numberline {2.2.2}Normalized Snow Difference Index}{19}%
+\contentsline {subsection}{\numberline {2.2.3}NDSI Motion Matrix}{19}%
+\contentsline {subsection}{\numberline {2.2.4}Motion Generated NDSI}{19}%
+\contentsline {chapter}{List Of Figures}{21}%
+\contentsline {chapter}{List Of Tables}{22}%
+\contentsline {chapter}{\numberline {3}Glossary}{26}%
+\contentsline {section}{\numberline {3.1}Acronyms}{26}%

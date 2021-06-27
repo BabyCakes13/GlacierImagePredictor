@@ -68,11 +68,22 @@ lgng.
 \newblock \url{https://landsat.gsfc.nasa.gov/}.
 \newblock Accessed: 2021-06-21.
 
+\bibitem[LK81]{lukas}
+B.~D. Lucas and T.~Kanade.
+\newblock An iterative image registration technique with an application to
+  stereo vision.
+\newblock 1981.
+
 \bibitem[nds]{ndsi}
 ndsi.
 \newblock
   \url{https://nsidc.org/support/faq/what-ndsi-snow-cover-and-how-does-it-compare-fsc}.
 \newblock Accessed: 2021-06-22.
+
+\bibitem[opt]{opticalflow}
+opticalflow.
+\newblock \url{https://nanonets.com/blog/optical-flow/}.
+\newblock Accessed: 2021-06-25.
 
 \bibitem[orb]{orb}
 orb.

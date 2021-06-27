@@ -3,6 +3,7 @@ import time
 import cv2
 import numpy
 
+from entities.aligned.aligned_image import AlignedImage
 from entities.image import Image
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -12,7 +13,7 @@ class MotionVectors(Image):
 
     NAME = "Motion Vectros"
 
-    def __init__(self, first_image: Image, second_image: Image):
+    def __init__(self, first_image: AlignedImage, second_image: AlignedImage):
         self.__first_image = first_image
         self.__second_image = second_image
         self.__optical_flow = None
@@ -63,7 +64,7 @@ class MotionVectors(Image):
         hsv[..., 0] = angle * 180 / numpy.pi / 2
         hsv[..., 1] = 255
         hsv[..., 2] = cv2.normalize(magnitude, None, 0, 255, cv2.NORM_MINMAX)
-        hsv[..., 2] = self.scale_to_8bit(hsv[..., 2], 3)
+        hsv[..., 2] = self.scale_to_8bit(hsv[..., 2], 4)
 
         bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
         return bgr

@@ -12,8 +12,9 @@
 \contentsline {figure}{\numberline {1.10}{\ignorespaces NDSI of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}}{11}%
 \contentsline {figure}{\numberline {1.11}{\ignorespaces Overlapped unaligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}}{12}%
 \contentsline {figure}{\numberline {1.12}{\ignorespaces Overlapped aligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}}{13}%
+\contentsline {figure}{\numberline {1.13}{\ignorespaces Optical flow problem visualisation \cite {opticalflow}.}}{13}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Technical specifications of Download, GlacierFactory and Glacier classes.}}{15}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Technical diagram for the NDSI class.}}{17}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}}{19}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Technical specifications of Download, GlacierFactory and Glacier classes.}}{16}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}}{20}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Technical diagram for the NDSI class.}}{20}%
 \addvspace {10\p@ }

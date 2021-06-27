@@ -420,7 +420,7 @@
 	\caption{Overlapped unaligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}
 	\label{fig:unaligned}	
 	\end{figure}
-	Since the bands we work with have a spacial resolution of 30 meters, which means that each pixel in the image represents 30 meters. Even with a misalignment of just 50 pixels we would end up with a 1.5 km difference between two scenes. Tracking pixels through the image without aligning them first would mean that we could never be sure that what we are looking at is indeed the same location. We have used different approaches on alignment which will be described in Section~\ref{seq:alignment}. Figure~\ref{fig:aligned} highlights the alignment corrected scene from Figure~\ref{fig:unaligned}. 
+	Since the bands we work with have a spacial resolution of 30 meters, which means that each pixel in the image represents 30 meters. Even with a misalignment of just 50 pixels we would end up with a 1.5 km difference between two scenes. Tracking pixels through the image without aligning them first would mean that we could never be sure that what we are looking at is indeed the same location. We have used different approaches on alignment which will be described in Section~\ref{seq:alignment_implementation}. Figure~\ref{fig:aligned} highlights the alignment corrected scene from Figure~\ref{fig:unaligned}. 
 	\begin{figure}[h]
 		\centering
 		\begin{minipage}{0.36\textwidth}
@@ -437,7 +437,21 @@
 
 	\subsubsection{NDSI's Motion Matrix}
 	\label{seq:ndsi_motion_matrix}
-	TODO
+	Since our dataset represents a \textbf{time series of satellite images}, as described in Section~\ref{seq:landsat8_section}, we thought that in order to generate a new image of this series, we could extract the \textbf{motion of each pixel} from one scene to another. This information could then be applied between any two consecutive (date-wise) scenes from the set and we could update a pixel's coordinates based on the value its motion vector and store it in a new image.
+	Extracting the motion vectors between two consecutive frames can be achieved by calculating their optical flow. \textbf{Optical flow} is defined as the motion of objects between consecutive frames of sequence, produced by the relative movement between the object and camera. By using computer vision algorithms which calculate the optical flow of two scenes, we could track the motion of melting glaciers across them in order to estimate their current velocity and possibly \textbf{predict their position} in the next frames \cite{opticalflow}.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=1.5]{../images/optical_flow_example.png}
+		\caption{Optical flow problem visualisation \cite{opticalflow}.}
+		\label{fig:optical_flow_example}
+	\end{figure}
+	
+	Figure~\ref{fig:optical_flow_example} emphasizes the problem visually, where we can express an image as a \textbf{function of space}, with the coordinates \textbf{\((x, y)\)}, and \textbf{time} \textbf{\(t\)}. If we take the first image\textbf{ \(I(x, y, t)\)} and we move its pixels by a distance of \textbf{\(dx, dy\)} over a timestamp \textbf{\(dt\)}, we obtain the new image as follows: \textbf{\(I(x + dx, y + dy, t + dt)\)} \cite{orb}.
+	
+	There are multiple types of optical flow algorithms, but for the purpose of our thesis, we have chosen the \textbf{dense optical flow} one, specifically \textbf{Gunnar Farneback's}. Even if dense implementations have higher cost we chose to make this trade mainly because it calculates the motion for each pixel of the frame and it also has a higher accuracy \cite{orb} compared to methods such as Lucas-Kanade (sparse) \cite{lukas}.
+	
+	By calculating the optical flow of two consecutive scenes, we construct a matrix which holds the vectors of motion for each pixel, as following.
+
 	\subsubsection{Motion Generated NDSI}
 	\label{seq:motion_generated_gui}
 	TODO
