@@ -18,8 +18,8 @@
 \contentsline {subsubsection}{Band 6 - SWIR1 Band}{9}%
 \contentsline {subsubsection}{Normalized Snow Difference Index}{10}%
 \contentsline {section}{\numberline {1.3}Alignment}{12}%
-\contentsline {subsubsection}{NDSI's Motion Matrix}{12}%
-\contentsline {subsubsection}{Motion Generated NDSI}{14}%
+\contentsline {subsubsection}{NDSI's Motion Optical Flow}{12}%
+\contentsline {subsubsection}{Motion Predicted NDSI}{14}%
 \contentsline {section}{\numberline {1.4}Graphical User Interface}{14}%
 \contentsline {subsection}{\numberline {1.4.1}Search and Download}{14}%
 \contentsline {chapter}{\numberline {2}Design and Implementation}{15}%
@@ -30,8 +30,10 @@
 \contentsline {subsubsection}{Alignment algorithms}{18}%
 \contentsline {subsection}{\numberline {2.2.2}Normalized Snow Difference Index}{19}%
 \contentsline {subsection}{\numberline {2.2.3}NDSI Motion Matrix}{19}%
-\contentsline {subsection}{\numberline {2.2.4}Motion Generated NDSI}{19}%
+\contentsline {subsection}{\numberline {2.2.4}Motion Predicted NDSI}{19}%
 \contentsline {chapter}{List Of Figures}{21}%
 \contentsline {chapter}{List Of Tables}{22}%
-\contentsline {chapter}{\numberline {3}Glossary}{26}%
-\contentsline {section}{\numberline {3.1}Acronyms}{26}%
+\contentsline {chapter}{\numberline {3}Conclusions}{26}%
+\contentsline {section}{\numberline {3.1}Future Development}{26}%
+\contentsline {chapter}{\numberline {4}Glossary}{27}%
+\contentsline {section}{\numberline {4.1}Acronyms}{27}%
