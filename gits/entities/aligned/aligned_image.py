@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import numpy
 import cv2
+import os
 from entities.image import Image
 
 from utils import logging
@@ -29,8 +30,17 @@ class AlignedImage(Image):
         if self.__aligned_ndarray is not None:
             return self.__aligned_ndarray
 
+        path = self.__image.create_band_path(suffix="_ALIGNED_")
+        if os.path.exists(path):
+            logger.notice("Read cached file: " + path)
+            self.__aligned_ndarray = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+            return self.__aligned_ndarray
+
         self.__align()
         self.__aligned_ndarray = self.__resize_aligned_to_reference()
+
+        path = self.__image.create_band_path(suffix="_ALIGNED_")
+        cv2.imwrite(path, self.__aligned_ndarray)
 
         return self.__aligned_ndarray
 

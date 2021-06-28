@@ -20,29 +20,35 @@ class Band(Image):
     }
 
     BAND_FILE_ENDWITH = {
-        'Blue': '_B2.TIF',
-        'Green': '_B3.TIF',
-        'Red': '_B4.TIF',
-        'NIR': '_B5.TIF',
-        'SWIR1': '_B6.TIF'
+        'Blue': '_B2',
+        'Green': '_B3',
+        'Red': '_B4',
+        'NIR': '_B5',
+        'SWIR1': '_B6'
     }
+
+    FILE_EXTENSION = ".TIF"
 
     def __init__(self, scene_path: str, scene_id: str, name: str):
         super().__init__()
 
-        self.__band_path = self.create_band_path(scene_path, scene_id, name)
+        self.__name = name
+        self.__scene_path = scene_path
         self.__ndarray = None
         self.__scene_id = scene_id
+        self.__band_path = self.create_band_path()
+
+        if not os.path.exists(self.__band_path):
+            raise FileNotFoundError("The {} band does not exist at the following location: {}."
+                                    .format(self.__name, self.__band_path))
 
         logger.debug("Created {}.".format(self.__str__()))
 
-    def create_band_path(self, scene_path: str, scene_id: str, name: str):
-        band_path = os.path.join(scene_path, scene_id + self.BAND_FILE_ENDWITH[name])
-        if os.path.exists(band_path):
-            return band_path
-        else:
-            raise FileNotFoundError("The {} band does not exist at the following location: {}."
-                                    .format(name, band_path))
+    def create_band_path(self, suffix=""):
+        band_path = os.path.join(self.__scene_path, self.__scene_id +
+                                 self.BAND_FILE_ENDWITH[self.__name] + suffix +
+                                 Band.FILE_EXTENSION)
+        return band_path
 
     def read(self) -> numpy.ndarray:
         try:
