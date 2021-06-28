@@ -90,10 +90,13 @@ class MotionPredictedNDSI(NDSI):
         self.__image = numpy.full_like(previous_image, MotionPredictedNDSI.INITIAL_VALUE)
 
     def __generate_image_based_on_movement(self) -> None:
+        tic = time.process_time()
         logger.notice("Generating image...")
         absolute_coordinates = self.__generate_absolute_coordinates()
         self.__image[absolute_coordinates[..., 1],
                      absolute_coordinates[..., 0]] = self.__previous_image.raw_data()
+        tok = time.process_time()
+        logger.success("Finished generating the initial image in {}".format(tok - tic))
 
     def __generate_absolute_coordinates(self) -> numpy.ndarray:
         index_array = self.__generate_index_array()

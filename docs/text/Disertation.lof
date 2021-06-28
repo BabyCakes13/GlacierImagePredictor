@@ -21,5 +21,8 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Technical diagram for the MotionVectors class.}}{22}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Hue representation of the optical flow.}}{23}%
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Technical diagram for the MotionPredictedNDSI class.}}{23}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Zoomed in part of the predicted NDSI (left). Neighbourhood extracted (right). }}{26}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Generated weights kernel (left). Filled in undefined value (right).}}{26}%
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
