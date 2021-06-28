@@ -7,7 +7,7 @@ from entities.interfaces.scene_interface import SceneInterface
 from entities.aligned.aligned_band import AlignedBand
 from entities.motion_vectors import MotionVectors
 from entities.ndsi import NDSI
-from entities.created_image import CreatedImage
+from entities.motion_predicted_ndsi import MotionPredictedNDSI
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -45,11 +45,11 @@ class AlignedScene(SceneInterface):
             self.__motion_vectors = MotionVectors(self.__ndsi, previous_scene.ndsi())
             self.__bands.append(self.__motion_vectors)
 
-            self.__created_image = CreatedImage(self.__motion_vectors, self.ndsi())
-            self.__bands.append(self.__created_image)
+            self.__motion_predicted_ndsi = MotionPredictedNDSI(self.__motion_vectors, self.ndsi())
+            self.__bands.append(self.__motion_predicted_ndsi)
         else:
             self.__motion_vectors = None
-            self.__created_image = None
+            self.__motion_predicted_ndsi = None
 
     def affine_transform_matrix(self) -> numpy.ndarray:
         if self.__affine_transform_matrix is None:

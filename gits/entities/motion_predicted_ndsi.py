@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 import time
 import numpy
-import cv2
 import multiprocessing
 from multiprocessing import shared_memory
 
 from entities.ndsi import NDSI
-from utils.utils import progress, debug_trace
 from utils import logging
+from utils.utils import progress
 logger = logging.getLogger(__name__)
 
 
-class CreatedImage(NDSI):
+class MotionPredictedNDSI(NDSI):
 
-    NAME = "Created Image"
+    NAME = "Motion Predicted NDSI"
     KERNEL_SIZE = 5
 
     INITIAL_VALUE = -1234
@@ -68,7 +67,7 @@ class CreatedImage(NDSI):
 
     def __initialise_image(self) -> None:
         previous_image = self.__previous_image.raw_data()
-        self.__image = numpy.full_like(previous_image, CreatedImage.INITIAL_VALUE)
+        self.__image = numpy.full_like(previous_image, MotionPredictedNDSI.INITIAL_VALUE)
 
     def __generate_image_based_on_movement(self) -> None:
         logger.notice("Generating image...")
@@ -115,7 +114,7 @@ class CreatedImage(NDSI):
         cores = multiprocessing.cpu_count()
         logger.notice("Filtering by average on {} cores...".format(cores))
 
-        zero_points = numpy.where(self.__image == CreatedImage.INITIAL_VALUE)
+        zero_points = numpy.where(self.__image == MotionPredictedNDSI.INITIAL_VALUE)
         zero_point_pairs = tuple(zip(*zero_points))
         self.__total_zero_points = len(zero_point_pairs)
 
@@ -159,7 +158,7 @@ class CreatedImage(NDSI):
         image_chunk = image_chunk[y - self.KERNEL_SIZE // 2:y + self.KERNEL_SIZE // 2 + 1,
                                   x - self.KERNEL_SIZE // 2:x + self.KERNEL_SIZE // 2 + 1]
         kernel = self.__remove_weight_for_number(image_chunk, self.__kernel, numpy.nan)
-        kernel = self.__remove_weight_for_number(image_chunk, kernel, CreatedImage.INITIAL_VALUE)
+        kernel = self.__remove_weight_for_number(image_chunk, kernel, MotionPredictedNDSI.INITIAL_VALUE)
 
         weights_sum = numpy.sum(kernel)
         if weights_sum == 0:
@@ -198,7 +197,7 @@ def filter_pixel(arg):
 
         zero_coordinates = numpy.where(image_chunk != image_chunk)
         kernel[zero_coordinates[0], zero_coordinates[1]] = 0
-        minus_one_coordinates = numpy.where(image_chunk == CreatedImage.INITIAL_VALUE)
+        minus_one_coordinates = numpy.where(image_chunk == MotionPredictedNDSI.INITIAL_VALUE)
         kernel[minus_one_coordinates[0], minus_one_coordinates[1]] = 0
 
         image_chunk[image_chunk != image_chunk] = 0
