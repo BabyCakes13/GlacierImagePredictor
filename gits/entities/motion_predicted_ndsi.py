@@ -7,6 +7,7 @@ import multiprocessing
 from multiprocessing import shared_memory
 
 from entities.ndsi import NDSI
+from entities.motion_vectors import MotionVectors
 from utils import logging
 from utils.utils import progress
 logger = logging.getLogger(__name__)
@@ -19,7 +20,7 @@ class MotionPredictedNDSI(NDSI):
 
     INITIAL_VALUE = -1234
 
-    def __init__(self, motion_vectors, previous_image):
+    def __init__(self, motion_vectors: MotionVectors, previous_image: NDSI):
         self.__image = None
         self.__motion_vectors = motion_vectors
         self.__previous_image = previous_image

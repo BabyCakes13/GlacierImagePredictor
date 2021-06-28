@@ -20,5 +20,6 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Technical diagram for the NDSI class.}}{21}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Technical diagram for the MotionVectors class.}}{22}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Hue representation of the optical flow.}}{23}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Technical diagram for the MotionPredictedNDSI class.}}{23}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

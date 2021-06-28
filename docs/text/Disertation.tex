@@ -453,6 +453,7 @@
 	We have used optical flow as a tool to generate \textbf{distance vectors} based on motion between the NDSI(\(time=t\)) and NDSI(\(time=t + dt\)). These vectors will be used in order to create the \textbf{motion predicted NDSI}.
 
 	\subsubsection{Motion Predicted NDSI}
+	\label{seq:motion_ndsi_functional}
 	
 	Whilst optical flow allows us to see movement of the ice front which already happened in the past, we wanted to use this information and apply it on the most recent images such that we can estimate further glacier movements.
 
@@ -593,6 +594,38 @@
 
 	\subsection{Motion Predicted NDSI}
 	\label{seq:motion_ndsi_implementation}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.6]{../images/motion_created_diagram.png}
+		\caption{Technical diagram for the MotionPredictedNDSI class.}
+		\label{fig:motion_predicted_diagram}
+	\end{figure}
+	
+	In order to generate the NDSI as described in Section~\ref{seq:motion_ndsi_functional}, we initialise a new numpy n-dimensional array based of the raw data of the image NDSI\(time=t+dt\), therefore making sure that the two images have the same shape and size.
+	
+	\begin{lstlisting}[caption={for loop motion image generation},label={lst:forloop},language=Python]
+		def __create_image(self):		
+			for y in range(self.__width, self.__height):
+				for x in range(self.__width, self.__height):
+					self.__compute_pixel(x, y)
+		
+		def __compute_pixel(self, x, y) -> None:
+			movement_on_x = self.__optical_flow.ndarray()[y][x][0]
+			movement_on_y = self.__optical_flow.ndarray()[y][x][1]
+			moved_x = movement_on_x + x
+			moved_y = movement_on_y + y
+			
+			if moved_x < 0 or moved_x >= self.__width:
+				return
+			if moved_y < 0 or moved_y >= self.__height:
+				return
+			self.__image[moved_y][moved_x] = self.__previous_image.ndarray()[y][x]
+	\end{lstlisting}
+	
+	Since we are given two parameters at the beginning, the motion vectors extracted by optical flow and the NDSI\(time=t+dt\), we simply must put each value from the NDSI array to a new location, calculated as following. For each pixel we know the motion vector. x represents by how much it shifted on the x axis and y represents by how far it moved on the y axis. 
+	
+	
 	- iterative algorithm... the for implementation which took a lot of time... the mathematical notation way;
 	- the numpy optimisation processing; because it is written in C. which is not interpreted, therefore we do not need to pass each operation through the python interpreter;
 	- we had to signal somehow the nan values
