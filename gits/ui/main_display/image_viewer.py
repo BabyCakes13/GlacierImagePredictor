@@ -11,6 +11,8 @@ logger = logging.getLogger(__name__)
 class ImageViewer:
     def __init__(self):
         self.__viewer = self.__set_image_viewer()
+        self.__image_name = None
+        self.__qimage = None
 
     def __set_image_viewer(self) -> QtImageViewer:
         viewer = QtImageViewer()
@@ -23,6 +25,7 @@ class ImageViewer:
         return viewer
 
     def _update_image(self, image):
+        self.__image_name = image.scene_name() + "_" + image.name()
         ndarray = image.visual_data()
         ndarray_dimension = len(ndarray.shape)
         width = ndarray.shape[1]
@@ -39,9 +42,15 @@ class ImageViewer:
             # TODO handle this error properly
             return
 
-        qimage = QtGui.QImage(ndarray, width, height, bytes_per_line, image_format)
-        self.__viewer.setImage(qimage)
+        self.__qimage = QtGui.QImage(ndarray, width, height, bytes_per_line, image_format)
+        self.__viewer.setImage(self.__qimage)
         self.__viewer.show()
 
     def viewer(self) -> QtImageViewer:
         return self.__viewer
+
+    def name(self):
+        return self.__image_name
+
+    def save(self, filename):
+        return self.__qimage.save(filename)

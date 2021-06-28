@@ -115,3 +115,6 @@ class NDSI(Image):
 
     def name(self) -> str:
         return self.NAME
+
+    def scene_name(self):
+        return self.__green_band.scene_name()

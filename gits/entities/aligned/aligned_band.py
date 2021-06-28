@@ -18,3 +18,6 @@ class AlignedBand(AlignedImage):
 
     def band(self) -> Band:
         return self.__band
+
+    def scene_name(self):
+        return self.__band.scene_name()

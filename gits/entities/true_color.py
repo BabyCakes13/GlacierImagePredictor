@@ -13,6 +13,7 @@ class TrueColor(Image):
         self.__red_band = red_band
         self.__green_band = green_band
         self.__blue_band = blue_band
+        self.__scene_id = self.__red_band.scene_name()
 
     def name(self) -> str:
         return self.NAME
@@ -38,3 +39,6 @@ class TrueColor(Image):
 
     def visual_data(self) -> numpy.ndarray:
         return self.__image8bit()
+
+    def scene_name(self):
+        return self.__scene_id

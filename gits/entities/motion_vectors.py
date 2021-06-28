@@ -76,3 +76,10 @@ class MotionVectors(Image):
 
     def name(self) -> str:
         return self.NAME
+
+    def create_mask(self, image):
+        ret, threshold = cv2.threshold(image, 1, 0xFFFF, cv2.THRESH_BINARY_INV)
+        return threshold
+
+    def scene_name(self):
+        return self.__first_image.scene_name()

@@ -10,3 +10,6 @@ class AlignedTrueColor(AlignedImage):
 
     def name(self):
         return self.__true_color.name()
+
+    def scene_name(self):
+        return self.__true_color.scene_name()

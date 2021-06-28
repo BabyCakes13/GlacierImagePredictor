@@ -42,9 +42,29 @@ class Window():
         # details from the thumbnail. But thumbnail looks better. Eh.
         pass
 
+    def __save(self):
+
+        suggestedFileName = self.__main_display_windw.image_viewer().name() + ".tiff"
+        suggestedFilePath = "/tmp/"
+
+        fileName, typefilter = QtWidgets.QFileDialog.getSaveFileName(
+            self.__window,
+            "Save F:xile",
+            suggestedFilePath + suggestedFileName,
+            "Images (*.tiff *.png)")
+        self.__main_display_windw.image_viewer().save(fileName)
+
+    def createAction(self, name, shortcut, function):
+        act = QtWidgets.QAction(name, self.__window)
+        act.setShortcut(shortcut)
+        act.triggered.connect(function)
+        return act
+
     def __set_menu(self) -> None:
         self.menu = self.__window.menuBar().addMenu("&Menu")
-        self.menu.addAction('&Exit', self.__window.close)
+
+        self.menu.addAction(self.createAction('&Save', "Ctrl+S", self.__save))
+        self.menu.addAction(self.createAction('&Exit', "Ctrl+Q", self.__window.close))
 
     def __set_toolbar(self):
         tools = QtWidgets.QToolBar()

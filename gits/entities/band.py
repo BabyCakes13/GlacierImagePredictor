@@ -32,6 +32,7 @@ class Band(Image):
 
         self.__band_path = self.create_band_path(scene_path, scene_id, name)
         self.__ndarray = None
+        self.__scene_id = scene_id
 
         logger.debug("Created {}.".format(self.__str__()))
 
@@ -68,6 +69,9 @@ class Band(Image):
         """
         band_filename = ntpath.basename(self.__band_path)
         return band_filename[-5:-4]
+
+    def scene_name(self):
+        return self.__scene_id
 
     def name(self):
         return self.BAND_NAMING_CONVENTION[self.band_number()]

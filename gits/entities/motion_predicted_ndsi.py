@@ -177,6 +177,8 @@ class MotionPredictedNDSI(NDSI):
     def name(self) -> str:
         return self.NAME
 
+    def scene_name(self):
+        return self.__previous_image.scene_name()
 
 def filter_pixel(arg):
     point, shm, shape, dtype, height, width, kernel_size = arg
