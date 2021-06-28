@@ -135,7 +135,7 @@ class AlignedScene(SceneInterface):
         return self.__bands
 
     def thumbnail(self) -> AlignedBand:
-        return self._red_band
+        return self.ndsi()
 
     def ndsi(self) -> NDSI:
         return self.__ndsi
