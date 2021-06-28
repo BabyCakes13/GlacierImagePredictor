@@ -43,7 +43,14 @@ class MotionVectors(Image):
 
         self.__optical_flow = cv2.calcOpticalFlowFarneback(masked_first_image,
                                                            masked_second_image,
-                                                           None, 0.5, 6, 15, 3, 5, 1.2, 0)
+                                                           None,
+                                                           pyr_scale=0.5,
+                                                           levels=6,
+                                                           winsize=15,
+                                                           iterations=3,
+                                                           poly_n=5,
+                                                           poly_sigma=1.2,
+                                                           flags=0)
         tok = time.process_time()
         logger.success("Finished optical flow in {} seconds.".format(tok - tik))
 
