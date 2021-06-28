@@ -13,10 +13,12 @@
 \contentsline {figure}{\numberline {1.11}{\ignorespaces Overlapped unaligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}}{12}%
 \contentsline {figure}{\numberline {1.12}{\ignorespaces Overlapped aligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}}{13}%
 \contentsline {figure}{\numberline {1.13}{\ignorespaces Optical flow problem visualisation.}}{13}%
-\contentsline {figure}{\numberline {1.14}{\ignorespaces Motion generated NDSI.}}{14}%
+\contentsline {figure}{\numberline {1.14}{\ignorespaces Motion generated NDSI algorithm.}}{14}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Technical specifications of Download, GlacierFactory and Glacier classes.}}{16}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}}{20}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Technical diagram for the NDSI class.}}{20}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Technical specifications of Download, GlacierFactory and Glacier classes.}}{17}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}}{19}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Technical diagram for the NDSI class.}}{21}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Technical diagram for the MotionVectors class.}}{22}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Hue representation of the optical flow.}}{23}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -17,14 +17,6 @@ class MotionVectors(Image):
         self.__first_image = first_image
         self.__second_image = second_image
         self.__optical_flow = None
-        self.__first_mask = None
-        self.__second_mask = None
-
-        self.__mask_images()
-
-    def __mask_images(self) -> None:
-        self.__first_mask = self.__create_mask(self.__first_image.raw_data_16bit())
-        self.__second_mask = self.__create_mask(self.__second_image.raw_data_16bit())
 
     def __create_mask(self, image) -> numpy.ndarray:
         ret, threshold = cv2.threshold(image, 1, 0xFFFF, cv2.THRESH_BINARY_INV)
@@ -40,10 +32,13 @@ class MotionVectors(Image):
 
     def __compute_optical_flow(self) -> None:
         tik = time.process_time()
+
+        first_mask = self.__create_mask(self.__first_image.raw_data_16bit())
+        second_mask = self.__create_mask(self.__second_image.raw_data_16bit())
         masked_first_image = numpy.ma.masked_array(self.__first_image.raw_data_16bit(),
-                                                   mask=self.__second_mask).filled(0)
+                                                   mask=second_mask).filled(0)
         masked_second_image = numpy.ma.masked_array(self.__second_image.raw_data_16bit(),
-                                                    mask=self.__first_mask).filled(0)
+                                                    mask=first_mask).filled(0)
 
         self.__optical_flow = cv2.calcOpticalFlowFarneback(masked_first_image,
                                                            masked_second_image,
@@ -52,11 +47,14 @@ class MotionVectors(Image):
         logger.success("Finished optical flow in {} seconds.".format(tok - tik))
 
     def __colored_optical_flow(self) -> numpy.ndarray:
+        first_mask = self.__create_mask(self.__first_image.raw_data_16bit())
+        second_mask = self.__create_mask(self.__second_image.raw_data_16bit())
+
         optical_flow = self.raw_data()
         magnitude, angle = cv2.cartToPolar(optical_flow[..., 0], optical_flow[..., 1])
 
-        magnitude = numpy.ma.masked_array(magnitude, mask=self.__first_mask).filled(0)
-        magnitude = numpy.ma.masked_array(magnitude, mask=self.__second_mask).filled(0)
+        magnitude = numpy.ma.masked_array(magnitude, mask=first_mask).filled(0)
+        magnitude = numpy.ma.masked_array(magnitude, mask=second_mask).filled(0)
 
         colored_clone = cv2.cvtColor(self.__first_image.raw_data_16bit(), cv2.COLOR_GRAY2BGR)
         hsv = numpy.zeros_like(colored_clone).astype(numpy.uint8)
