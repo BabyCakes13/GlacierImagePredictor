@@ -21,7 +21,6 @@
 \contentsline {subsubsection}{NDSI's Optical Flow}{12}%
 \contentsline {subsubsection}{Motion Predicted NDSI}{14}%
 \contentsline {section}{\numberline {1.4}Graphical User Interface}{15}%
-\contentsline {subsection}{\numberline {1.4.1}Search and Download}{15}%
 \contentsline {chapter}{\numberline {2}Design and Implementation}{16}%
 \contentsline {section}{\numberline {2.1}Search and Download}{16}%
 \contentsline {paragraph}{Data corruption verification}{17}%
