@@ -125,12 +125,13 @@ class MotionPredictedNDSI(NDSI):
         self.__finished = multiprocessing.Value('i', 0)
 
         with multiprocessing.Pool(processes=cores) as executor:
-            executor.map(filter_pixel, [(point, shm,
-                                         self.__image.shape,
-                                         self.__image.dtype,
-                                         self.__height,
-                                         self.__width,
-                                         self.KERNEL_SIZE) for point in zero_point_pairs])
+            executor.map(CreatedImage.filter_pixel,
+                         [(point, shm,
+                           self.__image.shape,
+                           self.__image.dtype,
+                           self.__height,
+                           self.__width,
+                           self.KERNEL_SIZE) for point in zero_point_pairs])
 
         self.__image[:][:] = shm_image[:][:]
         shm.close()
@@ -180,33 +181,33 @@ class MotionPredictedNDSI(NDSI):
     def scene_name(self):
         return self.__previous_image.scene_name()
 
-def filter_pixel(arg):
-    point, shm, shape, dtype, height, width, kernel_size = arg
-    shm_image = numpy.ndarray(shape, dtype, buffer=shm.buf)
+    def filter_pixel(arg):
+        point, shm, shape, dtype, height, width, kernel_size = arg
+        shm_image = numpy.ndarray(shape, dtype, buffer=shm.buf)
 
-    y, x = point
-    if y < (height - kernel_size // 2) and y >= (kernel_size // 2) and \
-       x < (width - kernel_size // 2) and x >= (kernel_size // 2):
+        y, x = point
+        if y < (height - kernel_size // 2) and y >= (kernel_size // 2) and \
+           x < (width - kernel_size // 2) and x >= (kernel_size // 2):
 
-        image_chunk = shm_image
-        image_chunk = image_chunk[y - kernel_size // 2:y + kernel_size // 2 + 1,
-                                  x - kernel_size // 2:x + kernel_size // 2 + 1]
+            image_chunk = shm_image
+            image_chunk = image_chunk[y - kernel_size // 2:y + kernel_size // 2 + 1,
+                                      x - kernel_size // 2:x + kernel_size // 2 + 1]
 
-        kernel1d = [abs(abs((kernel_size+1)//2 - x) - (kernel_size+1)//2)
-                    for x in range(1, kernel_size+1)]
-        kernel = numpy.outer(kernel1d, kernel1d)
-        kernel[kernel_size // 2][kernel_size // 2] = 0
+            kernel1d = [abs(abs((kernel_size+1)//2 - x) - (kernel_size+1)//2)
+                        for x in range(1, kernel_size+1)]
+            kernel = numpy.outer(kernel1d, kernel1d)
+            kernel[kernel_size // 2][kernel_size // 2] = 0
 
-        zero_coordinates = numpy.where(image_chunk != image_chunk)
-        kernel[zero_coordinates[0], zero_coordinates[1]] = 0
-        minus_one_coordinates = numpy.where(image_chunk == MotionPredictedNDSI.INITIAL_VALUE)
-        kernel[minus_one_coordinates[0], minus_one_coordinates[1]] = 0
+            zero_coordinates = numpy.where(image_chunk != image_chunk)
+            kernel[zero_coordinates[0], zero_coordinates[1]] = 0
+            minus_one_coordinates = numpy.where(image_chunk == MotionPredictedNDSI.INITIAL_VALUE)
+            kernel[minus_one_coordinates[0], minus_one_coordinates[1]] = 0
 
-        image_chunk[image_chunk != image_chunk] = 0
+            image_chunk[image_chunk != image_chunk] = 0
 
-        weights_sum = numpy.sum(kernel)
-        if weights_sum == 0:
-            return NDSI.VALUE_INTERVAL[0]
-        nominator = numpy.sum(image_chunk * kernel)
-        value = nominator / weights_sum
-        shm_image[y][x] = value
+            weights_sum = numpy.sum(kernel)
+            if weights_sum == 0:
+                return NDSI.VALUE_INTERVAL[0]
+            nominator = numpy.sum(image_chunk * kernel)
+            value = nominator / weights_sum
+            shm_image[y][x] = value
