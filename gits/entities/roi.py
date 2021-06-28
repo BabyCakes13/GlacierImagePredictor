@@ -1,11 +1,12 @@
 from entities.scene import Scene
 from entities.aligned.aligned_scene import AlignedScene
 from utils import logging
+from typing import Tuple
 logger = logging.getLogger(__name__)
 
 
 class RegionOfInterest:
-    def __init__(self, wgi_path: int, wgi_row: int):
+    def __init__(self, wgi_path: int, wgi_row: int, month_range: Tuple[int, int]):
         """
         Constructor of the RegionOfInterest class.
 
@@ -14,6 +15,7 @@ class RegionOfInterest:
         """
         self.__path = wgi_path
         self.__row = wgi_row
+        self.__month_range = month_range
 
         self.__scenes = []
         self.__aligned_scenes = []
@@ -33,6 +35,9 @@ class RegionOfInterest:
 
     def row(self):
         return self.__row
+
+    def monthrange(self):
+        return self.__month_range
 
     def add_scene(self, scene: Scene) -> None:
         self.__set_reference(scene)
@@ -58,11 +63,15 @@ class RegionOfInterest:
             logger.info(scene)
 
     def str_path_row(self) -> str:
-        return str(self.__path) + ":" + str(self.__row)
+        return str(self.__path) + ":" + str(self.__row) \
+            + " M " + str(self.__month_range[0]) + "-" + str(self.__month_range[1]) \
+            + " cnt: " + str(len(self.__scenes))
 
     def __eq__(self, other):
         if isinstance(other, RegionOfInterest):
-            return self.__path == other.path() and self.__row == other.row()
+            return self.__path == other.path() and self.__row == other.row() \
+                and self.__month_range[0] == other.monthrange()[0] \
+                and self.__month_range[1] == other.monthrange()[1]
         return False
 
     def __str__(self):

@@ -21,12 +21,12 @@ class Glacier:
         self.__latitude = latitude
         self.__longitude = longitude
 
-        self.__number_scenes = 0
-        self.__bbox = None
+        self.__number_of_scenes = 0
+        self.__bbox = self.__define_bounding_box()
 
         logger.debug("Created {}.".format(self.__str__()))
 
-    def define_bounding_box(self) -> list:
+    def __define_bounding_box(self) -> list:
         """
         Function for defining a boundig box based on the glacier's coordinates.
 
@@ -76,23 +76,22 @@ class Glacier:
     def name(self) -> str:
         return self.__name
 
-    def set_number_scenes(self, number_scenes: int):
+    def set_number_scenes(self, number_of_scenes: int) -> None:
         """
         Function which sets the number of scenes found for the glacier.
 
         :param number_scenes: The number of scenes the search query found for the glacier at the
                               search step.
         """
-        self.__number_scenes = number_scenes
+        self.__number_of_scenes = number_of_scenes
+        logger.debug("Found {} scenes for glacier {}".format(number_of_scenes, self.wgi_id()))
 
-        logger.debug("Found {} scenes for glacier {}".format(number_scenes, self.wgi_id()))
+    def number_of_scenes(self) -> int:
+        return self.__number_of_scenes
 
-    def number_scenes(self) -> int:
-        return self.__number_scenes
-
-    def __str__(self):
+    def __str__(self) -> str:
         return "Glacier[{}, {}, {}, {}, {}]".format(self.__wgi_id,
                                                     self.__latitude,
                                                     self.__longitude,
-                                                    self.__number_scenes,
+                                                    self.__number_of_scenes,
                                                     self.__name)

@@ -1,0 +1,67 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Disertation.aux
+The style file: alpha.bst
+Database file #1: references.bib
+Warning--to sort, need author or key in C1L1
+Warning--to sort, need author or key in LANDSATPIC
+Warning--to sort, need author or key in LANDSAT
+Warning--to sort, need author or key in wrs
+Warning--to sort, need author or key in sn
+Warning--to sort, need author or key in l8otb
+Warning--to sort, need author or key in lgng
+Warning--to sort, need author or key in bands
+Warning--to sort, need author or key in WGI
+Warning--to sort, need author or key in USGS
+Warning--to sort, need author or key in STAC
+Warning--to sort, need author or key in lc1l1
+Warning--to sort, need author or key in bd
+Warning--to sort, need author or key in ndsi
+Warning--to sort, need author or key in opticalflow
+Warning--to sort, need author or key in orb
+Warning--empty booktitle in ransac2
+Warning--empty booktitle in ransac
+Warning--empty booktitle in viirs
+Warning--empty booktitle in lukas
+You've used 21 entries,
+            2543 wiz_defined-function locations,
+            624 strings with 6537 characters,
+and the built_in function-call counts, 5153 in all, are:
+= -- 517
+> -- 89
+< -- 2
++ -- 24
+- -- 22
+* -- 247
+:= -- 667
+add.period$ -- 64
+call.type$ -- 21
+change.case$ -- 92
+chr.to.int$ -- 20
+cite$ -- 57
+duplicate$ -- 243
+empty$ -- 580
+format.name$ -- 29
+if$ -- 1175
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 5
+newline$ -- 108
+num.names$ -- 15
+pop$ -- 240
+preamble$ -- 1
+purify$ -- 113
+quote$ -- 0
+skip$ -- 169
+stack$ -- 0
+substring$ -- 164
+swap$ -- 22
+text.length$ -- 2
+text.prefix$ -- 2
+top$ -- 0
+type$ -- 168
+warning$ -- 20
+while$ -- 13
+width$ -- 25
+write$ -- 235
+(There were 20 warnings)

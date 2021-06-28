@@ -18,13 +18,13 @@ class TrueColor(Image):
         return self.NAME
 
     def __combine(self) -> numpy.ndarray:
-        image_dimension = self.__red_band.ndarray().shape
+        image_dimension = self.__red_band.raw_data().shape
         image = numpy.zeros((image_dimension[0],
                              image_dimension[1],
                              3), dtype=numpy.uint16)
-        image[:, :, 0] = self.__red_band.ndarray()*0.75
-        image[:, :, 1] = self.__green_band.ndarray()
-        image[:, :, 2] = self.__blue_band.ndarray()
+        image[:, :, 0] = self.__red_band.raw_data()*0.75
+        image[:, :, 1] = self.__green_band.raw_data()
+        image[:, :, 2] = self.__blue_band.raw_data()
 
         return image
 
@@ -33,8 +33,8 @@ class TrueColor(Image):
         image8bit = (image16bit/256).astype(numpy.uint8)
         return image8bit
 
-    def ndarray(self):
+    def raw_data(self) -> numpy.ndarray:
         return self.__image8bit()
 
-    def _raw_ndarray(self) -> numpy.ndarray:
-        return self.ndarray()
+    def visual_data(self) -> numpy.ndarray:
+        return self.__image8bit()

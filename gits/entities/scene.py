@@ -48,23 +48,23 @@ class Scene(SceneInterface):
     def __str__(self):
         return "Scene[{}]".format(self.scene_id().scene_id())
 
-    def descriptors(self):
+    def descriptors(self) -> numpy.ndarray:
         descriptors = self.bands()[0].descriptors()
         for band in self.bands()[1:-1]:
             descriptors = numpy.vstack((descriptors, band.descriptors()))
         return descriptors
 
-    def keypoints(self):
+    def keypoints(self) -> list:
         keypoints = []
         for band in self.bands()[:-1]:
             keypoints += band.keypoints()
         return keypoints
 
     def width(self):
-        return self._red_band.ndarray().shape[1]
+        return self._red_band.raw_data().shape[1]
 
     def height(self):
-        return self._red_band.ndarray().shape[0]
+        return self._red_band.raw_data().shape[0]
 
 
 def find_scene_by_wgi_id(scene_id: str, scenes: list):

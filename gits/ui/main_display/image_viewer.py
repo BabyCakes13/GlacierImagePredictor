@@ -23,7 +23,7 @@ class ImageViewer:
         return viewer
 
     def _update_image(self, image):
-        ndarray = image.ndarray()
+        ndarray = image.visual_data()
         ndarray_dimension = len(ndarray.shape)
         width = ndarray.shape[1]
         height = ndarray.shape[0]

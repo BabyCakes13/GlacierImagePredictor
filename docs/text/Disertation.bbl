@@ -1,0 +1,119 @@
+\begin{thebibliography}{LANb}
+
+\bibitem[ban]{bands}
+bands.
+\newblock
+  \url{https://www.usgs.gov/faqs/what-are-best-landsat-spectral-bands-use-my-research/}.
+\newblock Accessed: 2021-06-21.
+
+\bibitem[bd]{bd}
+bd.
+\newblock \url{https://landsat.gsfc.nasa.gov/landsat-8/landsat-8-bands/}.
+\newblock Accessed: 2021-06-22.
+
+\bibitem[C1L]{C1L1}
+Landsat collection 1.
+\newblock
+  \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-1?qt-science_support_page_related_con=1#qt-science_support_page_related_con}.
+\newblock Accessed: 2021-06-20.
+
+\bibitem[Der10]{ransac2}
+Konstantinos~G. Derpanis.
+\newblock Overview of the ransac algorithm.
+\newblock 2010.
+
+\bibitem[FB81]{ransac}
+M.A. Fischler and R.C. Bolles.
+\newblock Random sample consensus: A paradigm for modelfitting with
+  applications to image analysis and automated cartography.
+\newblock 1981.
+
+\bibitem[Hal15]{viirs}
+Dr. Dorothy~K Hall.
+\newblock Viirs snow cover algorithm theoretical basis document (atbd).
+\newblock 2015.
+
+\bibitem[KK14]{lolidcp}
+Edward~J Knight and Geir Kvaran.
+\newblock Landsat-8 operational land imager design, characterization and
+  performance.
+\newblock In {\em Proceedings of the ECAI 94 Workshop on Applications of
+  Evolutionary Algorithms}. Landsat-8 Sensor Characterization and Calibration,
+  2014.
+
+\bibitem[l8o]{l8otb}
+l8otb.
+\newblock \url{https://gisgeography.com/landsat-8-bands-combinations/}.
+\newblock Accessed: 2021-06-22.
+
+\bibitem[LANa]{LANDSAT}
+Landsat.
+\newblock
+  \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-8?qt-science_support_page_related_con=0#}.
+\newblock Accessed: 2021-06-21.
+
+\bibitem[LANb]{LANDSATPIC}
+Landsatpic.
+\newblock \url{https://landsat.gsfc.nasa.gov/sites/landsat/files/2013/01}.
+\newblock Accessed: 2021-06-21.
+
+\bibitem[lc1]{lc1l1}
+lc1l1.
+\newblock
+  \url{https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1656_%20Landsat_Collection1_L1_Product_Definition-v2.pdf}.
+\newblock Accessed: 2021-06-22.
+
+\bibitem[lgn]{lgng}
+lgng.
+\newblock \url{https://landsat.gsfc.nasa.gov/}.
+\newblock Accessed: 2021-06-21.
+
+\bibitem[LK81]{lukas}
+B.~D. Lucas and T.~Kanade.
+\newblock An iterative image registration technique with an application to
+  stereo vision.
+\newblock 1981.
+
+\bibitem[nds]{ndsi}
+ndsi.
+\newblock
+  \url{https://nsidc.org/support/faq/what-ndsi-snow-cover-and-how-does-it-compare-fsc}.
+\newblock Accessed: 2021-06-22.
+
+\bibitem[opt]{opticalflow}
+opticalflow.
+\newblock \url{https://nanonets.com/blog/optical-flow/}.
+\newblock Accessed: 2021-06-25.
+
+\bibitem[orb]{orb}
+orb.
+\newblock \url{https://docs.opencv.org/4.5.2/d1/d89/tutorial_py_orb.html}.
+\newblock Accessed: 2021-06-24.
+
+\bibitem[sn]{sn}
+sn.
+\newblock \url{https://gisgeography.com/landsat-file-naming-convention/}.
+\newblock Accessed: 2021-06-22.
+
+\bibitem[STA]{STAC}
+Stac.
+\newblock \url{https://stacspec.org/STAC-api.html}.
+\newblock Accessed: 2021-06-20.
+
+\bibitem[USG]{USGS}
+Usgs.
+\newblock \url{https://earthexplorer.usgs.gov/}.
+\newblock Accessed: 2021-06-21.
+
+\bibitem[WGI]{WGI}
+World glacier inventory.
+\newblock \url{http://nsidc.org/data/glacier_inventory/index.html}.
+\newblock Accessed: 2021-06-20.
+
+\bibitem[wrs]{wrs}
+wrs.
+\newblock
+  \url{https://landsat.gsfc.nasa.gov/about/worldwide-reference-system/}.
+\newblock Accessed: 2021-06-22.
+
+\end{thebibliography}

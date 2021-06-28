@@ -15,18 +15,18 @@ class Image:
         self.__keypoints = None
         self.__descriptors = None
 
-    def ndarray(self) -> numpy.ndarray:
+    def raw_data(self) -> numpy.ndarray:
         pass
 
-    def _raw_ndarray(self) -> numpy.ndarray:
+    def visual_data(self) -> numpy.ndarray:
         pass
 
-    def descriptors(self):
+    def descriptors(self) -> numpy.ndarray:
         if self.__descriptors is None:
             self.__compute_keypoint_descriptors()
         return self.__descriptors
 
-    def keypoints(self):
+    def keypoints(self) -> list:
         if self.__keypoints is None:
             self.__compute_keypoint_descriptors()
         return self.__keypoints
@@ -39,7 +39,7 @@ class Image:
         self.__keypoints, self.__descriptors = orb.compute(self._normalized_downsampled_ndarray(),
                                                            keypoints)
 
-    def __compute_boxed_keypoints(self, image, orb):
+    def __compute_boxed_keypoints(self, image, orb) -> list:
         """
         Splits the image in n boxes and applies feature finding in each, such that the keypoints
         are evenly distributed throughout the image, avoiding warp distortion in the case there are
@@ -67,7 +67,7 @@ class Image:
         return keypoints
 
     def _normalized_downsampled_ndarray(self) -> numpy.ndarray:
-        normalized_image = self._normalize_to_16bit(self._raw_ndarray())
+        normalized_image = self._normalize_to_16bit(self.raw_data())
         image = self.__downsample_16bit_to_8bit(normalized_image)
         return image
 
