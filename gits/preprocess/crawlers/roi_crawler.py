@@ -5,7 +5,7 @@ from entities.scene import Scene
 from entities.glacier import Glacier
 
 import os
-
+import operator
 from utils import logging
 logger = logging.getLogger(__name__)
 
@@ -43,13 +43,65 @@ class RoiCrawler(Crawler):
         allscenes.sort(key=lambda x: x.scene_id().scene_id())
 
         for scene in allscenes:
-            self.__create_roi_objects(scene)
+            print("Scene {} month {} year {}".format(scene.scene_id().scene_id(),
+                                                     scene.scene_id().month(),
+                                                     scene.scene_id().year()))
+
+        clustered_scenes = self.__cluster_scenes(allscenes)
+
+        for scene_group in clustered_scenes:
+            month_range_low = scene_group[0][0]
+            month_range_high = scene_group[-1][0]
+            for scene_pair in scene_group:
+                scene = scene_pair[1]
+                self.__create_roi_objects(scene, (month_range_low, month_range_high))
 
         return self.__rois
 
-    def __create_roi_objects(self, scene):
+    def __cluster_scenes(self, scenes):
+        monthlist = []
+        for scene in scenes:
+            monthlist.append((scene.scene_id().month(), scene))
+
+        monthlist.sort(key=lambda x: x[0])
+        print("Monthlist ", monthlist)
+
+        shifted = monthlist[1:]
+        shifted.append(monthlist[0])
+        print("shifted   ", shifted)
+
+        gaps = list(map(lambda x, y: x[0]-y[0], shifted, monthlist))
+        for i, gap in enumerate(gaps):
+            if gap < 0:
+                gaps[i] = gap + 12
+        print("gaps      ", gaps)
+
+        groups = [[]]
+        activegroup = 0
+        for i, gap in enumerate(gaps):
+            groups[activegroup].append(monthlist[i])
+            if gap > 0:
+                groups.append([])
+                activegroup += 1
+
+        if len(groups[-1]) == 0:
+            groups.pop(-1)
+
+        # if gaps[-1] <= 1:
+        #     groups[-1].extend(groups[0])
+        #     if(len(groups) > 1):
+        #         groups.pop(0)
+
+        for group in groups:
+            group.sort(key=lambda x:x[1].scene_id().scene_id())
+
+        print("grouped  ", groups)
+
+        return groups
+
+    def __create_roi_objects(self, scene, month_range):
         scene_id = scene.scene_id()
-        roi = RegionOfInterest(scene_id.path(), scene_id.row())
+        roi = RegionOfInterest(scene_id.path(), scene_id.row(), month_range)
         roi = self.__add_roi(roi)
         roi.add_scene(scene)
 
