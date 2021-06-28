@@ -42,7 +42,7 @@ class AlignedScene(SceneInterface):
         self.__bands.append(self.__ndsi)
 
         if previous_scene is not None:
-            self.__motion_vectors = MotionVectors(self.__ndsi, previous_scene.ndsi())
+            self.__motion_vectors = MotionVectors(previous_scene.ndsi(), self.__ndsi)
             self.__bands.append(self.__motion_vectors)
 
             self.__motion_predicted_ndsi = MotionPredictedNDSI(self.__motion_vectors, self.ndsi())
