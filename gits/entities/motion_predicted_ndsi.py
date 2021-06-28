@@ -27,6 +27,12 @@ class MotionPredictedNDSI(NDSI):
         self.__finished = 0
         self.__total_zero_points = 0
 
+    def name(self) -> str:
+        return self.NAME
+
+    def scene_name(self):
+        return self.__previous_image.scene_name()
+
     @property
     def __width(self):
         if self.__w is None:
@@ -125,7 +131,7 @@ class MotionPredictedNDSI(NDSI):
         self.__finished = multiprocessing.Value('i', 0)
 
         with multiprocessing.Pool(processes=cores) as executor:
-            executor.map(CreatedImage.filter_pixel,
+            executor.map(MotionPredictedNDSI.filter_pixel,
                          [(point, shm,
                            self.__image.shape,
                            self.__image.dtype,
@@ -140,54 +146,12 @@ class MotionPredictedNDSI(NDSI):
         tok = time.process_time()
         logger.success("Finished filtering in {}".format(tok - tic))
 
-    def _filter_pixel_by_average(self, pixel):
-        y, x = pixel
-        if self.__point_inside_boundary(y, x):
-            self.__image[y][x] = self.__average_pixel(y, x)
-            self.__finished += 1
-            if self.__finished % 10000 == 0:
-                progress(self.__finished, self.__total_zero_points, "Finished generating image.")
-
-    def __point_inside_boundary(self, y, x) -> bool:
-        if y < (self.__height - self.KERNEL_SIZE // 2) and y >= (self.KERNEL_SIZE // 2) and \
-           x < (self.__width - self.KERNEL_SIZE // 2) and x >= (self.KERNEL_SIZE // 2):
-            return True
-        return False
-
-    def __average_pixel(self,  y, x) -> int:
-        image_chunk = self.__image
-        image_chunk = image_chunk[y - self.KERNEL_SIZE // 2:y + self.KERNEL_SIZE // 2 + 1,
-                                  x - self.KERNEL_SIZE // 2:x + self.KERNEL_SIZE // 2 + 1]
-        kernel = self.__remove_weight_for_number(image_chunk, self.__kernel, numpy.nan)
-        kernel = self.__remove_weight_for_number(image_chunk, kernel, MotionPredictedNDSI.INITIAL_VALUE)
-
-        weights_sum = numpy.sum(kernel)
-        if weights_sum == 0:
-            return NDSI.VALUE_INTERVAL[0]
-        nominator = numpy.sum(image_chunk * kernel)
-        value = nominator // weights_sum
-
-        return value
-
-    def __remove_weight_for_number(self, image_chunk, kernel, number) -> numpy.ndarray:
-        number_coordinates = numpy.where(image_chunk == number)
-        kernel_without_weight = numpy.copy(kernel)
-        kernel_without_weight[number_coordinates[0], number_coordinates[1]] = 0
-        return kernel_without_weight
-
-    def name(self) -> str:
-        return self.NAME
-
-    def scene_name(self):
-        return self.__previous_image.scene_name()
-
     def filter_pixel(arg):
         point, shm, shape, dtype, height, width, kernel_size = arg
         shm_image = numpy.ndarray(shape, dtype, buffer=shm.buf)
 
         y, x = point
-        if y < (height - kernel_size // 2) and y >= (kernel_size // 2) and \
-           x < (width - kernel_size // 2) and x >= (kernel_size // 2):
+        if MotionPredictedNDSI.__point_inside_boundary(kernel_size, width, height, y, x):
 
             image_chunk = shm_image
             image_chunk = image_chunk[y - kernel_size // 2:y + kernel_size // 2 + 1,
@@ -211,3 +175,9 @@ class MotionPredictedNDSI(NDSI):
             nominator = numpy.sum(image_chunk * kernel)
             value = nominator / weights_sum
             shm_image[y][x] = value
+
+    def __point_inside_boundary(KERNEL_SIZE, width, height, y, x) -> bool:
+        if y < (height - KERNEL_SIZE // 2) and y >= (KERNEL_SIZE // 2) and \
+           x < (width - KERNEL_SIZE // 2) and x >= (KERNEL_SIZE // 2):
+            return True
+        return False
