@@ -33,7 +33,7 @@ class AlignedImage(Image):
         path = self.__image.create_band_path(suffix="_ALIGNED_")
         if os.path.exists(path):
             logger.notice("Read cached file: " + path)
-            self.__aligned_ndarray = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+            self.__aligned_ndarray = cv2.imread(path, cv2.IMREAD_ANYDEPTH)
             return self.__aligned_ndarray
 
         self.__align()
