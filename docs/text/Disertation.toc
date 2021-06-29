@@ -1,40 +1,42 @@
 \babel@toc {english}{}
-\contentsline {chapter}{\numberline {1}Application}{1}%
-\contentsline {section}{\numberline {1.1}Dataset}{1}%
-\contentsline {subsection}{\numberline {1.1.1}Landsat 8}{1}%
-\contentsline {paragraph}{Worldwide Reference System-2}{1}%
-\contentsline {subsubsection}{Landsat scene naming convention}{2}%
-\contentsline {subsubsection}{Operational Land Imager}{2}%
-\contentsline {subsubsection}{Thermal Infrared Sensor}{3}%
-\contentsline {subsubsection}{OLI and TIRS bands}{3}%
-\contentsline {subsection}{\numberline {1.1.2}World Glacier Inventory}{4}%
-\contentsline {subsection}{\numberline {1.1.3}Asset Acquisition}{6}%
-\contentsline {subsubsection}{USGS Earth Explorer}{6}%
-\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{7}%
-\contentsline {subsubsection}{Landsat 8 Collection 1, Tier 1}{8}%
-\contentsline {section}{\numberline {1.2}Dataset entities}{8}%
-\contentsline {subsection}{\numberline {1.2.1}Bands}{8}%
-\contentsline {subsubsection}{Band 3 - Green Band}{9}%
-\contentsline {subsubsection}{Band 6 - SWIR1 Band}{9}%
-\contentsline {subsubsection}{Normalized Snow Difference Index}{10}%
-\contentsline {section}{\numberline {1.3}Alignment}{12}%
-\contentsline {subsubsection}{NDSI's Optical Flow}{12}%
-\contentsline {subsubsection}{Motion Predicted NDSI}{14}%
-\contentsline {section}{\numberline {1.4}Graphical User Interface}{15}%
-\contentsline {chapter}{\numberline {2}Design and Implementation}{16}%
-\contentsline {section}{\numberline {2.1}Search and Download}{16}%
-\contentsline {paragraph}{Data corruption verification}{17}%
-\contentsline {section}{\numberline {2.2}Processing}{18}%
-\contentsline {subsection}{\numberline {2.2.1}Alignment}{18}%
-\contentsline {subsubsection}{Alignment algorithms}{20}%
-\contentsline {subsection}{\numberline {2.2.2}Normalized Snow Difference Index}{21}%
-\contentsline {subsection}{\numberline {2.2.3}NDSI's Optical Flow}{21}%
-\contentsline {subsection}{\numberline {2.2.4}Motion Predicted NDSI}{23}%
-\contentsline {subsection}{\numberline {2.2.5}Generated image filtering}{25}%
-\contentsline {chapter}{List Of Figures}{28}%
-\contentsline {chapter}{List Of Tables}{29}%
-\contentsline {chapter}{\numberline {3}Performance}{33}%
-\contentsline {chapter}{\numberline {4}Conclusions}{34}%
-\contentsline {section}{\numberline {4.1}Future Development}{34}%
-\contentsline {chapter}{\numberline {5}Glossary}{35}%
-\contentsline {section}{\numberline {5.1}Acronyms}{35}%
+\contentsline {section}{\numberline {0.1}The context of this thesis}{1}%
+\contentsline {section}{\numberline {0.2}Our Contribution}{1}%
+\contentsline {chapter}{List Of Figures}{4}%
+\contentsline {chapter}{List Of Tables}{6}%
+\contentsline {chapter}{\numberline {1}Application}{8}%
+\contentsline {section}{\numberline {1.1}Dataset}{8}%
+\contentsline {subsection}{\numberline {1.1.1}Landsat 8}{8}%
+\contentsline {paragraph}{Worldwide Reference System-2}{8}%
+\contentsline {subsubsection}{Landsat scene naming convention}{9}%
+\contentsline {subsubsection}{Operational Land Imager}{9}%
+\contentsline {subsubsection}{Thermal Infrared Sensor}{10}%
+\contentsline {subsubsection}{OLI and TIRS bands}{10}%
+\contentsline {subsection}{\numberline {1.1.2}World Glacier Inventory}{11}%
+\contentsline {subsection}{\numberline {1.1.3}Asset Acquisition}{13}%
+\contentsline {subsubsection}{USGS Earth Explorer}{13}%
+\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{14}%
+\contentsline {subsubsection}{Landsat 8 Collection 1, Tier 1}{15}%
+\contentsline {section}{\numberline {1.2}Dataset entities}{15}%
+\contentsline {subsection}{\numberline {1.2.1}Bands}{15}%
+\contentsline {subsubsection}{Band 3 - Green Band}{16}%
+\contentsline {subsubsection}{Band 6 - SWIR1 Band}{16}%
+\contentsline {subsubsection}{Normalized Snow Difference Index}{17}%
+\contentsline {section}{\numberline {1.3}Alignment}{18}%
+\contentsline {subsubsection}{NDSI's Optical Flow}{20}%
+\contentsline {subsubsection}{Motion Predicted NDSI}{21}%
+\contentsline {section}{\numberline {1.4}Graphical User Interface}{22}%
+\contentsline {chapter}{\numberline {2}Design and Implementation}{24}%
+\contentsline {section}{\numberline {2.1}Search and Download}{24}%
+\contentsline {paragraph}{Data corruption verification}{25}%
+\contentsline {section}{\numberline {2.2}Processing}{26}%
+\contentsline {subsection}{\numberline {2.2.1}Alignment}{26}%
+\contentsline {subsubsection}{Alignment algorithms}{28}%
+\contentsline {subsection}{\numberline {2.2.2}Normalized Snow Difference Index}{29}%
+\contentsline {subsection}{\numberline {2.2.3}NDSI's Optical Flow}{29}%
+\contentsline {subsection}{\numberline {2.2.4}Motion Predicted NDSI}{31}%
+\contentsline {subsection}{\numberline {2.2.5}Generated image filtering}{34}%
+\contentsline {chapter}{\numberline {3}Performance}{37}%
+\contentsline {chapter}{\numberline {4}Conclusions}{38}%
+\contentsline {section}{\numberline {4.1}Future Development}{38}%
+\contentsline {chapter}{\numberline {5}Glossary}{41}%
+\contentsline {section}{\numberline {5.1}Acronyms}{41}%

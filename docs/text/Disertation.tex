@@ -130,6 +130,58 @@
 
 	% =====================================================================
 	
+	\begin{abstract} %begin abstract  
+		%The abstract should have one page and should be a compact presentation of the dissertation.
+		\vspace{1.0cm}
+		\vspace{1.0cm}
+		\par
+		
+			
+		Over the last decade, climate change has impacted Earths' atmosphere and environment more than anytime before. Studies held by NASA confirmed that the second hottest year ever recorded was 2019 and the recorded temperatures of the ocean have never been higher. One way to track these changes is to study the retreat of glaciers, since they are the most sensitive climate change indicators. Since NASA and USGS launched their first Earth observation satellite in 23 July 1972, millions of images of the Earth have been stored and are freely to use for various fields of research. 
+		\vskip 0.2cm
+		Having this in mind, the goal of our application is to analyse the retreat of glaciers over time by using advanced computer vision algorithms which are able to detect movement of pixels based on a time series of aerial scenes collected from the Landsat 8 satellite. By analysing the directions of glacier retreat over time, we try to generate future images of how they might change. The snowfall and ice percentages of a glacier for a satellite image are also taken into consideration as a validation of our results. The application has also been made with the goal of being simple to use and easy to access for anyone who wants to get involved and make a contribution. 
+		\vskip 0.2cm
+		This theses contains information about the application's functionality, processing mechanics and experiments on various glaciers. In order to have a self sufficient environment,  both search and download of Landsat 8 assets facilities have been made available, such that one does not need to have an already created dataset of glacier satellite images.  As for generating a motion predicted image, we need to extract movement information between two consecutive scenes which have had their snow and ice pixels highlighted; the scenes are then passed to the computer vision algorithm which extracts the motion (optical flow) of each pixel and vectors of movement are generated. The results are used to further extend this movement trend which generates a predicted image.
+		
+	\end{abstract} %end abstract
+
+	\section{The context of this thesis} 
+
+	Climate change has become one of the biggest problems in the past years, human activities being one of the main factors by inducing global warming \cite{climate_change_1}. Due to heavy industrialisation of the society since the Industrial Revolution around the VII century, the levels of carbon dioxide in the atmosphere have grown beyond the capacity of natural elimination, creating the greenhouse effect. 
+	
+	The greenhouse effect is the process in which the radiation from a planet's atmosphere warms the planet surface above that normal temperature \cite{greenhouse}. The main causes of this change are human activities such as combustion of fossil fuels (coal, oil, natural gas), deforestation, soil erosion and agriculture \cite{climate_change_2}. If the change continues at this rate, there is an estimation that the average surface temperature will surpass \textdegree{3}  C this century \cite{climate_change_3}. Though it may not seem a lot, there is a scenario created over 30 years into the future explaining what this increase actually means: from 2020 to 2030 the temperature is set to rise above \textdegree{1.6}C; by this report, it is estimated that the average temperature will increase with \textdegree{3}C around 2050, in which case even if gas emissions are stopped, there will be another rise of at least \textdegree{1}C \cite{climate_change_4}. 
+	
+	One of the ways of creating an overview of the last decades of climate change is by analysing the change in the glaciers, since they are among the most sensitive indicators of climate change \cite{glacier_1}. The retreat of a glacier is caused by an increase of the temperature and less snowfall, a process which has been accelerated recently, due to the global warming \cite{glacier_2}.
+	
+	In the context of these changes, which are already beginning to impact the society and environment, I strongly believe that we have to take advantage of every opportunity to better understand and predict these changes, so proper preparations and actions could be taken as soon as possible. 
+
+
+	\section{Our Contribution}
+	
+	This paper uses image analysis techniques paired with artificial intelligent algorithms to create a time series analysis on the snow coverage of glaciers around the globe, while using methods which prove to be highly performant and accurate:
+	\begin{itemize}
+		\item Alignment of images with accuracy rate of \textbf{98\%} percent for the successful processed ones;
+		\item Successful alignment of approximately \textbf{85\%} images for a Landsat 8 iamge;
+		\item Snow coverage prediction with approximate \textbf{20\%} mean error.
+	\end{itemize}.
+	The results were achieved by calculating the NDSI for extracting snow pixels from a Landsat 8 image on a set of images for a glacier which has been split into path and row coordinates, paired up with alignment of the resulting images for displaying their differences over the years. The Normalized Difference Snow Index (NDSI) was obtained by calculating a formula which uses the green and SWIR1 bands from a scene and applying a threshold in order detect snow. The method of snow extraction was chosen to be NDSI calculation due to snow's high reflectance in the visible spectrum and high absorption in the short-wave infrared one. 
+	\vskip 0.2cm
+	After the snow coverage has been extracted, the NDSI, green and SWIR1 images are aligned based on a reference image, such that creation of an image which highlights the presence or absence of snow between two scenes, and one with highlight the movement can be created without pixel discrepancy errors. By reducing the misalignment to almost 0 shift, the results are reliable. 
+	Prediction of snow coverage is done by creating a data set containing snow ratio information extracted from the NDSI images, which is normalized (outliers are removed) and split into a train section and a test one, also having future predictions. The results are plotted for easier data interpretation and they highlight the pattern of snow coverage in the past years, as well as future ones, with a small error percent (approximately 20\%). An exact estimation of the error rate cannot be given due to the fact prediction is highly dependent on NDSI values, which are based on a high number of glacier variables such as the quality of image, the seasonal variation and other factors.  
+	\vskip  0.2cm
+	The thesis application can be used as an command line interface, as well as a graphical user one, in order to include a user group of both specialized and non-specialized in the field. 
+	.
+	\newpage{}
+
+	
+	\tableofcontents{}
+	\addcontentsline{toc}{chapter}{List Of Figures}
+	\listoffigures{}
+	\addcontentsline{toc}{chapter}{List Of Tables}
+	\listoftables{}
+	
+	\newpage{}
+	
 	\chapter{Application}
 	\section{Dataset}
 	In order to build the dataset, we made use of the freely available data from the Landsat Archive, specifically from collection 1, level 1. This consists of data products generated from Landsat 8 Operational Land Imager/Thermal Infrared Sensor, Landsat 7 Enhanced Thematic Mapper Plus, Landsat 4-5 Thematic Mapper, and Landsat 1-5 Multispectral Scanner instruments \cite{C1L1}. For the purpose of this paper, we will focus only on images collected from the Landsat 8 satellite.
@@ -397,13 +449,22 @@
 			\text{snow-free land}, & \text{NDSI < 0.0}
 		\end{cases}
 	\end{equation}
-	An example of a generated NDSI for the Belvedere glacier, scene LC81950282015098LGN01, can be viewed in Figure~\ref{fig:belvedere_ndsi}.
+	An example of a generated NDSI for the Belvedere glacier, scene LC81940282013341LGN01, can be viewed in Figure~\ref{fig:belvedere_ndsi}.
 	\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.445\textwidth}
 		\centering
-		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_ndsi.png}
-		\caption{NDSI of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}
-		\label{fig:belvedere_ndsi}
+		\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_NDSI_scaled.png}
+	\end{minipage}
+	\begin{minipage}{0.50\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_NDSI_small.png}
+	\end{minipage}
+	\caption{NDSI image of scene LC81940282013341LGN01.}
+	\label{fig:belvedere_ndsi}
 	\end{figure}
+
+	% ==================================================================================
 
 	\section{Alignment}
 	\label{seq:alignment_functional}
@@ -452,6 +513,20 @@
 	There are multiple types of optical flow algorithms, but for the purpose of our thesis, we have chosen the \textbf{dense optical flow} one, specifically \textbf{Gunnar Farneback's}. Even if dense implementations have higher cost we chose to make this trade mainly because it calculates the motion for each pixel of the frame and it also has a higher accuracy \cite{orb} compared to methods such as Lucas-Kanade (sparse) \cite{lukas}.
 	
 	We have used optical flow as a tool to generate \textbf{distance vectors} based on motion between the NDSI(\(time=t\)) and NDSI(\(time=t + dt\)). These vectors will be used in order to create the \textbf{motion predicted NDSI}.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_Motion Vectros_scaled.png}
+		\end{minipage}
+		\begin{minipage}{0.50\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_Motion Vectros_small.png}
+		\end{minipage}
+		\caption{Optical flow vectors, where the previous image is LC81940282013341LGN01 and the current image is LC81940282013341LGN01.}
+		\label{fig:aligned}
+	\end{figure}
 
 	\subsubsection{Motion Predicted NDSI}
 	\label{seq:motion_ndsi_functional}
@@ -467,8 +542,37 @@
 		\label{fig:motion_generated_schema}
 	\end{figure}
 
-	By applying this function to each pixel of the NDSI (\(t + dt\)) image and by making some adjustments which are further described in Section~\ref{seq:motion_ndsi_implementation}, for the Belvedere glacier we have generated the motion predicted NDSI as shown in Figure~\ref{fig:motion_generated_belvedere}.
-	TODO SHOW THE IMAGE AFTER CROPPING THE EDGES.
+	By applying this function to each pixel of the NDSI (\(t + dt\)) image and by making some adjustments which are further described in Section~\ref{seq:motion_ndsi_implementation}, for the Belvedere glacier, scene LC81940282015363LGN02, we have generated the motion predicted NDSI as shown in Figure~\ref{fig:motion_generated_belvedere}. The ice coverage for the generated image is 5.0991\% while the one for the actual NDSI(\(time=t+dt\)) is 5.3066\%. 
+
+	\begin{figure}[h!]
+	\centering
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_NDSI_generated_scaled.png}
+	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/motion_predicted_2015_small.png}
+	\end{minipage}
+	\caption{}
+	\label{fig:motion_generated_belvedere}
+	\end{figure}
+	
+	Figure~\ref{fig:overlay} highlights the difference between the NDSI of the previous scene and the generated motion NDSI.
+	
+\begin{figure}[h!]
+	\centering
+		\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_NDSI_generated_overlay_scaled.png}
+		\end{minipage}
+		\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/motion_predicted_overlay_2015_small.png}
+		\end{minipage}
+		\caption{}
+		\label{fig:overlay}
+\end{figure}
 
 	% =========================================================================	
 	
@@ -522,7 +626,8 @@
 	%========================================================================================
 	
 	\subsection{Alignment}
-	\label{seq:alignment_implementation}
+	\label{seq:alignment_implementation}\
+	
 	
 	In order to keep a high level of abstraction, we have split each scene into aligned and unaligned: Scene and AlignedScene objects. These and their children are created when crawling through the glaciers directory, specifically for each region of interest. However, aligning all the images when crawling would result into a lot of idle time for the user when starting the application and it would not be overall feasible to do so. Therefore, a scene is aligned only when it is specifically being selected in the graphical user interface (or when another entity needs it, such as optical flow and image generation). By doing this, we ensure that there is no unnecessary extra waiting time for each scene that we have when powering up the interface.
 	As for the actual alignment, we have used an algorithm which \textbf{collects features} from each band of a scene and tries to match them with a given reference one's features. The obtained \textbf{matches} can be then used to create an \textbf{affine transformation matrix} which specifies by how much did the current image \textbf{rotated and translated} in comparison to its reference. The affine transformation matrix will be then applied to the current image by a \textbf{warping} algorithm with the goal of ensuring as much as possible that there is no misalignment between any pixel of two different images from the same time series. Section~\ref{seq:alignment_algorithm} describes more technically how we built this and what were the computer vision algorithms used for that matter. Figure~\ref{fig:alignment_diagram} contains the technical details of each class which takes part into the alignment process.
@@ -589,7 +694,19 @@
 		\label{fig:hue_colour_wheel}
 	\end{figure}
 	
-	TODO PUT OPTICAL FLOW IMAGE FINISHED
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_Motion Vectros_color.png}
+		\end{minipage}
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_Motion Vectros_color_small.png}
+		\end{minipage}
+		\caption{}
+		\label{fig:NDSI}
+	\end{figure}
 	
 	%========================================================================================
 
@@ -668,6 +785,20 @@
 	\subsection{Generated image filtering}
 	\label{seq:filter}
 	
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_Motion Predicted NDSI_unfiltered.png}
+		\end{minipage}
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_Motion Predicted NDSI_unfiltered_small.png}
+		\end{minipage}
+		\caption{}
+		\label{fig:unfiltered}
+	\end{figure}
+	
 	A first step into creating the filter for the motion predicted NDSI image is to create a mask which will be applied on the black border of the scene such that we are looking for undefined values only inside it. Using numpy, the coordinates of these pixels are extracted into an array which then can be processed in parallel by Pythons' multiprocessing library. We have used multiprocessing instead of threading because Python does not have true parallelization in multithreading, only concurrency, which would not be a real improvement on the processing time. Since all the processes have to write different chunks of the same image and they do not share the same memory space, we chose to solve this problem by creating a shared memory buffer to hold the image.
 	
 	\begin{figure}[h!]
@@ -700,14 +831,19 @@
 	\label{fig:gaussian2}
 	\end{figure}
 	
-	\tableofcontents{}
-	\addcontentsline{toc}{chapter}{List Of Figures}
-	\listoffigures{}
-	\addcontentsline{toc}{chapter}{List Of Tables}
-	\listoftables{}
-	
-	\bibliographystyle{alpha}
-	\bibliography{references}
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_NDSI_scaled.png}
+		\end{minipage}
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/NDSI_2015_small.png}
+		\end{minipage}
+		\caption{}
+		\label{fig:NDSI}
+	\end{figure}
 	
 	\chapter{Performance}
 	\label{seq:performance}
@@ -716,7 +852,11 @@
 	\chapter{Conclusions}
 	\section{Future Development}
 	\label{seq:future_development}
-		
+	
+	\bibliographystyle{alpha}
+	\bibliography{references}
+	
+
 	\chapter{Glossary}
 	
 	% ==================================================================
@@ -742,3 +882,6 @@
 		\label{table:acron}
 	\end{table}
 	\end{document}
+
+EXTRAS 
+This part of the application can be viewed as a plug-in entity, since one can already have a predefined dataset which can be loaded directly to the processing unit.
