@@ -100,30 +100,32 @@ class ListsGui:
         self.__update_active_band(clicked_band)
         self.__gui.main_display_gui().set_image_display(clicked_band)
 
+        if hasattr(self.__active_band, 'snow_percentage'):
+            self.__window.ndsi_plot().setROI(self.__active_roi)
+            self.__window.ndsi_plot().visible(True)
+        else:
+            self.__window.ndsi_plot().visible(False)
+
     def _set_glacier_display(self):
         glaciers_str = gl.get_wgi_id_list_from(self.__glaciers)
         self.__window.lists_window()._set_default_glaciers_display(glaciers_str,
-                                                                   self.__glacier_clicked,
-                                                                   1, 0)
+                                                                   self.__glacier_clicked)
 
     def _set_roi_display(self):
         rois_str = ro.get_path_row_str_from(self.__active_rois())
         self.__window.lists_window()._set_default_rois_display(rois_str,
-                                                               self.__roi_clicked,
-                                                               1, 1)
+                                                               self.__roi_clicked)
 
     def _set_scenes_display(self):
         scenes_str = sc.get_scene_id_list_from(self.__active_scenes())
         self.__window.lists_window()._set_default_scenes_display(scenes_str,
-                                                                 self.__scene_clicked,
-                                                                 1, 2)
+                                                                 self.__scene_clicked)
         self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
 
     def _set_band_display(self):
         band_names = band.get_name_list_from(self.__active_scene.bands())
         self.__window.lists_window()._set_default_bands_display(band_names,
-                                                                self.__band_clicked,
-                                                                1, 3)
+                                                                self.__band_clicked)
         self.__bands_list_widget = self.__window.lists_window().bands_list_widget()
 
         # TODO get rid of this hack

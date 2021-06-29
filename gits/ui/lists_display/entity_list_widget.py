@@ -6,9 +6,7 @@ class EntityListWidget():
 
     DEFAULT_FONT_SIZE = 30
 
-    def __init__(self, items: list, clicked, grid_row: int, grid_column: int):
-        self._grid_row = grid_row
-        self._grid_column = grid_column
+    def __init__(self, items: list, clicked):
         self._clicked = clicked
         self._items = items
 

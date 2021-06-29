@@ -2,6 +2,7 @@ from entities.scene import Scene
 from entities.aligned.aligned_scene import AlignedScene
 from utils import logging
 from typing import Tuple
+
 logger = logging.getLogger(__name__)
 
 

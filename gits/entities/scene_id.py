@@ -1,4 +1,5 @@
 import calendar
+import datetime
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -32,6 +33,9 @@ class SceneID:
 
     def scene_id(self):
         return self.__scene
+
+    def date(self):
+        return datetime.date(self.year(), self.month(), self.day())
 
     def year(self) -> int:
         """

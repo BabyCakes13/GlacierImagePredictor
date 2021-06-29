@@ -34,7 +34,7 @@ class NDSI(Image):
         return ndsi_16bit
 
     def visual_data(self) -> numpy.ndarray:
-        self.__snow_percentage()
+        self.snow_percentage()
 
         ndsi_all = self.raw_data()
         ndsi_snow_ice = self.__filter_only_snow_and_ice(self.raw_data())
@@ -93,7 +93,7 @@ class NDSI(Image):
         ndsi_16bit = ndsi_normalized.astype(numpy.uint16)
         return ndsi_16bit
 
-    def __snow_percentage(self) -> float:
+    def snow_percentage(self) -> float:
         percentage = self.__snow_ratio() * 100
         percentage = round(percentage, 4)
         logger.notice("Snow percentage: {}%".format(percentage))

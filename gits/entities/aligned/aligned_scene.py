@@ -140,6 +140,9 @@ class AlignedScene(SceneInterface):
     def ndsi(self) -> NDSI:
         return self.__ndsi
 
+    def motion_predicted_ndsi(self) -> NDSI:
+        return self.__motion_predicted_ndsi
+
     def __str__(self):
         return "AlignedScene[{}]".format(self.scene_id().scene_id())
 

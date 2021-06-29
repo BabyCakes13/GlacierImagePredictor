@@ -181,3 +181,4 @@ class MotionPredictedNDSI(NDSI):
            x < (width - KERNEL_SIZE // 2) and x >= (KERNEL_SIZE // 2):
             return True
         return False
+
