@@ -10,12 +10,14 @@ class EntityListWidget():
         self._clicked = clicked
         self._items = items
 
-        self._widget = self.__create_basic_widget()
+        self.__create_basic_widget()
 
     def __create_basic_widget(self):
         widget = QtWidgets.QListWidget()
         widget.clicked.connect(self._clicked)
-        widget.addItems(self._items)
+
+        self._widget = widget
+        self._update_widget_items(self._items)
 
         return widget
 
@@ -27,12 +29,14 @@ class EntityListWidget():
         self.__fixed_horizontal_width()
         self._widget.setFixedHeight(self.DEFAULT_FONT_SIZE)
 
-    def _update_widget_items(self, items: list):
+    def _update_widget_items(self, items: list, active_row=0):
         self._widget.clear()
         self._widget.addItems(items)
         self._items = items
 
         self.vertical_widget()
+
+        self._widget.setCurrentRow(active_row)
 
     def _add_to_layout(self, layout) -> None:
         layout.addWidget(self._widget,

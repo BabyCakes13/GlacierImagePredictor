@@ -21,7 +21,7 @@ class ListsGui:
         self.__active_band = self.__active_scene.thumbnail()
 
     def alignment_state_changed(self):
-        self.__glacier_clicked()
+        self.__glacier_clicked(self.__window.lists_window().glaciers_list_widget().current_item())
 
     def __active_rois(self) -> list:
         return self.__active_glacier.rois()
@@ -73,8 +73,9 @@ class ListsGui:
     def __update_bands(self) -> None:
         self.__update_active_band(self.__active_scene.thumbnail())
         bands_names = sc.bands_names(self.__active_scene)
-        self.__window.lists_window().bands_list_widget()._update_widget_items(bands_names)
-        self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
+        row = self.__active_scene.bands().index(self.__active_band)
+        self.__window.lists_window().bands_list_widget()._update_widget_items(bands_names, row)
+        self.__gui.main_display_gui().set_image_display(self.__active_band)
 
         self.__window.lists_window().bands_list_widget()
 
@@ -122,7 +123,7 @@ class ListsGui:
         scenes_str = sc.get_scene_id_list_from(self.__active_scenes())
         self.__window.lists_window()._set_default_scenes_display(scenes_str,
                                                                  self.__scene_clicked)
-        self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
+        self.__gui.main_display_gui().set_image_display(self.__active_band)
 
     def _set_band_display(self):
         band_names = band.get_name_list_from(self.__active_scene.bands())
