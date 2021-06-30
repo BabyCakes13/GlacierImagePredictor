@@ -183,7 +183,7 @@
 	
 	\par This thesis makes use of techniques such as computer vision and machine learning for generating predicted images based on detected motion. This can be used to highlight glacier retreat over longer periods of time. For this purpose we had to implement techniques to align our images with respect to a reference, as well as determining ways to make use of the extracted optical flow information such that we can generate new images.
 
-	\par For the alignment process, more than 200 pairs of images have been tested, while only 10\% of them having erroneous alignment results. As for the image generation, the results can be seen in the Section~\ref{seq:performance}. TODO MORE TO WRITE HERE, SOME NUMBERS. Since the generated images rely mostly on visual validation, we have compared the ice and snow coverage on multiple datasets with different coordinates. TODO WRITE THIS BETTER.
+	\par For the alignment process, more than 200 pairs of images have been tested, while only around 10\% of them having erroneous alignment results. As for the image generation, since the generated images rely mostly on visual validation, we have compared the ice and snow coverage on multiple datasets with different coordinates. In order to better enhance the differences in snow retreat and accumulation which are predicted by the motion generated image, we have colourized them. The results can be seen in the Section~\ref{seq:experiments}. 
 	
 	\par The results were achieved through indexing glacier datasets by a crawler, which later on structure the data into path and row coordinates (see Paragraph~\ref{par:wrs2}), such that we are working with geographically consistent data. The normalized snow difference index has been calculated as described in Section~\ref{seq:ndsi_functional}, by using two Landsat 8 bands. We have chosen this metric to enhance snowfall and ice due to their high reflectance in the visible spectrum and high absorption in the infrared one.
 	
@@ -278,45 +278,6 @@
 		\caption{Landsat 8 TIRS generated bands \cite{l8otb}}
 		\label{fig:L8TIRS}
 	\end{figure}
-	
-	\subsubsection{OLI and TIRS bands}
-	
-	Landsat 8 acquires data from these sensors in in 11 bands, as following in Table~\ref{table:bands_table}.
-	
-	\begin{table} [h]
-		\center
-		\begin{tabularx}{480pt}{|p{0.3\linewidth}|X|X|}
-			\toprule
-			\textbf{Bands} & \textbf{Wavelength (micrometers)} & \textbf{Resolution (meters)} \\ [0.2ex]
-			\midrule
-			\midrule
-			Band 1 (Coastal aerosol) & 0.43-0.45 & 30 \\ [0.2ex]
-			\midrule
-			Band 2 (Blue) & 0.45-0.51 & 30 \\ [0.2ex]
-			\midrule
-			Band 3 (Green) & 0.53-0.59 & 30 \\ [0.2ex]
-			\midrule
-			Band 4 (Red) & 0.64-0.67 & 30 \\ [0.2ex]
-			\hline
-			Band 5 (Near Infrared) & 0.85-0.88 & 30 \\ [0.2ex]
-			\midrule
-			Band 6 (SWIR1) & 1.57-1.65 & 30 \\ [0.2ex]
-			\midrule
-			Band 7 (SWIR2) & 2.11-2.29 & 30 \\ [0.2ex]
-			\midrule
-			Band 8 (Panchromatic) & 0.50-0.68 & 15 \\ [0.2ex]
-			\midrule
-			Band 9 (Cirrus) & 1.36-1.38 & 30 \\ [0.2ex]
-			\midrule
-			Band 10 (TIR 1) & 10.6-11.19 & 100  \\ [0.2ex]
-			\midrule
-			Band 11 (TIR 2) & 11.50-12.51 & 100 \\ [0.2ex]
-			\midrule
-			\bottomrule
-		\end{tabularx}
-		\caption{Landsat 8-9 Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) bands \cite{bands}.}
-		\label{table:bands_table}
-	\end{table}
 	
 	\subsection{World Glacier Inventory}
 	\label{seq:wgi}
@@ -709,16 +670,8 @@
 	\end{figure}
 	
 	\begin{figure}[h!]
-		\centering
-		\begin{minipage}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_Motion Vectros_color.png}
-		\end{minipage}
-		\begin{minipage}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_Motion Vectros_color_small.png}
-		\end{minipage}
-		\caption{}
+		\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_Motion Vectros_color_small.png}
+		\caption{Optical flow colourized motion vectors.}
 		\label{fig:NDSI}
 	\end{figure}
 	
@@ -814,15 +767,8 @@
 	
 	\begin{figure}[h!]
 		\centering
-		\begin{minipage}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_Motion Predicted NDSI_unfiltered.png}
-		\end{minipage}
-		\begin{minipage}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_Motion Predicted NDSI_unfiltered_small.png}
-		\end{minipage}
-		\caption{}
+		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_Motion Predicted NDSI_unfiltered_small.png}
+		\caption{Raw generated NDSI image, unfiltered.}
 		\label{fig:unfiltered}
 	\end{figure}
 
@@ -891,23 +837,34 @@
 	
 	\newpage{}
 	\chapter{Performance and experiments}
+
+	
+	\section{Performance}
 	\label{seq:performance}
+	
+	\par In order to lower the user time while inspecting the data we are caching on storage the results of processing in multiple stages. The saved images are all the aligned ones, as well as the NDSI and generated NDSI. Therefore, before inspecting the data, the user has the option of issuing the cache command, which will go through all the dataset and compute the results. The caching is also done without issuing the manual cache command on the whole dataset, while simply using the graphical user interface. This helps to create an undisrupted user experience even when handling computationally heavy data.
+	
+	For the performance evaluation we are using a machine which has an Intel i7-7700HQ CPU, with 24 GB of RAM. The images were stored on my personal server and they were locally mounted through NFS.
+	
+	Downloading the dataset of two glaciers (IN5Q31300046, IT4L01211009) which have been used for the experiment section (Section~\ref{seq:experiments}) took around two hours on my machine, while their searching took around half an hour. For IN5Q31300046 (Parvati), there were 185 entries, while for IT4L01211009 (Jungfrau-Aletsch-Bietschhorn), there were 109. The processing and caching of all the datasets took around 8 hours, which outputs around 1 minutes and 30 seconds per scene.
+	
+	\section{Experiments}
+	\label{seq:experiments}
 	
 	\par To exemplify the functionality of our application, we have picked two glaciers and downloaded all their public available satellite imagery with at most 20\% cloud coverage. 
 	
-	\par The first glacier which will be analysed is named \textbf{Jungfrau-Aletsch-Bietschhorn}, located in the \textbf{Swiss Alps}, specifically at latitude 46.47735081308319 and longitude 8.056887228860798. This location is at the intersection of multiple WRS-2 coordinates, therefore we will have multiple sets of \(path, row, month\) which we will be focusing on.
+	\par The first glacier which will be analysed is named \textbf{Jungfrau-Aletsch-Bietschhorn}, located in the \textbf{Swiss Alps}, specifically at latitude 46.47735081308319 and longitude 8.056887228860798. This location is at the intersection of multiple WRS-2 coordinates, therefore we will have different sets of \(path, row, month\) which we will be focusing on.
 	
 	\subsection{Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}
 	
 	\begin{figure}[h!]
 		\centering
-		\begin{minipage}{0.5\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/experiment_194284.png}
-		\end{minipage}
+		\includegraphics[width=\linewidth]{../images/experiment_194284.png}
 		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 4), and the NDSI of each predicted motion image.}
 		\label{fig:jungfrau_194284}
 	\end{figure}
+	
+	Since this scene was captured in April, the snow fall fluctuates a lot, resulting in a low signal to noise ratio. This pattern proved to yield inconsistent results for the generated images.
 	
 	\begin{figure}[h!]
 		\centering
@@ -916,19 +873,21 @@
 		\label{fig:experiment_1940284_image}
 	\end{figure}
 
+
 	% =================================================================
+	
+	\newpage{}
 	
 	\subsection{Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}
 	
 	\begin{figure}[h!]
 		\centering
-		\begin{minipage}{0.44\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/experiment_194287.png}
-		\end{minipage}
+		\includegraphics[width=\linewidth]{../images/experiment_194287.png}
 		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}
 		\label{fig:jungfrau_194287}
 	\end{figure}
+
+	The scene was captured in July, hence the more consistent snow fall. These results in a better estimation of movement than the one obtained in early spring.
 	
 	\begin{figure}[h!]
 		\centering
@@ -939,17 +898,18 @@
 
 	% ===================================================================
 	
+	\newpage{}
+	
 	\subsection{Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}
 	
 	\begin{figure}[h!]
 		\centering
-		\begin{minipage}{0.44\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/experiment_194288.png}
-		\end{minipage}
+		\includegraphics[width=\linewidth]{../images/experiment_194288.png}
 		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}
 		\label{fig:jungfrau_194288}
 	\end{figure}
+	
+	The image was captured during August, which in this case has the least amount of snow fall. The result for this data set was the most reliable, as one can observe since the moraines are clearly exposed. 
 	
 	\begin{figure}[h!]
 		\centering
@@ -960,17 +920,18 @@
 	
 	% ==================================================================
 	
+	\newpage{}
+	
 	\subsection{Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}
 	
 	\begin{figure}[h!]
 		\centering
-		\begin{minipage}{0.44\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/experiment_195289.png}
-		\end{minipage}
+		\includegraphics[width=\linewidth]{../images/experiment_195289.png}
 		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(195, 28, 9), and the NDSI of each predicted motion image.}
 		\label{fig:jungfrau_195289}
 	\end{figure}
+
+	The last presented data set was acquired in September when the probability of snow fall increases. This is highlighted by the entry in 2017 which represents an outlier.
 
 	\begin{figure}[h!]
 	\centering
@@ -979,16 +940,16 @@
 	\label{fig:experiment_1950289_image}
 	\end{figure}
 	
+	\vfill
+	\newpage{}
+	
 	\par The second glacier which we have taken into consideration is named \textbf{Parvati} and it is located in \textbf{India}, at latitude 31.754 and longitude 77.675. We have chosen this glacier such that we can compare our results with the ones provided in \cite{parvati}. They have chosen a dataset of images located at WRS-2 path 147, row 38. However, we could not fetch enough quality images for that specific path and row in order to be able to make this comparison. The result that were achieved are however listed below for the available path and row.
 	
 	\subsection{PARVATI (146, 38, 4)}
 	
 	\begin{figure}[h!]
 		\centering
-		\begin{minipage}{0.44\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/experiment_146385.png}
-		\end{minipage}
+		\includegraphics[width=\linewidth]{../images/experiment_146385.png}
 		\caption{Comparison between the NDSI values of the actual NDSI images for Parvati(146, 38, 4), and the NDSI of each predicted motion image.}
 		\label{fig:parvati_146384}
 	\end{figure}
@@ -1000,15 +961,18 @@
 	\label{fig:experiment_1460384_image}
 	\end{figure}
 	
-	\begin{itemize}
-		\item 
-	\end{itemize}
-	
 	\par Here we should also write on what machine I ran the code and try it on different ones as a thing. Also write about the idea of moving the processing on cloud, but there might be traffic overhead because the images are large. Also say that we store it on hard drive, NOT ssd. Make tests with both.
 	
 	\newpage{}	
 	\chapter{Conclusions}
 	\label{seq:conclusions}
+	
+	
+	\par As a conclusion, we have successfully created a tool for easy asset search and acquisition from the Landsat archives. On top of this, we were able to investigate motion tendencies across time and use them to predict a future snapshot.
+	
+	\par We have found that for higher snow coverage scenes there are some erroneous results due to high fluctuations during the winter months, which create outliers. In the study done by \cite{parvati}, only September was taken into consideration when conducting the experiments, mainly because it is the month which has the lowest recorded snow coverage of the glacier. Also, even though the shortwave infrared band filters out most of the clouds in a scene, still there are some cases when they are very dense and the snow pixels cannot be properly extracted, resulting in erroneous scenes.
+	
+	\par Even with this, we have tested our application with multiple glaciers and obtained adequate results. Consistent ones were obtained between March and October, due to a lower snow fall which exposed only the glacier ice.
 	
 	\section{Future Development}
 	\label{seq:future_development}
@@ -1045,11 +1009,11 @@
 			\hline
 			NDSI & Normalized Snow Difference Index \\ [0.2ex]
 			\hline
-			\hline
 			CSV & Comma separated values \\ [0.2ex]
 			\hline
-			\hline
 			JSON & JavaScript Object Notation \\ [0.2ex]
+			\hline
+			NFS & Network File System \\ [0.2ex]
 			\hline
 		\end{tabular}
 		\caption{Acronyms table }

@@ -3,48 +3,48 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Disertation.aux
 The style file: alpha.bst
 Database file #1: references.bib
-I was expecting a `,' or a `}'---line 161 of file references.bib
+I was expecting a `,' or a `}'---line 129 of file references.bib
+ :  
+ :  note = {Retrieved 2021-06-30},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 134 of file references.bib
+ :  
+ :  note = {Retrieved 2021-06-30},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 171 of file references.bib
  :  
  :  title = {MEASURING SNOW AND GLACIER ICE PROPERTIES
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 167 of file references.bib
+I was expecting a `,' or a `}'---line 177 of file references.bib
  :  
  :  title = {Improved ORB Algorithm Using Three-Patch Method and Local Gray Difference},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 173 of file references.bib
+I was expecting a `,' or a `}'---line 183 of file references.bib
  :  
  :  title = {Feature Extractionusing ORB-RANSAC for Face Recognition},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 179 of file references.bib
+I was expecting a `,' or a `}'---line 189 of file references.bib
  :  
  :  title = {ORB: An efficient alternative to SIFT or SURF},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Repeated entry---line 183 of file references.bib
+Repeated entry---line 193 of file references.bib
  : @inproceedings{orbsift
  :                       ,
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 191 of file references.bib
+I was expecting a `,' or a `}'---line 201 of file references.bib
  :  
  :  title = {Array programming with NumPy},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 197 of file references.bib
+I was expecting a `,' or a `}'---line 207 of file references.bib
  :  
  :  title = {Realtime Computer Vision with OpenCV: Mobile computer-vision technology will soon become as ubiquitous as touch interfaces.},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 204 of file references.bib
- :  
- :  year = {Retrieved 2021-06-30},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 209 of file references.bib
- :  
- :  year = {Retrieved 2021-06-30},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 I was expecting a `,' or a `}'---line 214 of file references.bib
@@ -129,9 +129,6 @@ Warning--empty title in orbsift
 Warning--empty booktitle in orbsift
 Warning--empty year in orbsift
 Warning--empty booktitle in ransac
-Warning--empty author in gdal
-Warning--empty booktitle in gdal
-Warning--empty year in gdal
 Warning--empty author in git
 Warning--empty booktitle in git
 Warning--empty year in git
@@ -163,34 +160,34 @@ Warning--empty year in feorb
 Warning--empty booktitle in rgmuos
 You've used 32 entries,
             2543 wiz_defined-function locations,
-            653 strings with 7561 characters,
-and the built_in function-call counts, 8732 in all, are:
-= -- 807
+            655 strings with 7598 characters,
+and the built_in function-call counts, 8707 in all, are:
+= -- 809
 > -- 259
 < -- 5
 + -- 79
 - -- 76
-* -- 499
-:= -- 1220
-add.period$ -- 81
+* -- 490
+:= -- 1218
+add.period$ -- 82
 call.type$ -- 32
 change.case$ -- 150
 chr.to.int$ -- 31
-cite$ -- 98
-duplicate$ -- 435
-empty$ -- 911
+cite$ -- 95
+duplicate$ -- 429
+empty$ -- 907
 format.name$ -- 93
-if$ -- 1899
+if$ -- 1897
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 18
-newline$ -- 147
+missing$ -- 17
+newline$ -- 148
 num.names$ -- 45
-pop$ -- 383
+pop$ -- 380
 preamble$ -- 1
 purify$ -- 187
 quote$ -- 0
-skip$ -- 285
+skip$ -- 287
 stack$ -- 0
 substring$ -- 243
 swap$ -- 34
@@ -198,8 +195,8 @@ text.length$ -- 5
 text.prefix$ -- 2
 top$ -- 0
 type$ -- 256
-warning$ -- 49
+warning$ -- 46
 while$ -- 40
 width$ -- 35
-write$ -- 325
+write$ -- 327
 (There were 40 error messages)
