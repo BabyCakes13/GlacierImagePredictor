@@ -50,6 +50,14 @@ class MotionPredictedNDSI(NDSI):
 
         return self.__h
 
+    def visual_data(self):
+        old_ndsi = self.__previous_image.visual_data()
+        generated_ndsi_colored = super().visual_data()
+
+        generated_ndsi_colored[..., 0] = old_ndsi[..., 0]
+
+        return generated_ndsi_colored
+
     def __get_shape(self) -> tuple:
         height = self.__previous_image.raw_data().shape[0]
         width = self.__previous_image.raw_data().shape[1]
