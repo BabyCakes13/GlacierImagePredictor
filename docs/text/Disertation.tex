@@ -413,12 +413,12 @@
 		\caption{Landsat 8 green band specifications.}
 		\label{table:green_table}
 	\end{table}
-	\par The green band, alongside with the red and blue ones, fall in the visible spectrum and it is usually used for mapping peak vegetation. Figure~\ref{fig:belvedere_green} is an example of the green band for the Belvedere glacier, specifically taken from scene LC81950282015098LGN01.
+	\par The green band, alongside with the red and blue ones, fall in the visible spectrum and it is usually used for mapping peak vegetation. Figure~\ref{fig:green} is an example of the green band for the LC81950282015098LGN01 scene.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_B3.png}
-		\caption{Green band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}
-		\label{fig:belvedere_green}
+		\caption{Green band of scene LC81950282015098LGN01.}
+		\label{fig:green}
 	\end{figure}
 	
 	\subsubsection{Band 6 - SWIR1 Band}
@@ -441,12 +441,12 @@
 		\caption{Landsat 8 SWIR1 band specifications.}
 		\label{table:swir1_table}
 	\end{table}
-	\par The shortwave infrared 1 band is particularly useful for enhancing object which look similar in other bands, such as soils and rocks \cite{bd}. Alongside this, it also discriminates moisture content of soil and vegetation and penetrates thin clouds \cite{bands}. Figure~\ref{fig:belvedere_swir1} is illustrated below as an example of a SWIR1 band taken from the same scene as the green one above.
+	\par The shortwave infrared 1 band is particularly useful for enhancing object which look similar in other bands, such as soils and rocks \cite{bd}. Alongside this, it also discriminates moisture content of soil and vegetation and penetrates thin clouds \cite{bands}. Figure~\ref{fig:swir1} is illustrated below as an example of a SWIR1 band taken from the same scene as the green one above.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_B6.png}
-		\caption{SWIR1 band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}
-		\label{fig:belvedere_swir1}
+		\caption{SWIR1 band of scene LC81950282015098LGN01.}
+		\label{fig:swir1}
 	\end{figure}
 	
 	
@@ -468,20 +468,13 @@
 		\end{cases}
 	\end{equation}
 
-	\par An example of a generated NDSI for the Belvedere glacier, scene LC81940282013341LGN01, can be viewed in Figure~\ref{fig:belvedere_ndsi}.
+	\par An example of a generated NDSI for the Jungfrau-Aletsch-Bietschhorn glacier (46.47735081308319, 8.056887228860798), scene LC81940282013341LGN01, can be viewed in Figure~\ref{fig:ndsi}.
 	
-	\begin{figure}[h]
+	\begin{figure}[h!]
 	\centering
-	\begin{minipage}{0.445\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_NDSI_scaled.png}
-	\end{minipage}
-	\begin{minipage}{0.50\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_NDSI_small.png}
-	\end{minipage}
-	\caption{NDSI image of scene LC81940282013341LGN01.}
-	\label{fig:belvedere_ndsi}
+	\includegraphics[width=\linewidth]{../images/LC81950282014271_ndsi.png}
+	\caption{NDSI image of scene LC81950282014271, Jungfrau-Aletsch-Bietschhorn glacier.}
+	\label{fig:ndsi}
 	\end{figure}
 
 	\par The image is colour coded in order to enhance the difference between pixels which are considered either snow or ice (white), and the rest of the terrain (green).
@@ -493,34 +486,21 @@
 	
 	\par Landsat's trajectory orbiting Earth is not fully precise, therefore not all images will be pixel-to-pixel aligned, which is a problem for image processing. Since we want to track each pixel's movement, we must be sure that its coordinates in the image do not change between any two given scenes. Figure~\ref{fig:unaligned} highlights the misalignment from scene between scenes LC81950282013316 and LC81950282013364, as an example.
 	
-	\begin{figure}[h]
+	\begin{figure}[h!]
 	\centering
-	\begin{minipage}{0.36\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/unaligned.png}
-	\end{minipage}
-	\begin{minipage}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/unaligned_part.png}
-	\end{minipage}
-	\caption{Overlapped unaligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}
-	\label{fig:unaligned}	
+	\centering
+	\includegraphics[width=\linewidth]{../images/unaligned_LC81950282014271LGN01_and_LC819502820162245LGN01.png}
+	\caption{Overlapped unaligned green band of scene LC81950282014271LGN01 and reference LC819502820162245LGN01.}
+	\label{fig:scene_unaligned}	
 	\end{figure}
 
-	\par Since the bands we work with have a spacial resolution of 30 meters, which means that each pixel in the image represents 30 meters. Even with a misalignment of just 50 pixels we would end up with a 1.5 km difference between two scenes. Tracking pixels through the image without aligning them first would mean that we could never be sure that what we are looking at is indeed the same location. We have used different approaches on alignment which will be described in Section~\ref{seq:alignment_implementation}. Figure~\ref{fig:aligned} highlights the alignment corrected scene from Figure~\ref{fig:unaligned}. 
+	\par Since the bands we work with have a spacial resolution of 30 meters, which means that each pixel in the image represents 30 meters. Even with a misalignment of just 50 pixels we would end up with a 1.5 km difference between two scenes. Tracking pixels through the image without aligning them first would mean that we could never be sure that what we are looking at is indeed the same location. We have used different approaches on alignment which will be described in Section~\ref{seq:alignment_implementation}. Figure~\ref{fig:scene_aligned} highlights the alignment corrected scene from Figure~\ref{fig:scene_unaligned}. 
 	
-	\begin{figure}[h]
+	\begin{figure}[h!]
 		\centering
-		\begin{minipage}{0.36\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/aligned.png}
-		\end{minipage}
-		\begin{minipage}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/aligned_part.png}
-		\end{minipage}
-		\caption{Overlapped aligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}
-		\label{fig:aligned}
+		\includegraphics[width=\linewidth]{../images/aligned_LC81950282014271LGN01_and_LC81950282016245LGN01.png}
+		\caption{Overlapped aligned green band of scene LC81950282014271LGN01 and reference LC819502820162245LGN01.}
+		\label{fig:scene_aligned}
 	\end{figure}
 
 	\subsubsection{NDSI's Optical Flow}
@@ -541,20 +521,13 @@
 	
 	\par There are multiple types of optical flow algorithms, but for the purpose of our thesis, we have chosen the \textbf{dense optical flow} one, specifically \textbf{Gunnar Farneback's}. Even if dense implementations have higher cost we chose to make this trade mainly because it calculates the motion for each pixel of the frame and it also has a higher accuracy \cite{orb} compared to methods such as Lucas-Kanade (sparse) \cite{lukas}.
 	
-	\par We have used optical flow as a tool to generate \textbf{distance vectors} based on motion between the NDSI(\(time=t\)) and NDSI(\(time=t + dt\)). These vectors will be used in order to create the \textbf{motion predicted NDSI}.
+	\par We have used optical flow as a tool to generate \textbf{distance vectors} based on motion between the NDSI(\(time=t\)) and NDSI(\(time=t + dt\)), as it can be seen in Figure~\ref{fig:optical_flow}. These vectors will be used in order to create the \textbf{motion predicted NDSI}. 
 	
-	\begin{figure}[h]
+	\begin{figure}[h!]
 		\centering
-		\begin{minipage}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_Motion Vectros_scaled.png}
-		\end{minipage}
-		\begin{minipage}{0.50\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/LC81940282013341LGN01_Motion Vectros_small.png}
-		\end{minipage}
-		\caption{Optical flow vectors, where the previous image is LC81940282013341LGN01 and the current image is LC81940282013341LGN01.}
-		\label{fig:aligned}
+		\includegraphics[scale=0.32]{../images/LC81940282015363LGN02_NDSI_vectros_small.png}
+		\caption{Optical flow overlayed motion vectors.}
+		\label{fig:optical_flow}
 	\end{figure}
 
 	\subsubsection{Motion Predicted NDSI}
@@ -562,7 +535,7 @@
 	
 	\par Whilst optical flow allows us to see movement of the ice front which already happened in the past, we wanted to use this information and apply it on the most recent images such that we can estimate further glacier movements.
 
-	\par We obtain the motion predicted generated NDSI by relocating each pixel value from the NDSI(\(time=t + dt\)) to a \textbf{predicted location}. For now, this location is generated by adding the distance vectors obtained by optical flow as described in Section~\ref{seq:motion_matrix_implementation} to the pixels of the same image, therefore shifting them by twice as much as they originally did, in their respective directions, as it can be observed in Figure~\ref{fig:motion_generated_schema}. More methods of calculating the predicted location can be found in Section~\ref{seq:future_development}.
+	\par We obtain the motion predicted generated NDSI by relocating each pixel value from the NDSI(\(time=t + dt\)) to a \textbf{predicted location}. For now, this location is generated by adding the distance vectors obtained by optical flow as described in Section~\ref{seq:motion_ndsi_implementation} to the pixels of the same image, therefore shifting them by twice as much as they originally did, in their respective directions, as it can be observed in Figure~\ref{fig:motion_generated_schema}. More methods of calculating the predicted location can be found in Section~\ref{seq:future_development}.
 	
 	\begin{figure}[h!]
 		\centering
@@ -571,28 +544,22 @@
 		\label{fig:motion_generated_schema}
 	\end{figure}
 
-	\par By applying this function to each pixel of the NDSI (\(t + dt\)) image and by making some adjustments which are further described in Section~\ref{seq:motion_ndsi_implementation}, for the Belvedere glacier, scene LC81940282015363LGN02, we have generated the motion predicted NDSI as shown in Figure~\ref{fig:motion_generated_image}. The ice coverage for the generated image is 5.0991\% while the one for the actual NDSI(\(time=t+dt\)) is 5.3066\%.
+	\par By applying this function to each pixel of the NDSI (\(t + dt\)) image and by making some adjustments which are further described in Section~\ref{seq:motion_ndsi_implementation}, for scene LC81940282015363LGN02, we have generated the motion predicted NDSI as shown in Figure~\ref{fig:motion_predicted_image}. The ice coverage for the generated image is 5.0099\% while the one for the actual NDSI(\(time=t+dt\)) is 5.3066\%.
 	
 	\begin{figure}[h!]
 	\centering
-	\begin{minipage}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_NDSI_scaled.png}
-	\end{minipage}
-	\begin{minipage}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_Motion Predicted NDSI _ diffcolor_big.png}
-	\end{minipage}
-	\begin{minipage}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/motion_predicted_2015_small.png}
-	\end{minipage}
-	\begin{minipage}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_Motion Predicted NDSI _ diffcolor.png}
-	\end{minipage}
-	\caption{}
+	\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_motion_predicted.png}
+	\caption{Motion generated NDSI for scene LC81940282015363LGN02.}
 	\label{fig:motion_predicted_image}
+	\end{figure}
+
+	In order to better visualise the differences between the two images, they have been overlapped and colourized such that orange areas of snow that are predicted to melt, while blue represents areas which are predicted to develop snow build up.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_motion_predicted_overlay.png}
+		\caption{Overlapped motion generated NDSI for scene LC81940282015363LGN02.}
+		\label{fig:overlapped_motion_predicted_image}
 	\end{figure}
 
 
@@ -926,7 +893,118 @@
 	\chapter{Performance and experiments}
 	\label{seq:performance}
 	
-	\par Here we should also write on what machine I ran the code and try it on different ones as a thing. Also write about the idea of moving the processing on cloud, but there might be traffic overhead because the images are large. Also say that we store it on harddrive, NOT ssd. Make tests with both.
+	\par To exemplify the functionality of our application, we have picked two glaciers and downloaded all their public available satellite imagery with at most 20\% cloud coverage. 
+	
+	\par The first glacier which will be analysed is named \textbf{Jungfrau-Aletsch-Bietschhorn}, located in the \textbf{Swiss Alps}, specifically at latitude 46.47735081308319 and longitude 8.056887228860798. This location is at the intersection of multiple WRS-2 coordinates, therefore we will have multiple sets of \(path, row, month\) which we will be focusing on.
+	
+	\subsection{Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.5\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/experiment_194284.png}
+		\end{minipage}
+		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 4), and the NDSI of each predicted motion image.}
+		\label{fig:jungfrau_194284}
+	\end{figure}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{../images/experiment_1940284_image.png}
+		\caption{Overlapped motion generated NDSI for scene LC81940282017112LGN00.}
+		\label{fig:experiment_1940284_image}
+	\end{figure}
+
+	% =================================================================
+	
+	\subsection{Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.44\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/experiment_194287.png}
+		\end{minipage}
+		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}
+		\label{fig:jungfrau_194287}
+	\end{figure}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{../images/experiment_1940287_image.png}
+		\caption{Overlapped motion generated NDSI for scene LC81940282020201.}
+		\label{fig:experiment_1940287_image}
+	\end{figure}
+
+	% ===================================================================
+	
+	\subsection{Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.44\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/experiment_194288.png}
+		\end{minipage}
+		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}
+		\label{fig:jungfrau_194288}
+	\end{figure}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{../images/experiment_1940288_image.png}
+		\caption{Overlapped motion generated NDSI for scene LC81940282016238LGN01.}
+		\label{fig:experiment_1940288_image}
+	\end{figure}
+	
+	% ==================================================================
+	
+	\subsection{Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.44\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/experiment_195289.png}
+		\end{minipage}
+		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(195, 28, 9), and the NDSI of each predicted motion image.}
+		\label{fig:jungfrau_195289}
+	\end{figure}
+
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{../images/experiment_1950289.png}
+	\caption{Overlapped motion generated NDSI for scene LC81950282020256.}
+	\label{fig:experiment_1950289_image}
+	\end{figure}
+	
+	\par The second glacier which we have taken into consideration is named \textbf{Parvati} and it is located in \textbf{India}, at latitude 31.754 and longitude 77.675. We have chosen this glacier such that we can compare our results with the ones provided in \cite{parvati}. They have chosen a dataset of images located at WRS-2 path 147, row 38. However, we could not fetch enough quality images for that specific path and row in order to be able to make this comparison. The result that were achieved are however listed below for the available path and row.
+	
+	\subsection{PARVATI (146, 38, 4)}
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.44\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../images/experiment_146385.png}
+		\end{minipage}
+		\caption{Comparison between the NDSI values of the actual NDSI images for Parvati(146, 38, 4), and the NDSI of each predicted motion image.}
+		\label{fig:parvati_146384}
+	\end{figure}
+
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{../images/experiment_1460384_image.png}
+	\caption{Overlapped motion generated NDSI for scene LC81460382021091.}
+	\label{fig:experiment_1460384_image}
+	\end{figure}
+	
+	\begin{itemize}
+		\item 
+	\end{itemize}
+	
+	\par Here we should also write on what machine I ran the code and try it on different ones as a thing. Also write about the idea of moving the processing on cloud, but there might be traffic overhead because the images are large. Also say that we store it on hard drive, NOT ssd. Make tests with both.
 	
 	\newpage{}	
 	\chapter{Conclusions}
