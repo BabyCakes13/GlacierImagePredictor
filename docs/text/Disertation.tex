@@ -526,11 +526,40 @@
 
 	% =========================================================================	
 	\newpage{}
-	\section{Graphical User Interface}
+	\section{User Interface}
 	\label{seq:gui}
 	
 	\subsection{Search and Download}
-	\label{seq:search_download}
+	\label{subsec:search_download}
+	
+	\par Since the search and download part of the application can be viewed as a plug-in mechanism which only start to query the Landsat archive , we have opted to keep its interface in the form of a command line one only. The user simply has to run the command showed Listing~\ref{lst:downloadcommand} in order to find out detailed descriptions of which are the available options for search and download, which will output the result in Listing~\ref{lst:downloadhelp}.
+	
+	\begin{lstlisting}[caption={Command for sarch and download details},label={lst:downloadcommand},language=Bash]
+		% bash -x run_download.sh --help
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Detailed parameters required for the download script.},label={lst:downloadhelp},language=Bash]
+		+ export PYTHONPATH=./sat-search:./sat-stac
+		+ PYTHONPATH=./sat-search:./sat-stac
+		+ python3 gits/__main__.py download --help
+		usage: __main__.py download [-h] [--csv CSV] [-c C] [-d D] [-j J]
+		
+		optional arguments:
+		-h, --help            show this help message and exit
+		--csv CSV             Path to the csv file.
+		-c C, --cloud-cover C
+		Maximum cloud coverage allowed for a scene.
+		-d D, --download-directory D
+		Path to the output folder which will contain theprocessed results.
+		-j J, --jobs J        Number of threads which will search and download.
+		
+		real	0m0.850s
+		user	0m0.797s
+		sys	0m0.047s
+	\end{lstlisting}
+	
+	\subsection{Processing}
+	\label{ssubsec:processing_gui}
 
 	% =========================================================================
 	\newpage{}
