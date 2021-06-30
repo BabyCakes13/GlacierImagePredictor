@@ -23,6 +23,11 @@ class Glacier:
     def __str__(self):
         return "Glacier[{}]".format(self.__wgi_id)
 
+    def iterate_over_all(self):
+        logger.notice(self.__str__)
+        for roi in self.__rois:
+            roi.iterate_over_all()
+
 
 def find_glacier_by_wgi_id(glacier_wgi_id: str, glaciers: list) -> Glacier:
     for glacier in glaciers:

@@ -26,21 +26,23 @@ class AlignedImage(Image):
     def visual_data(self) -> numpy.ndarray:
         return self.__ndarray()
 
+    def create_cached_path(self):
+        path = self.__image.create_band_path(suffix="_ALIGNED_CACHED")
+        return path
+
     def __ndarray(self) -> numpy.ndarray:
         if self.__aligned_ndarray is not None:
             return self.__aligned_ndarray
 
-        path = self.__image.create_band_path(suffix="_ALIGNED_")
+        path = self.create_cached_path()
         if os.path.exists(path):
             logger.notice("Read cached file: " + path)
             self.__aligned_ndarray = cv2.imread(path, cv2.IMREAD_ANYDEPTH)
-            return self.__aligned_ndarray
-
-        self.__align()
-        self.__aligned_ndarray = self.__resize_aligned_to_reference()
-
-        path = self.__image.create_band_path(suffix="_ALIGNED_")
-        cv2.imwrite(path, self.__aligned_ndarray)
+        else:
+            self.__align()
+            self.__aligned_ndarray = self.__resize_aligned_to_reference()
+            logger.notice("Write cached file: " + path)
+            cv2.imwrite(path, self.__aligned_ndarray)
 
         return self.__aligned_ndarray
 

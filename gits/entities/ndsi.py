@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import numpy
 import cv2
+import os
+import tifffile
 from entities.aligned.aligned_band import AlignedBand
 from entities.image import Image
 
@@ -21,9 +23,20 @@ class NDSI(Image):
 
         self.__ndsi_data = None
 
+    def create_band_path(self, suffix="_NDSI_CACHED"):
+        return self.__green_band.create_band_path(suffix, False)
+
     def __ndsi(self):
         if self.__ndsi_data is None:
-            self.__ndsi_data = self.__calculate_ndsi()
+            path = self.create_band_path()
+            if os.path.exists(path):
+                logger.notice("Read cached file: " + path)
+                self.__ndsi_data = tifffile.imread(path)
+            else:
+                self.__ndsi_data = self.__calculate_ndsi()
+                logger.notice("Write cached file: " + path)
+                tifffile.imwrite(path, self.__ndsi_data)
+
         return self.__ndsi_data
 
     def raw_data(self) -> numpy.ndarray:

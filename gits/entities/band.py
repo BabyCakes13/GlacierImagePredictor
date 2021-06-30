@@ -44,9 +44,14 @@ class Band(Image):
 
         logger.debug("Created {}.".format(self.__str__()))
 
-    def create_band_path(self, suffix=""):
+    def create_band_path(self, suffix="", band_id=True):
+        if band_id:
+            band_ending = self.BAND_FILE_ENDWITH[self.__name]
+        else:
+            band_ending = ""
+
         band_path = os.path.join(self.__scene_path, self.__scene_id +
-                                 self.BAND_FILE_ENDWITH[self.__name] + suffix +
+                                 band_ending + suffix +
                                  Band.FILE_EXTENSION)
         return band_path
 

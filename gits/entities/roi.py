@@ -78,6 +78,11 @@ class RegionOfInterest:
     def __str__(self):
         return "RegionOfInterest[{}, {}]".format(self.__path, self.__row)
 
+    def iterate_over_all(self):
+        logger.notice(self.__str__)
+        for s in self.__aligned_scenes:
+            s.iterate_over_all()
+
 
 def find_roi_by_path_row(roi: RegionOfInterest, rois: list) -> RegionOfInterest:
     for r in rois:

@@ -22,6 +22,7 @@ class CMDArgs:
         self.add_download_args()
         self.add_process_args()
         self.add_gui_args()
+        self.add_cache_args()
 
         logger.debug("Created {}.".format(self.__str__()))
 
@@ -72,6 +73,15 @@ class CMDArgs:
         gui_parser = self.subparsers.add_parser('gui', add_help=True)
         gui_parser.set_defaults(func=set_gui_callback)
 
+    def add_cache_args(self) -> None:
+        cache_parser = self.subparsers.add_parser('cache', add_help=True)
+        cache_parser.add_argument('--input',
+                                    help='Path to the input folder which contains the dataset of'
+                                         'glaciers.',
+                                    type=str,
+                                    dest='input')
+        cache_parser.set_defaults(func=set_cache_callback)
+
 
 def activate_arguments() -> None:
     arguments = CMDArgs()
@@ -102,3 +112,11 @@ def set_process_callback(args) -> None:
 def set_gui_callback(args) -> None:
     ui = gui.GUI()
     ui.start()
+
+def set_cache_callback(args) -> None:
+    crawler = GlacierCrawler(args.input)
+    crawler.crawl()
+
+    glaciers = crawler.glaciers()
+    for g in glaciers:
+        g.iterate_over_all()

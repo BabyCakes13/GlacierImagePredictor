@@ -21,3 +21,6 @@ class AlignedBand(AlignedImage):
 
     def scene_name(self):
         return self.__band.scene_name()
+
+    def create_band_path(self, suffix, band_id):
+        return self.__band.create_band_path(suffix, band_id)

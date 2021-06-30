@@ -146,6 +146,12 @@ class AlignedScene(SceneInterface):
     def __str__(self):
         return "AlignedScene[{}]".format(self.scene_id().scene_id())
 
+    def iterate_over_all(self):
+        logger.notice(self.__str__)
+        for b in self.__bands:
+            print(b)
+            b.raw_data()
+
     def __matches_from_reference_to_image(self):
         drawn_matches_image = cv2.drawMatches(self.__reference_scene.normalized_downsampled_ndarray(),
                                               self.__reference_scene.keypoints(),

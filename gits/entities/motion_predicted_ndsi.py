@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+import os
 import time
 import numpy
+import tifffile
 import multiprocessing
 from multiprocessing import shared_memory
 
@@ -62,7 +64,17 @@ class MotionPredictedNDSI(NDSI):
 
     def raw_data(self) -> numpy.ndarray:
         if self.__image is None:
-            self.__create_image()
+            path = self.__previous_image.create_band_path(suffix="_PREDICTED_CACHED")
+            print(path)
+
+            if os.path.exists(path):
+                logger.notice("Read cached file: " + path)
+                self.__image = tifffile.imread(path)
+            else:
+                self.__create_image()
+                logger.notice("Write cached file: " + path)
+                tifffile.imwrite(path, self.__image)
+
         return self.__image
 
     def __create_image(self) -> numpy.ndarray:
@@ -70,6 +82,7 @@ class MotionPredictedNDSI(NDSI):
         self.__generate_image_based_on_movement()
         self.__mask_image()
         self.__filter_by_average()
+
 
     def __initialise_image(self) -> None:
         previous_image = self.__previous_image.raw_data()
