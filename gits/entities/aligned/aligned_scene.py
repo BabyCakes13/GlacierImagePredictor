@@ -155,8 +155,24 @@ class AlignedScene(SceneInterface):
     def iterate_over_all(self):
         logger.notice(self.__str__)
         for b in self.__bands:
+            if b.name() == "Motion Vectros":
+                continue
             print(b)
             b.raw_data()
+
+        # Make sure we don't fill the RAM
+        self.__bands = None
+
+        self.__ndsi = None
+        self.__motion_vectors = None
+        self.__motion_predicted_ndsi = None
+
+        self._red_band = None
+        self._green_band = None
+        self._blue_band = None
+        self._nir_band = None
+        self._swir1_band = None
+
 
     def __matches_from_reference_to_image(self):
         drawn_matches_image = cv2.drawMatches(self.__reference_scene.normalized_downsampled_ndarray(),
