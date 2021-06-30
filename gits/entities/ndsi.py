@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 class NDSI(Image):
 
     NAME = "NDSI"
-    THRESHOLD = 0.5
+    THRESHOLD = 0.3
 
     VALUE_INTERVAL = (-1, 1)
 
