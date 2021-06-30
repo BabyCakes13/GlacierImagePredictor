@@ -1,34 +1,32 @@
 \babel@toc {english}{}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Landsat 8 satellite \cite {LANDSATPIC}}}{9}%
-\contentsline {figure}{\numberline {1.2}{\ignorespaces WRS-2 Path/Row for Landsat \cite {wrs}.}}{10}%
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Landsat 8 OLI generated bands \cite {l8otb}}}{11}%
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Landsat 8 TIRS generated bands \cite {l8otb}}}{12}%
-\contentsline {figure}{\numberline {1.5}{\ignorespaces World glacier inventory ASCII text file, as CSV}}{13}%
-\contentsline {figure}{\numberline {1.6}{\ignorespaces EarthExplorer}}{14}%
-\contentsline {figure}{\numberline {1.7}{\ignorespaces Download Directory}}{15}%
-\contentsline {figure}{\numberline {1.8}{\ignorespaces Green band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}}{16}%
-\contentsline {figure}{\numberline {1.9}{\ignorespaces SWIR1 band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}}{17}%
-\contentsline {figure}{\numberline {1.10}{\ignorespaces NDSI image of scene LC81940282013341LGN01.}}{18}%
-\contentsline {figure}{\numberline {1.11}{\ignorespaces Overlapped unaligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}}{19}%
-\contentsline {figure}{\numberline {1.12}{\ignorespaces Overlapped aligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}}{19}%
-\contentsline {figure}{\numberline {1.13}{\ignorespaces Optical flow problem visualisation.}}{20}%
-\contentsline {figure}{\numberline {1.14}{\ignorespaces Optical flow vectors, where the previous image is LC81940282013341LGN01 and the current image is LC81940282013341LGN01.}}{21}%
-\contentsline {figure}{\numberline {1.15}{\ignorespaces Motion generated NDSI algorithm.}}{22}%
-\contentsline {figure}{\numberline {1.16}{\ignorespaces }}{22}%
-\contentsline {figure}{\numberline {1.17}{\ignorespaces }}{23}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Technical specifications of Download, GlacierFactory and Glacier classes.}}{25}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}}{27}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Technical diagram for the NDSI class.}}{29}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Technical diagram for the MotionVectors class.}}{30}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Hue representation of the optical flow.}}{31}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces }}{31}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Technical diagram for the MotionPredictedNDSI class.}}{33}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces }}{34}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Zoomed in part of the predicted NDSI (left). Neighbourhood extracted (right). }}{35}%
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Generated weights kernel (left). Filled in undefined value (right).}}{36}%
-\contentsline {figure}{\numberline {2.11}{\ignorespaces }}{36}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Landsat 8 satellite \cite {LANDSATPIC}}}{10}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces WRS-2 Path/Row for Landsat \cite {wrs}.}}{11}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Landsat 8 OLI generated bands \cite {l8otb}}}{12}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Landsat 8 TIRS generated bands \cite {l8otb}}}{13}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces World glacier inventory ASCII text file, as CSV}}{14}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces EarthExplorer}}{15}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Download Directory}}{16}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Green band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}}{17}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces SWIR1 band of scene LC81950282015098LGN01 from the Belvedere glacier, Italy.}}{18}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces NDSI image of scene LC81940282013341LGN01.}}{19}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Overlapped unaligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}}{20}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Overlapped aligned green band of scene LC81950282013316 and reference LC81950282013364 of the Belvedere glacier (195/028 WRS-2).}}{21}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Optical flow problem visualisation.}}{21}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Optical flow vectors, where the previous image is LC81940282013341LGN01 and the current image is LC81940282013341LGN01.}}{22}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Motion generated NDSI algorithm.}}{23}%
+\contentsline {figure}{\numberline {2.16}{\ignorespaces }}{23}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Technical specifications of Download, GlacierFactory and Glacier classes.}}{25}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}}{27}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Technical diagram for the NDSI class.}}{29}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Technical diagram for the MotionVectors class.}}{30}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Hue representation of the optical flow.}}{31}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces }}{31}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Technical diagram for the MotionPredictedNDSI class.}}{34}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces }}{35}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Zoomed in part of the predicted NDSI (left, top). Neighbourhood extracted (right, top). Kernel of weights (left, bottom). Generated value (right, bottom).}}{36}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

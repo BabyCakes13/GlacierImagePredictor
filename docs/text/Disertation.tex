@@ -136,44 +136,16 @@
 		\vspace{1.0cm}
 		\par
 		
-			
 		Over the last decade, climate change has impacted Earths' atmosphere and environment more than anytime before. Studies held by NASA confirmed that the second hottest year ever recorded was 2019 and the recorded temperatures of the ocean have never been higher. One way to track these changes is to study the retreat of glaciers, since they are the most sensitive climate change indicators. Since NASA and USGS launched their first Earth observation satellite in 23 July 1972, millions of images of the Earth have been stored and are freely to use for various fields of research. 
 		\vskip 0.2cm
 		Having this in mind, the goal of our application is to analyse the retreat of glaciers over time by using advanced computer vision algorithms which are able to detect movement of pixels based on a time series of aerial scenes collected from the Landsat 8 satellite. By analysing the directions of glacier retreat over time, we try to generate future images of how they might change. The snowfall and ice percentages of a glacier for a satellite image are also taken into consideration as a validation of our results. The application has also been made with the goal of being simple to use and easy to access for anyone who wants to get involved and make a contribution. 
 		\vskip 0.2cm
-		This theses contains information about the application's functionality, processing mechanics and experiments on various glaciers. In order to have a self sufficient environment,  both search and download of Landsat 8 assets facilities have been made available, such that one does not need to have an already created dataset of glacier satellite images.  As for generating a motion predicted image, we need to extract movement information between two consecutive scenes which have had their snow and ice pixels highlighted; the scenes are then passed to the computer vision algorithm which extracts the motion (optical flow) of each pixel and vectors of movement are generated. The results are used to further extend this movement trend which generates a predicted image.
+		This thesis contains information about the application's functionality, processing mechanics and experiments on various glaciers. In order to have a self sufficient environment,  both search and download of Landsat 8 assets facilities have been made available, such that one does not need to have an already created dataset of glacier satellite images.  As for generating a motion predicted image, we need to extract movement information between two consecutive snow index scenes which produces vectors of movement for each pixel. These results are used to further extend this movement trend which generates a predicted image.
 		
 	\end{abstract} %end abstract
 
-	\section{The context of this thesis} 
-
-	Climate change has become one of the biggest problems in the past years, human activities being one of the main factors by inducing global warming \cite{climate_change_1}. Due to heavy industrialisation of the society since the Industrial Revolution around the VII century, the levels of carbon dioxide in the atmosphere have grown beyond the capacity of natural elimination, creating the greenhouse effect. 
-	
-	The greenhouse effect is the process in which the radiation from a planet's atmosphere warms the planet surface above that normal temperature \cite{greenhouse}. The main causes of this change are human activities such as combustion of fossil fuels (coal, oil, natural gas), deforestation, soil erosion and agriculture \cite{climate_change_2}. If the change continues at this rate, there is an estimation that the average surface temperature will surpass \textdegree{3}  C this century \cite{climate_change_3}. Though it may not seem a lot, there is a scenario created over 30 years into the future explaining what this increase actually means: from 2020 to 2030 the temperature is set to rise above \textdegree{1.6}C; by this report, it is estimated that the average temperature will increase with \textdegree{3}C around 2050, in which case even if gas emissions are stopped, there will be another rise of at least \textdegree{1}C \cite{climate_change_4}. 
-	
-	One of the ways of creating an overview of the last decades of climate change is by analysing the change in the glaciers, since they are among the most sensitive indicators of climate change \cite{glacier_1}. The retreat of a glacier is caused by an increase of the temperature and less snowfall, a process which has been accelerated recently, due to the global warming \cite{glacier_2}.
-	
-	In the context of these changes, which are already beginning to impact the society and environment, I strongly believe that we have to take advantage of every opportunity to better understand and predict these changes, so proper preparations and actions could be taken as soon as possible. 
-
-
-	\section{Our Contribution}
-	
-	This paper uses image analysis techniques paired with artificial intelligent algorithms to create a time series analysis on the snow coverage of glaciers around the globe, while using methods which prove to be highly performant and accurate:
-	\begin{itemize}
-		\item Alignment of images with accuracy rate of \textbf{98\%} percent for the successful processed ones;
-		\item Successful alignment of approximately \textbf{85\%} images for a Landsat 8 iamge;
-		\item Snow coverage prediction with approximate \textbf{20\%} mean error.
-	\end{itemize}.
-	The results were achieved by calculating the NDSI for extracting snow pixels from a Landsat 8 image on a set of images for a glacier which has been split into path and row coordinates, paired up with alignment of the resulting images for displaying their differences over the years. The Normalized Difference Snow Index (NDSI) was obtained by calculating a formula which uses the green and SWIR1 bands from a scene and applying a threshold in order detect snow. The method of snow extraction was chosen to be NDSI calculation due to snow's high reflectance in the visible spectrum and high absorption in the short-wave infrared one. 
-	\vskip 0.2cm
-	After the snow coverage has been extracted, the NDSI, green and SWIR1 images are aligned based on a reference image, such that creation of an image which highlights the presence or absence of snow between two scenes, and one with highlight the movement can be created without pixel discrepancy errors. By reducing the misalignment to almost 0 shift, the results are reliable. 
-	Prediction of snow coverage is done by creating a data set containing snow ratio information extracted from the NDSI images, which is normalized (outliers are removed) and split into a train section and a test one, also having future predictions. The results are plotted for easier data interpretation and they highlight the pattern of snow coverage in the past years, as well as future ones, with a small error percent (approximately 20\%). An exact estimation of the error rate cannot be given due to the fact prediction is highly dependent on NDSI values, which are based on a high number of glacier variables such as the quality of image, the seasonal variation and other factors.  
-	\vskip  0.2cm
-	The thesis application can be used as an command line interface, as well as a graphical user one, in order to include a user group of both specialized and non-specialized in the field. 
-	.
 	\newpage{}
 
-	
 	\tableofcontents{}
 	\addcontentsline{toc}{chapter}{List Of Figures}
 	\listoffigures{}
@@ -181,27 +153,66 @@
 	\listoftables{}
 	
 	\newpage{}
+
+	\chapter{Introduction}
+	
+	\par The aim of Earth observation satellites is to collect satellite imagery in a consistent and long-term manner. These images can then further be used in order to extract information on weather behaviour, ocean temperatures, vegetation health, droughts and various other environmental variables. There are application which extract patterns based on these factors in order to understand why certain phenomena happened in the past and what are the conditions required for them to reappear in the future as well. 
+	
+	\par However, applications which track these changes require large processing power and consistent, qualitative datasets. Most of these datasets can be freely accessed and various analysation techniques can be used in order to extract pattern changes throughout the years. Fortunately, there are numerous Earth observing satellites which could satisfy the requirements of such a dataset. For the purpose of this thesis, only images collected by the Landsat 8 satellite have been used, since their quality is better than the last missions.
+	
+	\section{Motivation and goals}
+	
+	\par The motivation behind this thesis is found in the background of what climate change meant in the past and what it could further inquire in the future. Carbon dioxide levels in the atmosphere grown more than they can be naturally eliminated, causing butterfly effect changes in the environment. Glaciers are the most sensitive to these changes and through the means of Erath observation satellites they have been tracked longed enough such that qualitative imagery research can be used on them. On top of this, over the last years we have developed more and more powerful tools which are able to process heavy amounts of data. Not taking advantage of these factors seems like a loss.
+	
+	\par The goal of this thesis is to make use of such data by creating a tool for easy dataset creation, as well as analysing changes of glaciers in the last decade with the purpose of creating predicted images which could highlight future glacier retreat and snow fall decrease.
+
+	\section{Related work} 
+
+	\par There are multiple research papers on the domain of glacier analysis. Some of those which we found useful for our research regarding analysis of glacier based on satellite imagery are:
+	\begin{itemize}
+		\item \cite{rgmuos}, which proposes various methods of mapping glaciers on satellite images while taking into consideration seasonal variations in spectral properties of snow; 
+		\item \cite{aaesakh}: methods for separating ice and snow from debris using different indicators to calculate the mass balance of the glacier;
+		\item \cite{parvati}: assessment of glacier mass loss through a remote sensing modelling framework;
+		\item \cite{sar}: tracking transient snow lines and investigating firn evolution;
+		\item \cite{msg}: methods for measuring snow and glacier ice properties with the use of new satellite sensors, such as synthetic aperture radar.
+	\end{itemize}
+
+	For the alignment part of the thesis, some of the most helpful papers were \cite{orbsift}, \cite{feorb} and \cite{orblocal}.
+
+	\section{Our Contribution}
+	
+	\par This thesis makes use of techniques such as computer vision and machine learning for generating predicted images based on detected motion. This can be used to highlight glacier retreat over longer periods of time. For this purpose we had to implement techniques to align our images with respect to a reference, as well as determining ways to make use of the extracted optical flow information such that we can generate new images.
+
+	\par For the alignment process, more than 200 pairs of images have been tested, while only 10\% of them having erroneous alignment results. As for the image generation, the results can be seen in the Section~\ref{seq:performance}. TODO MORE TO WRITE HERE, SOME NUMBERS. Since the generated images rely mostly on visual validation, we have compared the ice and snow coverage on multiple datasets with different coordinates. TODO WRITE THIS BETTER.
+	
+	\par The results were achieved through indexing glacier datasets by a crawler, which later on structure the data into path and row coordinates (see Paragraph~\ref{par:wrs2}), such that we are working with geographically consistent data. The normalized snow difference index has been calculated as described in Section~\ref{seq:ndsi_functional}, by using two Landsat 8 bands. We have chosen this metric to enhance snowfall and ice due to their high reflectance in the visible spectrum and high absorption in the infrared one.
+	
+	\par Our goal is to process these images as pairs, so we had to take into consideration the fact that Landsat 8 does not have a perfectly stable trajectory, which yields in slightly misaligned pictures. However, this discrepancy would prove to generate unreliable results in the predicted image, therefore multiple techniques of solving this problem have been tested. Details of these can be found at Section~\ref{seq:alignment_functional}.
+
+	\par For the image generation we used a computer vision algorithm which calculated the optical flow between two consecutive frames, which resulted in a matrix holding the distance of movement for each pixel. Based on this distance, new coordinates have been predicted for the pixels and they have been moved accordingly, resulting in a new image representing the change over time. Various methods of filtering have been applied on the results, as it is described in Section\ref{seq:motion_ndsi_functional}. In order to validate our results, we have computed predicted images for all the pairs of the dataset, and we have compared them to already existing consecutive ones. The snow and ice coverage of the motion generated image can be then compared with its neighbours.
+
+	\par Since our application focuses on working with images, a graphical user interface seemed fit for this purpose. However, for the search and download part, a simple command line script has been used (see Section~\ref{seq:gui}.
 	
 	\chapter{Application}
 	\section{Dataset}
-	In order to build the dataset, we made use of the freely available data from the Landsat Archive, specifically from collection 1, level 1. This consists of data products generated from Landsat 8 Operational Land Imager/Thermal Infrared Sensor, Landsat 7 Enhanced Thematic Mapper Plus, Landsat 4-5 Thematic Mapper, and Landsat 1-5 Multispectral Scanner instruments \cite{C1L1}. For the purpose of this paper, we will focus only on images collected from the Landsat 8 satellite.
+	\par In order to build the dataset, we made use of the freely available data from the Landsat Archive, specifically from collection 1, level 1. This consists of data products generated from Landsat 8 Operational Land Imager/Thermal Infrared Sensor, Landsat 7 Enhanced Thematic Mapper Plus, Landsat 4-5 Thematic Mapper, and Landsat 1-5 Multispectral Scanner instruments \cite{C1L1}. For the purpose of this paper, we will focus only on images collected from the Landsat 8 satellite.
 	
 	\subsection{Landsat 8}
 	\label{seq:landsat8_section}
 
-	For the purpose of this paper, we will use images collected by the Landsat 8 satellite Figure~\ref{fig:landsat_satellite}, which was launched on an Atlas-V rocket from Vandenberg Air Force Base, California on February 11, 2013. Landsat 8 is the most recently launched Landsat satellite and carries the Operational Land Imager (OLI) and the Thermal Infrared Sensor (TIRS) instruments.
+	\par For the purpose of this paper, we will use images collected by the Landsat 8 satellite Figure~\ref{fig:landsat_satellite}, which was launched on an Atlas-V rocket from Vandenberg Air Force Base, California on February 11, 2013. Landsat 8 is the most recently launched Landsat satellite and carries the Operational Land Imager (OLI) and the Thermal Infrared Sensor (TIRS) instruments.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.25]{../images/LandsatSatellite.png}
 		\caption{Landsat 8 satellite \cite{LANDSATPIC}}
 		\label{fig:landsat_satellite}
 	\end{figure}
-	Landsat 8 orbits the Earth in a sun-synchronous, near-polar orbit, at an altitude of 705 km, inclined at 98.2 degrees, and completes one Earth orbit every 99 minutes.  The satellite has a 16-day repeat cycle with an equatorial crossing time: 10:00 a.m. +/- 15 minutes. It acquires about 740 scenes a day on the Worldwide Reference System-2 (WRS-2) path/row system, with a swath overlap (or sidelap) varying from 7\% at the equator to a maximum of approximately 85\% at extreme latitudes. A Landsat 8 scene size is 185 km x 180 km \cite{LANDSAT}.
+	\par Landsat 8 orbits the Earth in a sun-synchronous, near-polar orbit, at an altitude of 705 km, inclined at 98.2 degrees, and completes one Earth orbit every 99 minutes.  The satellite has a 16-day repeat cycle with an equatorial crossing time: 10:00 a.m. +/- 15 minutes. It acquires about 740 scenes a day on the Worldwide Reference System-2 (WRS-2) path/row system, with a swath overlap (or sidelap) varying from 7\% at the equator to a maximum of approximately 85\% at extreme latitudes. A Landsat 8 scene size is 185 km x 180 km \cite{LANDSAT}.
 	
 	\paragraph{Worldwide Reference System-2}
-	\label{par:wrs-2}
+	\label{par:wrs2}
 	
-	We will be referring to each scene's location based on its path and row coordinates from the worldwide reference system-2, which is a global notation system for Landsat data. It enables a user to inquire about satellite imagery over any portion of the world by specifying a nominal scene center designated by path and row numbers. The WRS has proven valuable for the cataloguing, referencing, and day-to-day use of imagery transmitted from the Landsat sensors \cite{wrs}. Landsat's trajectory projected on the world map can be seen in Figure~\ref{fig:wrs2}.
+	\par We will be referring to each scene's location based on its path and row coordinates from the worldwide reference system-2, which is a global notation system for Landsat data. It enables a user to inquire about satellite imagery over any portion of the world by specifying a nominal scene center designated by path and row numbers. The WRS has proven valuable for the cataloguing, referencing, and day-to-day use of imagery transmitted from the Landsat sensors \cite{wrs}. Landsat's trajectory projected on the world map can be seen in Figure~\ref{fig:wrs2}.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.2]{../images/wrs2.png}
@@ -212,7 +223,7 @@
 	\subsubsection{Landsat scene naming convention}
 	\label{seq:landsat_naming}
 	
-	Each Landsat scene is named after a well-defined convention in order to easily check information such as the WRS path, row and the date of acquisition. Having access to this information without the need to download the scene itself or the metadata file which holds this information represents a valuable asset, since we can easily filter the data based on the naming convention itself. In the table \ref{table:scene_naming} below we represent what each part of a Landsat scene of the form \textbf{LXS PPPRRR YYYYDDD  GSIVV} means.
+	\par Each Landsat scene is named after a well-defined convention in order to easily check information such as the WRS path, row and the date of acquisition. Having access to this information without the need to download the scene itself or the metadata file which holds this information represents a valuable asset, since we can easily filter the data based on the naming convention itself. In the table \ref{table:scene_naming} below we represent what each part of a Landsat scene of the form \textbf{LXS PPPRRR YYYYDDD  GSIVV} means.
 	\begin{table} [h]
 		\center
 		\begin{tabularx}{480pt}{|X|X|}
@@ -244,8 +255,8 @@
 	
 	\subsubsection{Operational Land Imager}
 	
-	The Operational Land Imager (OLI) is a remote sensing instrument aboard Landsat 8, built by Ball Aerospace \& Technologies. The sensor collects moderate resolution data that is used to monitor changing trends on the surface and evaluate how land usage changes over time. The images and data that OLI has helped collect have practical applications today in agriculture, mapping, and monitoring changes in snow, ice, and water \cite{lolidcp}. 
-	The OLI operates in the visible (VIS) and short wave infrared (SWIR) spectral region, having a width of 185 km. It uses nine channels, which range from wavelengths of 443 nm to 2,200 nm. Of these nine channels, eight are multispectral and one is panchromatic. The eight multispectral channels have a 30-meter spatial resolution, and the panchromatic channel has a 15 meters one.
+	\par The Operational Land Imager (OLI) represents remote sensing instrument which can be found abroad Landsat 8. It is built by Ball Aerospace \& Technologies and it collects moderate resolution data which is used for monitoring changes in trends on the surface and evaluating how it changes over time. The images and data which OLI has helped collect have practical applications today in various fields such as mapping and monitoring changes in snow, ice, water and agriculture, \cite{lolidcp}. 
+	The OLI operates in the short wave infrared spectral and visible region with a width of 185 km. Wavelengths of 443 nm to 2,200 nm are translated into nine channels, from which  eight are multispectral and one is panchromatic. The eight multispectral ones have a 30-meter spatial resolution, while the panchromatic channel has a 15 meters one.
 	The OLI generates 9 bands for Landsat as shown in Figure~\ref{fig:L8OLI}.
 	\begin{figure}[h]
 		\centering
@@ -256,7 +267,7 @@
 	
 	\subsubsection{Thermal Infrared Sensor}
 	
-	The Thermal Infrared Sensor (TIRS) measures land surface temperature in two thermal bands with a new technology that uses Quantum Well Infrared Photodetectors to detect long wavelengths of light emitted by the Earth whose intensity depends on surface temperature. These wavelengths, called thermal infrared, are well beyond the range of human vision \cite{lgng}.
+	\par The Thermal Infrared Sensor (TIRS) measures land surface temperature in two thermal bands with a new technology that uses Quantum Well Infrared Photodetectors to detect long wavelengths of light emitted by the Earth whose intensity depends on surface temperature. These wavelengths, called thermal infrared, are well beyond the range of human vision \cite{lgng}.
 	The thermal infrared sensor generates 2 bands for Landsat as shown in Figure~\ref{fig:L8TIRS}.
 	\begin{figure}[h]
 		\centering
@@ -306,7 +317,8 @@
 	
 	\subsection{World Glacier Inventory}
 	\label{seq:wgi}
-	The World Glacier Inventory (WGI) proves to be a useful resource for building our dataset, since it contains information for over 130,000 glaciers. Inventory parameters include geographic location, area, length, orientation, elevation, and classification. The WGI is based primarily on aerial photographs and maps with most glaciers having one data entry only. Hence, the data set can be viewed as a snapshot of the glacier distribution in the second half of the 20th century. It is based on the original WGI (WGMS 1989) from the World Glacier Monitoring Service \cite{WGI}.  
+	
+	\par The World Glacier Inventory (WGI) proves to be a useful resource for building our dataset, since it contains information for over 130,000 glaciers. Inventory parameters include geographic location, area, length, orientation, elevation, and classification. The WGI is based primarily on aerial photographs and maps with most glaciers having one data entry only. Hence, the data set can be viewed as a snapshot of the glacier distribution in the second half of the 20th century. It is based on the original WGI (WGMS 1989) from the World Glacier Monitoring Service \cite{WGI}.  
 	There are a number of ways to retrieve data from the inventory:
 	\begin{itemize}
 		\item download the entire database in a single ASCII text file (wgi\_feb2012.csv);
@@ -314,7 +326,7 @@
 		\item extract regions through the Extract Selected Regions interface.
 	\end{itemize}
 
-	The ASCII text file will be used with the purpose to define which are the glaciers to be included in the dataset to be built. An example of how this file looks like can be found in Figure~\ref{fig:WGI_ASCII}.
+	\par The ASCII text file will be used with the purpose to define which are the glaciers to be included in the dataset to be built. An example of how this file looks like can be found in Figure~\ref{fig:WGI_ASCII}.
 	
 	\begin{figure}[h]
 		\centering
@@ -331,9 +343,9 @@
 		\item \textbf{lon}: longitude of the glacier.
 	\end{itemize}
 
-	\subsection{Asset Acquisition}	
+	\subsection{Asset Acquisition}
 	
-	Since Landsat 8 acquires over 700 scenes per day, this means that there are over two million scenes available for download, either making use of already built user friendly tools or by simply querying for them directly.
+	\par Since Landsat 8 acquires over 700 scenes per day, this means that there are over two million scenes available for download, either making use of already built user friendly tools or by simply querying for them directly.
 	
 	\subsubsection{USGS Earth Explorer}
 	
@@ -371,7 +383,6 @@
 	
 	\section{Dataset entities}
 	
-	TODO better make this intro...
 	We will further describe which are the bands necessary for the image generation and what are their uses. On top of this, we will further explain what is the normalized snow difference index and what is the optical flow used for.
 	
 	\subsection{Bands}
@@ -464,6 +475,8 @@
 	\label{fig:belvedere_ndsi}
 	\end{figure}
 
+	The image is colour coded in order to enhance the difference between pixels which are considered either snow or ice (white), and the rest of the terrain (green).
+
 	% ==================================================================================
 
 	\section{Alignment}
@@ -535,50 +548,45 @@
 
 	We obtain the motion predicted generated NDSI by relocating each pixel value from the NDSI(\(time=t + dt\)) to a \textbf{predicted location}. For now, this location is generated by adding the distance vectors obtained by optical flow as described in Section~\ref{seq:motion_matrix_implementation} to the pixels of the same image, therefore shifting them by twice as much as they originally did, in their respective directions, as it can be observed in Figure~\ref{fig:motion_generated_schema}. More methods of calculating the predicted location can be found in Section~\ref{seq:future_development}.
 	
-	\begin{figure}[h]
+	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.5]{../images/motion_generated_schema.png}
 		\caption{Motion generated NDSI algorithm.}
 		\label{fig:motion_generated_schema}
 	\end{figure}
 
-	By applying this function to each pixel of the NDSI (\(t + dt\)) image and by making some adjustments which are further described in Section~\ref{seq:motion_ndsi_implementation}, for the Belvedere glacier, scene LC81940282015363LGN02, we have generated the motion predicted NDSI as shown in Figure~\ref{fig:motion_generated_belvedere}. The ice coverage for the generated image is 5.0991\% while the one for the actual NDSI(\(time=t+dt\)) is 5.3066\%. 
-
+	By applying this function to each pixel of the NDSI (\(t + dt\)) image and by making some adjustments which are further described in Section~\ref{seq:motion_ndsi_implementation}, for the Belvedere glacier, scene LC81940282015363LGN02, we have generated the motion predicted NDSI as shown in Figure~\ref{fig:motion_generated_image}. The ice coverage for the generated image is 5.0991\% while the one for the actual NDSI(\(time=t+dt\)) is 5.3066\%.
+	
 	\begin{figure}[h!]
 	\centering
 	\begin{minipage}{0.45\textwidth}
 		\centering
-		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_NDSI_generated_scaled.png}
+		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_NDSI_scaled.png}
+	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_Motion Predicted NDSI _ diffcolor_big.png}
 	\end{minipage}
 	\begin{minipage}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../images/motion_predicted_2015_small.png}
 	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_Motion Predicted NDSI _ diffcolor.png}
+	\end{minipage}
 	\caption{}
-	\label{fig:motion_generated_belvedere}
+	\label{fig:motion_predicted_image}
 	\end{figure}
-	
-	Figure~\ref{fig:overlay} highlights the difference between the NDSI of the previous scene and the generated motion NDSI.
-	
-\begin{figure}[h!]
-	\centering
-		\begin{minipage}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_NDSI_generated_overlay_scaled.png}
-		\end{minipage}
-		\begin{minipage}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../images/motion_predicted_overlay_2015_small.png}
-		\end{minipage}
-		\caption{}
-		\label{fig:overlay}
-\end{figure}
+
 
 	% =========================================================================	
 	
 	\section{Graphical User Interface}
 	\label{seq:gui}
 
+	% =========================================================================
+	
 	\chapter{Design and Implementation}
 	\label{cha:design_and_implementation}
 	
@@ -590,6 +598,8 @@
 	The first section is optional and can be run independently from the processing, since the user can have an already created database of images. However, we have focused on simplifying the process of satellite imagery downloading as described in \ref{seq:STAC} through using the sat-search library as a helper for searching and downloading assets. More information on querying can be found in \ref{seq:sd_implementation}. 
 	Given an existing set of data, the next step is to pass the root folder which contains the glacier directories to the processing unit, also designed as a plug-in mechanism which will trigger the graphical user interface to pop up and allow for the processing options to appear. More information on this section can be found at \ref{seq:processing}. From there, one can start processing by simply making use of the predefined buttons described in \ref{seq:gui}.
 	
+	% =========================================================================
+		
 	\section{Search and Download}
 	
 	Searching as well as downloading have been implemented on top of the sat-search library and it is used directly from the command line interface by running the script described in Section~\ref{seq:search_download}.
@@ -611,6 +621,8 @@
 	\paragraph{Data corruption verification}
 	Both the searching and downloading functions are executed concurrently, since they are \textbf{time intensive} tasks. Each band has around 60 MB, which would make one scene approximately 360 MB. For the Belvedere glaciers, we found 78 scenes with a cloud coverage of 10\%. This means that the size of the entire glacier data will be around 28 GB. Given that one asset's size is quite large, it takes a lot of time to finish the download. In this time, even a small connection interruption might result in corrupted data files, which would interfere with processing. Therefore, we implemented an \textbf{extra security measure} in the sat-stac library which verifies whether a file with the same name already exists at the download location. If it does, its size will be compared to the size taken from the STAC-API servers. In case the two file sizes don't match, it means that the file got corrupted during download and it will be downloaded again. If the sizes match, the downloader will skip the file and continue when it finds one requested file which was not yet found on the disk, such that we do not end up unnecessarily overwriting the already existing files in case of failure.
 	
+	% =========================================================================
+
 	\section{Processing}
 	\label{seq:processing}
 	Processing can be viewed as four different entities, as following:
@@ -632,13 +644,13 @@
 	In order to keep a high level of abstraction, we have split each scene into aligned and unaligned: Scene and AlignedScene objects. These and their children are created when crawling through the glaciers directory, specifically for each region of interest. However, aligning all the images when crawling would result into a lot of idle time for the user when starting the application and it would not be overall feasible to do so. Therefore, a scene is aligned only when it is specifically being selected in the graphical user interface (or when another entity needs it, such as optical flow and image generation). By doing this, we ensure that there is no unnecessary extra waiting time for each scene that we have when powering up the interface.
 	As for the actual alignment, we have used an algorithm which \textbf{collects features} from each band of a scene and tries to match them with a given reference one's features. The obtained \textbf{matches} can be then used to create an \textbf{affine transformation matrix} which specifies by how much did the current image \textbf{rotated and translated} in comparison to its reference. The affine transformation matrix will be then applied to the current image by a \textbf{warping} algorithm with the goal of ensuring as much as possible that there is no misalignment between any pixel of two different images from the same time series. Section~\ref{seq:alignment_algorithm} describes more technically how we built this and what were the computer vision algorithms used for that matter. Figure~\ref{fig:alignment_diagram} contains the technical details of each class which takes part into the alignment process.
 	
-	
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.45]{../images/alignment_diagram.png}
 		\caption{Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}
 		\label{fig:alignment_diagram}
 	\end{figure}
+
 	\subsubsection{Alignment algorithms}
 	\label{seq:alignment_algorithm}
 	
@@ -666,27 +678,27 @@
 	%========================================================================================
 
 	\subsection{NDSI's Optical Flow}
+	
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.6]{../images/motion_vectors_diagram.png}
 		\caption{Technical diagram for the MotionVectors class.}
 		\label{fig:motion_vectors_diagram}
 	\end{figure}
-	As described in Section~\ref{seq:motion_ndsi_implementation}, in order to determine the motion vector for each pixel between two images, we have used \textbf{Gunnar Farneback's} algorithm for dense optical flow calculation, implemented by the \textbf{OpenCV} library. The MotionVectors class takes as input two NDSI images.
+
+	\par As described in Section~\ref{seq:motion_ndsi_implementation}, in order to determine the motion vector for each pixel between two images, we have used \textbf{Gunnar Farneback's} algorithm for dense optical flow calculation, implemented by the \textbf{OpenCV} library. The MotionVectors class takes as input two NDSI images.
 	
-	Since the NDSI images have been aligned, depending on the affine transformation matrix, they will not overlap perfectly any more, resulting in artifacts at their borders. Applying optical flow by using two NDSI images as such would result in highly distorted motion vectors at the borders, as it can be seen in Figure~\ref{fig:motion_vectors_error}. For fixing this, we have created a mask from each image such that both of them are cropped with the mask of the other. This results in losing a small number of pixels at the borders which could not be taken into consideration anyway.
+	\par Since the NDSI images have been aligned, depending on the affine transformation matrix, they will not overlap perfectly any more, resulting in artifacts at their borders. Applying optical flow by using two NDSI images as such would result in highly distorted motion vectors at the borders. For fixing this, we have created a mask from each image such that both of them are cropped with the mask of the other. This results in losing a small number of pixels at the borders which could not be taken into consideration anyway.
 	
-	TODO GIVE EXAMPLE OF OPTICAL FLOW IMAGE
-	
-	In addition to the two NDSI image inputs, we have used the optical flow algorithm with the parameters specified in Listing~\ref{lst:opticalparameters}. We have used a pyramid scale of 0.5 and 6 pyramid levels having in mind that the images that we work with are large. By choosing this combination of parameters, we state that at each level, the image is going to be reshaped at half the size of the previous one; therefore the area of search for motion is small enough such that the optical flow is able to track movement.  
+	\par In addition to the two NDSI image inputs, we have used the optical flow algorithm with the parameters specified in Listing~\ref{lst:opticalparameters}. We have used a pyramid scale of 0.5 and 6 pyramid levels having in mind that the images that we work with are large. By choosing this combination of parameters, we state that at each level, the image is going to be reshaped at half the size of the previous one; therefore the area of search for motion is small enough such that the optical flow is able to track movement.  
 
 	\begin{lstlisting}[caption={Optical flow parameters},label={lst:opticalparameters},language=Python]
 		cv2.calcOpticalFlowFarneback(..., pyr_scale=0.5, levels=6, winsize=15, iterations=3, poly_n=5, poly_sigma=1.2, flags=0)
 	\end{lstlisting}
 
-	After our images are perfectly overlaid, we can give them as inputs to the optical flow algorithm. The result of this will be the computed motions for each pixel, represented as a tuple of the distance that its coordinates moved from one frame to another. Specifically, as referring to Figure~\ref{fig:motion_generated_schema}, each item from the optical flow n-dimensional array will represent the motion distance vector (\(dx, dy\)) as calculated between NDSI(\(time=t\)) and NDSI(\(time=t + dt\)).
+	\par After our images are perfectly overlaid, we can give them as inputs to the optical flow algorithm. The result of this will be the computed motions for each pixel, represented as a tuple of the distance that its coordinates moved from one frame to another. Specifically, as referring to Figure~\ref{fig:motion_generated_schema}, each item from the optical flow n-dimensional array will represent the motion distance vector (\(dx, dy\)) as calculated between NDSI(\(time=t\)) and NDSI(\(time=t + dt\)).
 	
-	To be able to visually interpret the optical flow output, we have used a colour coded image. Colour intensity is directly proportional to the motion vector length, while its hue represents the direction of this vector, as represented in Figure~\ref{fig:hue_colour_wheel}.
+	\par To be able to visually interpret the optical flow output, we have used a colour coded image. Colour intensity is directly proportional to the motion vector length, while its hue represents the direction of this vector, as represented in Figure~\ref{fig:hue_colour_wheel}.
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.3]{../images/colorwheel.png}
@@ -712,13 +724,6 @@
 
 	\subsection{Motion Predicted NDSI}
 	\label{seq:motion_ndsi_implementation}
-	
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.6]{../images/motion_created_diagram.png}
-		\caption{Technical diagram for the MotionPredictedNDSI class.}
-		\label{fig:motion_predicted_diagram}
-	\end{figure}
 	
 	As means to put in practice what we described in Section~\ref{seq:motion_ndsi_functional}, we start by initialising a new numpy n-dimensional array based of the shape of the image NDSI(\(time=t+dt\)). The new array will be filled with the data generated by using the two required entities:
 	\begin{itemize}
@@ -763,24 +768,44 @@
 	Since using the naive approach is not feasible in our application, we had to avoid iterating over the whole image in the first place. Therefore, instead of looping over each pixel in order to generate the values for the new image, we have made use of the numpy library to heavily optimise our data processing. By using numpy functions and vectorized operations directly instead of iterating we were able to improve the processing time by around 1700\%, bringing it down approximately from 10 minutes to 35 seconds.
 	
 	In the iterative approach, for each pixel we add its motion to its position such that we get its new location. These numbers can be computed ahead of time and transformed into arrays such that we only use numpy operations. By creating an array of the initial coordinates \(x, y\) and adding the motion vectors (\(dx, dy\)) array to it, we generated the absolute coordinates where each pixel from the NDSI image should be translated. By adding this modification we got rid of lines 5, 6, 7, 8, 9, 10 and 11 from the algorithm and replaced them with the code as it can be seen in Algorithm~\ref{algo:improved_generation}. The \(absolute\_coordinates\) and \(previous\_NDSI\) can be treated as a sparse array which is then densified using numpy capabilities.
-	
+
 	\begin{algorithm}
-		\SetKwInOut{Input}{Input}
-		\SetKwInOut{Output}{Output}
-		
-		$index\_array \gets [[[0, 0], [1, 0] ... [width, 0]$
-						 $[0, 1], [1, 1] ... [width, 1]$
-						 $...$
-						 $[0, height], [1, height] ... [width, height]]]$\;
-		$absolute\_coordinates \gets motion\_vectors + index\_array$\;
-		
-		$motion\_predicted\_image[absolute\_coordinates] \gets previous\_NDSI$\;
-		
-		\caption{Algorithm used for motion predicted image generation based on the optical flow vectors and NDSI(\(time=t+dt\))}
-		\label{algo:improved_generation}
-	\end{algorithm}
+	\SetKwInOut{Input}{Input}
+	\SetKwInOut{Output}{Output}
 	
-	The function used to generate the predicted NDSI does not have a one-to-one domain, thus making it undefined for certain inputs. This results in a very noisy generated image, as it can be seen in Figure TODO. We have implemented a filter which uses the weighted average of the neighbouring pixels values to fill the missing ones. The detailed description of the implementation can be found in Section~\ref{seq:filter}.
+	\underline{function generate} $(previous\_NDSI, motion\_vectors)$\;
+	\Input{The NDSI(\(time=t+dt\) and the motion vectors generated by optical flow between NDSI(\(time=t\)) and NDSI(\(time=t+dt\))}
+	\Output{The motion predicted NDSI(\(time=t+2*dt\)))}
+	
+	$motion\_predicted\_image \gets previous\_NDSI.shape$\;
+	$width \gets NDSI.width()$\;
+	$height \gets NDSI.height()$\;
+	
+	$index\_array \gets [[[0, 0], [1, 0] ... [width, 0]$
+	$[0, 1], [1, 1] ... [width, 1]$
+	$...$
+	$[0, height], [1, height] ... [width, height]]]$\;
+	$absolute\_coordinates \gets motion\_vectors + index\_array$\;
+	
+	$motion\_predicted\_image[absolute\_coordinates] \gets previous\_NDSI$\;
+
+	\Return{$motion\_predicted\_image$}\;
+	
+	\caption{Improved algorithm used for motion predicted image generation based on the optical flow vectors and NDSI(\(time=t+dt\))}
+	\label{algo:improved_generation}
+	\end{algorithm}
+
+	The technical description of the MotionPredictedNDSI class can be found in Figure~\ref{fig:motion_predicted_diagram}.
+	
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{../images/motion_created_diagram.png}
+	\caption{Technical diagram for the MotionPredictedNDSI class.}
+	\label{fig:motion_predicted_diagram}
+	\end{figure}
+
+	
+	The function used to generate the predicted NDSI does not have a one-to-one domain, thus making it undefined for certain inputs. This results in a very noisy generated image, as it can be seen in Figure Figure~\ref{fig:unfiltered}. We have implemented a filter which uses the weighted average of the neighbouring pixels values to fill the missing ones. The detailed description of the implementation can be found in Section~\ref{seq:filter}.
 	
 	\subsection{Generated image filtering}
 	\label{seq:filter}
@@ -798,27 +823,17 @@
 		\caption{}
 		\label{fig:unfiltered}
 	\end{figure}
-	
-	A first step into creating the filter for the motion predicted NDSI image is to create a mask which will be applied on the black border of the scene such that we are looking for undefined values only inside it. Using numpy, the coordinates of these pixels are extracted into an array which then can be processed in parallel by Pythons' multiprocessing library. We have used multiprocessing instead of threading because Python does not have true parallelization in multithreading, only concurrency, which would not be a real improvement on the processing time. Since all the processes have to write different chunks of the same image and they do not share the same memory space, we chose to solve this problem by creating a shared memory buffer to hold the image.
-	
-	\begin{figure}[h!]
-		\centering
-		\begin{minipage}{0.44\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/gaussian_image.png}
-		\end{minipage}
-		\begin{minipage}{0.44\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/gaussian_kernel1.png}
-		\end{minipage}
-		\caption{Zoomed in part of the predicted NDSI (left). Neighbourhood extracted (right). }
-		\label{fig:gaussian1}
-	\end{figure}
-
-	The value of each found undefined pixel has to be calculated as an weighted average composed of its neighbouring pixels, as shown in Figure~\ref{fig:gaussian1}. We created the kernel which holds the weight of each pixel in the neighbourhood such that pixels closer to the centre have a higher weights than those near the edge. However, we have the case when we have multiple undefined pixels in the same neighbourhood. Since we cannot take their values in consideration, we do not want to include them in the weighted average, thus we set their weight to be 0, as shown in Figure~\ref{fig:gaussian2} left. The result of the weighted average will be then stored as the value of the currently focused undefined pixel, as highlighted in Figure~\ref{fig:gaussian2} right.
 
 	\begin{figure}[h!]
 	\centering
+	\begin{minipage}{0.44\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/gaussian_image.png}
+	\end{minipage}
+	\begin{minipage}{0.44\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../images/gaussian_kernel1.png}
+	\end{minipage}
 	\begin{minipage}{0.44\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../images/gaussian_weights.png}
@@ -827,31 +842,69 @@
 		\centering
 		\includegraphics[width=\linewidth]{../images/gaussian_pixel.png}
 	\end{minipage}
-	\caption{Generated weights kernel (left). Filled in undefined value (right).}
-	\label{fig:gaussian2}
+	\caption{Zoomed in part of the predicted NDSI (left, top). Neighbourhood extracted (right, top). Kernel of weights (left, bottom). Generated value (right, bottom).}
+	\label{fig:gaussian}
 	\end{figure}
 	
-	\begin{figure}[h!]
-		\centering
-		\begin{minipage}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/LC81940282015363LGN02_NDSI_scaled.png}
-		\end{minipage}
-		\begin{minipage}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../images/NDSI_2015_small.png}
-		\end{minipage}
-		\caption{}
-		\label{fig:NDSI}
-	\end{figure}
+	A first step into creating the filter for the motion predicted NDSI image is to create a mask which will be applied on the black border of the scene such that we are looking for undefined values only inside it. Using numpy, the coordinates of these pixels are extracted into an array which then can be processed in parallel by Pythons' multiprocessing library. We have used multiprocessing instead of threading because Python does not have true parallelization in multithreading, only concurrency, which would not be a real improvement on the processing time. Since all the processes have to write different chunks of the same image and they do not share the same memory space, we chose to solve this problem by creating a shared memory buffer to hold the image.
+
+	The value of each found undefined pixel has to be calculated as an weighted average composed of its neighbouring pixels, as shown in Figure~\ref{fig:gaussian} top. We created the kernel which holds the weight of each pixel in the neighbourhood such that pixels closer to the centre have a higher weights than those near the edge. However, we have the case when we have multiple undefined pixels in the same neighbourhood. Since we cannot take their values in consideration, we do not want to include them in the weighted average, thus we set their weight to be 0, as shown in Figure~\ref{fig:gaussian} left, bottom. The result of the weighted average will be then stored as the value of the currently focused undefined pixel, as highlighted in Figure~\ref{fig:gaussian} right, bottom.
+
+	% ===================================================================================
+	
+	\section{Extras}
+	\label{seq:extras}
+	Below we will talk about the 
+	
+	\subsection{Programming language}
+	\label{seq:programminglang}
+	
+	\subsection{Programming environment}
+	\label{seq:programmingenv}
+	
+	The application part of the thesis has been written with the help of the Emacs text editor, mainly because it provides a uniformity which supports various working flows, since it is not focused on a specific programming language, like PyCharm or Eclipse, for example. The editor is highly customizable and it provides structured, powerful commands for text editing, file searching, in-place code versioning and many more.
+	
+	\subsection{Libraries}
+	\label{seq:libraries}
+	
+	\subsubsection{NumPy}
+	
+	Since the data used for this thesis is large in size, relying on Python alone for data structures for processing does not scale. Python is an interpreted language, not a compiled one, which means that for each operation its interpreter has to do extra work such that it translated the bytecode instruction into a form that is machine executable. For a large number of operation, such as we have high resolution images, this does not scale. Instead, we resorted to using NumPy, which is an open-source library which brings support of large data computation, such as multi-dimensional arrays and matrices, as well as a large collection of mathematical functions which can be easily used for their operation \cite{arraynumpy}. The library has a well optimised C code core which can handle large processing by bypassing the python interpreter, which results in the speed of a compiled language, not an interpreted one. Therefore, based on the needs of our dataset, we have used NumPys' main data structure, the ndarray (n-dimensional array) as a data structure to hold our images and various optimisations applied throughout processing focused on using only this type of data structure in order to make use of NumPys' optimisations and speed.
+	
+	\subsubsection{Open Source Computer Vision Library (OpenCV)}
+	
+	The OpenCV library brings support for computer vision processing, by providing programming functions which can be reliably used \cite{cuda}. Its use in our thesis both for image alignment and detecting motion through deep optical flow, by using its already integrated functions as a support. OpenCV, as well as NumPy, is open-source and it is written and optimised in native code, which is needed for the large size of our dataset entities.
+	
+	\subsubsection{Geospatial Data Abstraction Library (GDAL)}
+	
+	The GDAL library is a translator for vector and raster geo-spatial data formats, which presents a single data model to work with \cite{gdal}. Since our images are represented in the tiff format, reading them by using GDAL proved to be the easy and reliable.
+	
+	\subsubsection{Version-control}
+	\label{seq:versioning}
+	
+	In order to keep track of various changes, bugs and enhancements of our application, we had to make sure that we are using a reliable version-control system. For this purpose, Git was chosen for its fast performance with the aim of data integrity and support for distributed workflows \cite{git}. When a directory is flagged as a git repository, it keeps track of any changes made to that location, independent of a central server of network accessibility. By keeping a clean workflow, one can easily include enhancements and try experiments without the worry of losing stability. We have kept track of every change, bug and enhancement from the beginning of developing this application by using git, and the repository which contains all of this information can be found on Github, at \url{https://github.com/BabyCakes13/GlacierImagePredictor}.
 	
 	\chapter{Performance}
 	\label{seq:performance}
 	Here we should also write on what machine I ran the code and try it on different ones as a thing. Also write about the idea of moving the processing on cloud, but there might be traffic overhead because the images are large. Also say that we store it on harddrive, NOT ssd. Make tests with both.
 	
 	\chapter{Conclusions}
+	\label{seq:conclusions}
+	
 	\section{Future Development}
 	\label{seq:future_development}
+	
+	During the process of creating the application, multiple problems were met. One of them was that even though there are a large number of aerial images collected in the collection provided for the Landsat 8 satellite, there are not many which have a small enough cloud coverage. This results in datasets with a low number of entities, which means that we cannot test our results on a longer period of time. Since clouds interfere with delimiting snow and pixels from a scene, if we wanted to broaden our dataset, we thought of two options:
+	\begin{itemize}
+		\item harvesting images from multiple satellites, such as Sentinel and older versions of Landsat. Even if these satellites use other types of sensors on board for Earth observation, by matching the wavelengths of their bands one could make a match between them. By using multiple satellites, more populated datasets can be created, since we are taking into consideration collected scenes over the years for pairs of paths, rows and months. By only using Landsat 8, even with an allowed cloud coverage of 20\%, the average length of a \(path, row, month\)) dataset was around 15;
+		\item implementing cloud mapping algorithms such that cloud could be detected and trimmed out before the calculation of the normalized snow difference index and optical flow extraction. For now, the optical flow algorithm ran between scenes which have a high cloud coverage finds large vectors of motion at the locations where clouds existed from one frame to another. The result does not take into consideration the difference between snow pixels and cloud ones, therefore all of them are moved. 
+	\end{itemize}
+
+	Another improvement could be changing the way that the coordinates of the pixels of the motion generated image are calculated. For now, we are predicting their location by using the method described in \ref{fig:motion_generated_schema}, where we are multiplying by two both the original coordinates and the time. A more interesting approach would be using time series forecasting models applied on the distance vectors generated by optical flow for each pixel over time in order to generate future entries. This could be done with statistical methods such as the autoregressive integrated moving average (ARIMA). However, doing this forecast over each pixel of a high resolution image would take a lot of processing power; also, a larger \(path, row, month\) dataset would be needed for such an analysis.
+	
+	One of the main slow downs in developing and using the application was the slow time of processing due to the large data files. As described in Section~\ref{seq:performance}, running the NDSI calculation, alignment, optical flow generation and motion image creation took around two minutes for each scene. By having access to a more powerful machine, this time could be reduced. This could be done by migrating the processing unit to cloud and hiring a machine with a CPU which has a high number of cores and better performance. One of the possible downsides would then be the amount of time needed for passing the large scene files through he network to the machine on cloud, which, depending on the bandwidth. A solution to this downside would be passing the dataset before starting the processing and make sure that they are on the same machine. However, cloud storage can get very expensive and the trade off between processing time and expenses could prove too big.
+	
+	As for a final future development idea, migrating the codebase from Python to a compiled programming language, such as C or C++ would yield in much faster results.
 	
 	\bibliographystyle{alpha}
 	\bibliography{references}
@@ -883,5 +936,3 @@
 	\end{table}
 	\end{document}
 
-EXTRAS 
-This part of the application can be viewed as a plug-in entity, since one can already have a predefined dataset which can be loaded directly to the processing unit.
