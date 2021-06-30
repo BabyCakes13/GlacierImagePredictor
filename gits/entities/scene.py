@@ -32,6 +32,9 @@ class Scene(SceneInterface):
     def scene_path(self):
         return self._scene_path
 
+    def clear(self):
+        pass
+
     def bands(self) -> list:
         return [
             self._red_band,

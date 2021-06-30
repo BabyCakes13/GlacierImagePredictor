@@ -57,6 +57,10 @@ class AlignedScene(SceneInterface):
             self.__motion_vectors = None
             self.__motion_predicted_ndsi = None
 
+    def clear(self):
+        for b in self.__bands:
+            b.clear()
+
     def affine_transform_matrix(self) -> numpy.ndarray:
         if self.__affine_transform_matrix is None:
             self.__calculate_affine_transform_matrix()

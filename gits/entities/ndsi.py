@@ -23,6 +23,9 @@ class NDSI(Image):
 
         self.__ndsi_data = None
 
+    def clear(self):
+        self.__ndsi_data = None
+
     def create_band_path(self, suffix="_NDSI_CACHED"):
         return self.__green_band.create_band_path(suffix, False)
 
@@ -115,7 +118,10 @@ class NDSI(Image):
     def __snow_ratio(self) -> float:
         total_snow_pixels = self.__total_snow_pixels()
         total_image_pixels = self.__total_image_pixels()
-        ratio = total_snow_pixels / total_image_pixels
+        try:
+            ratio = total_snow_pixels / total_image_pixels
+        except ZeroDivisionError:
+            ratio = 0
         return ratio
 
     def __total_snow_pixels(self) -> int:

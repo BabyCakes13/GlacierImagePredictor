@@ -30,6 +30,9 @@ class MotionPredictedNDSI(NDSI):
         self.__finished = 0
         self.__total_zero_points = 0
 
+    def clear(self):
+        self.__image = None
+
     def name(self) -> str:
         return self.NAME
 
@@ -206,6 +209,9 @@ class MotionPredictedNDSIOverlay():
     def __init__(self, predicted_ndsi, previous_ndsi):
         self.__predicted_ndsi = predicted_ndsi
         self.__previous_ndsi = previous_ndsi
+
+    def clear(self):
+        pass
 
     def name(self):
         return self.NAME

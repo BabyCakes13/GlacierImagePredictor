@@ -30,6 +30,9 @@ class AlignedImage(Image):
         path = self.__image.create_band_path(suffix="_ALIGNED_CACHED")
         return path
 
+    def clear(self):
+        self.__aligned_ndarray = None
+
     def __ndarray(self) -> numpy.ndarray:
         if self.__aligned_ndarray is not None:
             return self.__aligned_ndarray

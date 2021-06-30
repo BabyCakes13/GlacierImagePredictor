@@ -17,6 +17,9 @@ class MotionVectorsArrows():
         self.__second_image = second_image
         self.__motionvectors = motionvectors
 
+    def clear(self):
+        pass
+
     def name(self):
         return self.NAME
 
@@ -59,6 +62,9 @@ class MotionVectors(Image):
     def __init__(self, first_image: AlignedImage, second_image: AlignedImage):
         self.__first_image = first_image
         self.__second_image = second_image
+        self.__optical_flow = None
+
+    def clear(self):
         self.__optical_flow = None
 
     def __create_mask(self, image) -> numpy.ndarray:
