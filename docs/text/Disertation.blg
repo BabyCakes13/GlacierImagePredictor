@@ -3,51 +3,51 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Disertation.aux
 The style file: alpha.bst
 Database file #1: references.bib
-I was expecting a `,' or a `}'---line 164 of file references.bib
+I was expecting a `,' or a `}'---line 161 of file references.bib
  :  
  :  title = {MEASURING SNOW AND GLACIER ICE PROPERTIES
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 170 of file references.bib
+I was expecting a `,' or a `}'---line 167 of file references.bib
  :  
  :  title = {Improved ORB Algorithm Using Three-Patch Method and Local Gray Difference},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 176 of file references.bib
+I was expecting a `,' or a `}'---line 173 of file references.bib
  :  
  :  title = {Feature Extractionusing ORB-RANSAC for Face Recognition},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 182 of file references.bib
+I was expecting a `,' or a `}'---line 179 of file references.bib
  :  
  :  title = {ORB: An efficient alternative to SIFT or SURF},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Repeated entry---line 186 of file references.bib
+Repeated entry---line 183 of file references.bib
  : @inproceedings{orbsift
  :                       ,
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 194 of file references.bib
+I was expecting a `,' or a `}'---line 191 of file references.bib
  :  
  :  title = {Array programming with NumPy},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 200 of file references.bib
+I was expecting a `,' or a `}'---line 197 of file references.bib
  :  
  :  title = {Realtime Computer Vision with OpenCV: Mobile computer-vision technology will soon become as ubiquitous as touch interfaces.},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 207 of file references.bib
+I was expecting a `,' or a `}'---line 204 of file references.bib
  :  
  :  year = {Retrieved 2021-06-30},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 212 of file references.bib
+I was expecting a `,' or a `}'---line 209 of file references.bib
  :  
  :  year = {Retrieved 2021-06-30},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 217 of file references.bib
+I was expecting a `,' or a `}'---line 214 of file references.bib
  :  
  :  year = {Retrieved 2021-06-30},
 (Error may have been on previous line)
@@ -56,7 +56,6 @@ Warning--to sort, need author or key in LANDSATPIC
 Warning--to sort, need author or key in wrs
 Warning--to sort, need author or key in l8otb
 Warning--to sort, need author or key in sn
-Warning--to sort, need author or key in bands
 Name 1 in "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" has a comma at the end for entry sar
 while executing---line 1185 of file alpha.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" for entry sar
@@ -93,7 +92,6 @@ Name 1 in "Chaoqun Ma, Xiaoguang Hu, Jin Xiao, Huanchao Du, and Guofeng Zhang" h
 while executing---line 1185 of file alpha.bst
 Too many commas in name 1 of "Chaoqun Ma, Xiaoguang Hu, Jin Xiao, Huanchao Du, and Guofeng Zhang" for entry orblocal
 while executing---line 1185 of file alpha.bst
-Warning--to sort, need author or key in C1L1
 Warning--to sort, need author or key in LANDSAT
 Warning--to sort, need author or key in lgng
 Warning--to sort, need author or key in WGI
@@ -163,45 +161,45 @@ Warning--empty title in feorb
 Warning--empty booktitle in feorb
 Warning--empty year in feorb
 Warning--empty booktitle in rgmuos
-You've used 33 entries,
+You've used 32 entries,
             2543 wiz_defined-function locations,
-            655 strings with 7584 characters,
-and the built_in function-call counts, 8875 in all, are:
-= -- 827
-> -- 253
-< -- 4
-+ -- 77
-- -- 74
-* -- 505
-:= -- 1222
-add.period$ -- 84
-call.type$ -- 33
-change.case$ -- 153
-chr.to.int$ -- 32
-cite$ -- 103
-duplicate$ -- 437
-empty$ -- 934
-format.name$ -- 90
-if$ -- 1940
+            653 strings with 7561 characters,
+and the built_in function-call counts, 8732 in all, are:
+= -- 807
+> -- 259
+< -- 5
++ -- 79
+- -- 76
+* -- 499
+:= -- 1220
+add.period$ -- 81
+call.type$ -- 32
+change.case$ -- 150
+chr.to.int$ -- 31
+cite$ -- 98
+duplicate$ -- 435
+empty$ -- 911
+format.name$ -- 93
+if$ -- 1899
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 17
-newline$ -- 152
-num.names$ -- 42
-pop$ -- 399
+missing$ -- 18
+newline$ -- 147
+num.names$ -- 45
+pop$ -- 383
 preamble$ -- 1
-purify$ -- 191
+purify$ -- 187
 quote$ -- 0
-skip$ -- 287
+skip$ -- 285
 stack$ -- 0
-substring$ -- 252
+substring$ -- 243
 swap$ -- 34
-text.length$ -- 4
+text.length$ -- 5
 text.prefix$ -- 2
 top$ -- 0
-type$ -- 264
-warning$ -- 51
-while$ -- 38
-width$ -- 36
-write$ -- 335
+type$ -- 256
+warning$ -- 49
+while$ -- 40
+width$ -- 35
+write$ -- 325
 (There were 40 error messages)
