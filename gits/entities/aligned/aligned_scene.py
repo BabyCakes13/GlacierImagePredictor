@@ -5,9 +5,9 @@ import math
 
 from entities.interfaces.scene_interface import SceneInterface
 from entities.aligned.aligned_band import AlignedBand
-from entities.motion_vectors import MotionVectors
+from entities.motion_vectors import MotionVectors, MotionVectorsArrows
 from entities.ndsi import NDSI
-from entities.motion_predicted_ndsi import MotionPredictedNDSI
+from entities.motion_predicted_ndsi import MotionPredictedNDSI, MotionPredictedNDSIOverlay
 
 from utils import logging
 logger = logging.getLogger(__name__)
@@ -45,8 +45,14 @@ class AlignedScene(SceneInterface):
             self.__motion_vectors = MotionVectors(previous_scene.ndsi(), self.__ndsi)
             self.__bands.append(self.__motion_vectors)
 
+            self.__motion_vectors_arrows = MotionVectorsArrows(self.__motion_vectors, previous_scene.ndsi(), self.__ndsi)
+            self.__bands.append(self.__motion_vectors_arrows)
+
             self.__motion_predicted_ndsi = MotionPredictedNDSI(self.__motion_vectors, self.ndsi())
             self.__bands.append(self.__motion_predicted_ndsi)
+
+            self.__motion_predicted_overlay_ndsi = MotionPredictedNDSIOverlay(self.__motion_predicted_ndsi, self.ndsi())
+            self.__bands.append(self.__motion_predicted_overlay_ndsi)
         else:
             self.__motion_vectors = None
             self.__motion_predicted_ndsi = None

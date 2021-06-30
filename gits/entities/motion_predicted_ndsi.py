@@ -50,14 +50,6 @@ class MotionPredictedNDSI(NDSI):
 
         return self.__h
 
-    def visual_data(self):
-        old_ndsi = self.__previous_image.visual_data()
-        generated_ndsi_colored = super().visual_data()
-
-        generated_ndsi_colored[..., 0] = old_ndsi[..., 0]
-
-        return generated_ndsi_colored
-
     def __get_shape(self) -> tuple:
         height = self.__previous_image.raw_data().shape[0]
         width = self.__previous_image.raw_data().shape[1]
@@ -207,3 +199,27 @@ class MotionPredictedNDSI(NDSI):
             return True
         return False
 
+
+class MotionPredictedNDSIOverlay():
+    NAME = "Motion Predicted Overlay NDSI"
+
+    def __init__(self, predicted_ndsi, previous_ndsi):
+        self.__predicted_ndsi = predicted_ndsi
+        self.__previous_ndsi = previous_ndsi
+
+    def name(self):
+        return self.NAME
+
+    def scene_name(self):
+        return self.__predicted_ndsi.scene_name()
+
+    def visual_data(self):
+        old_ndsi = self.__previous_ndsi.visual_data()
+        predicted_ndsi_colored = self.__predicted_ndsi.visual_data()
+
+        predicted_ndsi_colored[..., 0] = old_ndsi[..., 0]
+
+        return predicted_ndsi_colored
+
+    def snow_percentage(self):
+        return self.__predicted_ndsi.snow_percentage()

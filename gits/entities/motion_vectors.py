@@ -10,9 +10,51 @@ from utils.utils import debug_trace
 logger = logging.getLogger(__name__)
 
 
+class MotionVectorsArrows():
+    NAME = "Motion Vectors Arrows"
+    def __init__(self, motionvectors, first_image: AlignedImage, second_image: AlignedImage):
+        self.__first_image = first_image
+        self.__second_image = second_image
+        self.__motionvectors = motionvectors
+
+    def name(self):
+        return self.NAME
+
+    def scene_name(self):
+        return self.__motionvectors.scene_name()
+
+    def visual_data(self) -> numpy.ndarray:
+        return self.__arrowed_optical_flow()
+
+    def __create_mask(self, image) -> numpy.ndarray:
+        ret, threshold = cv2.threshold(image, 1, 0xFFFF, cv2.THRESH_BINARY_INV)
+        return threshold
+
+    def __arrowed_optical_flow(self) -> numpy.ndarray:
+        first_mask = self.__create_mask(self.__first_image.raw_data_16bit())
+        second_mask = self.__create_mask(self.__second_image.raw_data_16bit())
+        base_image = self.__second_image.visual_data()
+
+        optical_flow = self.__motionvectors.raw_data()
+
+        thiccness = 2
+        step = 30
+
+        for y in range(0, base_image.shape[0], step):
+            for x in range(0, base_image.shape[1], step):
+                if first_mask[y][x] == 0 and second_mask[y][x] == 0:
+                    dx, dy = optical_flow[y][x]
+                    end_point = (x, y)
+                    start_point = (int(x - dx), int(y - dy))
+                    color = (0, 0, 255)
+                    cv2.arrowedLine(base_image, start_point, end_point, color, thiccness)
+
+        return base_image
+
+
 class MotionVectors(Image):
 
-    NAME = "Motion Vectros"
+    NAME = "Motion Vectors Color"
 
     def __init__(self, first_image: AlignedImage, second_image: AlignedImage):
         self.__first_image = first_image
@@ -29,7 +71,7 @@ class MotionVectors(Image):
         return self.__optical_flow
 
     def visual_data(self) -> numpy.ndarray:
-        return self.__arrowed_optical_flow()
+        return self.__colored_optical_flow()
 
     def __compute_optical_flow(self) -> None:
         tik = time.process_time()
@@ -74,27 +116,6 @@ class MotionVectors(Image):
 
         bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
         return bgr
-
-    def __arrowed_optical_flow(self) -> numpy.ndarray:
-        first_mask = self.__create_mask(self.__first_image.raw_data_16bit())
-        second_mask = self.__create_mask(self.__second_image.raw_data_16bit())
-        base_image = self.__second_image.visual_data()
-
-        optical_flow = self.raw_data()
-
-        thiccness = 2
-        step = 30
-
-        for y in range(0, base_image.shape[0], step):
-            for x in range(0, base_image.shape[1], step):
-                if first_mask[y][x] == 0 and second_mask[y][x] == 0:
-                    dx, dy = optical_flow[y][x]
-                    end_point = (x, y)
-                    start_point = (int(x - dx), int(y - dy))
-                    color = (0, 0, 255)
-                    cv2.arrowedLine(base_image, start_point, end_point, color, thiccness)
-
-        return base_image
 
     @staticmethod
     def scale_to_8bit(image, value) -> numpy.ndarray:

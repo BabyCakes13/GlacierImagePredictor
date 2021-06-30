@@ -76,24 +76,26 @@ class ListsGui:
         self.__window.lists_window().bands_list_widget()._update_widget_items(bands_names)
         self.__gui.main_display_gui().set_image_display(self.__active_scene.thumbnail())
 
-    def __glacier_clicked(self):
+        self.__window.lists_window().bands_list_widget()
+
+    def __glacier_clicked(self, item_clicked):
         item = self.__window.lists_window().glaciers_list_widget().current_item()
         glacier = gl.find_glacier_by_wgi_id(item.text(), self.__glaciers)
 
         self.__update_active_glacier(glacier)
 
-    def __roi_clicked(self):
+    def __roi_clicked(self, item_clicked):
         item = self.__window.lists_window().rois_list_widget().current_item()
         roi = ro.find_roi_by_path_row(item.text(), self.__active_rois())
 
         self.__update_active_roi(roi)
 
-    def __scene_clicked(self):
+    def __scene_clicked(self, item_clicked):
         item = self.__window.lists_window().scenes_list_widget().current_item()
         scene = sc.find_scene_by_wgi_id(item.text(), self.__active_scenes())
         self.__update_active_scene(scene)
 
-    def __band_clicked(self, item: str):
+    def __band_clicked(self, item_clicked: str):
         clicked_item = self.__bands_list_widget.current_item()
         clicked_band = band.find_band_by_name(clicked_item.text(), self.__active_scene.bands())
 

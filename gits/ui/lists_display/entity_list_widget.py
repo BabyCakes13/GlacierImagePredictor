@@ -32,6 +32,8 @@ class EntityListWidget():
         self._widget.addItems(items)
         self._items = items
 
+        self.vertical_widget()
+
     def _add_to_layout(self, layout) -> None:
         layout.addWidget(self._widget,
                          self._grid_row,
