@@ -15,6 +15,7 @@ class NdsiPlot():
         self.__layout = QtWidgets.QVBoxLayout()
         self.__frame.setLayout(self.__layout)
         self.__roi = None
+        self.__glacier_nane = ""
 
         self.__initialize_buttons()
         self.__initializePlot()
@@ -38,11 +39,17 @@ class NdsiPlot():
         self.__layout.addWidget(self.__static_canvas)
         self.__axes = self.__static_canvas.figure.subplots()
 
+    def setGlacier(self, glacier_name):
+        self.__glacier_nane = glacier_name
+
     def setROI(self, roi):
         self.__roi = roi
         if self.__axes is not None:
             self.__axes.remove()
             self.__axes = self.__static_canvas.figure.subplots()
+            self.__axes.set_title(self.__glacier_nane + " @ " + str(self.__roi.path()) \
+                                  + ":" + str(self.__roi.row()) \
+                                  + " Month: " + str(self.__roi.monthrange()[0]))
         self.__static_canvas.draw()
 
     def visible(self, visible):
@@ -59,13 +66,17 @@ class NdsiPlot():
     def __calculateNDSI(self):
         series = self.__ndsi_series()
 
-        scenes = series.values()
-        ndsis = series.keys()
+        ndsi_values = series.values()
+        scens_dates = series.keys()
 
-        print(scenes)
-        print(ndsis)
+        print(ndsi_values)
+        print(scens_dates)
 
-        self.__axes.plot(ndsis, scenes, 'go-', label='NDSI')
+        self.__axes.plot(scens_dates, ndsi_values, 'go-', label='NDSI')
+        offset = (max(ndsi_values) - min(ndsi_values)) / 40
+        for scene, ndsi in series.items():
+            self.__axes.text(scene, ndsi+offset, "%f" % ndsi, ha="center")
+        self.__axes.legend()
         self.__static_canvas.draw()
 
     def __predicted_ndsi_series(self):
@@ -84,11 +95,15 @@ class NdsiPlot():
     def __calculateGeneratedNDSI(self):
         series = self.__predicted_ndsi_series()
 
-        scenes = series.values()
-        ndsis = series.keys()
+        ndsi_values = series.values()
+        scens_dates = series.keys()
 
-        print(scenes)
-        print(ndsis)
+        print(ndsi_values)
+        print(scens_dates)
 
-        self.__axes.plot(ndsis, scenes, 'ro-', label='PredictedNDSI')
+        self.__axes.plot(scens_dates, ndsi_values, 'ro-', label='PredictedNDSI')
+        offset = (max(ndsi_values) - min(ndsi_values)) / 40
+        for scene, ndsi in series.items():
+            self.__axes.text(scene, ndsi+offset, "%f" % ndsi, ha="center")
+        self.__axes.legend()
         self.__static_canvas.draw()
