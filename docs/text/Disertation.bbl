@@ -1,4 +1,4 @@
-\begin{thebibliography}{SHWS18}
+\begin{thebibliography}{SHWS17}
 
 \bibitem[bd]{bd}
 bd.
@@ -88,9 +88,6 @@ B.~D. Lucas and T.~Kanade.
   stereo vision.
 \newblock 1981.
 
-\bibitem[MKI]{msg}
-Jan-Gunnar~Winther Max~K6nig and Elisabeth Isaksson.
-
 \bibitem[nds]{ndsi}
 ndsi.
 \newblock
@@ -107,17 +104,17 @@ orb.
 \newblock \url{https://docs.opencv.org/4.5.2/d1/d89/tutorial_py_orb.html}.
 \newblock Accessed: 2021-06-24.
 
-\bibitem[RRA19]{aaesakh}
+\bibitem[RRA19]{RACOVITEANU2019}
 Adina~E. Racoviteanu, Karl Rittger, and Richard Armstrong.
 \newblock An automated approach for estimating snowline altitudes in the
   karakoram and eastern himalaya from remote sensing.
-\newblock 2019.
+\newblock {\em Front. Earth Sci.}, 7:220, 2019.
 
-\bibitem[SHWS18]{sar}
-Christopher Nuth1 Liss M. Andreassen2 Ward J. J. van~Pelt Solveig H.~Winsvold,
-  Andreas~Kääb1 and Thomas Schellenberger1.
-\newblock Using sar satellite data time series for regional glacier mapping.
-\newblock 2018.
+\bibitem[SHWS17]{WINSVOLD2017}
+Christopher Nuth Liss M. Andreassen Ward J. J. van~Pelt Solveig H.~Winsvold,
+  Andreas~Kääb and Thomas Schellenberger.
+\newblock Using sar satellite data time-series for regional glacier mapping.
+\newblock {\em The Cryosphere Discussion}, 2017.
 
 \bibitem[sn]{sn}
 sn.
@@ -129,11 +126,11 @@ Stac.
 \newblock \url{https://stacspec.org/STAC-api.html}.
 \newblock Accessed: 2021-06-20.
 
-\bibitem[TK20]{parvati}
-Swati Tak and Ashok~K. Keshari.
+\bibitem[Tak20]{TAK2020}
+Keshari~A.K Tak, S.
 \newblock Investigating mass balance of parvati glacier in himalaya using
   satellite imagery based model.
-\newblock 2020.
+\newblock {\em Scientific Reports}, 10:12211, 2020.
 
 \bibitem[USG]{USGS}
 Usgs.
@@ -149,10 +146,11 @@ World glacier inventory.
 \newblock \url{http://nsidc.org/data/glacier_inventory/index.html}.
 \newblock Accessed: 2021-06-20.
 
-\bibitem[WKN16]{rgmuos}
+\bibitem[WKN16]{WINSVOLD2016}
 Solveig~Havstad Winsvold, Andreas Kääb, and Christopher Nuth.
 \newblock Regional glacier mapping using optical satellite data time series.
-\newblock 2016.
+\newblock {\em IEEE JOURNAL OF SELECTED TOPICS IN APPLIED EARTH OBSERVATIONS
+  AND REMOTE SENSING}, 9:3698--3710, 2016.
 
 \bibitem[wrs]{wrs}
 wrs.

@@ -424,16 +424,19 @@
 	\par The normalized snow difference index (NDSI) is an index which relates to the presence of snow/ice in a pixel. Snow and ice usually have a very low reflectance in the shortwave infrared spectrum and very high in the visible one, which is useful for mapping out most types of clouds from the scene \cite{ndsi}. We can therefore use the formula from Equation~\ref{eq:ndsi_formula} in order to highlight the snow and ice pixels from a Landsat 8 image.
 	
 	\begin{equation}\label{eq:ndsi_formula}
-		NDSI = \frac{green - SWIR1}{green + SWIR1}
+		NDSI = \frac{green - swir1}{green + swir1}
 	\end{equation}
 
-	\par By combining the snow reflectance behaviour of snow and ice for each of these bands, we can create a normalized snow difference index image which has values in the range [-1, 1]. We can then apply a threshold on the pixels which states that if the NDSI value for a pixel is larger than 0.0, then that pixel represents snow/ice covered land; similarly, if its value is smaller than 0.0, that pixel represents snow/ice free land \cite{ndsi}, \cite{viirs}, as represented in Equation~\ref{eq:ndsi_threshold}. Of course, this represents the general value for the threshold, but with the increase of its value, we can more accurately differentiate between snow and ice. With larger threshold values we can state that a pixel represents ice covered land rather than just snow fall land \cite{viirs}. We have tried different values for the threshold and came to the conclusion that a value of 0.3 is best suited for our needs.
+	\par We can then apply a threshold on the pixels which states that if the NDSI value for a pixel is larger than 0.0, then that pixel represents snow/ice covered land; similarly, if its value is smaller than 0.0, that pixel represents snow/ice free land \cite{ndsi}, \cite{viirs}, as represented in Equation~\ref{eq:ndsi_threshold}. Of course, this represents the general value for the threshold, but with the increase of its value, we can more accurately differentiate between snow and ice. With larger threshold values we can state that a pixel represents ice covered land rather than just snow fall land \cite{viirs}. We have tried different values for the threshold and came to the conclusion that a value of 0.3 is best suited for our needs.
 	
 	\begin{equation}
+		thresholding(pixel) = \left.
 		\begin{cases}\label{eq:ndsi_threshold}
-			\text{snow/ice land} & \text{if } NDSI \geq 0.0\\
-			\text{snow-free land}, & \text{NDSI < 0.0}
+			
+			\text{snow/ice},  & NDSI \geq 0.3\\
+			\text{snow-free}, & NDSI < 0.3
 		\end{cases}
+		\right\}
 	\end{equation}
 
 	\par An example of a generated NDSI for the Jungfrau-Aletsch-Bietschhorn glacier (46.47735081308319, 8.056887228860798), scene LC81940282013341LGN01, can be viewed in Figure~\ref{fig:ndsi}.
@@ -652,7 +655,7 @@
 	
 	\par As we have seen in Section~\ref{seq:landsat8_section}, the Landsat 8 satellite does not have a perfect trajectory, which results into misaligned images. These changes are not obvious to the naked eye from scene to scene, but overlapping two scenes highlights this problem, as we can see in Figure~\ref{fig:unaligned}. Even so the scenes are almost similar, which means that aligning them does not prove to be very hard and it is done by using a strong \textbf{keypoint detection algorithm} which in our case detects edges formed by mountains and other geographical features present in the scenes. The \textbf{computer vision algorithms} used for this are \textbf{ORB (Oriented FAST and Rotated BRIEF)}, \textbf{Harris Corner Detector} and \textbf{RANSAC (Random Sample Consensus)} and they are applied on the raw 16bit grayscale image.
 	
-	\par \textbf{ORB} represents a fusion between the features from accelerated segment test (\textbf{FAST}) keypoint detector and binary robust independent elementary features (\textbf{BRIEF}) descriptor. The FAST detector finds keypoints in the image and uses Harris corner measure to select the a number of top points from the list (25\%, in our case) \cite{orb}. In order to use the detector we must first normalize and downsample the 16bit raw image to 8 bit, as it is required by ORB. Each keypoint is then represented by a circle of 16 pixels. The descriptors must then identify these keypoints and pair with each other.
+	\par \textbf{ORB} represents a fusion between the features extracted by using the fast accelerated segment test (\textbf{FAST}) keypoint detector combined with the binary robust independent elementary features (\textbf{BRIEF}) descriptor. The FAST detector finds keypoints in the image and uses Harris corner measure to select the a number of top points from the list (25\%, in our case) \cite{orb}. In order to use the detector we must first normalize and downsample the 16bit raw image to 8 bit, as it is required by ORB. Each keypoint is then represented by a circle of 16 pixels. The descriptors must then identify these keypoints and pair with each other.
 	We compute for each scene its \textbf{keypoints and descriptors} taken from \textbf{each band}, in order to increase the precision of alignment later on. Also, since we are working with satellite imagery there might be cases when the algorithm only finds keypoints in a small part of the image, resulting in erroneous distortion. \textbf{Splitting} the image into multiple boxes and applying the orb detect algorithm on each separate part of the image proved to solve this problem and create much better results. 
 	
 	\par After ensuring that we have good enough keypoints we will be aligning each scene with its reference by simply comparing the keypoint-descriptor pairs between the two scenes and checking which are equal. If two pairs are found to be equal, it means that the algorithm has found the same feature in both images and can calculate by how much it \textbf{rotated and shifted}. However, not all of these matches represent good results in our case, since the trajectory Landsat 8 can vary. We have found that selecting only \textbf{5000 keypoints} in the \textbf{top 25\% matches} from the total yielded in the better results overall. We then set the \textbf{maximum allowed shifting euclidean distance} between any two pixels to be at most 200, so 6km on the map, therefore getting rid of outlier matches based on the distance.

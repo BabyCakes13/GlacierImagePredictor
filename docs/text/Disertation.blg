@@ -13,64 +13,64 @@ I was expecting a `,' or a `}'---line 134 of file references.bib
  :  note = {Retrieved 2021-06-30},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 171 of file references.bib
- :  
- :  title = {MEASURING SNOW AND GLACIER ICE PROPERTIES
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 177 of file references.bib
+I was expecting a `,' or a `}'---line 144 of file references.bib
  :  
  :  title = {Improved ORB Algorithm Using Three-Patch Method and Local Gray Difference},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 183 of file references.bib
+I was expecting a `,' or a `}'---line 150 of file references.bib
  :  
  :  title = {Feature Extractionusing ORB-RANSAC for Face Recognition},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 189 of file references.bib
+I was expecting a `,' or a `}'---line 156 of file references.bib
  :  
  :  title = {ORB: An efficient alternative to SIFT or SURF},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Repeated entry---line 193 of file references.bib
+Repeated entry---line 160 of file references.bib
  : @inproceedings{orbsift
  :                       ,
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 201 of file references.bib
+I was expecting a `,' or a `}'---line 168 of file references.bib
  :  
  :  title = {Array programming with NumPy},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 207 of file references.bib
+I was expecting a `,' or a `}'---line 174 of file references.bib
  :  
  :  title = {Realtime Computer Vision with OpenCV: Mobile computer-vision technology will soon become as ubiquitous as touch interfaces.},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 214 of file references.bib
+I was expecting a `,' or a `}'---line 181 of file references.bib
  :  
  :  year = {Retrieved 2021-06-30},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "parvati"
+Warning--I didn't find a database entry for "sar"
+Warning--I didn't find a database entry for "msg"
 Warning--to sort, need author or key in LANDSATPIC
 Warning--to sort, need author or key in wrs
 Warning--to sort, need author or key in l8otb
 Warning--to sort, need author or key in sn
-Name 1 in "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" has a comma at the end for entry sar
+Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
 while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" for entry sar
+Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
 while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" for entry sar
+Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
 while executing---line 1185 of file alpha.bst
-Name 1 in "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" has a comma at the end for entry sar
+Name 1 in "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" has a comma at the end for entry WINSVOLD2017
 while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" for entry sar
+Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
 while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" for entry sar
+Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
 while executing---line 1185 of file alpha.bst
-Name 1 in "Max K6nig, Jan-Gunnar Winther, and Elisabeth Isaksson" has a comma at the end for entry msg
+Name 1 in "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" has a comma at the end for entry WINSVOLD2017
 while executing---line 1185 of file alpha.bst
-Name 1 in "Max K6nig, Jan-Gunnar Winther, and Elisabeth Isaksson" has a comma at the end for entry msg
+Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
 while executing---line 1185 of file alpha.bst
 Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
 while executing---line 1185 of file alpha.bst
@@ -134,20 +134,14 @@ Warning--empty booktitle in git
 Warning--empty year in git
 Warning--empty booktitle in viirs
 Warning--empty booktitle in lukas
-Name 1 in "Max K6nig, Jan-Gunnar Winther, and Elisabeth Isaksson" has a comma at the end for entry msg
+Name 1 in "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" has a comma at the end for entry WINSVOLD2017
 while executing---line 1250 of file alpha.bst
-Warning--empty title in msg
-Warning--empty booktitle in msg
-Warning--empty year in msg
-Warning--empty booktitle in aaesakh
-Name 1 in "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" has a comma at the end for entry sar
+Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
 while executing---line 1250 of file alpha.bst
-Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" for entry sar
+Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
 while executing---line 1250 of file alpha.bst
-Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb1, Christopher Nuth1, Liss M. Andreassen2, Ward J. J. van Pelt, and Thomas Schellenberger1" for entry sar
+Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
 while executing---line 1250 of file alpha.bst
-Warning--empty booktitle in sar
-Warning--empty booktitle in parvati
 Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
 while executing---line 1250 of file alpha.bst
 Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
@@ -157,46 +151,45 @@ while executing---line 1250 of file alpha.bst
 Warning--empty title in feorb
 Warning--empty booktitle in feorb
 Warning--empty year in feorb
-Warning--empty booktitle in rgmuos
-You've used 32 entries,
+You've used 31 entries,
             2543 wiz_defined-function locations,
-            655 strings with 7598 characters,
-and the built_in function-call counts, 8707 in all, are:
-= -- 809
-> -- 259
-< -- 5
-+ -- 79
-- -- 76
-* -- 490
-:= -- 1218
-add.period$ -- 82
-call.type$ -- 32
-change.case$ -- 150
-chr.to.int$ -- 31
-cite$ -- 95
-duplicate$ -- 429
-empty$ -- 907
-format.name$ -- 93
-if$ -- 1897
+            670 strings with 7772 characters,
+and the built_in function-call counts, 8409 in all, are:
+= -- 801
+> -- 229
+< -- 6
++ -- 69
+- -- 66
+* -- 485
+:= -- 1180
+add.period$ -- 81
+call.type$ -- 31
+change.case$ -- 144
+chr.to.int$ -- 30
+cite$ -- 87
+duplicate$ -- 405
+empty$ -- 865
+format.name$ -- 83
+if$ -- 1832
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 17
-newline$ -- 148
-num.names$ -- 45
-pop$ -- 380
+missing$ -- 16
+newline$ -- 145
+num.names$ -- 42
+pop$ -- 338
 preamble$ -- 1
-purify$ -- 187
+purify$ -- 179
 quote$ -- 0
-skip$ -- 287
+skip$ -- 276
 stack$ -- 0
-substring$ -- 243
-swap$ -- 34
-text.length$ -- 5
-text.prefix$ -- 2
+substring$ -- 287
+swap$ -- 33
+text.length$ -- 6
+text.prefix$ -- 3
 top$ -- 0
-type$ -- 256
-warning$ -- 46
-while$ -- 40
-width$ -- 35
+type$ -- 248
+warning$ -- 39
+while$ -- 39
+width$ -- 34
 write$ -- 327
 (There were 40 error messages)
