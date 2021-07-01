@@ -138,7 +138,7 @@
 		
 		Over the last decade, climate change has impacted Earths' atmosphere and environment more than anytime before. Studies held by NASA confirmed that the second hottest year ever recorded was 2019 and the recorded temperatures of the ocean have never been higher. One way to track these changes is to study the retreat of glaciers, since they are the most sensitive climate change indicators. Since NASA and USGS launched their first Earth observation satellite in 23 July 1972, millions of images of the Earth have been stored and are freely to use for various fields of research. 
 		\vskip 0.2cm
-		Having this in mind, the goal of our application is to analyse the retreat of glaciers over time by using advanced computer vision algorithms which are able to detect movement of pixels based on a time series of aerial scenes collected from the Landsat 8 satellite. By analysing the directions of glacier retreat over time, we try to generate future images of how they might change. The snowfall and ice percentages of a glacier for a satellite image are also taken into consideration as a validation of our results. The application has also been made with the goal of being simple to use and easy to access for anyone who wants to get involved and make a contribution. 
+		In this work we are going to analyse the retreat of glaciers over time by using advanced computer vision algorithms on aerial imagery collected from the Landsat 8 satellite. Our aim is to detect movement based on dense optical flow generation over a time series of images and use the results for generating new ones in the series.
 		\vskip 0.2cm
 		This thesis contains information about the application's functionality, processing mechanics and experiments on various glaciers. In order to have a self sufficient environment,  both search and download of Landsat 8 assets facilities have been made available, such that one does not need to have an already created dataset of glacier satellite images.  As for generating a motion predicted image, we need to extract movement information between two consecutive snow index scenes which produces vectors of movement for each pixel. These results are used to further extend this movement trend which generates a predicted image.
 		
@@ -882,18 +882,9 @@
 	
 	\par To exemplify the functionality of our application, we have picked two glaciers and downloaded all their public available satellite imagery with at most 20\% cloud coverage. 
 	
-	\par The first glacier which will be analysed is named \textbf{Jungfrau-Aletsch-Bietschhorn}, located in the \textbf{Swiss Alps}, specifically at latitude 46.47735081308319 and longitude 8.056887228860798. This location is at the intersection of multiple WRS-2 coordinates, therefore we will have different sets of \(path, row, month\) which we will be focusing on.
+	\par The first glacier region which will be analysed is named \textbf{Jungfrau-Aletsch-Bietschhorn}, located in the \textbf{Swiss Alps}, specifically at latitude 46.47735081308319 and longitude 8.056887228860798, with an elevation which varies between 809 m to 4,274 m. This location is at the intersection of multiple WRS-2 coordinates, therefore we will have different sets of \(path, row, month\) which we will be focusing on.
 	
 	\subsection{Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}
-	
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[width=\linewidth]{../images/experiment_194284.png}
-		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 4), and the NDSI of each predicted motion image.}
-		\label{fig:jungfrau_194284}
-	\end{figure}
-	
-	Since this scene was captured in April, the snow fall fluctuates a lot, resulting in a low signal to noise ratio. This pattern proved to yield inconsistent results for the generated images.
 	
 	\begin{figure}[h!]
 		\centering
@@ -902,6 +893,14 @@
 		\label{fig:experiment_1940284_image}
 	\end{figure}
 
+	Since this scene was captured in April, the snow fall fluctuates a lot, resulting in a low signal to noise ratio. This pattern proved to yield inconsistent results for the generated images.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.5]{../images/experiment_194284.png}
+		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 4), and the NDSI of each predicted motion image.}
+		\label{fig:jungfrau_194284}
+	\end{figure}
 
 	% =================================================================
 	
@@ -911,18 +910,18 @@
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=\linewidth]{../images/experiment_194287.png}
-		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}
-		\label{fig:jungfrau_194287}
+		\includegraphics[width=\linewidth]{../images/experiment_1940287_image.png}
+		\caption{Overlapped motion generated NDSI for scene LC81940282020201.}
+		\label{fig:experiment_1940287_image}
 	\end{figure}
 
 	The scene was captured in July, hence the more consistent snow fall. These results in a better estimation of movement than the one obtained in early spring.
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=\linewidth]{../images/experiment_1940287_image.png}
-		\caption{Overlapped motion generated NDSI for scene LC81940282020201.}
-		\label{fig:experiment_1940287_image}
+		\includegraphics[scale=0.5]{../images/experiment_194287.png}
+		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}
+		\label{fig:jungfrau_194287}
 	\end{figure}
 
 	% ===================================================================
@@ -933,18 +932,18 @@
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=\linewidth]{../images/experiment_194288.png}
-		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}
-		\label{fig:jungfrau_194288}
+		\includegraphics[width=\linewidth]{../images/experiment_1940288_image.png}
+		\caption{Overlapped motion generated NDSI for scene LC81940282016238LGN01.}
+		\label{fig:experiment_1940288_image}
 	\end{figure}
-	
+
 	The image was captured during August, which in this case has the least amount of snow fall. The result for this data set was the most reliable, as one can observe since the moraines are clearly exposed. 
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=\linewidth]{../images/experiment_1940288_image.png}
-		\caption{Overlapped motion generated NDSI for scene LC81940282016238LGN01.}
-		\label{fig:experiment_1940288_image}
+		\includegraphics[scale=0.5]{../images/experiment_194288.png}
+		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}
+		\label{fig:jungfrau_194288}
 	\end{figure}
 	
 	% ==================================================================
@@ -955,49 +954,50 @@
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=\linewidth]{../images/experiment_195289.png}
-		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(195, 28, 9), and the NDSI of each predicted motion image.}
-		\label{fig:jungfrau_195289}
+		\includegraphics[width=\linewidth]{../images/experiment_1950289.png}
+		\caption{Overlapped motion generated NDSI for scene LC81950282020256.}
+		\label{fig:experiment_1950289_image}
 	\end{figure}
 
 	The last presented data set was acquired in September when the probability of snow fall increases. This is highlighted by the entry in 2017 which represents an outlier.
-
+	
 	\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{../images/experiment_1950289.png}
-	\caption{Overlapped motion generated NDSI for scene LC81950282020256.}
-	\label{fig:experiment_1950289_image}
+		\centering
+		\includegraphics[scale=0.5]{../images/experiment_195289.png}
+		\caption{Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(195, 28, 9), and the NDSI of each predicted motion image.}
+		\label{fig:jungfrau_195289}
 	\end{figure}
 	
 	\vfill
 	\newpage{}
 	
-	\par The second glacier which we have taken into consideration is named \textbf{Parvati} and it is located in \textbf{India}, at latitude 31.754 and longitude 77.675. We have chosen this glacier such that we can compare our results with the ones provided in \cite{parvati}. They have chosen a dataset of images located at WRS-2 path 147, row 38. However, we could not fetch enough quality images for that specific path and row in order to be able to make this comparison. The result that were achieved are however listed below for the available path and row.
+	\par The second glacier which we have taken into consideration is named \textbf{Parvati} and it is located in \textbf{India}, at latitude 31.754 and longitude 77.675, with a maximum elevation of 5599 meters. We have chosen this glacier such that we can compare our results with the ones provided in \cite{parvati}. They have chosen a dataset of images located at WRS-2 path 147, row 38. However, we could not fetch the same images for that specific path and row in order to be able to make this comparison. The result that were achieved are however listed below for the available path and row.
 	
 	\subsection{PARVATI (146, 38, 4)}
-	
+		
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=\linewidth]{../images/experiment_146385.png}
+		\includegraphics[width=\linewidth]{../images/experiment_1460384_image.png}
+		\caption{Overlapped motion generated NDSI for scene LC81460382021091.}
+		\label{fig:experiment_1460384_image}
+	\end{figure}
+
+	
+	Here we can see again that the high snow fluctuation yields in big differences between the predicted image and the actual one. Given that the Parvati region is located at a higher altitude than the Jungfrau-Aletsch-Bietschhorn one, its snowfall is higher. This can also be seed while analysing the snow coverage values for the values from Figure~\ref{fig:jungfrau_194284} and Figure~\ref{fig:parvati_146384}, where the maximum snow fall for Parvati is around 57\% (2014) and the one for Jungfrau-Aletsch-Bietschhorn is around 23\% (2016).
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.5]{../images/experiment_146385.png}
 		\caption{Comparison between the NDSI values of the actual NDSI images for Parvati(146, 38, 4), and the NDSI of each predicted motion image.}
 		\label{fig:parvati_146384}
 	\end{figure}
-
-	\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{../images/experiment_1460384_image.png}
-	\caption{Overlapped motion generated NDSI for scene LC81460382021091.}
-	\label{fig:experiment_1460384_image}
-	\end{figure}
-	
-	\par Here we should also write on what machine I ran the code and try it on different ones as a thing. Also write about the idea of moving the processing on cloud, but there might be traffic overhead because the images are large. Also say that we store it on hard drive, NOT ssd. Make tests with both.
 	
 	\newpage{}	
 	\chapter{Conclusions}
 	\label{seq:conclusions}
 	
 	
-	\par As a conclusion, we have successfully created a tool for easy asset search and acquisition from the Landsat archives. On top of this, we were able to investigate motion tendencies across time and use them to predict a future snapshot.
+	\par As a conclusion, we were able to investigate motion tendencies across time and use them to predict a future snapshot. On top of this, we have also successfully created a tool for easy asset search and acquisition from the Landsat archives.
 	
 	\par We have found that for higher snow coverage scenes there are some erroneous results due to high fluctuations during the winter months, which create outliers. In the study done by \cite{parvati}, only September was taken into consideration when conducting the experiments, mainly because it is the month which has the lowest recorded snow coverage of the glacier. Also, even though the shortwave infrared band filters out most of the clouds in a scene, still there are some cases when they are very dense and the snow pixels cannot be properly extracted, resulting in erroneous scenes.
 	
