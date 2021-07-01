@@ -106,7 +106,7 @@
 		
 		\textsc{\Huge Master Dissertation}\\[2cm]
 		
-		{\Huge \bfseries Name}\\[6cm]
+		{\Huge \bfseries {A Computer Vision Application for Predicting Satellite Imagery Focusing on Glacier Evolution}}\\[6cm]
 		
 		\begin{minipage}{0.4\textwidth}
 			\begin{flushleft} \large
@@ -134,13 +134,7 @@
 		%The abstract should have one page and should be a compact presentation of the dissertation.
 		\vspace{1.0cm}
 		\vspace{1.0cm}
-		\par
-		
-		Over the last decade, climate change has impacted Earths' atmosphere and environment more than anytime before. Studies held by NASA confirmed that the second hottest year ever recorded was 2019 and the recorded temperatures of the ocean have never been higher. One way to track these changes is to study the retreat of glaciers, since they are the most sensitive climate change indicators. Since NASA and USGS launched their first Earth observation satellite in 23 July 1972, millions of images of the Earth have been stored and are freely to use for various fields of research. 
-		\vskip 0.2cm
-		In this work we are going to analyse the retreat of glaciers over time by using advanced computer vision algorithms on aerial imagery collected from the Landsat 8 satellite. Our aim is to detect movement based on dense optical flow generation over a time series of images and use the results for generating new ones in the series.
-		\vskip 0.2cm
-		This thesis contains information about the application's functionality, processing mechanics and experiments on various glaciers. In order to have a self sufficient environment,  both search and download of Landsat 8 assets facilities have been made available, such that one does not need to have an already created dataset of glacier satellite images.  As for generating a motion predicted image, we need to extract movement information between two consecutive snow index scenes which produces vectors of movement for each pixel. These results are used to further extend this movement trend which generates a predicted image.
+		\par Over the last decade, climate change has impacted Earths' atmosphere and environment more than anytime before, glaciers being the most sensitive indicators. In this work we are going to analyse the retreat of glaciers over time by using advanced computer vision algorithms on aerial imagery collected from the Landsat 8 satellite. Our aim is to detect movement based on dense optical flow generation over a time series of images and use the results for generating new ones in the series. Our results show that we were able to get relevant information by extracting motion tendencies across time and we have successfully generated new snapshots based on these. 
 		
 	\end{abstract} %end abstract
 
@@ -166,25 +160,19 @@
 
 	\par The goal of this thesis is to make use of such data by analysing changes of glaciers in the last decade with the purpose of creating predicted images which could highlight future glacier retreat or different patterns of accumulation. Creating support for easy asset acquisition of satellite imagery is also important, since current methods do not scale for larger datasets.
 
-	\section{State of the Art}
+	\section{Related work}
 	
 	\par In \cite{WINSVOLD2016}, the authors use both Sentinel and Landsat satellites for image collection in order to produce a higher quantity of qualitative images for glacier mapping, while also covering wider areas. They propose four approaches for studying automatic glacier mapping. The first is by analysing different band ratios for multispectral image creation while the second proposes robust methods used for improving glacier mapping by exploitation of seasonal variation yielded by the spectral properties of snow. The third one highlights spatio-temporal variation of glacier surface types and the fourth one analyses how the chosen band ratio images generated from the first application can be used for automatically detecting changes in glaciers. Their results show that the alpine and arctic advances and retreats provide the most visible signs of climate change and they propose to revisit current methods for glacier mapping in order to reduce the practice of manual glacier mapping.
 	
-	Another paper which studies glacier sensitivity to climate change is \cite{TAK2020}, in which the authors propose a remote sensing based framework used on multispectral satellite imagery, used for studying the ablation and accumulation processes of glaciers in order to quantify their mass balance. They have studied the mass loss during of the Parvati glacier, located in the western Himalaya, between 1998 and 2016. Their results show that the glacier responds to climate change factors each year through a high mass loss, resulting in a strong effect on water availability and river flows.
+	\par Another paper which studies glacier sensitivity to climate change is \cite{TAK2020}, in which the authors propose a remote sensing based framework used on multispectral satellite imagery, used for studying the ablation and accumulation processes of glaciers in order to quantify their mass balance. They have studied the mass loss during of the Parvati glacier, located in the western Himalaya, between 1998 and 2016. Their results show that the glacier responds to climate change factors each year through a high mass loss, resulting in a strong effect on water availability and river flows.
 	
-	In \cite{RACOVITEANU2019}, the authors propose a decision-based image classification algorithm for separating ice, debris and snow surfaces on glaciers and extracting snow lines both monthly and annually. They achieved this by automatically partitioning glacier surfaces through band ratios combined with topographic criteria which were extracted for each pixel. They have conducted the study on Karakoram and Trishuli regions, with images taken from 2000 to 2016 and they have concluded that snow lines were the most sensitive to manual corrections, elevation dataset, topographic slope and the calculated thresholds for the band ratios for the spring and winter months.
+	\par In \cite{RACOVITEANU2019}, the authors propose a decision-based image classification algorithm for separating ice, debris and snow surfaces on glaciers and extracting snow lines both monthly and annually. They achieved this by automatically partitioning glacier surfaces through band ratios combined with topographic criteria which were extracted for each pixel. They have conducted the study on Karakoram and Trishuli regions located in eastern Himalaya, with images taken from 2000 to 2016 and they have concluded that snow lines were the most sensitive to manual corrections, elevation dataset, topographic slope and the calculated thresholds for the band ratios for the spring and winter months.
 	
-	In \cite{WINSVOLD2017}, the authors propose descriptive methods for glacier mapping by using aerial time series produced by the Synthetic Aperture Radar sensor from Radarsat-2 and Sentinel-1A. Out of their five scenarios, the first tracks transient snow lines and it proved to correlate with both Landsat 8 and Sentinel-2A produced aerial images. As a conclusion, they state that automatically derived satellite imagery products prove to be important in analysing glacier change.
+	\par In \cite{WINSVOLD2017}, the authors propose descriptive methods for glacier mapping by using aerial time series produced by the Synthetic Aperture Radar sensor from Radarsat-2 and Sentinel-1A. Out of their five scenarios, the first tracks transient snow lines and it proved to correlate with both Landsat 8 and Sentinel-2A produced aerial images. As a conclusion, they state that automatically derived satellite imagery products prove to be important in analysing glacier change.
 	
-
-	\par There are multiple research papers on the domain of glacier analysis. Some of those which we found useful for our research regarding analysis of glacier based on satellite imagery are:
-	\begin{itemize}
-		\item \cite{parvati}: assessment of glacier mass loss through a remote sensing modelling framework;
-		\item \cite{sar}: tracking transient snow lines and investigating firn evolution;
-		\item \cite{msg}: methods for measuring snow and glacier ice properties with the use of new satellite sensors, such as synthetic aperture radar.
-	\end{itemize}
-
-	For the alignment part of the thesis, some of the most helpful papers were \cite{orbsift}, \cite{feorb} and \cite{orblocal} which describe different ways in which we can pair the ORB alignment algorithm with different methods of warping and feature point extraction.
+	\par Another interesting approach to determine glacier melt was analysed in \cite{WANG2017}, where the authors have compared the band ratio method with the Normalized Difference Snow Index (NDSI) one for extracting parameters which highlight glaciers. They have conducted their studies on the Karakorum area with satellite imagery collected from Landsat 8, starting from 2014. Their results show that for boundary extraction, the band ratio technique yielded better results. They also state that visual interpretation is still an major factor in analysing the obtained results.
+	
+	\par As for motion estimation, Farneb{\"a}ck, Gunnar proposes an interesting approach in \cite{GUNNAR2013}. The author presents an algorithm for estimating motion between two frames by approximating each neighbourhood of both by quadratic polynomials. Their transformation under translation is then analysed in order to extract displacement fields.
 
 	\section{Our Contribution}
 	
@@ -204,6 +192,7 @@
 	
 	\chapter{Application}
 	\section{Dataset}
+
 	\par In order to build the dataset, we made use of the freely available data from the Landsat Archive, specifically from collection 1, level 1. This dataset contains assets which are generated from the Landsat 8 Sensors, as well as entries from other older Landsat satellites. For the purpose of this paper, we will focus only on images collected from the Landsat 8 satellite.
 	
 	\subsection{Landsat 8}
@@ -213,7 +202,7 @@
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.25]{../images/LandsatSatellite.png}
-		\caption{Landsat 8 satellite \cite{LANDSATPIC}}
+		\caption{Landsat 8 satellite \cite{LANDSATPIC}.}
 		\label{fig:landsat_satellite}
 	\end{figure}
 
@@ -223,6 +212,7 @@
 	\label{par:wrs2}
 	
 	\par We will be referring to each scene's location based on its path and row coordinates from the worldwide reference system-2, which is a notation system used for Landsat images. This system is used with the main goal of keeping a structured archive of Landsat data which can be easily catalogued and accesses. Users can access aerial imagery through querying the specified path and row variables \cite{wrs}. Landsat's trajectory projected on the world map can be seen in Figure~\ref{fig:wrs2}.
+
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.2]{../images/wrs2.png}
@@ -265,7 +255,7 @@
 	
 	\subsubsection{Operational Land Imager}
 	
-	\par The Operational Land Imager (OLI) represents remote sensing instrument which can be found abroad Landsat 8. It is built by Ball Aerospace \& Technologies and it collects moderate resolution data which is used for monitoring changes in trends on the surface and evaluating how it changes over time. The images and data which OLI has helped collect have practical applications today in various fields such as mapping and monitoring changes in snow, ice, water and agriculture, \cite{lolidcp}. 
+	\par The Operational Land Imager (OLI) represents remote sensing instrument which can be found abroad Landsat 8. It is built by Ball Aerospace \& Technologies and it collects moderate resolution data which is used for monitoring changes in trends on the surface and evaluating how it changes over time. The images and data which OLI has helped collect have practical applications today in various fields such as mapping and monitoring changes in snow, ice, water and agriculture, \cite{KNIGHT2014}. 
 	The OLI operates in the short wave infrared spectral and visible region with a width of 185 km. Wavelengths of 443 nm to 2,200 nm are translated into nine channels, from which  eight are multispectral and one is panchromatic. The eight multispectral ones have a 30-meter spatial resolution, while the panchromatic channel has a 15 meters one.
 	The OLI generates 9 bands for Landsat as shown in Figure~\ref{fig:L8OLI}.
 	\begin{figure}[h]
@@ -885,14 +875,14 @@
 	
 	For the performance evaluation we are using a machine which has an Intel i7-7700HQ CPU, with 24 GB of RAM. The images were stored on my personal server and they were locally mounted through NFS.
 	
-	Downloading the dataset of two glaciers (IN5Q31300046, IT4L01211009) which have been used for the experiment section (Section~\ref{seq:experiments}) took around two hours on my machine, while their searching took around half an hour. For IN5Q31300046 (Parvati), there were 185 entries, while for IT4L01211009 (Jungfrau-Aletsch-Bietschhorn), there were 109. The processing and caching of all the datasets took around 8 hours, which outputs around 1 minutes and 30 seconds per scene.
+	Downloading the dataset of two glaciers (IN5Q31300046, IT4L01211009) which have been used for the experiment section (Section~\ref{seq:experiments}) took around two hours on my machine, while their searching took around half an hour. For IN5Q31300046 (Parvati), there were 185 entries, while for IT4L01211009 (Jungfrau-Aletsch-Bietschhorn), there were 109. The processing and caching of all the datasets took around 8 hours, which outputs around 1 minute and 30 seconds per scene.
 	
 	\section{Experiments}
 	\label{seq:experiments}
 	
 	\par To exemplify the functionality of our application, we have picked two glaciers and downloaded all their public available satellite imagery with at most 20\% cloud coverage. 
 	
-	\par The first glacier region which will be analysed is named \textbf{Jungfrau-Aletsch-Bietschhorn}, located in the \textbf{Swiss Alps}, specifically at latitude 46.47735081308319 and longitude 8.056887228860798, with an elevation which varies between 809 m to 4,274 m. This location is at the intersection of multiple WRS-2 coordinates, therefore we will have different sets of \(path, row, month\) which we will be focusing on.
+	\par The first glacier region which will be analysed is named \textbf{Jungfrau-Aletsch-Bietschhorn}, located in the \textbf{Swiss Alps}, specifically at latitude 46.47735081308319 and longitude 8.056887228860798, with an elevation which varies between 809 m to 4,274 m. This location is at the intersection of multiple WRS-2 coordinates, therefore we will have different sets of \(path, row, month\) which we will be focusing on. Each graph represents the snow coverage of the NDSI(\(time = t + dt\)) image, colourized with green, while the one for the motion generated one, NDSI(\(time = t + 2*dt\)) is colourized with red.
 	
 	\subsection{Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}
 	
@@ -903,7 +893,7 @@
 		\label{fig:experiment_1940284_image}
 	\end{figure}
 
-	Since this scene was captured in April, the snow fall fluctuates a lot, resulting in a low signal to noise ratio. This pattern proved to yield inconsistent results for the generated images.
+	The motion generated image for this path and row can be seen in Figure~\ref{fig:experiment_1940284_image}, while and Figure~\ref{fig:jungfrau_194284} holds the snow coverage values extracted from each image in the dataset. This scene was captured in April, when the temperatures are still low and the snow fall fluctuates a lot, resulting in a low signal to noise ratio. This pattern proved to yield inconsistent results for the generated images.
 	
 	\begin{figure}[h!]
 		\centering
@@ -924,8 +914,8 @@
 		\caption{Overlapped motion generated NDSI for scene LC81940282020201.}
 		\label{fig:experiment_1940287_image}
 	\end{figure}
-
-	The scene was captured in July, hence the more consistent snow fall. These results in a better estimation of movement than the one obtained in early spring.
+	
+	Figure~\ref{fig:experiment_1940287_image} represents the motion predicted NDSI image afferent to this path, row and month pair. As it can be seen in Figure~\ref{fig:jungfrau_194287}, the scene was captured in July, hence the more consistent snow fall. These results yield a better estimation of movement than the one obtained in early spring.
 	
 	\begin{figure}[h!]
 		\centering
@@ -947,7 +937,7 @@
 		\label{fig:experiment_1940288_image}
 	\end{figure}
 
-	The image was captured during August, which in this case has the least amount of snow fall. The result for this data set was the most reliable, as one can observe since the moraines are clearly exposed. 
+	The result of the experiment is captured in Figure~\ref{fig:experiment_1940288_image}, while its graph of snow coverage can be located at Figure~\ref{fig:jungfrau_194288}. The image was captured during August, which in this case has the least amount of snow fall. The result for this data set was the most reliable, as one can observe since the moraines are clearly exposed. 
 	
 	\begin{figure}[h!]
 		\centering
@@ -993,7 +983,7 @@
 	\end{figure}
 
 	
-	Here we can see again that the high snow fluctuation yields in big differences between the predicted image and the actual one. Given that the Parvati region is located at a higher altitude than the Jungfrau-Aletsch-Bietschhorn one, its snowfall is higher. This can also be seed while analysing the snow coverage values for the values from Figure~\ref{fig:jungfrau_194284} and Figure~\ref{fig:parvati_146384}, where the maximum snow fall for Parvati is around 57\% (2014) and the one for Jungfrau-Aletsch-Bietschhorn is around 23\% (2016).
+	Here we can see again that the high snow fluctuation yields in big differences between the predicted image and the actual one, as it can be observed in Figure~\ref{fig:experiment_1460384_image}. Given that the Parvati region is located at a higher altitude than the Jungfrau-Aletsch-Bietschhorn one, its snowfall is higher. This can also be seed while analysing the snow coverage values for the values from Figure~\ref{fig:jungfrau_194284} and Figure~\ref{fig:parvati_146384}, where the maximum snow fall for Parvati is around 57\% (2014) and the one for Jungfrau-Aletsch-Bietschhorn is around 23\% (2016).
 
 	\begin{figure}[h!]
 		\centering

@@ -24,9 +24,9 @@ class NdsiPlot():
 
     def __initialize_buttons(self):
         self.__button_layout = QtWidgets.QHBoxLayout()
-        nb = QtWidgets.QPushButton("Show NDSI", self.__frame)
+        nb = QtWidgets.QPushButton("Plot NDSI snow coverage", self.__frame)
         nb.clicked.connect(self.__calculateNDSI)
-        gnb = QtWidgets.QPushButton("Show Generated NDSI", self.__frame)
+        gnb = QtWidgets.QPushButton("Plot Motion Predicted NDSI snow coverage ", self.__frame)
         gnb.clicked.connect(self.__calculateGeneratedNDSI)
 
         self.__button_layout.addWidget(nb)

@@ -1,7 +1,7 @@
 \babel@toc {english}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Landsat 8 satellite \cite {LANDSATPIC}}}{11}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Landsat 8 satellite \cite {LANDSATPIC}.}}{11}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces WRS-2 Path/Row for Landsat \cite {wrs}.}}{12}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Landsat 8 OLI generated bands \cite {l8otb}}}{13}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Landsat 8 TIRS generated bands \cite {l8otb}}}{13}%
@@ -15,15 +15,15 @@
 \contentsline {figure}{\numberline {2.12}{\ignorespaces Overlapped aligned green band of scene LC81950282014271LGN01 and reference LC819502820162245LGN01.}}{22}%
 \contentsline {figure}{\numberline {2.13}{\ignorespaces Optical flow problem visualisation.}}{23}%
 \contentsline {figure}{\numberline {2.14}{\ignorespaces Optical flow overlayed motion vectors.}}{24}%
-\contentsline {figure}{\numberline {2.15}{\ignorespaces Motion generated NDSI algorithm.}}{24}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Motion generated NDSI algorithm.}}{25}%
 \contentsline {figure}{\numberline {2.16}{\ignorespaces Motion generated NDSI for scene LC81940282015363LGN02.}}{25}%
 \contentsline {figure}{\numberline {2.17}{\ignorespaces Overlapped motion generated NDSI for scene LC81940282015363LGN02.}}{26}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Technical specifications of Download, GlacierFactory and Glacier classes.}}{30}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}}{32}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Technical diagram for the NDSI class.}}{34}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Technical diagram for the NDSI class.}}{33}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Technical diagram for the MotionVectors class.}}{34}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Hue representation of the optical flow.}}{36}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Hue representation of the optical flow.}}{35}%
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Optical flow colourized motion vectors.}}{36}%
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Technical diagram for the MotionPredictedNDSI class.}}{39}%
 \contentsline {figure}{\numberline {3.8}{\ignorespaces Raw generated NDSI image, unfiltered.}}{40}%
