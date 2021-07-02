@@ -3,57 +3,63 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Disertation.aux
 The style file: alpha.bst
 Database file #1: references.bib
+I was expecting a `,' or a `}'---line 108 of file references.bib
+ :  
+ :  note = {Retrieved 2021-06-30},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 113 of file references.bib
+ :  
+ :  note = {Retrieved 2021-06-30},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 117 of file references.bib
+ :  
+ :  author={Rublee, Ethan and Rabaud, Vincent and Konolige, Kurt and Bradski, Gary},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 I was expecting a `,' or a `}'---line 129 of file references.bib
- :  
- :  note = {Retrieved 2021-06-30},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 134 of file references.bib
- :  
- :  note = {Retrieved 2021-06-30},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 144 of file references.bib
- :  
- :  title = {Improved ORB Algorithm Using Three-Patch Method and Local Gray Difference},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 150 of file references.bib
- :  
- :  title = {Feature Extractionusing ORB-RANSAC for Face Recognition},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 156 of file references.bib
- :  
- :  title = {ORB: An efficient alternative to SIFT or SURF},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Repeated entry---line 160 of file references.bib
- : @inproceedings{orbsift
- :                       ,
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 168 of file references.bib
- :  
- :  title = {Array programming with NumPy},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 174 of file references.bib
- :  
- :  title = {Realtime Computer Vision with OpenCV: Mobile computer-vision technology will soon become as ubiquitous as touch interfaces.},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 181 of file references.bib
  :  
  :  year = {Retrieved 2021-06-30},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 188 of file references.bib
+ :  title="
+ :         An operational land imager for the landsat data continuity mission",
+I'm skipping whatever remains of this entry
+Repeated entry---line 316 of file references.bib
+ : @article{WINSVOLD2016
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 327 of file references.bib
+ : @article{RACOVITEANU2019
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 342 of file references.bib
+ : @article{TAK2020
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 359 of file references.bib
+ : @article{WINSVOLD2017
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 432 of file references.bib
+ : @article{Harris2020
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 484 of file references.bib
+ : @article{Fischler1981
+ :                      ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "GUNNAR2013"
+Warning--I didn't find a database entry for "bands"
+Warning--I didn't find a database entry for "lukas"
 Warning--I didn't find a database entry for "parvati"
-Warning--I didn't find a database entry for "sar"
-Warning--I didn't find a database entry for "msg"
 Warning--to sort, need author or key in LANDSATPIC
 Warning--to sort, need author or key in wrs
 Warning--to sort, need author or key in l8otb
 Warning--to sort, need author or key in sn
+Warning--to sort, need author or key in NASA2020
 Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
 while executing---line 1185 of file alpha.bst
 Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
@@ -71,26 +77,6 @@ while executing---line 1185 of file alpha.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
 while executing---line 1185 of file alpha.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
-while executing---line 1185 of file alpha.bst
-Name 1 in "Chaoqun Ma, Xiaoguang Hu, Jin Xiao, Huanchao Du, and Guofeng Zhang" has a comma at the end for entry orblocal
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Chaoqun Ma, Xiaoguang Hu, Jin Xiao, Huanchao Du, and Guofeng Zhang" for entry orblocal
-while executing---line 1185 of file alpha.bst
-Name 1 in "Chaoqun Ma, Xiaoguang Hu, Jin Xiao, Huanchao Du, and Guofeng Zhang" has a comma at the end for entry orblocal
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Chaoqun Ma, Xiaoguang Hu, Jin Xiao, Huanchao Du, and Guofeng Zhang" for entry orblocal
 while executing---line 1185 of file alpha.bst
 Warning--to sort, need author or key in LANDSAT
 Warning--to sort, need author or key in lgng
@@ -102,38 +88,16 @@ Warning--to sort, need author or key in bd
 Warning--to sort, need author or key in ndsi
 Warning--to sort, need author or key in opticalflow
 Warning--to sort, need author or key in orb
-Too many commas in name 1 of "Charles R. Harris, K. Jarrod Millman, […], Travis E. Oliphant" for entry arraynumpy
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Charles R. Harris, K. Jarrod Millman, […], Travis E. Oliphant" for entry arraynumpy
-while executing---line 1185 of file alpha.bst
 Warning--to sort, need author or key in cuda
 Warning--to sort, need author or key in gdal
 Warning--to sort, need author or key in git
-Name 1 in "Chaoqun Ma, Xiaoguang Hu, Jin Xiao, Huanchao Du, and Guofeng Zhang" has a comma at the end for entry orblocal
-while executing---line 1250 of file alpha.bst
-Too many commas in name 1 of "Chaoqun Ma, Xiaoguang Hu, Jin Xiao, Huanchao Du, and Guofeng Zhang" for entry orblocal
-while executing---line 1250 of file alpha.bst
-Warning--empty title in orblocal
-Warning--empty booktitle in orblocal
-Warning--empty year in orblocal
-Too many commas in name 1 of "Charles R. Harris, K. Jarrod Millman, […], Travis E. Oliphant" for entry arraynumpy
-while executing---line 1250 of file alpha.bst
-Warning--empty title in arraynumpy
-Warning--empty booktitle in arraynumpy
-Warning--empty year in arraynumpy
 Warning--empty author in cuda
 Warning--empty booktitle in cuda
 Warning--empty year in cuda
-Warning--empty booktitle in ransac2
-Warning--empty title in orbsift
-Warning--empty booktitle in orbsift
-Warning--empty year in orbsift
-Warning--empty booktitle in ransac
 Warning--empty author in git
 Warning--empty booktitle in git
 Warning--empty year in git
 Warning--empty booktitle in viirs
-Warning--empty booktitle in lukas
 Name 1 in "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" has a comma at the end for entry WINSVOLD2017
 while executing---line 1250 of file alpha.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
@@ -142,54 +106,45 @@ Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher N
 while executing---line 1250 of file alpha.bst
 Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
 while executing---line 1250 of file alpha.bst
-Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
-while executing---line 1250 of file alpha.bst
-Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
-while executing---line 1250 of file alpha.bst
-Too many commas in name 1 of "Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb" for entry feorb
-while executing---line 1250 of file alpha.bst
-Warning--empty title in feorb
-Warning--empty booktitle in feorb
-Warning--empty year in feorb
-You've used 31 entries,
+You've used 27 entries,
             2543 wiz_defined-function locations,
-            670 strings with 7772 characters,
-and the built_in function-call counts, 8409 in all, are:
-= -- 801
-> -- 229
-< -- 6
-+ -- 69
-- -- 66
-* -- 485
-:= -- 1180
-add.period$ -- 81
-call.type$ -- 31
-change.case$ -- 144
-chr.to.int$ -- 30
-cite$ -- 87
-duplicate$ -- 405
-empty$ -- 865
-format.name$ -- 83
-if$ -- 1832
+            685 strings with 8214 characters,
+and the built_in function-call counts, 8122 in all, are:
+= -- 784
+> -- 312
+< -- 2
++ -- 109
+- -- 107
+* -- 550
+:= -- 1169
+add.period$ -- 75
+call.type$ -- 27
+change.case$ -- 152
+chr.to.int$ -- 26
+cite$ -- 70
+duplicate$ -- 320
+empty$ -- 737
+format.name$ -- 117
+if$ -- 1733
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 16
-newline$ -- 145
-num.names$ -- 42
-pop$ -- 338
+missing$ -- 11
+newline$ -- 133
+num.names$ -- 27
+pop$ -- 280
 preamble$ -- 1
 purify$ -- 179
 quote$ -- 0
-skip$ -- 276
+skip$ -- 240
 stack$ -- 0
-substring$ -- 287
-swap$ -- 33
-text.length$ -- 6
-text.prefix$ -- 3
+substring$ -- 325
+swap$ -- 27
+text.length$ -- 2
+text.prefix$ -- 2
 top$ -- 0
-type$ -- 248
-warning$ -- 39
-while$ -- 39
-width$ -- 34
-write$ -- 327
-(There were 40 error messages)
+type$ -- 216
+warning$ -- 25
+while$ -- 31
+width$ -- 29
+write$ -- 302
+(There were 24 error messages)

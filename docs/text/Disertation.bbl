@@ -1,32 +1,19 @@
-\begin{thebibliography}{SHWS17}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{HMvdW{\etalchar{+}}20}
 
 \bibitem[bd]{bd}
 bd.
 \newblock \url{https://landsat.gsfc.nasa.gov/landsat-8/landsat-8-bands/}.
 \newblock Accessed: 2021-06-22.
 
-\bibitem[CMZ]{orblocal}
-Jin Xiao Huanchao~Du Chaoqun~Ma, Xiaoguang~Hu and Guofeng Zhang.
-
-\bibitem[CRH]{arraynumpy}
-[…] Travis E.~Oliphant Charles R.~Harris, K. Jarrod~Millman.
-
 \bibitem[cud]{cuda}
 Cuda.
 
-\bibitem[Der10]{ransac2}
-Konstantinos~G. Derpanis.
-\newblock Overview of the ransac algorithm.
-\newblock 2010.
-
-\bibitem[ERB]{orbsift}
-Kurt~Konolige Ethan~Rublee, Vincent~Rabaud and Gary Bradski.
-
-\bibitem[FB81]{ransac}
-M.A. Fischler and R.C. Bolles.
-\newblock Random sample consensus: A paradigm for modelfitting with
+\bibitem[FB81]{Fischler1981}
+Martin~A. Fischler and Robert~C. Bolles.
+\newblock Random sample consensus: A paradigm for model fitting with
   applications to image analysis and automated cartography.
-\newblock 1981.
+\newblock {\em Commun. ACM}, 24(6):381–395, June 1981.
 
 \bibitem[gda]{gdal}
 Gdal.
@@ -40,34 +27,36 @@ Dr. Dorothy~K Hall.
 \newblock Viirs snow cover algorithm theoretical basis document (atbd).
 \newblock 2015.
 
-\bibitem[HY15]{bands}
-Xianjian~Lu Hongbo~Yan, Guoqing~Zhou.
-\newblock Comparative analysis of surface soil moisture retrieval using vswi
-  and tvdi in karst areas.
-\newblock In {\em Proceedings Volume 9808, International Conference on
-  Intelligent Earth Observing and Applications 2015; 980806 (2015)}, 2015.
+\bibitem[HMvdW{\etalchar{+}}20]{HARRIS2020}
+Charles~R. Harris, K.~Jarrod Millman, St{\'e}fan~J. van~der Walt, Ralf Gommers,
+  Pauli Virtanen, David Cournapeau, Eric Wieser, Julian Taylor, Sebastian Berg,
+  Nathaniel~J. Smith, Robert Kern, Matti Picus, Stephan Hoyer, Marten~H. van
+  Kerkwijk, Matthew Brett, Allan Haldane, Jaime~Fern{\'a}ndez del R{\'i}o, Mark
+  Wiebe, Pearu Peterson, Pierre G{\'e}rard-Marchant, Kevin Sheppard, Tyler
+  Reddy, Warren Weckesser, Hameer Abbasi, Christoph Gohlke, and Travis~E.
+  Oliphant.
+\newblock Array programming with numpy.
+\newblock {\em Nature}, 585(7825):357--362, Sep 2020.
 
-\bibitem[KK14]{lolidcp}
+\bibitem[KK14]{KNIGHT2014}
 Edward~J Knight and Geir Kvaran.
 \newblock Landsat-8 operational land imager design, characterization and
   performance.
-\newblock In {\em Proceedings of the ECAI 94 Workshop on Applications of
-  Evolutionary Algorithms}. Landsat-8 Sensor Characterization and Calibration,
-  2014.
+\newblock {\em Landsat-8 Sensor Characterization and Calibration}, 2014.
 
 \bibitem[l8o]{l8otb}
-l8otb.
+Different band combinations of landsat.
 \newblock \url{https://gisgeography.com/landsat-8-bands-combinations/}.
 \newblock Accessed: 2021-06-22.
 
 \bibitem[LANa]{LANDSAT}
-Landsat.
+Landsat satellite specifications.
 \newblock
   \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-8?qt-science_support_page_related_con=0#}.
 \newblock Accessed: 2021-06-21.
 
 \bibitem[LANb]{LANDSATPIC}
-Landsatpic.
+Picture of the landsat satellite.
 \newblock \url{https://landsat.gsfc.nasa.gov/sites/landsat/files/2013/01}.
 \newblock Accessed: 2021-06-21.
 
@@ -78,15 +67,14 @@ lc1l1.
 \newblock Accessed: 2021-06-22.
 
 \bibitem[lgn]{lgng}
-lgng.
+Nasa on the landsat satellite.
 \newblock \url{https://landsat.gsfc.nasa.gov/}.
 \newblock Accessed: 2021-06-21.
 
-\bibitem[LK81]{lukas}
-B.~D. Lucas and T.~Kanade.
-\newblock An iterative image registration technique with an application to
-  stereo vision.
-\newblock 1981.
+\bibitem[NAS]{NASA2020}
+Nasa report on 2020 average temperatures.
+\newblock
+  https://www.nasa.gov/press-release/2020-tied-for-warmest-year-on-record-nasa-analysis-shows.
 
 \bibitem[nds]{ndsi}
 ndsi.
@@ -137,10 +125,6 @@ Usgs.
 \newblock \url{https://earthexplorer.usgs.gov/}.
 \newblock Accessed: 2021-06-21.
 
-\bibitem[VA]{feorb}
-Vinay S. Shekhara Akshay KumarC. K N Balasubramanya Murthya S.~Natarajanb
-  Vinay~A., Avani S.~Rao.
-
 \bibitem[WGI]{WGI}
 World glacier inventory.
 \newblock \url{http://nsidc.org/data/glacier_inventory/index.html}.
@@ -157,5 +141,12 @@ wrs.
 \newblock
   \url{https://landsat.gsfc.nasa.gov/about/worldwide-reference-system/}.
 \newblock Accessed: 2021-06-22.
+
+\bibitem[WYLC17]{WANG2017}
+H~Wang, R~Yang, X~LI, and S~CAO.
+\newblock Glacier parameter extraction using landsat 8 images in the eastern
+  karakorum.
+\newblock {\em {IOP} Conference Series: Earth and Environmental Science},
+  57:012004, feb 2017.
 
 \end{thebibliography}

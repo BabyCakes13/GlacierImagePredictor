@@ -48,12 +48,7 @@
 	howpublished = {\url{https://landsat.gsfc.nasa.gov/landsat-8/thermal-infrared-sensor-tirs}},
 	note = {Accessed: 2021-06-21}
 }
-@INPROCEEDINGS{bands,
-	author = {Hongbo Yan, Guoqing Zhou, Xianjian Lu},
-	title = {Comparative analysis of surface soil moisture retrieval using VSWI and TVDI in karst areas},
-	year = {2015},
-	booktitle = {Proceedings Volume 9808, International Conference on Intelligent Earth Observing and Applications 2015; 980806 (2015)}
-}
+
 @misc{lgng,
 	title = {NASA on the Landsat Satellite},
 	howpublished = {\url{https://landsat.gsfc.nasa.gov/}},
@@ -100,22 +95,13 @@
 	howpublished = {\url{https://docs.opencv.org/4.5.2/d1/d89/tutorial_py_orb.html}},
 	note = {Accessed: 2021-06-24}
 }
-@INPROCEEDINGS{ransac,
-	author = {M.A. Fischler and R.C. Bolles},
-	title = {Random sample consensus: A paradigm for modelfitting with applications to image analysis and automated cartography},
-	book={Commu-nications of the ACM, 24(6):381–395},
-	year = {1981},
-}
-@INPROCEEDINGS{ransac2,
-	author = {Konstantinos G. Derpanis},
-	title = {Overview of the RANSAC Algorithm},
-	year = {2010},
-}
+
 @misc{opticalflow,
 	title = {opticalflow},
 	howpublished = {\url{https://nanonets.com/blog/optical-flow/}},
 	note = {Accessed: 2021-06-25}
 }
+
 @misc{gdal,
 	title = {GDAL},
 	howpublished={https://gdal.org/}
@@ -126,48 +112,17 @@
 	howpublished={https://git-scm.com/}
 	note = {Retrieved 2021-06-30},
 }
-@INPROCEEDINGS{lukas,
-	author = {B. D. Lucas and T. Kanade},
-	title = {An iterative image registration technique with an application to stereo vision},
-	book={Proceedings of Imaging Understanding Workshop, pages 121--130},
-	year = {1981},
-}
-@INPROCEEDINGS{orblocal,
-	author = {Chaoqun Ma, Xiaoguang Hu, Jin Xiao, Huanchao Du, and Guofeng Zhang}
-	title = {Improved ORB Algorithm Using Three-Patch Method and Local Gray Difference},
-	book={Special Issue Advanced Sensors and Signal Processing of Sensor Data: Recent Advances and Applications}
-	year = {2020},
-}
-@INPROCEEDINGS{feorb,
-	author = {Vinay A., Avani S. Rao, Vinay S. Shekhara, Akshay KumarC., K N Balasubramanya Murthya, S. Natarajanb}
-	title = {Feature Extractionusing ORB-RANSAC for Face Recognition},
-	book={Proceedings of the 4th International Conference on Eco-friendly Computing and Communication Systems}
-	year = {2015},
-}
-@INPROCEEDINGS{orbsift,
-	author = {Ethan Rublee, Vincent Rabaud, Kurt Konolige and Gary Bradski}
-	title = {ORB: An efficient alternative to SIFT or SURF},
-	book={2011 International Conference on Computer Vision}
-	year = {2012},
-}
-@INPROCEEDINGS{orbsift,
-	author = {Ethan Rublee, Vincent Rabaud, Kurt Konolige and Gary Bradski}
-	title = {ORB: An efficient alternative to SIFT or SURF},
-	book={2011 International Conference on Computer Vision}
-	year = {2012},
-}
-@INPROCEEDINGS{arraynumpy,
-	author = {Charles R. Harris, K. Jarrod Millman, […], Travis E. Oliphant }
-	title = {Array programming with NumPy},
-	book={Nature volume 585, pages 357–362 (2020)}
-	year = {2020},
-}
-@INPROCEEDINGS{opencvpaper,
-	author = {Kari Pulli, Anatoly Baksheev, Kirill Kornyakov and Victor Eruhimov}
-	title = {Realtime Computer Vision with OpenCV: Mobile computer-vision technology will soon become as ubiquitous as touch interfaces.},
-	book={Nature volume 585, pages 357–362 (2020)}
-	year = {2020},
-}
+
+@INPROCEEDINGS{RUBLEE2011
+	author={Rublee, Ethan and Rabaud, Vincent and Konolige, Kurt and Bradski, Gary},
+	booktitle={2011 International Conference on Computer Vision}, 
+	title={ORB: An efficient alternative to SIFT or SURF}, 
+	year={2011},
+	volume={},
+	number={},
+	pages={2564-2571},
+	doi={10.1109/ICCV.2011.6126544}}
+
 @INPROCEEDINGS{cuda,
 	title = {CUDA},
 	book={opencv.org.}
@@ -236,3 +191,331 @@
 	number="",
 	pages="2808-2810",
 	doi="10.1109/IGARSS.2007.4423426"}
+
+@inproceedings{KANADE1981,
+	author = {Lucas, Bruce D. and Kanade, Takeo},
+	title = {An Iterative Image Registration Technique with an Application to Stereo Vision},
+	year = {1981},
+	publisher = {Morgan Kaufmann Publishers Inc.},
+	address = {San Francisco, CA, USA},
+	abstract = {Image registration finds a variety of applications in computer vision. Unfortunately, traditional image registration techniques tend to be costly. We present a new image registration technique that makes use of the spatial intensity gradient of the images to find a good match using a type of Newton-Raphson iteration. Our technique is taster because it examines far fewer potential matches between the images than existing techniques Furthermore, this registration technique can be generalized to handle rotation, scaling and shearing. We show how our technique can be adapted tor use in a stereo vision system.},
+	booktitle = {Proceedings of the 7th International Joint Conference on Artificial Intelligence - Volume 2},
+	pages = {674–679},
+	numpages = {6},
+	location = {Vancouver, BC, Canada},
+	series = {IJCAI'81}
+}
+
+@article{PULLI2012,
+	author = {Pulli, Kari and Baksheev, Anatoly and Kornyakov, Kirill and Eruhimov, Victor},
+	title = {Realtime Computer Vision with OpenCV: Mobile Computer-Vision Technology Will Soon Become as Ubiquitous as Touch Interfaces.},
+	year = {2012},
+	issue_date = {April 2012},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {10},
+	number = {4},
+	issn = {1542-7730},
+	url = {https://doi.org/10.1145/2181796.2206309},
+	doi = {10.1145/2181796.2206309},
+	abstract = {Computer vision is a rapidly growing field devoted to analyzing, modifying, and high-level understanding of images. Its objective is to determine what is happening in front of a camera and use that understanding to control a computer or robotic system, or to provide people with new images that are more informative or aesthetically pleasing than the original camera images. Application areas for computer-vision technology include video surveillance, biometrics, automotive, photography, movie production, Web search, medicine, augmented reality gaming, new user interfaces, and many more.},
+	journal = {Queue},
+	month = apr,
+	pages = {40–56},
+	numpages = {17}
+}
+
+@Article{HARRIS2020,
+	author={Harris, Charles R.
+	and Millman, K. Jarrod
+	and van der Walt, St{\'e}fan J.
+	and Gommers, Ralf
+	and Virtanen, Pauli
+	and Cournapeau, David
+	and Wieser, Eric
+	and Taylor, Julian
+	and Berg, Sebastian
+	and Smith, Nathaniel J.
+	and Kern, Robert
+	and Picus, Matti
+	and Hoyer, Stephan
+	and van Kerkwijk, Marten H.
+	and Brett, Matthew
+	and Haldane, Allan
+	and del R{\'i}o, Jaime Fern{\'a}ndez
+	and Wiebe, Mark
+	and Peterson, Pearu
+	and G{\'e}rard-Marchant, Pierre
+	and Sheppard, Kevin
+	and Reddy, Tyler
+	and Weckesser, Warren
+	and Abbasi, Hameer
+	and Gohlke, Christoph
+	and Oliphant, Travis E.},
+	title={Array programming with NumPy},
+	journal={Nature},
+	year={2020},
+	month={Sep},
+	day={01},
+	volume={585},
+	number={7825},
+	pages={357-362},
+	abstract={Array programming provides a powerful, compact and expressive syntax for accessing, manipulating and operating on data in vectors, matrices and higher-dimensional arrays. NumPy is the primary array programming library for the Python language. It has an essential role in research analysis pipelines in fields as diverse as physics, chemistry, astronomy, geoscience, biology, psychology, materials science, engineering, finance and economics. For example, in astronomy, NumPy was an important part of the software stack used in the discovery of gravitational waves1 and in the first imaging of a black hole2. Here we review how a few fundamental array concepts lead to a simple and powerful programming paradigm for organizing, exploring and analysing scientific data. NumPy is the foundation upon which the scientific Python ecosystem is constructed. It is so pervasive that several projects, targeting audiences with specialized needs, have developed their own NumPy-like interfaces and array objects. Owing to its central position in the ecosystem, NumPy increasingly acts as an interoperability layer between such array computation libraries and, together with its application programming interface (API), provides a flexible framework to support the next decade of scientific and industrial analysis.},
+	issn={1476-4687},
+	doi={10.1038/s41586-020-2649-2},
+	url={https://doi.org/10.1038/s41586-020-2649-2}
+}
+
+@article{Fischler1981,
+	author = {Fischler, Martin A. and Bolles, Robert C.},
+	title = {Random Sample Consensus: A Paradigm for Model Fitting with Applications to Image Analysis and Automated Cartography},
+	year = {1981},
+	issue_date = {June 1981},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {24},
+	number = {6},
+	issn = {0001-0782},
+	url = {https://doi.org/10.1145/358669.358692},
+	doi = {10.1145/358669.358692},
+	abstract = {A new paradigm, Random Sample Consensus (RANSAC), for fitting a model to experimental data is introduced. RANSAC is capable of interpreting/smoothing data containing a significant percentage of gross errors, and is thus ideally suited for applications in automated image analysis where interpretation is based on the data provided by error-prone feature detectors. A major portion of this paper describes the application of RANSAC to the Location Determination Problem (LDP): Given an image depicting a set of landmarks with known locations, determine that point in space from which the image was obtained. In response to a RANSAC requirement, new results are derived on the minimum number of landmarks needed to obtain a solution, and algorithms are presented for computing these minimum-landmark solutions in closed form. These results provide the basis for an automatic system that can solve the LDP under difficult viewing},
+	journal = {Commun. ACM},
+	month = jun,
+	pages = {381–395},
+	numpages = {15},
+	keywords = {image matching, automated cartography, location determination, camera calibration, model fitting, scene analysis}
+}
+@inproceedings{Hongbo2015,
+	author = {Hongbo Yan and Guoqing Zhou and Xianjian Lu},
+	title = {{Comparative analysis of surface soil moisture retrieval using VSWI and TVDI in karst areas}},
+	volume = {9808},
+	booktitle = {International Conference on Intelligent Earth Observing and Applications 2015},
+	editor = {Guoqing Zhou and Chuanli Kang},
+	organization = {International Society for Optics and Photonics},
+	publisher = {SPIE},
+	pages = {37 -- 49},
+	keywords = {VSWI, TVDI, surface soil moisture, karst, remote sensing,  Landsat 8},
+	year = {2015},
+	doi = {},
+	URL = {https://doi.org/10.1117/12.2207397}
+}
+
+@ARTICLE{WINSVOLD2016,
+	author={Winsvold, Solveig Havstad and Kääb, Andreas and Nuth, Christopher},
+	journal={IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing}, 
+	title={Regional Glacier Mapping Using Optical Satellite Data Time Series}, 
+	year={2016},
+	volume={9},
+	number={8},
+	pages={3698-3711},
+	doi={10.1109/JSTARS.2016.2527063}}
+
+
+@ARTICLE{RACOVITEANU2019,
+	author = {{Racoviteanu}, Adina E. and {Rittger}, Karl and {Armstrong}, Richard},
+	title = "{An automated approach for estimating snowline altitudes in the Karakoram and eastern Himalaya from remote sensing}",
+	journal = {Frontiers in Earth Science},
+	keywords = {Snowlines, ELA, Landsat, Karakoram and Himalaya (HKH), remote sensing},
+	year = 2019,
+	month = sep,
+	volume = {7},
+	eid = {220},
+	pages = {220},
+	doi = {10.3389/feart.2019.00220},
+	adsurl = {https://ui.adsabs.harvard.edu/abs/2019FrEaS...7..220R},
+	adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@Article{TAK2020,
+	author={Tak, Swati
+	and Keshari, Ashok K.},
+	title={Investigating mass balance of Parvati glacier in Himalaya using satellite imagery based model},
+	journal={Scientific Reports},
+	year={2020},
+	month={Jul},
+	day={22},
+	volume={10},
+	number={1},
+	pages={12211},
+	abstract={Accurate assessment of glacier mass loss is essential for understanding the glacier sensitivity to climate change and the ramifications of glacier retreat or surge. The glacier melt affects the runoff and water availability, on which the drinking and irrigation water supplies and generation of hydroelectric energy depend upon. The excessive glacial retreat may cause flood, glacial lake outburst flood, avalanches and sea level rise which are likely to affect the lives and livelihood of the people and damage the infrastructure. Here, we present a remote sensing based modeling framework to improve the understanding of accumulation and ablation processes and to quantify the glacier mass balance using multispectral satellite imageries, as several glacierized regions of the world are still poorly monitored because the field measurements for continuous monitoring on a large scale or in a complex harsh terrain are costly, time consuming and difficult. The developed modeling framework has been applied to the Parvati glacier in the western Himalaya to investigate glaciological processes and estimate the surface mass loss using 19 years of satellite images from 1998 to 2016. It spreads over 425.318 km2 and more than 50{\%} of the area is accumulation area. The study shows that the Parvati glacier is not in equilibrium and its behavioural response changes year to year characterized with high rate of mass loss. The value of accumulation area ratio varies between 0.33 and 0.70 with an average value of 0.55, indicating a negative mass loss. The mean specific mass loss is −{\thinspace}0.49{\thinspace}{\textpm}{\thinspace}0.11 m w.e. and the total mass loss is 3.95 Gt., indicating strong influence of climate change and effect on river flows and water availability.},
+	issn={2045-2322},
+	doi={10.1038/s41598-020-69203-8},
+	url={https://doi.org/10.1038/s41598-020-69203-8}
+}
+
+@Article{WINSVOLD2017,
+	AUTHOR = {Winsvold, S. H. and K\"a\"ab, A. and Nuth, C. and Andreassen, L. M. and van Pelt, W. J. J. and Schellenberger, T.},
+	TITLE = {Using SAR satellite data time series for regional glacier mapping},
+	JOURNAL = {The Cryosphere},
+	VOLUME = {12},
+	YEAR = {2018},
+	NUMBER = {3},
+	PAGES = {867--890},
+	URL = {https://tc.copernicus.org/articles/12/867/2018/},
+	DOI = {10.5194/tc-12-867-2018}
+}
+
+@article{WANG2017,
+	doi = {10.1088/1755-1315/57/1/012004},
+	url = {https://doi.org/10.1088/1755-1315/57/1/012004},
+	year = 2017,
+	month = {feb},
+	publisher = {{IOP} Publishing},
+	volume = {57},
+	pages = {012004},
+	author = {H Wang and R Yang and X LI and S CAO},
+	title = {Glacier parameter extraction using Landsat 8 images in the eastern Karakorum},
+	journal = {{IOP} Conference Series: Earth and Environmental Science},
+	abstract = {Changes in glacial melt and river runoff directly impact upon water resources and utilization. Glacier area data provide the basis of analysing glacier change. In this study, Landsat images from the end of the 2014 melt season were analysed using remote sensing and geographic information systems (GIS) technology. We compared the band ratio method and Normalized Difference Snow Index (NDSI) method for extracting glacial parameters. The results show that the band ratio method is better for glacier boundary extraction. However, for debris covered glaciers, textural analysis is needed for area extraction and needed to revise boundary extraction results through the visual interpretation of the remote sensing image Accurate area extraction is particularly important for glaciers, as these are major contributors to runoff.}
+}
+
+@InProceedings{GUNNAR2003,
+	author="Farneb{\"a}ck, Gunnar",
+	editor="Bigun, Josef
+	and Gustavsson, Tomas",
+	title="Two-Frame Motion Estimation Based on Polynomial Expansion",
+	booktitle="Image Analysis",
+	year="2003",
+	publisher="Springer Berlin Heidelberg",
+	address="Berlin, Heidelberg",
+	pages="363--370",
+	abstract="This paper presents a novel two-frame motion estimation algorithm. The first step is to approximate each neighborhood of both frames by quadratic polynomials, which can be done efficiently using the polynomial expansion transform. From observing how an exact polynomial transforms under translation a method to estimate displacement fields from the polynomial expansion coefficients is derived and after a series of refinements leads to a robust algorithm. Evaluation on the Yosemite sequence shows good results.",
+	isbn="978-3-540-45103-7"
+}
+
+@inproceedings{KANADE1981,
+	author = {Lucas, Bruce D. and Kanade, Takeo},
+	title = {An Iterative Image Registration Technique with an Application to Stereo Vision},
+	year = {1981},
+	publisher = {Morgan Kaufmann Publishers Inc.},
+	address = {San Francisco, CA, USA},
+	abstract = {Image registration finds a variety of applications in computer vision. Unfortunately, traditional image registration techniques tend to be costly. We present a new image registration technique that makes use of the spatial intensity gradient of the images to find a good match using a type of Newton-Raphson iteration. Our technique is taster because it examines far fewer potential matches between the images than existing techniques Furthermore, this registration technique can be generalized to handle rotation, scaling and shearing. We show how our technique can be adapted tor use in a stereo vision system.},
+	booktitle = {Proceedings of the 7th International Joint Conference on Artificial Intelligence - Volume 2},
+	pages = {674–679},
+	numpages = {6},
+	location = {Vancouver, BC, Canada},
+	series = {IJCAI'81}
+}
+
+@article{PULLI2012,
+	author = {Pulli, Kari and Baksheev, Anatoly and Kornyakov, Kirill and Eruhimov, Victor},
+	title = {Realtime Computer Vision with OpenCV: Mobile Computer-Vision Technology Will Soon Become as Ubiquitous as Touch Interfaces.},
+	year = {2012},
+	issue_date = {April 2012},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {10},
+	number = {4},
+	issn = {1542-7730},
+	url = {https://doi.org/10.1145/2181796.2206309},
+	doi = {10.1145/2181796.2206309},
+	abstract = {Computer vision is a rapidly growing field devoted to analyzing, modifying, and high-level understanding of images. Its objective is to determine what is happening in front of a camera and use that understanding to control a computer or robotic system, or to provide people with new images that are more informative or aesthetically pleasing than the original camera images. Application areas for computer-vision technology include video surveillance, biometrics, automotive, photography, movie production, Web search, medicine, augmented reality gaming, new user interfaces, and many more.},
+	journal = {Queue},
+	month = apr,
+	pages = {40–56},
+	numpages = {17}
+}
+
+@Article{Harris2020,
+	author={Harris, Charles R.
+	and Millman, K. Jarrod
+	and van der Walt, St{\'e}fan J.
+	and Gommers, Ralf
+	and Virtanen, Pauli
+	and Cournapeau, David
+	and Wieser, Eric
+	and Taylor, Julian
+	and Berg, Sebastian
+	and Smith, Nathaniel J.
+	and Kern, Robert
+	and Picus, Matti
+	and Hoyer, Stephan
+	and van Kerkwijk, Marten H.
+	and Brett, Matthew
+	and Haldane, Allan
+	and del R{\'i}o, Jaime Fern{\'a}ndez
+	and Wiebe, Mark
+	and Peterson, Pearu
+	and G{\'e}rard-Marchant, Pierre
+	and Sheppard, Kevin
+	and Reddy, Tyler
+	and Weckesser, Warren
+	and Abbasi, Hameer
+	and Gohlke, Christoph
+	and Oliphant, Travis E.},
+	title={Array programming with NumPy},
+	journal={Nature},
+	year={2020},
+	month={Sep},
+	day={01},
+	volume={585},
+	number={7825},
+	pages={357-362},
+	abstract={Array programming provides a powerful, compact and expressive syntax for accessing, manipulating and operating on data in vectors, matrices and higher-dimensional arrays. NumPy is the primary array programming library for the Python language. It has an essential role in research analysis pipelines in fields as diverse as physics, chemistry, astronomy, geoscience, biology, psychology, materials science, engineering, finance and economics. For example, in astronomy, NumPy was an important part of the software stack used in the discovery of gravitational waves1 and in the first imaging of a black hole2. Here we review how a few fundamental array concepts lead to a simple and powerful programming paradigm for organizing, exploring and analysing scientific data. NumPy is the foundation upon which the scientific Python ecosystem is constructed. It is so pervasive that several projects, targeting audiences with specialized needs, have developed their own NumPy-like interfaces and array objects. Owing to its central position in the ecosystem, NumPy increasingly acts as an interoperability layer between such array computation libraries and, together with its application programming interface (API), provides a flexible framework to support the next decade of scientific and industrial analysis.},
+	issn={1476-4687},
+	doi={10.1038/s41586-020-2649-2},
+	url={https://doi.org/10.1038/s41586-020-2649-2}
+}
+
+@INPROCEEDINGS{RUBLEE2011,
+	author={Rublee, Ethan and Rabaud, Vincent and Konolige, Kurt and Bradski, Gary},
+	booktitle={2011 International Conference on Computer Vision}, 
+	title={ORB: An efficient alternative to SIFT or SURF}, 
+	year={2011},
+	volume={},
+	number={},
+	pages={2564-2571},
+	doi={10.1109/ICCV.2011.6126544}}
+
+
+@article{Fischler1981,
+	author = {Fischler, Martin A. and Bolles, Robert C.},
+	title = {Random Sample Consensus: A Paradigm for Model Fitting with Applications to Image Analysis and Automated Cartography},
+	year = {1981},
+	issue_date = {June 1981},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {24},
+	number = {6},
+	issn = {0001-0782},
+	url = {https://doi.org/10.1145/358669.358692},
+	doi = {10.1145/358669.358692},
+	abstract = {A new paradigm, Random Sample Consensus (RANSAC), for fitting a model to experimental data is introduced. RANSAC is capable of interpreting/smoothing data containing a significant percentage of gross errors, and is thus ideally suited for applications in automated image analysis where interpretation is based on the data provided by error-prone feature detectors. A major portion of this paper describes the application of RANSAC to the Location Determination Problem (LDP): Given an image depicting a set of landmarks with known locations, determine that point in space from which the image was obtained. In response to a RANSAC requirement, new results are derived on the minimum number of landmarks needed to obtain a solution, and algorithms are presented for computing these minimum-landmark solutions in closed form. These results provide the basis for an automatic system that can solve the LDP under difficult viewing},
+	journal = {Commun. ACM},
+	month = jun,
+	pages = {381–395},
+	numpages = {15},
+	keywords = {image matching, automated cartography, location determination, camera calibration, model fitting, scene analysis}
+}
+
+@inproceedings{Hongbo2015,
+	author = {Hongbo Yan and Guoqing Zhou and Xianjian Lu},
+	title = {{Comparative analysis of surface soil moisture retrieval using VSWI and TVDI in karst areas}},
+	volume = {9808},
+	booktitle = {International Conference on Intelligent Earth Observing and Applications 2015},
+	editor = {Guoqing Zhou and Chuanli Kang},
+	organization = {International Society for Optics and Photonics},
+	publisher = {SPIE},
+	pages = {37 -- 49},
+	keywords = {VSWI, TVDI, surface soil moisture, karst, remote sensing,  Landsat 8},
+	year = {2015},
+	doi = {},
+	URL = {https://doi.org/10.1117/12.2207397}
+}
+
+@misc{NASA2020,
+	title = {NASA report on 2020 average temperatures.},
+	howpublished = {https://www.nasa.gov/press-release/2020-tied-for-warmest-year-on-record-nasa-analysis-shows}},
+	note = {Accessed: 2021-07-01}
+}
+
+@article{Tatem2008,
+	author = {Tatem, Andrew and Goetz, Scott and Hay, Simon},
+	year = {2008},
+	month = {09},
+	pages = {390-398},
+	title = {Fifty Years of Earth Observation Satellites},
+	volume = {96},
+	journal = {American Scientist},
+	doi = {10.1511/2008.74.390}
+}
