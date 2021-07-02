@@ -1,152 +1,159 @@
-\newcommand{\etalchar}[1]{$^{#1}$}
-\begin{thebibliography}{HMvdW{\etalchar{+}}20}
+\begin{thebibliography}{}
 
-\bibitem[bd]{bd}
+\bibitem[bd, ]{bd}
 bd.
 \newblock \url{https://landsat.gsfc.nasa.gov/landsat-8/landsat-8-bands/}.
 \newblock Accessed: 2021-06-22.
 
-\bibitem[cud]{cuda}
+\bibitem[cud, ]{cuda}
 Cuda.
 
-\bibitem[FB81]{Fischler1981}
-Martin~A. Fischler and Robert~C. Bolles.
-\newblock Random sample consensus: A paradigm for model fitting with
-  applications to image analysis and automated cartography.
-\newblock {\em Commun. ACM}, 24(6):381–395, June 1981.
-
-\bibitem[gda]{gdal}
-Gdal.
-\newblock https://gdal.org/.
-
-\bibitem[git]{git}
-git.
-
-\bibitem[Hal15]{viirs}
-Dr. Dorothy~K Hall.
-\newblock Viirs snow cover algorithm theoretical basis document (atbd).
-\newblock 2015.
-
-\bibitem[HMvdW{\etalchar{+}}20]{HARRIS2020}
-Charles~R. Harris, K.~Jarrod Millman, St{\'e}fan~J. van~der Walt, Ralf Gommers,
-  Pauli Virtanen, David Cournapeau, Eric Wieser, Julian Taylor, Sebastian Berg,
-  Nathaniel~J. Smith, Robert Kern, Matti Picus, Stephan Hoyer, Marten~H. van
-  Kerkwijk, Matthew Brett, Allan Haldane, Jaime~Fern{\'a}ndez del R{\'i}o, Mark
-  Wiebe, Pearu Peterson, Pierre G{\'e}rard-Marchant, Kevin Sheppard, Tyler
-  Reddy, Warren Weckesser, Hameer Abbasi, Christoph Gohlke, and Travis~E.
-  Oliphant.
-\newblock Array programming with numpy.
-\newblock {\em Nature}, 585(7825):357--362, Sep 2020.
-
-\bibitem[KK14]{KNIGHT2014}
-Edward~J Knight and Geir Kvaran.
-\newblock Landsat-8 operational land imager design, characterization and
-  performance.
-\newblock {\em Landsat-8 Sensor Characterization and Calibration}, 2014.
-
-\bibitem[l8o]{l8otb}
+\bibitem[l8o, ]{l8otb}
 Different band combinations of landsat.
 \newblock \url{https://gisgeography.com/landsat-8-bands-combinations/}.
 \newblock Accessed: 2021-06-22.
 
-\bibitem[LANa]{LANDSAT}
+\bibitem[gda, ]{gdal}
+Gdal.
+\newblock https://gdal.org/.
+
+\bibitem[git, ]{git}
+git.
+
+\bibitem[lc1, ]{lc1l1}
+Landsat collection 1 product definition.
+\newblock
+  \url{https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1656_%20Landsat_Collection1_L1_Product_Definition-v2.pdf}.
+\newblock Accessed: 2021-06-22.
+
+\bibitem[LAN, a]{LANDSAT}
 Landsat satellite specifications.
 \newblock
   \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-8?qt-science_support_page_related_con=0#}.
 \newblock Accessed: 2021-06-21.
 
-\bibitem[LANb]{LANDSATPIC}
-Picture of the landsat satellite.
-\newblock \url{https://landsat.gsfc.nasa.gov/sites/landsat/files/2013/01}.
-\newblock Accessed: 2021-06-21.
-
-\bibitem[lc1]{lc1l1}
-lc1l1.
-\newblock
-  \url{https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1656_%20Landsat_Collection1_L1_Product_Definition-v2.pdf}.
-\newblock Accessed: 2021-06-22.
-
-\bibitem[lgn]{lgng}
+\bibitem[lgn, ]{lgng}
 Nasa on the landsat satellite.
 \newblock \url{https://landsat.gsfc.nasa.gov/}.
 \newblock Accessed: 2021-06-21.
 
-\bibitem[NAS]{NASA2020}
+\bibitem[NAS, ]{NASA2020}
 Nasa report on 2020 average temperatures.
 \newblock
   https://www.nasa.gov/press-release/2020-tied-for-warmest-year-on-record-nasa-analysis-shows.
 
-\bibitem[nds]{ndsi}
+\bibitem[nds, ]{ndsi}
 ndsi.
 \newblock
   \url{https://nsidc.org/support/faq/what-ndsi-snow-cover-and-how-does-it-compare-fsc}.
 \newblock Accessed: 2021-06-22.
 
-\bibitem[opt]{opticalflow}
-opticalflow.
-\newblock \url{https://nanonets.com/blog/optical-flow/}.
-\newblock Accessed: 2021-06-25.
-
-\bibitem[orb]{orb}
+\bibitem[orb, ]{orb}
 orb.
 \newblock \url{https://docs.opencv.org/4.5.2/d1/d89/tutorial_py_orb.html}.
 \newblock Accessed: 2021-06-24.
 
-\bibitem[RRA19]{RACOVITEANU2019}
-Adina~E. Racoviteanu, Karl Rittger, and Richard Armstrong.
-\newblock An automated approach for estimating snowline altitudes in the
-  karakoram and eastern himalaya from remote sensing.
-\newblock {\em Front. Earth Sci.}, 7:220, 2019.
+\bibitem[LAN, b]{LANDSATPIC}
+Picture of the landsat satellite.
+\newblock \url{https://landsat.gsfc.nasa.gov/sites/landsat/files/2013/01}.
+\newblock Accessed: 2021-06-21.
 
-\bibitem[SHWS17]{WINSVOLD2017}
-Christopher Nuth Liss M. Andreassen Ward J. J. van~Pelt Solveig H.~Winsvold,
-  Andreas~Kääb and Thomas Schellenberger.
-\newblock Using sar satellite data time-series for regional glacier mapping.
-\newblock {\em The Cryosphere Discussion}, 2017.
-
-\bibitem[sn]{sn}
+\bibitem[sn, ]{sn}
 sn.
 \newblock \url{https://gisgeography.com/landsat-file-naming-convention/}.
 \newblock Accessed: 2021-06-22.
 
-\bibitem[STA]{STAC}
+\bibitem[STA, ]{STAC}
 Stac.
 \newblock \url{https://stacspec.org/STAC-api.html}.
 \newblock Accessed: 2021-06-20.
 
-\bibitem[Tak20]{TAK2020}
-Keshari~A.K Tak, S.
-\newblock Investigating mass balance of parvati glacier in himalaya using
-  satellite imagery based model.
-\newblock {\em Scientific Reports}, 10:12211, 2020.
-
-\bibitem[USG]{USGS}
+\bibitem[USG, ]{USGS}
 Usgs.
 \newblock \url{https://earthexplorer.usgs.gov/}.
 \newblock Accessed: 2021-06-21.
 
-\bibitem[WGI]{WGI}
+\bibitem[WGI, ]{WGI}
 World glacier inventory.
 \newblock \url{http://nsidc.org/data/glacier_inventory/index.html}.
 \newblock Accessed: 2021-06-20.
 
-\bibitem[WKN16]{WINSVOLD2016}
-Solveig~Havstad Winsvold, Andreas Kääb, and Christopher Nuth.
-\newblock Regional glacier mapping using optical satellite data time series.
-\newblock {\em IEEE JOURNAL OF SELECTED TOPICS IN APPLIED EARTH OBSERVATIONS
-  AND REMOTE SENSING}, 9:3698--3710, 2016.
-
-\bibitem[wrs]{wrs}
+\bibitem[wrs, ]{wrs}
 wrs.
 \newblock
   \url{https://landsat.gsfc.nasa.gov/about/worldwide-reference-system/}.
 \newblock Accessed: 2021-06-22.
 
-\bibitem[WYLC17]{WANG2017}
-H~Wang, R~Yang, X~LI, and S~CAO.
+\bibitem[Farneb{\"a}ck, 2003]{GUNNAR2003}
+Farneb{\"a}ck, G. (2003).
+\newblock Two-frame motion estimation based on polynomial expansion.
+\newblock In Bigun, J. and Gustavsson, T., editors, {\em Image Analysis}, pages
+  363--370, Berlin, Heidelberg. Springer Berlin Heidelberg.
+
+\bibitem[Fischler and Bolles, 1981]{Fischler1981}
+Fischler, M.~A. and Bolles, R.~C. (1981).
+\newblock Random sample consensus: A paradigm for model fitting with
+  applications to image analysis and automated cartography.
+\newblock {\em Commun. ACM}, 24(6):381–395.
+
+\bibitem[Hall and Riggs, 2001]{Hall2001}
+Hall, D. and Riggs, G. (2001).
+\newblock Algorithm theoretical basis document (atbd) for the modis snow and
+  sea ice-mapping algorithms.
+
+\bibitem[Harris et~al., 2020]{HARRIS2020}
+Harris, C.~R., Millman, K.~J., van~der Walt, S.~J., Gommers, R., Virtanen, P.,
+  Cournapeau, D., Wieser, E., Taylor, J., Berg, S., Smith, N.~J., Kern, R.,
+  Picus, M., Hoyer, S., van Kerkwijk, M.~H., Brett, M., Haldane, A., del
+  R{\'i}o, J.~F., Wiebe, M., Peterson, P., G{\'e}rard-Marchant, P., Sheppard,
+  K., Reddy, T., Weckesser, W., Abbasi, H., Gohlke, C., and Oliphant, T.~E.
+  (2020).
+\newblock Array programming with numpy.
+\newblock {\em Nature}, 585(7825):357--362.
+
+\bibitem[Knight and Kvaran, 2014]{KNIGHT2014}
+Knight, E.~J. and Kvaran, G. (2014).
+\newblock Landsat-8 operational land imager design, characterization and
+  performance.
+\newblock {\em Landsat-8 Sensor Characterization and Calibration}.
+
+\bibitem[Lucas and Kanade, 1981]{KANADE1981}
+Lucas, B.~D. and Kanade, T. (1981).
+\newblock An iterative image registration technique with an application to
+  stereo vision.
+\newblock In {\em Proceedings of the 7th International Joint Conference on
+  Artificial Intelligence - Volume 2}, IJCAI'81, page 674–679, San Francisco,
+  CA, USA. Morgan Kaufmann Publishers Inc.
+
+\bibitem[Racoviteanu et~al., 2019]{RACOVITEANU2019}
+Racoviteanu, A.~E., Rittger, K., and Armstrong, R. (2019).
+\newblock An automated approach for estimating snowline altitudes in the
+  karakoram and eastern himalaya from remote sensing.
+\newblock {\em Front. Earth Sci.}, 7:220.
+
+\bibitem[Solveig H.~Winsvold and Schellenberger, 2017]{WINSVOLD2017}
+Solveig H.~Winsvold, Andreas~Kääb, C. N. L. M. A. W. J. J. v.~P. and
+  Schellenberger, T. (2017).
+\newblock Using sar satellite data time-series for regional glacier mapping.
+\newblock {\em The Cryosphere Discussion}.
+
+\bibitem[Tak, 2020]{TAK2020}
+Tak, S., K.~A. (2020).
+\newblock Investigating mass balance of parvati glacier in himalaya using
+  satellite imagery based model.
+\newblock {\em Scientific Reports}, 10:12211.
+
+\bibitem[Wang et~al., 2017]{WANG2017}
+Wang, H., Yang, R., LI, X., and CAO, S. (2017).
 \newblock Glacier parameter extraction using landsat 8 images in the eastern
   karakorum.
 \newblock {\em {IOP} Conference Series: Earth and Environmental Science},
-  57:012004, feb 2017.
+  57:012004.
+
+\bibitem[Winsvold et~al., 2016]{WINSVOLD2016}
+Winsvold, S.~H., Kääb, A., and Nuth, C. (2016).
+\newblock Regional glacier mapping using optical satellite data time series.
+\newblock {\em IEEE JOURNAL OF SELECTED TOPICS IN APPLIED EARTH OBSERVATIONS
+  AND REMOTE SENSING}, 9:3698--3710.
 
 \end{thebibliography}

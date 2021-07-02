@@ -1,7 +1,7 @@
 This is BibTeX, Version 0.99d (TeX Live 2020)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Disertation.aux
-The style file: alpha.bst
+The style file: apalike.bst
 Database file #1: references.bib
 I was expecting a `,' or a `}'---line 108 of file references.bib
  :  
@@ -27,33 +27,36 @@ I was expecting a `,' or a `}'---line 188 of file references.bib
  :  title="
  :         An operational land imager for the landsat data continuity mission",
 I'm skipping whatever remains of this entry
-Repeated entry---line 316 of file references.bib
+Repeated entry---line 303 of file references.bib
  : @article{WINSVOLD2016
  :                      ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 327 of file references.bib
+Repeated entry---line 314 of file references.bib
  : @article{RACOVITEANU2019
  :                         ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 342 of file references.bib
+Repeated entry---line 329 of file references.bib
  : @article{TAK2020
  :                 ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 359 of file references.bib
+Repeated entry---line 346 of file references.bib
  : @article{WINSVOLD2017
  :                      ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 432 of file references.bib
+Repeated entry---line 386 of file references.bib
+ : @inproceedings{KANADE1981
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 419 of file references.bib
  : @article{Harris2020
  :                    ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 484 of file references.bib
+Repeated entry---line 471 of file references.bib
  : @article{Fischler1981
  :                      ,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "GUNNAR2013"
 Warning--I didn't find a database entry for "bands"
-Warning--I didn't find a database entry for "lukas"
 Warning--I didn't find a database entry for "parvati"
 Warning--to sort, need author or key in LANDSATPIC
 Warning--to sort, need author or key in wrs
@@ -61,23 +64,21 @@ Warning--to sort, need author or key in l8otb
 Warning--to sort, need author or key in sn
 Warning--to sort, need author or key in NASA2020
 Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
-while executing---line 1185 of file alpha.bst
+while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
-while executing---line 1185 of file alpha.bst
-Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
-while executing---line 1185 of file alpha.bst
+while executing---line 1023 of file apalike.bst
 Name 1 in "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" has a comma at the end for entry WINSVOLD2017
-while executing---line 1185 of file alpha.bst
+while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
-while executing---line 1185 of file alpha.bst
+while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
-while executing---line 1185 of file alpha.bst
+while executing---line 1023 of file apalike.bst
 Name 1 in "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" has a comma at the end for entry WINSVOLD2017
-while executing---line 1185 of file alpha.bst
+while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
-while executing---line 1185 of file alpha.bst
+while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
-while executing---line 1185 of file alpha.bst
+while executing---line 1023 of file apalike.bst
 Warning--to sort, need author or key in LANDSAT
 Warning--to sort, need author or key in lgng
 Warning--to sort, need author or key in WGI
@@ -86,65 +87,79 @@ Warning--to sort, need author or key in STAC
 Warning--to sort, need author or key in lc1l1
 Warning--to sort, need author or key in bd
 Warning--to sort, need author or key in ndsi
-Warning--to sort, need author or key in opticalflow
 Warning--to sort, need author or key in orb
 Warning--to sort, need author or key in cuda
 Warning--to sort, need author or key in gdal
 Warning--to sort, need author or key in git
+Warning--empty year in bd
 Warning--empty author in cuda
-Warning--empty booktitle in cuda
 Warning--empty year in cuda
+Warning--empty booktitle in cuda
+Warning--empty year in l8otb
+Warning--empty year in gdal
 Warning--empty author in git
-Warning--empty booktitle in git
 Warning--empty year in git
-Warning--empty booktitle in viirs
+Warning--empty booktitle in git
+Warning--empty year in lc1l1
+Warning--empty year in LANDSAT
+Warning--empty year in lgng
+Warning--empty year in NASA2020
+Warning--empty year in ndsi
+Warning--empty year in orb
+Warning--empty year in LANDSATPIC
+Warning--empty year in sn
+Warning--empty year in STAC
+Warning--empty year in USGS
+Warning--empty year in WGI
+Warning--empty year in wrs
+Warning--empty journal in Hall2001
 Name 1 in "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" has a comma at the end for entry WINSVOLD2017
-while executing---line 1250 of file alpha.bst
+while executing---line 1098 of file apalike.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
-while executing---line 1250 of file alpha.bst
+while executing---line 1098 of file apalike.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
-while executing---line 1250 of file alpha.bst
+while executing---line 1098 of file apalike.bst
 Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
-while executing---line 1250 of file alpha.bst
-You've used 27 entries,
-            2543 wiz_defined-function locations,
-            685 strings with 8214 characters,
-and the built_in function-call counts, 8122 in all, are:
-= -- 784
-> -- 312
-< -- 2
-+ -- 109
-- -- 107
-* -- 550
-:= -- 1169
-add.period$ -- 75
-call.type$ -- 27
-change.case$ -- 152
-chr.to.int$ -- 26
-cite$ -- 70
-duplicate$ -- 320
-empty$ -- 737
-format.name$ -- 117
-if$ -- 1733
+while executing---line 1098 of file apalike.bst
+You've used 28 entries,
+            1935 wiz_defined-function locations,
+            614 strings with 7953 characters,
+and the built_in function-call counts, 8718 in all, are:
+= -- 883
+> -- 279
+< -- 9
++ -- 103
+- -- 98
+* -- 676
+:= -- 1435
+add.period$ -- 79
+call.type$ -- 28
+change.case$ -- 188
+chr.to.int$ -- 27
+cite$ -- 84
+duplicate$ -- 371
+empty$ -- 646
+format.name$ -- 119
+if$ -- 1741
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 11
-newline$ -- 133
-num.names$ -- 27
-pop$ -- 280
+missing$ -- 13
+newline$ -- 136
+num.names$ -- 35
+pop$ -- 194
 preamble$ -- 1
-purify$ -- 179
+purify$ -- 188
 quote$ -- 0
-skip$ -- 240
+skip$ -- 259
 stack$ -- 0
-substring$ -- 325
-swap$ -- 27
+substring$ -- 524
+swap$ -- 38
 text.length$ -- 2
-text.prefix$ -- 2
+text.prefix$ -- 0
 top$ -- 0
-type$ -- 216
-warning$ -- 25
-while$ -- 31
-width$ -- 29
-write$ -- 302
+type$ -- 168
+warning$ -- 39
+while$ -- 33
+width$ -- 0
+write$ -- 320
 (There were 24 error messages)

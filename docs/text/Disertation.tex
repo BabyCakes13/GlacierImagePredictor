@@ -176,7 +176,7 @@
 	
 	\par Another interesting approach to determine glacier melt was analysed in \cite{WANG2017}, where the authors have compared the band ratio method with the Normalized Difference Snow Index (NDSI) one for extracting parameters which highlight glaciers. They have conducted their studies on the Karakorum area with satellite imagery collected from Landsat 8, starting from 2014. Their results show that for boundary extraction, the band ratio technique yielded better results. They also state that visual interpretation is still an major factor in analysing the obtained results.
 	
-	\par As for motion estimation, Farneb{\"a}ck, Gunnar proposes an interesting approach in \cite{GUNNAR2013}. The author presents an algorithm for estimating motion between two frames by approximating each neighbourhood of both by quadratic polynomials. Their transformation under translation is then analysed in order to extract displacement fields.
+	\par As for motion estimation, Farneb{\"a}ck, Gunnar proposes an interesting approach in \cite{GUNNAR2003}. The author presents an algorithm for estimating motion between two frames by approximating each neighbourhood of both by quadratic polynomials. Their transformation under translation is then analysed in order to extract displacement fields.
 
 	\section{Our Contribution}
 	
@@ -210,14 +210,14 @@
 		\label{fig:landsat_satellite}
 	\end{figure}
 
-	\par The satellite is orbiting the Earth at an altitude of 705 km, completing one orbit every 99 minutes. Based on this trajectory, the satellite has a 16 day repeat cycle and it acquires 740 scenes each day. These are organised on the path/row system defined by Worldwide Reference System-2 (WRS-2). A Landsat 8 scene size is 185 km x 180 km \cite{LANDSAT}. 
+	\par The satellite is orbiting the Earth at an altitude of 705 km, completing one orbit every 99 minutes. Based on this trajectory, the satellite has a 16 day repeat cycle and it acquires 740 scenes each day. These are organised on the path/row system defined by Worldwide Reference System-2. A Landsat 8 scene size is 185 km x 180 km \cite{LANDSAT}. 
 	
 	\paragraph{Worldwide Reference System-2}
 	\label{par:wrs2}
 	
-	\par We will be referring to each scene's location based on its path and row coordinates from the worldwide reference system-2, which is a notation system used for Landsat images. This system is used with the main goal of keeping a structured archive of Landsat data which can be easily catalogued and accesses. Users can access aerial imagery through querying the specified path and row variables \cite{wrs}. Landsat's trajectory projected on the world map can be seen in Figure~\ref{fig:wrs2}.
+	\par We will be referring to each scene's location based on its path and row coordinates from the WRS-2, which is a notation system used for Landsat images. This system is used with the main goal of keeping a structured archive of Landsat data which can be easily catalogued and accesses. Users can access aerial imagery through querying the specified path and row variables \cite{wrs}. Landsat's trajectory projected on the world map can be seen in Figure~\ref{fig:wrs2}.
 
-	\begin{figure}[h]
+	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.2]{../images/wrs2.png}
 		\caption{WRS-2 Path/Row for Landsat \cite{wrs}.}
@@ -227,8 +227,8 @@
 	\subsubsection{Landsat scene naming convention}
 	\label{seq:landsat_naming}
 	
-	\par Each Landsat scene is named after a well-defined convention in order to easily check information such as the WRS path, row and the date of acquisition. Having access to this information without the need to download the scene itself or the metadata file which holds this information represents a valuable asset, since we can easily filter the data based on the naming convention itself. In the table \ref{table:landsat_table} below we represent what each part of a Landsat scene of the form \textbf{LXS PPPRRR YYYYDDD GSIVV} means.
-	\begin{table} [h]
+	\par Each Landsat scene is named after a well-defined convention in order to easily check information such as the WRS-2 path, row and the date of acquisition. Having access to this information without the need to download the scene itself or the metadata file which holds this information represents a valuable asset, since we can easily filter the data based on the naming convention itself. In the table \ref{table:landsat_table} below we represent what each part of a Landsat scene of the form \textbf{LXS PPPRRR YYYYDDD GSIVV} means.
+	\begin{table} [h!]
 		\center
 		\begin{tabularx}{480pt}{|X|X|}
 			\toprule
@@ -412,7 +412,7 @@
 	\end{figure}
 	
 	
-	\subsubsection{Normalized Snow Difference Index}
+	\subsection{Normalized Snow Difference Index}
 	\label{seq:ndsi_functional}
 	
 	\par The normalized snow difference index (NDSI) is an index which relates to the presence of snow/ice in a pixel. Snow and ice usually have a very low reflectance in the shortwave infrared spectrum and very high in the visible one, which is useful for mapping out most types of clouds from the scene \cite{ndsi}. We can therefore use the formula from Equation~\ref{eq:ndsi_formula} in order to highlight the snow and ice pixels from a Landsat 8 image.
@@ -421,93 +421,101 @@
 		NDSI = \frac{green - swir1}{green + swir1}
 	\end{equation}
 
-	\par We can then apply a threshold on the pixels which states that if the NDSI value for a pixel is larger than 0.0, then that pixel represents snow/ice covered land; similarly, if its value is smaller than 0.0, that pixel represents snow/ice free land \cite{ndsi}, \cite{viirs}, as represented in Equation~\ref{eq:ndsi_threshold}. Of course, this represents the general value for the threshold, but with the increase of its value, we can more accurately differentiate between snow and ice. With larger threshold values we can state that a pixel represents ice covered land rather than just snow fall land \cite{viirs}. We have tried different values for the threshold and came to the conclusion that a value of 0.3 is best suited for our needs.
+	\par We can then apply the thresholding function from Equation~\ref{eq:ndsi_threshold} in order to separate snow free land from covered one. We have tried different values for the threshold, as proposed by Hall and Riggs in \cite{Hall2001}, finding that 0.3 yields the best results.
 	
 	\begin{equation}
 		thresholding(pixel) = \left.
 		\begin{cases}\label{eq:ndsi_threshold}
-			
 			\text{snow/ice},  & NDSI \geq 0.3\\
 			\text{snow-free}, & NDSI < 0.3
 		\end{cases}
 		\right\}
 	\end{equation}
 
-	\par An example of a generated NDSI for the Jungfrau-Aletsch-Bietschhorn glacier (46.47735081308319, 8.056887228860798), scene LC81940282013341LGN01, can be viewed in Figure~\ref{fig:ndsi}.
+	\par For easier visual analysis, we have coloured the result such that pixels which are considered to represent snow are white, while snow free land is represented with green. The resulting NDSI image can be viewed in Figure~\ref{fig:ndsi}.
 	
 	\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{../images/LC81950282014271_ndsi.png}
-	\caption{NDSI image of scene LC81950282014271, Jungfrau-Aletsch-Bietschhorn glacier.}
-	\label{fig:ndsi}
+		\centering
+		\includegraphics[width=\columnwidth]{../images/LC81950282014271_ndsi.png}
+		\caption{NDSI image of scene LC81950282014271, Jungfrau-Aletsch-Bietschhorn glacier.}
+		\label{fig:ndsi}
 	\end{figure}
-
-	\par The image is colour coded in order to enhance the difference between pixels which are considered either snow or ice (white), and the rest of the terrain (green).
 
 	% ==================================================================================
 
 	\section{Alignment}
 	\label{seq:alignment_functional}
 	
-	\par Landsat's trajectory orbiting Earth is not fully precise, therefore not all images will be pixel-to-pixel aligned, which is a problem for image processing. Since we want to track each pixel's movement, we must be sure that its coordinates in the image do not change between any two given scenes. Figure~\ref{fig:unaligned} highlights the misalignment from scene between scenes LC81950282013316 and LC81950282013364, as an example.
+	\par Landsat’s trajectory orbiting Earth is not precise, therefore not all images will be
+	aligned pixel-to-pixel. The green and swir1 bands have a spacial resolution of 30 meters, therefore a misalignment of just 50 pixels
+	we would end up with a 1.5 km difference between two scenes. Tracking pixel motions through
+	a series of images without aligning them first would yield in erroneous results, due to inconsistent geographical coordinates. Figure~\ref{fig:alignment_example} highlights the misalignment between
+	scenes LC81950282013316 and LC81950282013364.
 	
-	\begin{figure}[h!]
-	\centering
-	\centering
-	\includegraphics[width=\linewidth]{../images/unaligned_LC81950282014271LGN01_and_LC819502820162245LGN01.png}
-	\caption{Overlapped unaligned green band of scene LC81950282014271LGN01 and reference LC819502820162245LGN01.}
-	\label{fig:scene_unaligned}	
-	\end{figure}
-
-	\par The green and swir1 bands have a spacial resolution of 30 meters, therefore a misalignment of just 50 pixels we would end up with a 1.5 km difference between two scenes. Tracking pixel motions through a series of images without aligning them first would yield in erroneous results, due to inconsistent geographical coordinates. Figure~\ref{fig:scene_unaligned} highlights the misalignment between scenes LC81950282013316 and LC81950282013364. We have used different approaches on alignment which will be described in Section~\ref{seq:alignment_implementation}. Figure~\ref{fig:scene_aligned} highlights the alignment corrected scene from Figure~\ref{fig:scene_unaligned}. 
-	
-	\begin{figure}[h!]
+	\begin{figure}
 		\centering
-		\includegraphics[width=\linewidth]{../images/aligned_LC81950282014271LGN01_and_LC81950282016245LGN01.png}
-		\caption{Overlapped aligned green band of scene LC81950282014271LGN01 and reference LC819502820162245LGN01.}
-		\label{fig:scene_aligned}
+		\begin{minipage}[0.2]{\columnwidth}
+			\centering
+			\includegraphics[width=\columnwidth]{../images/LC81940282013213LGN01_LC81940282015219LGN01_unaligned.png}
+		\end{minipage}
+		\begin{minipage}[0.2]{\columnwidth}
+			\centering
+			\includegraphics[width=\columnwidth]{../images/LC81940282014216LGN01_LC81940282015219LGN01_aligned.png}
+		\end{minipage}
+		\caption{Overlapped unaligned (top) and aligned (bottom) NDSI scenes LC81940282014216LGN01 and LC81940282013213LGN01.}
+		\label{fig:alignment_example}
 	\end{figure}
 
-	\par In order to solve this problem, we have used an algorithm which \textbf{collects features} from each band of a scene and tries to match them with a given reference one's features. The obtained \textbf{matches} can be then used to create an \textbf{affine transformation matrix} which specifies by how much did the current image \textbf{rotated and translated} in comparison to its reference. The affine transformation matrix will be then applied to the current image by a \textbf{warping} algorithm with the goal of ensuring as much as possible that there is no misalignment between any pixel of two different images from the same time series. Section~\ref{seq:alignment_algorithm} describes more technically how we built this and what were the computer vision algorithms used for that matter. 
+	\par In order to solve this problem, we have used an algorithm which \textbf{collects features} from each band of a scene and tries to match them with a given reference one's features. The obtained \textbf{matches} can be then used to create an \textbf{affine transformation matrix} which specifies by how much did the current image \textbf{rotated and translated} in comparison to its reference. The affine transformation matrix will be then applied to the current image by a \textbf{warping} algorithm with the goal of ensuring as much as possible that there is no misalignment between any pixel of two different images from the same time series. Section~\ref{seq:alignment_algorithm} describes in a technical manner the approaches used to solve this and what were the computer vision algorithms used for that matter. 
 
-	\subsubsection{NDSI's Optical Flow}
+	\subsection{Movement extraction through optical flow}
 	\label{seq:ndsi_motion_matrix}
 	
-	\par Since our dataset represents a \textbf{time series of satellite images}, as described in Section~\ref{seq:landsat8_section}, we thought that in order to generate a new image of this series, we could extract the \textbf{motion of each pixel} from one scene to another. This information could then be applied between any two consecutive (date-wise) scenes from the set and we could update a pixel's coordinates based on the value its motion vector and store it in a new image.
+	\par Since our dataset can be viewed as a time series of satellite images, we propose that in order to generate a new image of this series, we should \textbf{track the motion} of each pixel from one frame to another.
 	
-	\par Extracting the motion vectors between two consecutive frames can be achieved by calculating their optical flow. \textbf{Optical flow} is defined as the motion of objects between consecutive frames of sequence, produced by the relative movement between the object and camera. By using computer vision algorithms which calculate the optical flow of two scenes, we could track the motion of melting glaciers across them in order to estimate their current velocity and possibly \textbf{predict their position} in the next frames \cite{opticalflow}.
+	\par Extracting the motion vectors between two consecutive frames can be achieved by
+	calculating their optical flow. Optical flow is defined as the motion of objects between
+	consecutive frames of a series, produced by the relative movement between the object
+	and camera. By using computer vision algorithms which calculate the optical flow of two
+	scenes, we could track the changes in glacier retreat across a time series dataset such that we can estimate
+	their current velocity and predict their position in the next frames.
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=0.6]{../images/optical_flow_schema.png}
-		\caption{Optical flow problem visualisation.}
+		\includegraphics[width=\columnwidth]{../images/optical_flow_schema.png}
+		\caption{Optical flow between NDSI(\(time=t\)) and NDSI(\(time=t+dt\)).}
+		\label{fig:optical_flow_schema}
+	\end{figure}
+	
+	\par Figure~\ref{fig:optical_flow_schema} emphasizes the problem visually, where we can express an image as a
+	function of space, with the coordinates \((x, y)\), and time \(t\). If we take the first image
+	to be \(I(x, y, t)\) and we move its pixels by a distance of \((dx, dy)\) over a timestamp \((dt)\), we obtain
+	the new image as follows: \(I(x + dx, y + dy, t + dt)\).
+	
+	\par There are multiple types of optical flow generation algorithms, but for the purpose of our thesis,
+	we have chosen a \textbf{dense optical flow} algorithm proposed by Farneb{\"a}ck in \cite{GUNNAR2003}. Even
+	if dense implementations have a higher cost, we chose to make this trade mainly because it
+	calculates the motion for each pixel of the frame while also having a higher accuracy compared to sparse methods such as in the one proposed by Lucas and Kanade in \cite{KANADE1981}.
+	
+	\par The generated results will be the computed motions for each pixel, treated as a pair representing the distance and direction that its coordinates moved from one frame to another. As referring to Figure~\ref{fig:optical_flow_schema}, each item from the result represents the motion distance vector (\(dx, dy\)) as calculated between NDSI(\(time=t\)) and NDSI(\(time=t+dt\)). As an example, the generated optical flow vectors for scene LC81940282015363LGN02 can be seen in Figure~\ref{fig:optical_flow_example}. In order not to visually flood the image with vectors for each pixel, they are dawn from 30 to 30 pixels (900 to 900 meters).
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\columnwidth]{../images/LC81940282015363LGN02_NDSI_vectros_small.png}
+		\caption{Overlayed motion vectors generated by optical flow for scene LC81940282015363LGN02.}
 		\label{fig:optical_flow_example}
 	\end{figure}
-	
-	\par Figure~\ref{fig:optical_flow_example} emphasizes the problem visually, where we can express an image as a \textbf{function of space}, with the coordinates \textbf{\((x, y)\)}, and \textbf{time} \textbf{\(t\)}. If we take the first image\textbf{ \(I(x, y, t)\)} and we move its pixels by a distance of \textbf{\(dx, dy\)} over a timestamp \textbf{\(dt\)}, we obtain the new image as follows: \textbf{\(I(x + dx, y + dy, t + dt)\)} \cite{orb}.
-	
-	\par There are multiple types of optical flow algorithms, but for the purpose of our thesis, we have chosen the \textbf{dense optical flow} one, specifically \textbf{Gunnar Farneback's}. Even if dense implementations have higher cost we chose to make this trade mainly because it calculates the motion for each pixel of the frame and it also has a higher accuracy \cite{orb} compared to methods such as Lucas-Kanade (sparse) \cite{lukas}.
-	
-	\par We have used optical flow as a tool to generate \textbf{distance vectors} based on motion between the NDSI(\(time=t\)) and NDSI(\(time=t + dt\)), as it can be seen in Figure~\ref{fig:optical_flow}. These vectors will be used in order to create the \textbf{motion predicted NDSI}. 
-	
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.32]{../images/LC81940282015363LGN02_NDSI_vectros_small.png}
-		\caption{Optical flow overlayed motion vectors.}
-		\label{fig:optical_flow}
-	\end{figure}
 
-	\subsubsection{Motion Predicted NDSI}
+	\subsection{Generating predicted images based on motion}
 	\label{seq:motion_ndsi_functional}
 	
-	\par Whilst optical flow allows us to see movement of the ice front which already happened in the past, we wanted to use this information and apply it on the most recent images such that we can estimate further glacier movements.
-
-	\par We obtain the motion predicted generated NDSI by relocating each pixel value from the NDSI(\(time=t + dt\)) to a \textbf{predicted location}. For now, this location is generated by adding the distance vectors obtained by optical flow as described in Section~\ref{seq:motion_ndsi_implementation} to the pixels of the same image, therefore shifting them by twice as much as they originally did, in their respective directions, as it can be observed in Figure~\ref{fig:motion_generated_schema}. More methods of calculating the predicted location can be found in Section~\ref{seq:future_development}.
+	\par Optical flow allows us to detect movement of the ice front, therefore we propose to generate NDSI images whose pixels will be predicted based on the past extracted motions for a frame. We can obtain the motion predicted NDSI image by relocating each pixel value from
+	the NDSI(\(time=t+dt\)) to a location (\(x + 2*dx, y + 2*dy\)), thus generating the new image NDSI(\(time=t+dt\)) as described in Figure~\ref{fig:motion_generated_schema}, \(I(x + 2*dx, y + 2*dy, t + 2*dt)\). More methods of calculating the predicted location can be found in Section~\ref{seq:future_development}.
 	
-	\begin{figure}[h!]
+	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=0.5]{../images/motion_generated_schema.png}
-		\caption{Motion generated NDSI algorithm.}
+		\includegraphics[scale = 0.5]{../images/motion_generated_schema.png}
+		\caption{Overlayed motion vectors generated by optical flow for scene LC81940282015363LGN02.}
 		\label{fig:motion_generated_schema}
 	\end{figure}
 
@@ -520,7 +528,7 @@
 	\label{fig:motion_predicted_image}
 	\end{figure}
 
-	In order to better visualise the differences between the two images, they have been overlapped and colourized such that orange areas of snow that are predicted to melt, while blue represents areas which are predicted to develop snow build up.
+	In order to better visualise the differences between the two images, they have been overlapped and colourized such that orange areas of snow that are predicted to melt, while blue represents areas which are considered to develop snow build up.
 	
 	\begin{figure}[h!]
 		\centering
@@ -529,18 +537,18 @@
 		\label{fig:overlapped_motion_predicted_image}
 	\end{figure}
 
-
+	\vfill
 	% =========================================================================	
-	\newpage{}
-	\section{User Interface}
+
+	\chapter{User Interface}
 	\label{seq:gui}
 	
-	\subsection{Search and Download}
+	\section{Search and Download}
 	\label{subsec:search_download}
 	
-	\par Since the search and download part of the application can be viewed as a plug-in mechanism which only start to query the Landsat archive , we have opted to keep its interface in the form of a command line one only. The user simply has to run the command showed Listing~\ref{lst:downloadcommand} in order to find out detailed descriptions of which are the available options for search and download, which will output the result in Listing~\ref{lst:downloadhelp}.
+	\par Since the search and download part of the application can be viewed as a plug-in mechanism which only starts to query the Landsat archive , we have opted to keep its interface in the form of a command line one only. The user simply has to run the command showed Listing~\ref{lst:downloadcommand} in order to find out detailed descriptions of which are the available options for search and download, which will output the result in Listing~\ref{lst:downloadhelp}.
 	
-	\begin{lstlisting}[caption={Command for sarch and download details},label={lst:downloadcommand},language=Bash]
+	\begin{lstlisting}[caption={Help command for sarch and download.},label={lst:downloadcommand},language=Bash]
 		% bash -x run_download.sh --help
 	\end{lstlisting}
 	
@@ -558,14 +566,35 @@
 		-d D, --download-directory D
 		Path to the output folder which will contain theprocessed results.
 		-j J, --jobs J        Number of threads which will search and download.
-		
-		real	0m0.850s
-		user	0m0.797s
-		sys	0m0.047s
 	\end{lstlisting}
+
+	\section{Processing}
 	
-	\subsection{Processing}
-	\label{ssubsec:processing_gui}
+	\par Our thesis focuses on computer vision, therefore we wanted to make sure that we are providing a tool which supports easy image visualisation, as well as an easy way to process. A graphical user interface which focuses on providing easy access to the glaciers dataset, equipped with a screen to easily visualise the images in different stages of processing proves to be the best approach for our purpose. Figure~\ref{fig:gui} represents the main use case scenario for using the interface, while also snowing snippets of NDSI images as well as generated ones and their snow coverage graphs.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\columnwidth]{../images/GUI.png}
+		\caption{Graphical user interface for the processing part of the application.}
+		\label{fig:gui}
+	\end{figure}
+
+	\begin{lstlisting}[caption={Help command for processing.},label={lst:processcommand},language=Bash]
+	% bash -x run_process.sh --help
+	\end{lstlisting}
+
+	In order to power up the application, we use the same approach as described in Section~\ref{subsec:search_download}, but running a different script with different parameters, described in Listing~\ref{lst:processcommand}. The only parameter necessary for starting the processing, as shown as an output to the command in Listing~\ref{lst:processhelp}, is the directory which holds the dataset which should have the same hierarchy as the one described in Figure~\ref{fig:DownloadDirectory}.
+
+	\begin{lstlisting}[caption={Detailed parameters required for the download script.},label={lst:processhelp},language=Bash]
+		+ export PYTHONPATH=./sat-search:./sat-stac
+		+ PYTHONPATH=./sat-search:./sat-stac
+		+ python3 gits/__main__.py process --help
+		usage: __main__.py process [-h] [--input INPUT]
+		
+		optional arguments:
+		-h, --help     show this help message and exit
+		--input INPUT  Path to the input folder which contains the dataset of glaciers.
+	\end{lstlisting}
 
 	% =========================================================================
 	\newpage{}
@@ -1017,10 +1046,7 @@
 	\par One of the main slow downs in developing and using the application was the slow time of processing due to the large data files. A machine which has a more powerful processing unit, as well as more available memory, would yield much faster results. This could be done by \textbf{migrating} the processing unit to \textbf{cloud} and hiring a machine with a CPU which has a high number of cores and better performance. One of the possible downsides would then be the amount of time needed for passing the large scene files through he network to the machine on cloud, which is easily dependable on the bandwidth. A solution to this downside would be passing the dataset before starting the processing and make sure that they are on the same machine. However, cloud storage can get very expensive and the trade off between processing time and expenses could prove too unbalanced.
 	
 	\par As for a final future development idea, migrating the codebase from Python to a compiled programming language, such as C or C++ would yield in much faster results.
-	
-	\newpage{}	
-	\bibliographystyle{alpha}
-	\bibliography{references}
+
 	
 	\newpage{}
 	\chapter{Glossary}
@@ -1045,9 +1071,15 @@
 			\hline
 			NASA & National Aeronautics and Space Administration \\ [0.2ex]
 			\hline
+			WRS-2 & Worldwide Reference System-2 \\ [0.2ex]
+			\hline
 		\end{tabular}
 		\caption{Acronyms table }
 		\label{table:acron}
 	\end{table}
+
+	\bibliographystyle{apalike}
+	\bibliography{references}
+
 	\end{document}
 

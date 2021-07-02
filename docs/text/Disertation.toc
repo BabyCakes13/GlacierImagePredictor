@@ -21,40 +21,40 @@
 \contentsline {subsection}{\numberline {2.2.1}Bands}{18}%
 \contentsline {subsubsection}{Band 3 - Green Band}{18}%
 \contentsline {subsubsection}{Band 6 - SWIR1 Band}{19}%
-\contentsline {subsubsection}{Normalized Snow Difference Index}{20}%
+\contentsline {subsection}{\numberline {2.2.2}Normalized Snow Difference Index}{20}%
 \contentsline {section}{\numberline {2.3}Alignment}{21}%
-\contentsline {subsubsection}{NDSI's Optical Flow}{23}%
-\contentsline {subsubsection}{Motion Predicted NDSI}{24}%
-\contentsline {section}{\numberline {2.4}User Interface}{26}%
-\contentsline {subsection}{\numberline {2.4.1}Search and Download}{26}%
-\contentsline {subsection}{\numberline {2.4.2}Processing}{28}%
-\contentsline {chapter}{\numberline {3}Design and Implementation}{29}%
-\contentsline {section}{\numberline {3.1}Search and Download}{29}%
-\contentsline {paragraph}{Data corruption verification}{30}%
-\contentsline {section}{\numberline {3.2}Processing}{31}%
-\contentsline {subsection}{\numberline {3.2.1}Alignment}{32}%
-\contentsline {subsubsection}{Alignment algorithms}{32}%
-\contentsline {subsection}{\numberline {3.2.2}Normalized Snow Difference Index}{34}%
-\contentsline {subsection}{\numberline {3.2.3}NDSI's Optical Flow}{35}%
-\contentsline {subsection}{\numberline {3.2.4}Motion Predicted NDSI}{36}%
-\contentsline {subsection}{\numberline {3.2.5}Generated image filtering}{40}%
-\contentsline {section}{\numberline {3.3}Extras}{41}%
-\contentsline {subsection}{\numberline {3.3.1}Programming environment}{41}%
-\contentsline {subsection}{\numberline {3.3.2}Programming language}{42}%
-\contentsline {subsection}{\numberline {3.3.3}Libraries}{43}%
-\contentsline {subsubsection}{NumPy}{43}%
-\contentsline {subsubsection}{Open Source Computer Vision Library (OpenCV)}{43}%
-\contentsline {subsubsection}{Geospatial Data Abstraction Library (GDAL)}{43}%
-\contentsline {subsubsection}{Version-control}{44}%
-\contentsline {chapter}{\numberline {4}Performance and experiments}{45}%
-\contentsline {section}{\numberline {4.1}Performance}{45}%
-\contentsline {section}{\numberline {4.2}Experiments}{46}%
-\contentsline {subsection}{\numberline {4.2.1}Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}{46}%
-\contentsline {subsection}{\numberline {4.2.2}Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}{47}%
-\contentsline {subsection}{\numberline {4.2.3}Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}{48}%
-\contentsline {subsection}{\numberline {4.2.4}Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}{49}%
-\contentsline {subsection}{\numberline {4.2.5}PARVATI (146, 38, 4)}{50}%
-\contentsline {chapter}{\numberline {5}Conclusions}{52}%
-\contentsline {section}{\numberline {5.1}Future Development}{52}%
-\contentsline {chapter}{\numberline {6}Glossary}{58}%
-\contentsline {section}{\numberline {6.1}Acronyms}{58}%
+\contentsline {subsection}{\numberline {2.3.1}Movement extraction through optical flow}{23}%
+\contentsline {subsection}{\numberline {2.3.2}Generating predicted images based on motion}{25}%
+\contentsline {chapter}{\numberline {3}User Interface}{27}%
+\contentsline {section}{\numberline {3.1}Search and Download}{27}%
+\contentsline {section}{\numberline {3.2}Processing}{28}%
+\contentsline {chapter}{\numberline {4}Design and Implementation}{30}%
+\contentsline {section}{\numberline {4.1}Search and Download}{30}%
+\contentsline {paragraph}{Data corruption verification}{31}%
+\contentsline {section}{\numberline {4.2}Processing}{32}%
+\contentsline {subsection}{\numberline {4.2.1}Alignment}{33}%
+\contentsline {subsubsection}{Alignment algorithms}{33}%
+\contentsline {subsection}{\numberline {4.2.2}Normalized Snow Difference Index}{35}%
+\contentsline {subsection}{\numberline {4.2.3}NDSI's Optical Flow}{36}%
+\contentsline {subsection}{\numberline {4.2.4}Motion Predicted NDSI}{37}%
+\contentsline {subsection}{\numberline {4.2.5}Generated image filtering}{41}%
+\contentsline {section}{\numberline {4.3}Extras}{42}%
+\contentsline {subsection}{\numberline {4.3.1}Programming environment}{42}%
+\contentsline {subsection}{\numberline {4.3.2}Programming language}{43}%
+\contentsline {subsection}{\numberline {4.3.3}Libraries}{44}%
+\contentsline {subsubsection}{NumPy}{44}%
+\contentsline {subsubsection}{Open Source Computer Vision Library (OpenCV)}{44}%
+\contentsline {subsubsection}{Geospatial Data Abstraction Library (GDAL)}{44}%
+\contentsline {subsubsection}{Version-control}{45}%
+\contentsline {chapter}{\numberline {5}Performance and experiments}{46}%
+\contentsline {section}{\numberline {5.1}Performance}{46}%
+\contentsline {section}{\numberline {5.2}Experiments}{47}%
+\contentsline {subsection}{\numberline {5.2.1}Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}{47}%
+\contentsline {subsection}{\numberline {5.2.2}Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}{48}%
+\contentsline {subsection}{\numberline {5.2.3}Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}{49}%
+\contentsline {subsection}{\numberline {5.2.4}Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}{50}%
+\contentsline {subsection}{\numberline {5.2.5}PARVATI (146, 38, 4)}{51}%
+\contentsline {chapter}{\numberline {6}Conclusions}{53}%
+\contentsline {section}{\numberline {6.1}Future Development}{53}%
+\contentsline {chapter}{\numberline {7}Glossary}{56}%
+\contentsline {section}{\numberline {7.1}Acronyms}{56}%
