@@ -700,7 +700,21 @@
 	the image into multiple boxes and applying the ORB algorithm on each separate
 	part of the image such that features are homogeneously distributed also improved valid match making. As a final optimisation, we set the maximum allowed shifting euclidean distance between any two
 	pixels to be at most 200, so 6km on the map, therefore getting rid of outlier matches
-	based on the distance.
+	based on the distance. The drawn matches between two images and a close up on the keypoints can be seen in Figure~\ref{fig:drawn_matches}.
+	
+	\begin{figure}
+		\centering
+		\begin{minipage}[0.2]{\columnwidth}
+			\centering
+			\includegraphics[width=\columnwidth]{../images/drawn_matches.png}
+		\end{minipage}
+		\begin{minipage}[0.2]{\columnwidth}
+			\centering
+			\includegraphics[width=\columnwidth]{../images/drawn_matches_small.png}
+		\end{minipage}
+		\caption{Drawn matches between scene LC81940282014216LGN01 and scene LC81940282013213LGN01 (top). Close up keypoints (bottom).}
+		\label{fig:drawn_matches}
+	\end{figure}
 	
 	\par The obtained matches can be then used to create an affine transformation matrix, generated through the \textbf{Random Sample Consensus (RANSAC)} algorithm, proposed by Fischler and Bolles in \cite{Fischler1981}. The affine transformation matrix describes the rotation and translation of the image to be aligned in comparison
 	to its reference and it is used for warping it such that no two pixels are misaligned.

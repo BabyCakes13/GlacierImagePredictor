@@ -24,23 +24,24 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Technical specifications of Download, GlacierFactory and Glacier classes.}}{33}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}}{35}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Technical diagram for the NDSI class.}}{36}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Technical diagram for the MotionVectors class.}}{37}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Hue representation of the optical flow.}}{38}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Optical flow colourized motion vectors.}}{38}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Technical diagram for the MotionPredictedNDSI class.}}{41}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Raw generated NDSI image, unfiltered.}}{42}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Zoomed in part of the predicted NDSI (left, top). Neighbourhood extracted (right, top). Kernel of weights (left, bottom). Generated value (right, bottom).}}{43}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Drawn matches between scene LC81940282014216LGN01 and scene LC81940282013213LGN01 (top). Close up keypoints (bottom).}}{36}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Technical diagram for the NDSI class.}}{37}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Technical diagram for the MotionVectors class.}}{38}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Hue representation of the optical flow.}}{39}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Optical flow colourized motion vectors.}}{39}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Technical diagram for the MotionPredictedNDSI class.}}{42}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Raw generated NDSI image, unfiltered.}}{43}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Zoomed in part of the predicted NDSI (left, top). Neighbourhood extracted (right, top). Kernel of weights (left, bottom). Generated value (right, bottom).}}{44}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Overlapped motion generated NDSI for scene LC81940282017112LGN00.}}{47}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 4), and the NDSI of each predicted motion image.}}{48}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Overlapped motion generated NDSI for scene LC81940282020201.}}{48}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}}{49}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Overlapped motion generated NDSI for scene LC81940282016238LGN01.}}{49}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}}{50}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Overlapped motion generated NDSI for scene LC81950282020256.}}{50}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(195, 28, 9), and the NDSI of each predicted motion image.}}{51}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Overlapped motion generated NDSI for scene LC81460382021091.}}{52}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Parvati(146, 38, 4), and the NDSI of each predicted motion image.}}{52}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Overlapped motion generated NDSI for scene LC81940282017112LGN00.}}{48}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 4), and the NDSI of each predicted motion image.}}{49}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Overlapped motion generated NDSI for scene LC81940282020201.}}{49}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}}{50}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Overlapped motion generated NDSI for scene LC81940282016238LGN01.}}{50}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(194, 28, 7), and the NDSI of each predicted motion image.}}{51}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Overlapped motion generated NDSI for scene LC81950282020256.}}{51}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Jungfrau-Aletsch-Bietschhorn(195, 28, 9), and the NDSI of each predicted motion image.}}{52}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Overlapped motion generated NDSI for scene LC81460382021091.}}{53}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Comparison between the NDSI values of the actual NDSI images for Parvati(146, 38, 4), and the NDSI of each predicted motion image.}}{53}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
