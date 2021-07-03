@@ -225,5 +225,8 @@ class MotionPredictedNDSIOverlay():
 
         return predicted_ndsi_colored
 
+    def raw_data(self) -> numpy.ndarray:
+        pass
+
     def snow_percentage(self):
         return self.__predicted_ndsi.snow_percentage()

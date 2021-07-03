@@ -29,6 +29,9 @@ class MotionVectorsArrows():
     def visual_data(self) -> numpy.ndarray:
         return self.__arrowed_optical_flow()
 
+    def raw_data(self) -> numpy.ndarray:
+        pass
+
     def __create_mask(self, image) -> numpy.ndarray:
         ret, threshold = cv2.threshold(image, 1, 0xFFFF, cv2.THRESH_BINARY_INV)
         return threshold
