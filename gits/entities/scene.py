@@ -46,7 +46,7 @@ class Scene(SceneInterface):
         ]
 
     def thumbnail(self):
-        return self._red_band
+        return self._true_color
 
     def __str__(self):
         return "Scene[{}]".format(self.scene_id().scene_id())

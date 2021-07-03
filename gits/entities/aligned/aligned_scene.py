@@ -6,6 +6,8 @@ import math
 from entities.image import Image
 from entities.interfaces.scene_interface import SceneInterface
 from entities.aligned.aligned_band import AlignedBand
+from entities.aligned.aligned_image import AlignedImage
+from entities.aligned.aligned_true_color import AlignedTrueColor
 from entities.motion_vectors import MotionVectors, MotionVectorsArrows
 from entities.ndsi import NDSI
 from entities.motion_predicted_ndsi import MotionPredictedNDSI, MotionPredictedNDSIOverlay
@@ -46,6 +48,9 @@ class AlignedScene(SceneInterface):
 
         self.__drawn_matches_image = DrawnMatchesImage(scene, reference_scene, self)
         self.__bands.append(self.__drawn_matches_image)
+
+        self.__true_color = AlignedTrueColor(scene.true_color(), reference_scene, self)
+        self.__bands.append(self.__true_color)
 
         if previous_scene is not None:
             self.__motion_vectors = MotionVectors(previous_scene.ndsi(), self.__ndsi)
@@ -154,7 +159,10 @@ class AlignedScene(SceneInterface):
         return self.__bands
 
     def thumbnail(self) -> AlignedBand:
-        return self.__ndsi
+        return self.true_color()
+
+    def true_color(self) -> AlignedImage:
+        return self.__true_color
 
     def ndsi(self) -> NDSI:
         return self.__ndsi

@@ -2,6 +2,7 @@
 import numpy
 import cv2
 import os
+import tifffile
 from entities.image import Image
 
 from utils import logging
@@ -39,12 +40,13 @@ class AlignedImage(Image):
         path = self.create_cached_path()
         if os.path.exists(path):
             logger.notice("Read cached file: " + path)
-            self.__aligned_ndarray = cv2.imread(path, cv2.IMREAD_ANYDEPTH)
+            self.__aligned_ndarray = tifffile.imread(path)
         else:
             self.__align()
-            self.__aligned_ndarray = self.__resize_aligned_to_reference()
+            if self.__aligned_ndarray.shape[2] < 3:
+                self.__aligned_ndarray = self.__resize_aligned_to_reference()
             logger.notice("Write cached file: " + path)
-            cv2.imwrite(path, self.__aligned_ndarray)
+            tifffile.imwrite(path, self.__aligned_ndarray)
 
         return self.__aligned_ndarray
 
@@ -58,7 +60,7 @@ class AlignedImage(Image):
         self.__warp_affine_transform_matrix(affine_matrix)
 
     def __warp_affine_transform_matrix(self, affine_transformation_matrix) -> None:
-        height, width = self.__image.raw_data().shape
+        height, width = self.__image.raw_data().shape[0:2]
         self.__aligned_ndarray = cv2.warpAffine(self.__image.raw_data(),
                                                 affine_transformation_matrix, (width, height))
 
