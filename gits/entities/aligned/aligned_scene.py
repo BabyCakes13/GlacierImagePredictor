@@ -3,12 +3,14 @@ import numpy
 import cv2
 import math
 
+from entities.image import Image
 from entities.interfaces.scene_interface import SceneInterface
 from entities.aligned.aligned_band import AlignedBand
 from entities.motion_vectors import MotionVectors, MotionVectorsArrows
 from entities.ndsi import NDSI
 from entities.motion_predicted_ndsi import MotionPredictedNDSI, MotionPredictedNDSIOverlay
 
+from utils.utils import debug_trace
 from utils import logging
 logger = logging.getLogger(__name__)
 
@@ -23,6 +25,7 @@ class AlignedScene(SceneInterface):
         self.__reference_scene = reference_scene
 
         self.__affine_transform_matrix = None
+        self.__matches = None
 
         self._red_band = AlignedBand(scene.red_band(), reference_scene, self)
         self._green_band = AlignedBand(scene.green_band(), reference_scene, self)
@@ -41,17 +44,23 @@ class AlignedScene(SceneInterface):
         self.__ndsi = NDSI(self._green_band, self._swir1_band)
         self.__bands.append(self.__ndsi)
 
+        self.__drawn_matches_image = DrawnMatchesImage(scene, reference_scene, self)
+        self.__bands.append(self.__drawn_matches_image)
+
         if previous_scene is not None:
             self.__motion_vectors = MotionVectors(previous_scene.ndsi(), self.__ndsi)
             self.__bands.append(self.__motion_vectors)
 
-            self.__motion_vectors_arrows = MotionVectorsArrows(self.__motion_vectors, previous_scene.ndsi(), self.__ndsi)
+            self.__motion_vectors_arrows = MotionVectorsArrows(self.__motion_vectors,
+                                                               previous_scene.ndsi(),
+                                                               self.__ndsi)
             self.__bands.append(self.__motion_vectors_arrows)
 
             self.__motion_predicted_ndsi = MotionPredictedNDSI(self.__motion_vectors, self.ndsi())
             self.__bands.append(self.__motion_predicted_ndsi)
 
-            self.__motion_predicted_overlay_ndsi = MotionPredictedNDSIOverlay(self.__motion_predicted_ndsi, self.ndsi())
+            self.__motion_predicted_overlay_ndsi = \
+                MotionPredictedNDSIOverlay(self.__motion_predicted_ndsi, self.ndsi())
             self.__bands.append(self.__motion_predicted_overlay_ndsi)
         else:
             self.__motion_vectors = None
@@ -145,10 +154,15 @@ class AlignedScene(SceneInterface):
         return self.__bands
 
     def thumbnail(self) -> AlignedBand:
-        return self.ndsi()
+        return self.__ndsi
 
     def ndsi(self) -> NDSI:
         return self.__ndsi
+
+    def matches(self):
+        if self.__matches is None:
+            self.affine_transform_matrix()
+        return self.__matches
 
     def motion_predicted_ndsi(self) -> NDSI:
         return self.__motion_predicted_ndsi
@@ -176,13 +190,44 @@ class AlignedScene(SceneInterface):
         self._nir_band = None
         self._swir1_band = None
 
+
+class DrawnMatchesImage(Image):
+
+    NAME = "Drawn Matches"
+
+    def __init__(self, scene, reference_scene, aligned_scene):
+        self.__reference_scene = reference_scene
+        self.__scene = scene
+        self.__aligned_scene = aligned_scene
+
+    def name(self):
+        return self.NAME
+
+    def scene_name(self):
+        return self.__scene.scene_id().scene_id()
+
+    def raw_data(self):
+        pass
+
+    def clear(self):
+        pass
+
+    def visual_data(self):
+        return self.__matches_from_reference_to_image()
+
     def __matches_from_reference_to_image(self):
-        drawn_matches_image = cv2.drawMatches(self.__reference_scene.normalized_downsampled_ndarray(),
+        reference_green_band_8bit = (self.__reference_scene.green_band().visual_data() >> 8).astype(numpy.uint8)
+        green_band_8bit = (self.__scene.green_band().visual_data() >> 8).astype(numpy.uint8)
+
+        drawn_matches_image = cv2.drawMatches(reference_green_band_8bit,
                                               self.__reference_scene.keypoints(),
-                                              self.__image.normalized_downsampled_ndarray(),
-                                              self.__image.keypoints(),
-                                              self.__matches,
+                                              green_band_8bit,
+                                              self.__scene.keypoints(),
+                                              self.__aligned_scene.matches(),
                                               None, matchColor=(0, 255, 255),
                                               singlePointColor=(100, 0, 0),
                                               flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+
+        debug_trace()
+
         return drawn_matches_image

@@ -544,7 +544,7 @@
 	\label{seq:gui}
 	
 	\section{Search and Download}
-	\label{subsec:search_download}
+	\label{sec:search_download}
 	
 	\par Since the search and download part of the application can be viewed as a plug-in mechanism which only starts to query the Landsat archive , we have opted to keep its interface in the form of a command line one only. The user simply has to run the command showed Listing~\ref{lst:downloadcommand} in order to find out detailed descriptions of which are the available options for search and download, which will output the result in Listing~\ref{lst:downloadhelp}.
 	
@@ -578,6 +578,7 @@
 	\end{figure}
 
 	\section{Processing}
+	\label{sec:processing_gui}
 	
 	\par Our thesis focuses on computer vision, therefore we wanted to make sure that we are providing a tool which supports easy image visualisation, as well as an easy way to process. A graphical user interface which focuses on providing easy access to the glaciers dataset, equipped with a screen to easily visualise the images in different stages of processing proves to be the best approach for our purpose. Figure~\ref{fig:gui} represents the main use case scenario for using the interface, while also snowing snippets of NDSI images as well as generated ones and their snow coverage graphs.
 	
@@ -619,22 +620,29 @@
 	\chapter{Design and Implementation}
 	\label{cha:design_and_implementation}
 	
-	\par The design of the application will be discussed while focusing on two different aspects:
+	\par The application design can be discussed by splitting the topics in:
 	
 	\begin{itemize}
 		\item \textbf{search and download}
 		\item \textbf{processing}
+		\begin{itemize}
+			\item Normalised Snow Difference Index;
+			\item Alignment;
+			\item Motion extraction through optical flow;
+			\item Motion generated NDSI;
+			\item Generated NDSI filtering.
+		\end{itemize}
 	\end{itemize}
 
-	\par The first section is optional and can be run independently from the processing, since the user can have an already created database of images. However, we have focused on simplifying the process of satellite imagery downloading as described in \ref{seq:STAC} through using the sat-search library as a helper for searching and downloading assets. More information on querying can be found in \ref{seq:sd_implementation}. 
-	Given an existing set of data, the next step is to pass the root folder which contains the glacier directories to the processing unit, also designed as a plug-in mechanism which will trigger the graphical user interface to pop up and allow for the processing options to appear. More information on this section can be found at \ref{seq:processing}. From there, one can start processing by simply making use of the predefined buttons described in \ref{seq:gui}.
+	\par The first section is optional and can be run independently from the processing, since the user can have an already created database of images. However, we have focused on simplifying the process of satellite imagery downloading as described in Section~\ref{seq:STAC} through using the sat-search library as a helper for searching and downloading assets. More information on querying can be found in Section~\ref{seq:sd_implementation}. 
+	Given an existing set of data, the next step is to pass the root folder which contains the glacier directories to the processing unit, also designed as a plug-in mechanism which will trigger the graphical user interface to pop up and allow for the processing options to appear. More information on this section can be found at Section~\ref{sec:processing_gui}. From there, one can start processing by simply making use of the predefined buttons described in Section~\ref{seq:gui}.
 	
 	% =========================================================================
 		
 	\section{Search and Download}
 	\label{seq:sd_implementation}
 		
-	\par Searching as well as downloading have been implemented on top of the sat-search library and it is used directly from the command line interface by running the script described in Section~\ref{seq:search_download}.
+	\par Searching as well as downloading have been implemented on top of the sat-search library and it is used directly from the command line interface by running the script described in Section~\ref{sec:search_download}.
 	
 	\par As an input we will be using a CSV file which will have the form as described in Section~\ref{seq:wgi}. Mainly we will need just four attributes to be specified for each desired glacier in order to create a query for searching, as follows: \textit{wgi\_glacier\_id, glacier\_name, lat and lon}.
 	
@@ -650,29 +658,20 @@
 	
 	\par The technical specifications of the Download, GlacierFactory and Glacier classes can be found in Figure~\ref{fig:sd_diagram}.
 	
-	\begin{figure}[h]
+	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.23]{../images/sd_diagram.png}
 		\caption{Technical specifications of Download, GlacierFactory and Glacier classes.}
 		\label{fig:sd_diagram}
 	\end{figure}
 
-	\paragraph{Data corruption verification}
+	\subsection{Data corruption verification}
 	Both the searching and downloading functions are executed concurrently, since they are \textbf{time intensive} tasks. Each band has around 60 MB, which would make one scene approximately 360 MB. For the Belvedere glaciers, we found 78 scenes with a cloud coverage of 10\%. This means that the size of the entire glacier data will be around 28 GB. Given that one asset's size is quite large, it takes a lot of time to finish the download. In this time, even a small connection interruption might result in corrupted data files, which would interfere with processing. Therefore, we implemented an \textbf{extra security measure} in the sat-stac library which verifies whether a file with the same name already exists at the download location. If it does, its size will be compared to the size taken from the STAC-API servers. In case the two file sizes don't match, it means that the file got corrupted during download and it will be downloaded again. If the sizes match, the downloader will skip the file and continue when it finds one requested file which was not yet found on the disk, such that we do not end up unnecessarily overwriting the already existing files in case of failure.
 	
 	% =========================================================================
 
 	\section{Processing}
 	\label{seq:processing}
-	
-	\par Processing can be viewed as four different entities, as following:
-	
-	\begin{itemize}
-		\item Image alignment;
-		\item Normalized snow difference index;
-		\item NDSI's motion matrix;
-		\item Motion generated NDSI.
-	\end{itemize}
 
 	\par Before generating any images, we first need to make sure that the pixels between any two scenes are not misaligned. The details of the alignment process are described in Section~\ref{seq:alignment_implementation}. After we ensure that out images are fit, we move on to creating the normalized snow difference index image in order to enhance the ice through a set threshold (see Section~\ref{seq:ndsi_implementation}). We then create the matrix of pixel motions calculated between two consecutive (date-wise) scenes, process described in Section~\ref{seq:motion_matrix_implementation}. Based on the information of where each pixel has moved between two consecutive images, we can then create our future NDSI image by applying the motion vectors on each pixel from a scene. More details on the design and implementation of this part can be found in Section~\ref{seq:motion_ndsi_implementation}.
 	The normalized snow difference index image will be computed for each scene as described in Section~\ref{seq:ndsi_functional}.
@@ -690,18 +689,21 @@
 		\caption{Technical diagram for the SceneInterface, AlignedScene, AlignedBand and Image classes.}
 		\label{fig:alignment_diagram}
 	\end{figure}
-
-	\subsubsection{Alignment algorithms}
-	\label{seq:alignment_algorithm}
 	
 	\par As we have seen in Section~\ref{seq:landsat8_section}, the Landsat 8 satellite does not have a perfect trajectory, which results into misaligned images. We have solved this problem by using a strong \textbf{keypoint detection algorithm} which in our case detects edges formed by mountains and other geographical features present in the scenes. The \textbf{computer vision algorithms} used for this are \textbf{ORB (Oriented FAST and Rotated BRIEF)}, \textbf{Harris Corner Detector} and \textbf{RANSAC (Random Sample Consensus)} and they are applied on the raw 16bit grayscale image.
 	
-	\par \textbf{ORB} represents a fusion between the features extracted by using the fast accelerated segment test (\textbf{FAST}) keypoint detector combined with the binary robust independent elementary features (\textbf{BRIEF}) descriptor. The FAST detector finds keypoints in the image and uses Harris corner measure to select the a number of top points from the list (25\%, in our case) \cite{orb}. In order to use the detector we must first normalize and downsample the 16bit raw image to 8 bit, as it is required by ORB. Each keypoint is then represented by a circle of 16 pixels. The descriptors must then identify these keypoints and pair with each other.
-	We compute for each scene its \textbf{keypoints and descriptors} taken from \textbf{each band}, in order to increase the precision of alignment later on. Also, since we are working with satellite imagery there might be cases when the algorithm only finds keypoints in a small part of the image, resulting in erroneous distortion. \textbf{Splitting} the image into multiple boxes and applying the orb detect algorithm on each separate part of the image proved to solve this problem and create much better results. 
+	\par \textbf{ORB} represents a fusion between the features extracted by using the fast accelerated
+	segment test (FAST) keypoint detector combined with the binary robust independent
+	elementary features (BRIEF) descriptor. The FAST detector finds keypoints in the
+	image and uses Harris corner measure to select a number of top points from the
+	generated list. We have found that keeping the top 25\% matches extracted from 5000 keypoints yielded the best results. Splitting
+	the image into multiple boxes and applying the ORB algorithm on each separate
+	part of the image such that features are homogeneously distributed also improved valid match making. As a final optimisation, we set the maximum allowed shifting euclidean distance between any two
+	pixels to be at most 200, so 6km on the map, therefore getting rid of outlier matches
+	based on the distance.
 	
-	\par After ensuring that we have good enough keypoints we will be aligning each scene with its reference by simply comparing the keypoint-descriptor pairs between the two scenes and checking which are equal. If two pairs are found to be equal, it means that the algorithm has found the same feature in both images and can calculate by how much it \textbf{rotated and shifted}. However, not all of these matches represent good results in our case, since the trajectory Landsat 8 can vary. We have found that selecting only \textbf{5000 keypoints} in the \textbf{top 25\% matches} from the total yielded in the better results overall. We then set the \textbf{maximum allowed shifting euclidean distance} between any two pixels to be at most 200, so 6km on the map, therefore getting rid of outlier matches based on the distance.
-	
-	\par The \textbf{matches} from the reference and image to be aligned will be used alongside the \textbf{Random Sample Consensus (RANSAC)} algorithm in order to create the \textbf{affine transformation matrix} using the cv2 library. RANSAC, proposed by Fischler and Bolles, is a general parameter estimation approach designed to handle a large proportion of outliers in the input data \cite{Fischler1981}. After we have the transformation matrix, we can \textbf{warp} it on the image to be aligned in order to get the result. 
+	\par The obtained matches can be then used to create an affine transformation matrix, generated through the \textbf{Random Sample Consensus (RANSAC)} algorithm, proposed by Fischler and Bolles in \cite{Fischler1981}. The affine transformation matrix describes the rotation and translation of the image to be aligned in comparison
+	to its reference and it is used for warping it such that no two pixels are misaligned.
 	%========================================================================================
 	
 	\subsection{Normalized Snow Difference Index}
@@ -719,7 +721,8 @@
 
 	%========================================================================================
 
-	\subsection{NDSI's Optical Flow}
+	\subsection{Motion extraction through optical flow}
+	\label{motion_ndsi_implementation}
 	
 	\begin{figure}[h!]
 		\centering
@@ -757,7 +760,7 @@
 	
 	%========================================================================================
 
-	\subsection{Motion Predicted NDSI}
+	\subsection{Motion generated NDSI}
 	\label{seq:motion_ndsi_implementation}
 	
 	\par As means to put in practice what we described in Section~\ref{seq:motion_ndsi_functional}, we start by initialising a new numpy n-dimensional array based of the \textbf{shape} of the image \textbf{NDSI(\(time=t+dt\))}. The new array will be filled with the data generated by using the two required entities:

@@ -15,7 +15,6 @@ class AlignedImage(Image):
         numpy.set_printoptions(suppress=True, precision=5)
 
         self.__image = image
-        self.__matches = None
         self.__aligned_ndarray = None
         self.__this_scene = this_scene
         self.__reference_scene = reference_scene
