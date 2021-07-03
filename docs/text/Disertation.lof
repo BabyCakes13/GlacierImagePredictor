@@ -29,8 +29,8 @@
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Technical diagram for the MotionVectors class.}}{38}%
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Hue representation of the optical flow.}}{39}%
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Optical flow colourized motion vectors.}}{39}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Technical diagram for the MotionPredictedNDSI class.}}{42}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Raw generated NDSI image, unfiltered.}}{43}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Raw generated NDSI image, unfiltered, zoomed in for a clear view.}}{42}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Technical diagram for the classes involved in generating the motion extracted images.}}{43}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Zoomed in part of the predicted NDSI (left, top). Neighbourhood extracted (right, top). Kernel of weights (left, bottom). Generated value (right, bottom).}}{44}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Overlapped motion generated NDSI for scene LC81940282017112LGN00.}}{48}%

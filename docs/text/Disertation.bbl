@@ -1,10 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[bd, ]{bd}
-bd.
-\newblock \url{https://landsat.gsfc.nasa.gov/landsat-8/landsat-8-bands/}.
-\newblock Accessed: 2021-06-22.
-
 \bibitem[cud, ]{cuda}
 Cuda.
 
@@ -17,13 +12,20 @@ Different band combinations of landsat.
 Gdal.
 \newblock https://gdal.org/.
 
-\bibitem[git, ]{git}
-git.
+\bibitem[bd, ]{bd}
+Landsat 8 bands specifications.
+\newblock \url{https://landsat.gsfc.nasa.gov/landsat-8/landsat-8-bands/}.
+\newblock Accessed: 2021-06-22.
 
 \bibitem[lc1, ]{lc1l1}
 Landsat collection 1 product definition.
 \newblock
   \url{https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1656_%20Landsat_Collection1_L1_Product_Definition-v2.pdf}.
+\newblock Accessed: 2021-06-22.
+
+\bibitem[sn, ]{sn}
+Landsat file naming convention.
+\newblock \url{https://gisgeography.com/landsat-file-naming-convention/}.
 \newblock Accessed: 2021-06-22.
 
 \bibitem[LAN, a]{LANDSAT}
@@ -48,23 +50,13 @@ ndsi.
   \url{https://nsidc.org/support/faq/what-ndsi-snow-cover-and-how-does-it-compare-fsc}.
 \newblock Accessed: 2021-06-22.
 
-\bibitem[orb, ]{orb}
-orb.
-\newblock \url{https://docs.opencv.org/4.5.2/d1/d89/tutorial_py_orb.html}.
-\newblock Accessed: 2021-06-24.
-
 \bibitem[LAN, b]{LANDSATPIC}
 Picture of the landsat satellite.
 \newblock \url{https://landsat.gsfc.nasa.gov/sites/landsat/files/2013/01}.
 \newblock Accessed: 2021-06-21.
 
-\bibitem[sn, ]{sn}
-sn.
-\newblock \url{https://gisgeography.com/landsat-file-naming-convention/}.
-\newblock Accessed: 2021-06-22.
-
 \bibitem[STA, ]{STAC}
-Stac.
+Stac api endpoint.
 \newblock \url{https://stacspec.org/STAC-api.html}.
 \newblock Accessed: 2021-06-20.
 
@@ -79,7 +71,7 @@ World glacier inventory.
 \newblock Accessed: 2021-06-20.
 
 \bibitem[wrs, ]{wrs}
-wrs.
+Worldwide reference system-2.
 \newblock
   \url{https://landsat.gsfc.nasa.gov/about/worldwide-reference-system/}.
 \newblock Accessed: 2021-06-22.
