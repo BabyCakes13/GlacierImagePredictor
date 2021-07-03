@@ -28,33 +28,33 @@
 \contentsline {chapter}{\numberline {3}User Interface}{27}%
 \contentsline {section}{\numberline {3.1}Search and Download}{27}%
 \contentsline {section}{\numberline {3.2}Processing}{28}%
-\contentsline {chapter}{\numberline {4}Design and Implementation}{30}%
-\contentsline {section}{\numberline {4.1}Search and Download}{30}%
-\contentsline {paragraph}{Data corruption verification}{31}%
-\contentsline {section}{\numberline {4.2}Processing}{32}%
-\contentsline {subsection}{\numberline {4.2.1}Alignment}{33}%
-\contentsline {subsubsection}{Alignment algorithms}{33}%
-\contentsline {subsection}{\numberline {4.2.2}Normalized Snow Difference Index}{35}%
-\contentsline {subsection}{\numberline {4.2.3}NDSI's Optical Flow}{36}%
-\contentsline {subsection}{\numberline {4.2.4}Motion Predicted NDSI}{37}%
-\contentsline {subsection}{\numberline {4.2.5}Generated image filtering}{41}%
-\contentsline {section}{\numberline {4.3}Extras}{42}%
-\contentsline {subsection}{\numberline {4.3.1}Programming environment}{42}%
-\contentsline {subsection}{\numberline {4.3.2}Programming language}{43}%
-\contentsline {subsection}{\numberline {4.3.3}Libraries}{44}%
-\contentsline {subsubsection}{NumPy}{44}%
-\contentsline {subsubsection}{Open Source Computer Vision Library (OpenCV)}{44}%
-\contentsline {subsubsection}{Geospatial Data Abstraction Library (GDAL)}{44}%
-\contentsline {subsubsection}{Version-control}{45}%
-\contentsline {chapter}{\numberline {5}Performance and experiments}{46}%
-\contentsline {section}{\numberline {5.1}Performance}{46}%
-\contentsline {section}{\numberline {5.2}Experiments}{47}%
-\contentsline {subsection}{\numberline {5.2.1}Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}{47}%
-\contentsline {subsection}{\numberline {5.2.2}Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}{48}%
-\contentsline {subsection}{\numberline {5.2.3}Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}{49}%
-\contentsline {subsection}{\numberline {5.2.4}Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}{50}%
-\contentsline {subsection}{\numberline {5.2.5}PARVATI (146, 38, 4)}{51}%
-\contentsline {chapter}{\numberline {6}Conclusions}{53}%
-\contentsline {section}{\numberline {6.1}Future Development}{53}%
-\contentsline {chapter}{\numberline {7}Glossary}{56}%
-\contentsline {section}{\numberline {7.1}Acronyms}{56}%
+\contentsline {chapter}{\numberline {4}Design and Implementation}{31}%
+\contentsline {section}{\numberline {4.1}Search and Download}{31}%
+\contentsline {paragraph}{Data corruption verification}{32}%
+\contentsline {section}{\numberline {4.2}Processing}{33}%
+\contentsline {subsection}{\numberline {4.2.1}Alignment}{34}%
+\contentsline {subsubsection}{Alignment algorithms}{34}%
+\contentsline {subsection}{\numberline {4.2.2}Normalized Snow Difference Index}{36}%
+\contentsline {subsection}{\numberline {4.2.3}NDSI's Optical Flow}{37}%
+\contentsline {subsection}{\numberline {4.2.4}Motion Predicted NDSI}{38}%
+\contentsline {subsection}{\numberline {4.2.5}Generated image filtering}{42}%
+\contentsline {section}{\numberline {4.3}Extras}{43}%
+\contentsline {subsection}{\numberline {4.3.1}Programming environment}{43}%
+\contentsline {subsection}{\numberline {4.3.2}Programming language}{44}%
+\contentsline {subsection}{\numberline {4.3.3}Libraries}{45}%
+\contentsline {subsubsection}{NumPy}{45}%
+\contentsline {subsubsection}{Open Source Computer Vision Library (OpenCV)}{45}%
+\contentsline {subsubsection}{Geospatial Data Abstraction Library (GDAL)}{45}%
+\contentsline {subsubsection}{Version-control}{46}%
+\contentsline {chapter}{\numberline {5}Performance and experiments}{47}%
+\contentsline {section}{\numberline {5.1}Performance}{47}%
+\contentsline {section}{\numberline {5.2}Experiments}{48}%
+\contentsline {subsection}{\numberline {5.2.1}Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}{48}%
+\contentsline {subsection}{\numberline {5.2.2}Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}{49}%
+\contentsline {subsection}{\numberline {5.2.3}Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}{50}%
+\contentsline {subsection}{\numberline {5.2.4}Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}{51}%
+\contentsline {subsection}{\numberline {5.2.5}PARVATI (146, 38, 4)}{52}%
+\contentsline {chapter}{\numberline {6}Conclusions}{54}%
+\contentsline {section}{\numberline {6.1}Future Development}{54}%
+\contentsline {chapter}{\numberline {7}Glossary}{57}%
+\contentsline {section}{\numberline {7.1}Acronyms}{57}%

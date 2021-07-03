@@ -568,11 +568,20 @@
 		-j J, --jobs J        Number of threads which will search and download.
 	\end{lstlisting}
 
+	When starting the scrip with the desired parameters, the process will query for assets and start downloading them, as shown in Figure~\ref{fig:download_cmd}.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\columnwidth]{../images/download_cmd.png}
+		\caption{Command line interface for the search and download part of the application.}
+		\label{fig:download_cmd}
+	\end{figure}
+
 	\section{Processing}
 	
 	\par Our thesis focuses on computer vision, therefore we wanted to make sure that we are providing a tool which supports easy image visualisation, as well as an easy way to process. A graphical user interface which focuses on providing easy access to the glaciers dataset, equipped with a screen to easily visualise the images in different stages of processing proves to be the best approach for our purpose. Figure~\ref{fig:gui} represents the main use case scenario for using the interface, while also snowing snippets of NDSI images as well as generated ones and their snow coverage graphs.
 	
-	\begin{figure}[h]
+	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\columnwidth]{../images/GUI.png}
 		\caption{Graphical user interface for the processing part of the application.}
@@ -595,6 +604,15 @@
 		-h, --help     show this help message and exit
 		--input INPUT  Path to the input folder which contains the dataset of glaciers.
 	\end{lstlisting}
+
+	For more detailed information, the command line interface can still be used for various activity updates, processing time and possible errors, as shown in Figure~\ref{fig:process_cmd}.
+
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\columnwidth]{../images/process_cmd.png}
+	\caption{Command line interface for the processing part of the application.}
+	\label{fig:process_cmd}
+	\end{figure}
 
 	% =========================================================================
 	\newpage{}
