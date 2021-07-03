@@ -5,7 +5,6 @@ from entities.scene import Scene
 from entities.glacier import Glacier
 
 import os
-import operator
 from utils import logging
 logger = logging.getLogger(__name__)
 
@@ -43,9 +42,9 @@ class RoiCrawler(Crawler):
         allscenes.sort(key=lambda x: x.scene_id().scene_id())
 
         for scene in allscenes:
-            print("Scene {} month {} year {}".format(scene.scene_id().scene_id(),
-                                                     scene.scene_id().month(),
-                                                     scene.scene_id().year()))
+            logger.info("Scene {} month {} year {}".format(scene.scene_id().scene_id(),
+                                                           scene.scene_id().month(),
+                                                           scene.scene_id().year()))
 
         clustered_scenes = self.__cluster_scenes(allscenes)
 
@@ -64,17 +63,14 @@ class RoiCrawler(Crawler):
             monthlist.append((scene.scene_id().month(), scene))
 
         monthlist.sort(key=lambda x: x[0])
-        print("Monthlist ", monthlist)
 
         shifted = monthlist[1:]
         shifted.append(monthlist[0])
-        print("shifted   ", shifted)
 
         gaps = list(map(lambda x, y: x[0]-y[0], shifted, monthlist))
         for i, gap in enumerate(gaps):
             if gap < 0:
                 gaps[i] = gap + 12
-        print("gaps      ", gaps)
 
         groups = [[]]
         activegroup = 0
@@ -87,15 +83,8 @@ class RoiCrawler(Crawler):
         if len(groups[-1]) == 0:
             groups.pop(-1)
 
-        # if gaps[-1] <= 1:
-        #     groups[-1].extend(groups[0])
-        #     if(len(groups) > 1):
-        #         groups.pop(0)
-
         for group in groups:
-            group.sort(key=lambda x:x[1].scene_id().scene_id())
-
-        print("grouped  ", groups)
+            group.sort(key=lambda x: x[1].scene_id().scene_id())
 
         return groups
 
@@ -131,8 +120,6 @@ class RoiCrawler(Crawler):
         :param roi: Region of interest to be searched in the list of all  roi's and added.
         :return: A region of interest.
         """
-        # TODO The logic here can be implemented better. Should not return a roi in a function
-        # which is adding one to a list. Or should I?
 
         alread_existing_roi = self.__roi_exists(roi)
         if alread_existing_roi is None:

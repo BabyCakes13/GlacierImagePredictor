@@ -9,7 +9,6 @@ from multiprocessing import shared_memory
 from entities.ndsi import NDSI
 from entities.motion_vectors import MotionVectors
 from utils import logging
-from utils.utils import progress
 logger = logging.getLogger(__name__)
 
 
@@ -69,7 +68,7 @@ class MotionPredictedNDSI(NDSI):
     def raw_data(self) -> numpy.ndarray:
         if self.__image is None:
             path = self.__previous_image.create_band_path(suffix="_PREDICTED_CACHED")
-            print(path)
+            logger.info(path)
 
             if os.path.exists(path):
                 logger.notice("Read cached file: " + path)
@@ -86,7 +85,6 @@ class MotionPredictedNDSI(NDSI):
         self.__generate_image_based_on_movement()
         self.__mask_image()
         self.__filter_by_average()
-
 
     def __initialise_image(self) -> None:
         previous_image = self.__previous_image.raw_data()

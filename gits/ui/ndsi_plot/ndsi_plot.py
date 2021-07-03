@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
-from matplotlib.backends.qt_compat import QtCore, QtWidgets
-from matplotlib.backends.backend_qt5agg import (
-        FigureCanvas, NavigationToolbar2QT as NavigationToolbar)
+from matplotlib.backends.qt_compat import QtWidgets
+from matplotlib.backends.backend_qt5agg import FigureCanvas
 from matplotlib.figure import Figure
-from PyQt5 import QtWidgets
-import numpy
+import json
+
+from utils import logging
+logger = logging.getLogger(__name__)
 
 
 class NdsiPlot():
@@ -66,11 +67,8 @@ class NdsiPlot():
     def __calculateNDSI(self):
         series = self.__ndsi_series()
 
-        ndsi_values = series.values()
-        scens_dates = series.keys()
-
-        print(ndsi_values)
-        print(scens_dates)
+        ndsi_values = list(series.values())
+        scens_dates = (series.keys())
 
         self.__axes.plot(scens_dates, ndsi_values, 'go-', label='NDSI')
         offset = (max(ndsi_values) - min(ndsi_values)) / 40
@@ -97,9 +95,6 @@ class NdsiPlot():
 
         ndsi_values = series.values()
         scens_dates = series.keys()
-
-        print(ndsi_values)
-        print(scens_dates)
 
         self.__axes.plot(scens_dates, ndsi_values, 'ro-', label='PredictedNDSI')
         offset = (max(ndsi_values) - min(ndsi_values)) / 40
