@@ -228,6 +228,4 @@ class DrawnMatchesImage(Image):
                                               singlePointColor=(100, 0, 0),
                                               flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
-        debug_trace()
-
         return drawn_matches_image
