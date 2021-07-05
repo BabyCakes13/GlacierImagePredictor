@@ -1,57 +1,58 @@
 \babel@toc {english}{}
-\contentsline {chapter}{List Of Figures}{2}%
-\contentsline {chapter}{List Of Tables}{4}%
-\contentsline {chapter}{\numberline {1}Introduction}{6}%
-\contentsline {section}{\numberline {1.1}Motivation and goals}{7}%
-\contentsline {section}{\numberline {1.2}Related work}{7}%
-\contentsline {section}{\numberline {1.3}Our Contribution}{9}%
-\contentsline {chapter}{\numberline {2}Glacier Satellite Imagery Processing}{11}%
-\contentsline {section}{\numberline {2.1}Dataset}{11}%
-\contentsline {subsection}{\numberline {2.1.1}Landsat 8}{11}%
-\contentsline {subsubsection}{Worldwide Reference System-2}{11}%
-\contentsline {subsubsection}{Landsat scene naming convention}{12}%
-\contentsline {subsubsection}{Operational Land Imager}{12}%
-\contentsline {subsubsection}{Thermal Infrared Sensor}{13}%
-\contentsline {subsection}{\numberline {2.1.2}World Glacier Inventory}{14}%
-\contentsline {subsection}{\numberline {2.1.3}Asset Acquisition}{15}%
-\contentsline {subsubsection}{USGS Earth Explorer}{15}%
-\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{17}%
-\contentsline {subsubsection}{Landsat 8 Collection 1, Tier 1}{18}%
-\contentsline {section}{\numberline {2.2}Dataset entities}{18}%
-\contentsline {subsection}{\numberline {2.2.1}Bands}{18}%
-\contentsline {subsubsection}{Band 3 - Green Band}{18}%
-\contentsline {subsubsection}{Band 6 - SWIR1 Band}{19}%
-\contentsline {subsection}{\numberline {2.2.2}Normalized Snow Difference Index}{20}%
-\contentsline {section}{\numberline {2.3}Alignment}{21}%
-\contentsline {subsection}{\numberline {2.3.1}Movement extraction through optical flow}{22}%
-\contentsline {subsection}{\numberline {2.3.2}Generating predicted images based on motion}{24}%
-\contentsline {chapter}{\numberline {3}Glacier Image Predictor}{28}%
-\contentsline {section}{\numberline {3.1}User Interface}{29}%
-\contentsline {subsection}{\numberline {3.1.1}Search and Download}{29}%
-\contentsline {subsection}{\numberline {3.1.2}Processing}{29}%
-\contentsline {section}{\numberline {3.2}Search and Download}{32}%
-\contentsline {subsection}{\numberline {3.2.1}Data corruption verification}{34}%
-\contentsline {section}{\numberline {3.3}Processing}{34}%
-\contentsline {subsection}{\numberline {3.3.1}Alignment}{34}%
-\contentsline {subsection}{\numberline {3.3.2}Normalized Snow Difference Index}{36}%
-\contentsline {subsection}{\numberline {3.3.3}Motion extraction through optical flow}{38}%
-\contentsline {subsection}{\numberline {3.3.4}Motion generated NDSI}{39}%
-\contentsline {subsection}{\numberline {3.3.5}Generated image filtering}{43}%
-\contentsline {section}{\numberline {3.4}Tools and libraries}{44}%
-\contentsline {subsection}{\numberline {3.4.1}Programming language}{44}%
-\contentsline {subsection}{\numberline {3.4.2}Libraries}{45}%
-\contentsline {subsubsection}{NumPy}{45}%
-\contentsline {subsubsection}{Open Source Computer Vision Library (OpenCV)}{46}%
-\contentsline {subsubsection}{Geospatial Data Abstraction Library (GDAL)}{46}%
-\contentsline {subsection}{\numberline {3.4.3}Version-control}{46}%
-\contentsline {chapter}{\numberline {4}Performance and experiments}{47}%
-\contentsline {section}{\numberline {4.1}Performance}{47}%
-\contentsline {section}{\numberline {4.2}Experiments}{48}%
-\contentsline {subsection}{\numberline {4.2.1}Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}{48}%
-\contentsline {subsection}{\numberline {4.2.2}Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}{49}%
-\contentsline {subsection}{\numberline {4.2.3}Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}{50}%
-\contentsline {subsection}{\numberline {4.2.4}Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}{51}%
-\contentsline {subsection}{\numberline {4.2.5}PARVATI (146, 38, 4)}{52}%
-\contentsline {chapter}{\numberline {5}Conclusions}{54}%
-\contentsline {section}{\numberline {5.1}Future development}{54}%
-\contentsline {section}{\numberline {5.2}Acronyms}{59}%
+\contentsline {chapter}{List Of Figures}{2}{chapter*.1}%
+\contentsline {chapter}{List Of Tables}{4}{chapter*.2}%
+\contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation and goals}{7}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Related work}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Our Contribution}{9}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Glacier Satellite Imagery Processing}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Dataset}{11}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Landsat 8}{11}{subsection.2.1.1}%
+\contentsline {subsubsection}{Worldwide Reference System-2}{11}{section*.4}%
+\contentsline {subsubsection}{Landsat scene naming convention}{12}{section*.5}%
+\contentsline {subsubsection}{Operational Land Imager}{12}{section*.6}%
+\contentsline {subsubsection}{Thermal Infrared Sensor}{13}{section*.7}%
+\contentsline {subsection}{\numberline {2.1.2}World Glacier Inventory}{14}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Asset Acquisition}{15}{subsection.2.1.3}%
+\contentsline {subsubsection}{USGS Earth Explorer}{15}{section*.8}%
+\contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{17}{section*.9}%
+\contentsline {subsubsection}{Landsat 8 Collection 1, Tier 1}{18}{section*.10}%
+\contentsline {section}{\numberline {2.2}Dataset entities}{18}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}True colour image}{18}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Bands}{18}{subsection.2.2.2}%
+\contentsline {subsubsection}{Band 3 - Green Band}{18}{section*.11}%
+\contentsline {subsubsection}{Band 6 - SWIR1 Band}{19}{section*.12}%
+\contentsline {subsection}{\numberline {2.2.3}Normalized Snow Difference Index}{19}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Alignment}{21}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Movement extraction through optical flow}{21}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Generating predicted images based on motion}{23}{subsection.2.3.2}%
+\contentsline {chapter}{\numberline {3}Glacier Image Predictor}{28}{chapter.3}%
+\contentsline {section}{\numberline {3.1}User Interface}{29}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Search and Download}{29}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Processing}{29}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Search and Download}{32}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Data corruption verification}{34}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}Processing}{34}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Alignment}{34}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Normalized Snow Difference Index}{36}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Motion extraction through optical flow}{38}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Motion generated NDSI}{39}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Generated image filtering}{43}{subsection.3.3.5}%
+\contentsline {section}{\numberline {3.4}Tools and libraries}{44}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Programming language}{44}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Libraries}{45}{subsection.3.4.2}%
+\contentsline {subsubsection}{NumPy}{45}{section*.13}%
+\contentsline {subsubsection}{Open Source Computer Vision Library (OpenCV)}{46}{section*.14}%
+\contentsline {subsubsection}{Geospatial Data Abstraction Library (GDAL)}{46}{section*.15}%
+\contentsline {subsection}{\numberline {3.4.3}Version-control}{46}{subsection.3.4.3}%
+\contentsline {chapter}{\numberline {4}Performance and experiments}{47}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Performance}{47}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Experiments}{48}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}{48}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}{49}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}{50}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}{51}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}PARVATI (146, 38, 4)}{52}{subsection.4.2.5}%
+\contentsline {chapter}{\numberline {5}Conclusions}{54}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Future development}{54}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Acronyms}{59}{section.5.2}%
