@@ -3,60 +3,96 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Disertation.aux
 The style file: apalike.bst
 Database file #1: references.bib
-I was expecting a `,' or a `}'---line 80 of file references.bib
+I was expecting a `,' or a `}'---line 3 of file references.bib
  :  
- :  note = {Retrieved 2021-06-30},
+ :  title = {Landsat Collection 1 asset information},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 84 of file references.bib
+Warning--entry type for "WGI" isn't style-file defined
+--line 8 of file references.bib
+Warning--entry type for "STAC" isn't style-file defined
+--line 16 of file references.bib
+Warning--entry type for "USGS" isn't style-file defined
+--line 24 of file references.bib
+Warning--entry type for "LANDSAT" isn't style-file defined
+--line 31 of file references.bib
+Warning--entry type for "lgng" isn't style-file defined
+--line 39 of file references.bib
+I was expecting a `,' or a `}'---line 42 of file references.bib
+ :  
+ :  title = {NASA on the Landsat Satellite},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "lc1l1" isn't style-file defined
+--line 47 of file references.bib
+Warning--entry type for "olitris" isn't style-file defined
+--line 55 of file references.bib
+Warning--entry type for "l8otb" isn't style-file defined
+--line 63 of file references.bib
+Warning--entry type for "bd" isn't style-file defined
+--line 70 of file references.bib
+Warning--entry type for "sn" isn't style-file defined
+--line 86 of file references.bib
+Warning--entry type for "wrs" isn't style-file defined
+--line 94 of file references.bib
+Warning--entry type for "gdal" isn't style-file defined
+--line 102 of file references.bib
+I was expecting a `,' or a `}'---line 105 of file references.bib
+ :  
+ :  title = {GDAL documentation},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "cuda" isn't style-file defined
+--line 110 of file references.bib
+I was expecting a `,' or a `}'---line 115 of file references.bib
+ :  
+ :  urldate = {2021-06-30},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "NASA2020" isn't style-file defined
+--line 118 of file references.bib
+I was expecting a `,' or a `}'---line 123 of file references.bib
+ :  
+ :  urldate = {2021-07-01},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 127 of file references.bib
  :  
  :  author={Rublee, Ethan and Rabaud, Vincent and Konolige, Kurt and Bradski, Gary},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 96 of file references.bib
- :  
- :  year = {Retrieved 2021-06-30},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 155 of file references.bib
+I was expecting a `,' or a `}'---line 193 of file references.bib
  :  title="
  :         An operational land imager for the landsat data continuity mission",
 I'm skipping whatever remains of this entry
-Repeated entry---line 270 of file references.bib
+Repeated entry---line 308 of file references.bib
  : @article{WINSVOLD2016
  :                      ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 281 of file references.bib
+Repeated entry---line 319 of file references.bib
  : @article{RACOVITEANU2019
  :                         ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 296 of file references.bib
+Repeated entry---line 334 of file references.bib
  : @article{TAK2020
  :                 ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 313 of file references.bib
+Repeated entry---line 351 of file references.bib
  : @article{WINSVOLD2017
  :                      ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 353 of file references.bib
+Repeated entry---line 391 of file references.bib
  : @inproceedings{KANADE1981
  :                          ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 386 of file references.bib
+Repeated entry---line 424 of file references.bib
  : @article{Harris2020
  :                    ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 438 of file references.bib
+Repeated entry---line 476 of file references.bib
  : @article{Fischler1981
  :                      ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "bands"
-Warning--I didn't find a database entry for "parvati"
-Warning--to sort, need author or key in LANDSATPIC
-Warning--to sort, need author or key in wrs
-Warning--to sort, need author or key in l8otb
-Warning--to sort, need author or key in sn
-Warning--to sort, need author or key in NASA2020
 Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
 while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
@@ -73,33 +109,13 @@ Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher N
 while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" for entry WINSVOLD2017
 while executing---line 1023 of file apalike.bst
-Warning--to sort, need author or key in LANDSAT
-Warning--to sort, need author or key in lgng
-Warning--to sort, need author or key in WGI
-Warning--to sort, need author or key in USGS
-Warning--to sort, need author or key in STAC
-Warning--to sort, need author or key in lc1l1
-Warning--to sort, need author or key in bd
-Warning--to sort, need author or key in ndsi
-Warning--to sort, need author or key in cuda
-Warning--to sort, need author or key in gdal
-Warning--empty author in cuda
-Warning--empty year in cuda
-Warning--empty booktitle in cuda
-Warning--empty year in l8otb
-Warning--empty year in gdal
-Warning--empty year in bd
-Warning--empty year in lc1l1
-Warning--empty year in sn
-Warning--empty year in LANDSAT
-Warning--empty year in lgng
-Warning--empty year in NASA2020
-Warning--empty year in ndsi
-Warning--empty year in LANDSATPIC
-Warning--empty year in STAC
-Warning--empty year in USGS
-Warning--empty year in WGI
-Warning--empty year in wrs
+Name 1 in "George Riggs, Dorothy Hall, and Miguel O. Román" has a comma at the end for entry ndsi
+while executing---line 1023 of file apalike.bst
+Name 1 in "George Riggs, Dorothy Hall, and Miguel O. Román" has a comma at the end for entry ndsi
+while executing---line 1023 of file apalike.bst
+Name 1 in "George Riggs, Dorothy Hall, and Miguel O. Román" has a comma at the end for entry ndsi
+while executing---line 1098 of file apalike.bst
+Warning--empty journal in ndsi
 Warning--empty journal in Hall2001
 Name 1 in "Solveig H. Winsvold, Andreas Kääb, Christopher Nuth, Liss M. Andreassen, Ward J. J. van Pelt, and Thomas Schellenberger" has a comma at the end for entry WINSVOLD2017
 while executing---line 1098 of file apalike.bst
@@ -111,43 +127,43 @@ Too many commas in name 1 of "Tak, S., Keshari, A.K" for entry TAK2020
 while executing---line 1098 of file apalike.bst
 You've used 26 entries,
             1935 wiz_defined-function locations,
-            611 strings with 7929 characters,
-and the built_in function-call counts, 8268 in all, are:
-= -- 838
-> -- 279
-< -- 9
-+ -- 103
-- -- 98
-* -- 644
-:= -- 1372
-add.period$ -- 75
+            608 strings with 7284 characters,
+and the built_in function-call counts, 8899 in all, are:
+= -- 861
+> -- 402
+< -- 25
++ -- 140
+- -- 134
+* -- 691
+:= -- 1625
+add.period$ -- 63
 call.type$ -- 26
-change.case$ -- 178
-chr.to.int$ -- 25
-cite$ -- 74
-duplicate$ -- 344
-empty$ -- 598
-format.name$ -- 119
-if$ -- 1647
-int.to.chr$ -- 2
+change.case$ -- 194
+chr.to.int$ -- 24
+cite$ -- 28
+duplicate$ -- 346
+empty$ -- 551
+format.name$ -- 176
+if$ -- 1703
+int.to.chr$ -- 3
 int.to.str$ -- 0
 missing$ -- 12
-newline$ -- 128
-num.names$ -- 35
-pop$ -- 175
+newline$ -- 116
+num.names$ -- 80
+pop$ -- 162
 preamble$ -- 1
-purify$ -- 178
+purify$ -- 196
 quote$ -- 0
-skip$ -- 246
+skip$ -- 292
 stack$ -- 0
-substring$ -- 498
-swap$ -- 38
-text.length$ -- 2
+substring$ -- 487
+swap$ -- 43
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 156
-warning$ -- 33
-while$ -- 33
+warning$ -- 2
+while$ -- 64
 width$ -- 0
-write$ -- 302
-(There were 23 error messages)
+write$ -- 293
+(There were 29 error messages)

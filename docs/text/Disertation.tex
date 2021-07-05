@@ -121,9 +121,8 @@
 				Maria-Minerva \textsc{Vonica}
 			\end{flushright}
 		\end{minipage}\\[0.5cm]
-		\vfill
-		{\large Timi\c{s}oara\\ 2021}\\
 		
+		{\large Timi\c{s}oara\\ 2021}\\
 		\vfill
 		
 	\end{titlepage}
@@ -174,7 +173,7 @@
 	
 	\par In \cite{WINSVOLD2017}, the authors propose descriptive methods for glacier mapping by using aerial time series produced by the Synthetic Aperture Radar sensor from Radarsat-2 and Sentinel-1A. Out of their five scenarios, the first tracks transient snow lines and it proved to correlate with both Landsat 8 and Sentinel-2A produced aerial images. As a conclusion, they state that automatically derived satellite imagery products prove to be important in analysing glacier change.
 	
-	\par Another interesting approach to determine glacier melt was analysed in \cite{WANG2017}, where the authors have compared the band ratio method with the Normalized Difference Snow Index (NDSI) one for extracting parameters which highlight glaciers. They have conducted their studies on the Karakorum area with satellite imagery collected from Landsat 8, starting from 2014. Their results show that for boundary extraction, the band ratio technique yielded better results. They also state that visual interpretation is still an major factor in analysing the obtained results.
+	\par Another interesting approach was analysed in \cite{WANG2017}, where the authors have compared the band ratio method with the Normalized Difference Snow Index (NDSI) one for extracting parameters which highlight glaciers. They have conducted their studies on the Karakorum area with satellite imagery collected from Landsat 8, starting from 2014. Their results show that for boundary extraction, the band ratio technique yielded better results. They also state that visual interpretation is still an major factor in analysing the obtained results.
 	
 	\par As for motion estimation, Farneb{\"a}ck, Gunnar proposes an interesting approach in \cite{GUNNAR2003}. The author presents an algorithm for estimating motion between two frames by approximating each neighbourhood of both by quadratic polynomials. Their transformation under translation is then analysed in order to extract displacement fields.
 
@@ -194,7 +193,7 @@
 	
 	\newpage{}
 	
-	\chapter{Application}
+	\chapter{Glacier Satellite Imagery Processing}
 	\section{Dataset}
 
 	\par In order to build the dataset, we made use of the freely available data from the Landsat Archive, specifically from collection 1, level 1. This dataset contains assets which are generated from the Landsat 8 Sensors, as well as entries from other older Landsat satellites. For the purpose of this paper, we will focus only on images collected from the Landsat 8 satellite.
@@ -206,15 +205,14 @@
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.25]{../images/LandsatSatellite.png}
-		\caption{Landsat 8 satellite \cite{LANDSATPIC}.}
+		\caption{Landsat 8 satellite \cite{lgng}.}
 		\label{fig:landsat_satellite}
 	\end{figure}
 
 	\par The satellite is orbiting the Earth at an altitude of 705 km, completing one orbit every 99 minutes. Based on this trajectory, the satellite has a 16 day repeat cycle and it acquires 740 scenes each day. These are organised on the path/row system defined by Worldwide Reference System-2. A Landsat 8 scene size is 185 km x 180 km \cite{LANDSAT}. 
 	
-	\paragraph{Worldwide Reference System-2}
+	\subsubsection{Worldwide Reference System-2}
 	\label{par:wrs2}
-	
 	\par We will be referring to each scene's location based on its path and row coordinates from the WRS-2, which is a notation system used for Landsat images. This system is used with the main goal of keeping a structured archive of Landsat data which can be easily catalogued and accesses. Users can access aerial imagery through querying the specified path and row variables \cite{wrs}. Landsat's trajectory projected on the world map can be seen in Figure~\ref{fig:wrs2}.
 
 	\begin{figure}[h!]
@@ -261,23 +259,17 @@
 	
 	\par The Operational Land Imager (OLI) represents remote sensing instrument which can be found abroad Landsat 8. It is built by Ball Aerospace \& Technologies and it collects moderate resolution data which is used for monitoring changes in trends on the surface and evaluating how it changes over time. The images and data which OLI has helped collect have practical applications today in various fields such as mapping and monitoring changes in snow, ice, water and agriculture, \cite{KNIGHT2014}. 
 	The OLI operates in the short wave infrared spectral and visible region with a width of 185 km. Wavelengths of 443 nm to 2,200 nm are translated into nine channels, from which  eight are multispectral and one is panchromatic. The eight multispectral ones have a 30-meter spatial resolution, while the panchromatic channel has a 15 meters one.
-	The OLI generates 9 bands for Landsat as shown in Figure~\ref{fig:L8OLI}.
-	\begin{figure}[h]
-		\centering
-		\includegraphics[scale=0.5]{../images/Landsat8-OLI-Bands.png}
-		\caption{Landsat 8 OLI generated bands \cite{l8otb}}
-		\label{fig:L8OLI}
-	\end{figure}
+	The OLI generates 9 bands for Landsat 8 as shown in Figure~\ref{fig:L8OLI}.
 	
 	\subsubsection{Thermal Infrared Sensor}
 	
-	\par The Thermal Infrared Sensor (TIRS) measures land surface temperature in two thermal bands with a new technology that uses quantum mechanic techniques in order to detect thermal infrared wavelengths of light which are emitted by the Earth \cite{lgng}. The thermal infrared sensor generates 2 bands for Landsat as shown in Figure~\ref{fig:L8TIRS}.
+	\par The Thermal Infrared Sensor (TIRS) measures land surface temperature in two thermal bands with a new technology that uses quantum mechanic techniques in order to detect thermal infrared wavelengths of light which are emitted by the Earth \cite{lgng}. The thermal infrared sensor generates 2 bands for Landsat 8 as shown in Figure~\ref{fig:L8TIRS}.
 	
-	\begin{figure}[h!]
+	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=0.5]{../images/Landsat8-TIRS-Bands.png}
-		\caption{Landsat 8 TIRS generated bands \cite{l8otb}}
-		\label{fig:L8TIRS}
+		\includegraphics[scale=0.3]{../images/all_Landsat_bands.png}
+		\caption{Landsat satellites sensors wavelengths \cite{olitris}.}
+		\label{fig:L8OLI}
 	\end{figure}
 	
 	\subsection{World Glacier Inventory}
@@ -329,7 +321,11 @@
 	\subsubsection{SpatioTemporal Asset Catalog API}
 	\label{seq:STAC}
 	
-	\par In order to fix the problem of excessive manual labour which appeared by using the USGS Earth Explorer, we rather implemented an endpoint of the SpatioTemporal Asset Catalog API, specifically, the following: \textbf{\url{http://nsidc.org/data/glacier_inventory/index.html}} \cite{STAC}. The main idea of searching by using parameters still remains, but instead of manual inputting data for the search data, we rely on using the above-mentioned World Glacier Inventory ASCII text file, since it already has all the required information for each glacier.
+	\par In order to fix the problem of excessive manual labour which appeared by using the USGS Earth Explorer, we rather implemented an endpoint of the SpatioTemporal Asset Catalog API, specifically, the following:
+	
+	\textbf{\url{http://nsidc.org/data/glacier_inventory/index.html}} \cite{STAC}
+	
+	\par The main idea of searching by using parameters still remains, but instead of manual inputting data for the search data, we rely on using the above-mentioned World Glacier Inventory ASCII text file, since it already has all the required information for each glacier.
 	
 	\par By using this method we can pick which glaciers we want to download based on their coordinates and calculate a bounding box representing the area we want to search, required for the STAC API query. Since there might be clouds which could obfuscate the area of interest in the image, we also add a maximum allowed cloud coverage along the bounding box.
 	
@@ -403,7 +399,7 @@
 		\caption{Landsat 8 SWIR1 band specifications.}
 		\label{table:swir1_table}
 	\end{table}
-	\par The shortwave infrared 1 band is particularly useful for enhancing object which look similar in other bands, such as soils and rocks \cite{bd}. Alongside this, it also discriminates moisture content of soil and vegetation and penetrates thin clouds \cite{bands}. Figure~\ref{fig:swir1} is illustrated below as an example of a SWIR1 band taken from the same scene as the green one above.
+	\par The shortwave infrared 1 band is particularly useful for enhancing object which look similar in other bands, such as soils and rocks \cite{bd}. Alongside this, it also discriminates moisture content of soil and vegetation and penetrates thin clouds \cite{l8otb}. Figure~\ref{fig:swir1} is illustrated below as an example of a SWIR1 band taken from the same scene as the green one above.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.3]{../images/LC81950282015098LGN01_B6.png}
@@ -429,7 +425,7 @@
 			\text{snow/ice},  & NDSI \geq 0.3\\
 			\text{snow-free}, & NDSI < 0.3
 		\end{cases}
-		\right\}
+		\right.
 	\end{equation}
 
 	\par For easier visual analysis, we have coloured the result such that pixels which are considered to represent snow are white, while snow free land is represented with green. The resulting NDSI image can be viewed in Figure~\ref{fig:ndsi}.
@@ -466,7 +462,7 @@
 		\label{fig:alignment_example}
 	\end{figure}
 
-	\par In order to solve this problem, we have used an algorithm which \textbf{collects features} from each band of a scene and tries to match them with a given reference one's features. The obtained \textbf{matches} can be then used to create an \textbf{affine transformation matrix} which specifies by how much did the current image \textbf{rotated and translated} in comparison to its reference. The affine transformation matrix will be then applied to the current image by a \textbf{warping} algorithm with the goal of ensuring as much as possible that there is no misalignment between any pixel of two different images from the same time series. Section~\ref{seq:alignment_algorithm} describes in a technical manner the approaches used to solve this and what were the computer vision algorithms used for that matter. 
+	\par In order to solve this problem, we have used an algorithm which \textbf{collects features} from each band of a scene and tries to match them with a given reference one's features. The obtained \textbf{matches} can be then used to create an \textbf{affine transformation matrix} which specifies by how much did the current image \textbf{rotated and translated} in comparison to its reference. The affine transformation matrix will be then applied to the current image by a \textbf{warping} algorithm with the goal of ensuring as much as possible that there is no misalignment between any pixel of two different images from the same time series. Section~\ref{seq:alignment_implementation} describes in a technical manner the approaches used to solve this and what were the computer vision algorithms used for that matter. 
 
 	\subsection{Movement extraction through optical flow}
 	\label{seq:ndsi_motion_matrix}
@@ -482,7 +478,7 @@
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=\columnwidth]{../images/optical_flow_schema.png}
+		\includegraphics[scale=0.3]{../images/optical_flow_schema.png}
 		\caption{Optical flow between NDSI(\(time=t\)) and NDSI(\(time=t+dt\)).}
 		\label{fig:optical_flow_schema}
 	\end{figure}
@@ -514,8 +510,8 @@
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale = 0.5]{../images/motion_generated_schema.png}
-		\caption{Overlayed motion vectors generated by optical flow for scene LC81940282015363LGN02.}
+		\includegraphics[scale = 0.6]{../images/motion_generated_schema.png}
+		\caption{Schema for prediction of new images based on past motion.}
 		\label{fig:motion_generated_schema}
 	\end{figure}
 
@@ -538,12 +534,33 @@
 	\end{figure}
 
 	\vfill
-	% =========================================================================	
 
-	\chapter{User Interface}
+	% =========================================================================
+	\newpage{}
+	\chapter{Glacier Image Predictor}
+	\label{cha:design_and_implementation}
+	
+	\par The application design can be discussed by splitting the topics in:
+	
+	\begin{itemize}
+		\item \textbf{search and download}
+		\item \textbf{processing}
+		\begin{itemize}
+			\item Normalised Snow Difference Index;
+			\item Alignment;
+			\item Motion extraction through optical flow;
+			\item Motion generated NDSI;
+			\item Generated NDSI filtering.
+		\end{itemize}
+	\end{itemize}
+
+	\par The first section is optional and can be run independently from the processing, since the user can have an already created database of images. However, we have focused on simplifying the process of satellite imagery downloading as described in Section~\ref{seq:STAC} through using the sat-search library as a helper for searching and downloading assets. More information on querying can be found in Section~\ref{seq:sd_implementation}. 
+	Given an existing set of data, the next step is to pass the root folder which contains the glacier directories to the processing unit, also designed as a plug-in mechanism which will trigger the graphical user interface to pop up and allow for the processing options to appear. More information on this section can be found at Section~\ref{sec:processing_gui}. From there, one can start processing by simply making use of the predefined buttons described in Section~\ref{seq:gui}.
+	
+	\section{User Interface}
 	\label{seq:gui}
 	
-	\section{Search and Download}
+	\subsection{Search and Download}
 	\label{sec:search_download}
 	
 	\par Since the search and download part of the application can be viewed as a plug-in mechanism which only starts to query the Landsat archive , we have opted to keep its interface in the form of a command line one only. The user simply has to run the command showed Listing~\ref{lst:downloadcommand} in order to find out detailed descriptions of which are the available options for search and download, which will output the result in Listing~\ref{lst:downloadhelp}.
@@ -567,7 +584,7 @@
 		Path to the output folder which will contain theprocessed results.
 		-j J, --jobs J        Number of threads which will search and download.
 	\end{lstlisting}
-
+	
 	When starting the scrip with the desired parameters, the process will query for assets and start downloading them, as shown in Figure~\ref{fig:download_cmd}.
 	
 	\begin{figure}[h!]
@@ -576,8 +593,8 @@
 		\caption{Command line interface for the search and download part of the application.}
 		\label{fig:download_cmd}
 	\end{figure}
-
-	\section{Processing}
+	
+	\subsection{Processing}
 	\label{sec:processing_gui}
 	
 	\par Our thesis focuses on computer vision, therefore we wanted to make sure that we are providing a tool which supports easy image visualisation, as well as an easy way to process. A graphical user interface which focuses on providing easy access to the glaciers dataset, equipped with a screen to easily visualise the images in different stages of processing proves to be the best approach for our purpose. Figure~\ref{fig:gui} represents the main use case scenario for using the interface, while also snowing snippets of NDSI images as well as generated ones and their snow coverage graphs.
@@ -588,13 +605,13 @@
 		\caption{Graphical user interface for the processing part of the application.}
 		\label{fig:gui}
 	\end{figure}
-
+	
 	\begin{lstlisting}[caption={Help command for processing.},label={lst:processcommand},language=Bash]
-	% bash -x run_process.sh --help
+		% bash -x run_process.sh --help
 	\end{lstlisting}
-
-	In order to power up the application, we use the same approach as described in Section~\ref{subsec:search_download}, but running a different script with different parameters, described in Listing~\ref{lst:processcommand}. The only parameter necessary for starting the processing, as shown as an output to the command in Listing~\ref{lst:processhelp}, is the directory which holds the dataset which should have the same hierarchy as the one described in Figure~\ref{fig:DownloadDirectory}.
-
+	
+	In order to power up the application, we use the same approach as described in Section~\ref{sec:search_download}, but running a different script with different parameters, described in Listing~\ref{lst:processcommand}. The only parameter necessary for starting the processing, as shown as an output to the command in Listing~\ref{lst:processhelp}, is the directory which holds the dataset which should have the same hierarchy as the one described in Figure~\ref{fig:DownloadDirectory}.
+	
 	\begin{lstlisting}[caption={Detailed parameters required for the download script.},label={lst:processhelp},language=Bash]
 		+ export PYTHONPATH=./sat-search:./sat-stac
 		+ PYTHONPATH=./sat-search:./sat-stac
@@ -605,37 +622,15 @@
 		-h, --help     show this help message and exit
 		--input INPUT  Path to the input folder which contains the dataset of glaciers.
 	\end{lstlisting}
-
+	
 	For more detailed information, the command line interface can still be used for various activity updates, processing time and possible errors, as shown in Figure~\ref{fig:process_cmd}.
-
+	
 	\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\columnwidth]{../images/process_cmd.png}
-	\caption{Command line interface for the processing part of the application.}
-	\label{fig:process_cmd}
+		\centering
+		\includegraphics[width=\columnwidth]{../images/process_cmd.png}
+		\caption{Command line interface for the processing part of the application.}
+		\label{fig:process_cmd}
 	\end{figure}
-
-	% =========================================================================
-	\newpage{}
-	\chapter{Design and Implementation}
-	\label{cha:design_and_implementation}
-	
-	\par The application design can be discussed by splitting the topics in:
-	
-	\begin{itemize}
-		\item \textbf{search and download}
-		\item \textbf{processing}
-		\begin{itemize}
-			\item Normalised Snow Difference Index;
-			\item Alignment;
-			\item Motion extraction through optical flow;
-			\item Motion generated NDSI;
-			\item Generated NDSI filtering.
-		\end{itemize}
-	\end{itemize}
-
-	\par The first section is optional and can be run independently from the processing, since the user can have an already created database of images. However, we have focused on simplifying the process of satellite imagery downloading as described in Section~\ref{seq:STAC} through using the sat-search library as a helper for searching and downloading assets. More information on querying can be found in Section~\ref{seq:sd_implementation}. 
-	Given an existing set of data, the next step is to pass the root folder which contains the glacier directories to the processing unit, also designed as a plug-in mechanism which will trigger the graphical user interface to pop up and allow for the processing options to appear. More information on this section can be found at Section~\ref{sec:processing_gui}. From there, one can start processing by simply making use of the predefined buttons described in Section~\ref{seq:gui}.
 	
 	% =========================================================================
 		
@@ -673,7 +668,7 @@
 	\section{Processing}
 	\label{seq:processing}
 
-	\par Before generating any images, we first need to make sure that the pixels between any two scenes are not misaligned. The details of the alignment process are described in Section~\ref{seq:alignment_implementation}. After we ensure that out images are fit, we move on to creating the normalized snow difference index image in order to enhance the ice through a set threshold (see Section~\ref{seq:ndsi_implementation}). We then create the matrix of pixel motions calculated between two consecutive (date-wise) scenes, process described in Section~\ref{seq:motion_matrix_implementation}. Based on the information of where each pixel has moved between two consecutive images, we can then create our future NDSI image by applying the motion vectors on each pixel from a scene. More details on the design and implementation of this part can be found in Section~\ref{seq:motion_ndsi_implementation}.
+	\par Before generating any images, we first need to make sure that the pixels between any two scenes are not misaligned. The details of the alignment process are described in Section~\ref{seq:alignment_implementation}. After we ensure that out images are fit, we move on to creating the normalized snow difference index image in order to enhance the ice through a set threshold (see Section~\ref{seq:ndsi_implementation}). We then create the matrix of pixel motions calculated between two consecutive (date-wise) scenes, process described in Section~\ref{seq:motion_ndsi_implementation}. Based on the information of where each pixel has moved between two consecutive images, we can then create our future NDSI image by applying the motion vectors on each pixel from a scene. More details on the design and implementation of this part can be found in Section~\ref{seq:motion_ndsi_implementation}.
 	The normalized snow difference index image will be computed for each scene as described in Section~\ref{seq:ndsi_functional}.
 	
 	%========================================================================================
@@ -730,7 +725,7 @@
 		\label{fig:ndsi_diagram}
 	\end{figure}
 
-	\par The NDSI is generated by using the Formula~\ref{eq:ndsi_formula} described in section \ref{seq:ndsi_functional} on the green and shortwave infrared bands from a specific scene. Each band pixel is converted to \textbf{float32} in order to increase the \textbf{precision} of calculation; as each band is read as a n-dimensional array we can use numpy's optimised processing for generating the NDSI index image, since it converts the data and runs on native code rather than going through Python's interpretor. Figure~\ref{fig:ndsi_diagram} holds the technical diagram for the NDSI.
+	\par The NDSI is generated by using the Formula~\ref{eq:ndsi_formula} described in section \ref{seq:ndsi_functional} on the green and shortwave infrared bands from a specific scene. Each band pixel is converted to \textbf{float32} in order to increase the \textbf{precision} of calculation; as each band is read as a $n$-dimensional array we can use numpy's optimised processing for generating the NDSI index image, since it converts the data and runs on native code rather than going through Python's interpretor. Figure~\ref{fig:ndsi_diagram} holds the technical diagram for the NDSI.
 	
 	\par For easier visual analysis, we have coloured the result such that pixels which are considered to represent snow are white, while snow free land is represented with green. The resulting NDSI image can be viewed in Figure~\ref{fig:ndsi}. However, in he background, the raw NDSI image is used for better precision.
 
@@ -809,7 +804,7 @@ hue represents the direction of this vector, as represented in Figure~\ref{fig:h
 	
 	\par As a first approach of populating the new image, we have simply iterated over all
 	the pixels in the NDSI(\(time=t+dt\)) image and calculated their new coordinates
-	based on their respective motion vector, as it can be seen in Algorithm~\ref{algo:iterative}. Since this
+	based on their respective motion vector, as it can be seen in Algorithm~\ref{algo:change}. Since this
 	is an iterative approach, it does not scale for images as large as the ones we are using.
 	On top of this, since we are using the Python language, which is an interpreted one,
 	each operation has to go through an interpreter before being processed. For very granular data
@@ -855,7 +850,7 @@ hue represents the direction of this vector, as represented in Figure~\ref{fig:h
 	\end{figure}
 	
 	
-	\par The function used to generate the predicted NDSI does not have a \textbf{one-to-one domain}, thus making it undefined for certain inputs. This results in a very \textbf{noisy} generated image, as it can be seen in Figure~\ref{fig:unfiltered_small}. We have implemented a \textbf{filter} which uses the weighted average of the neighbouring pixels values to fill the missing ones.
+	\par The function used to generate the predicted NDSI does not have a \textbf{one-to-one} \textbf{domain}, thus making it undefined for certain inputs. This results in a very \textbf{noisy} generated image, as it can be seen in Figure~\ref{fig:unfiltered_small}. We have implemented a \textbf{filter} which uses the weighted average of the neighbouring pixels values to fill the missing ones.
 	
 	\begin{figure}[h!]
 		\centering
@@ -899,11 +894,6 @@ hue represents the direction of this vector, as represented in Figure~\ref{fig:h
 	\label{seq:extras}
 	
 	In the following sections we will address the tools and libraries which were used as a support for building the application.
-	
-	\subsection{Programming environment}
-	\label{seq:programmingenv}
-	
-	\par The application part of the thesis has been written with the help of the \textbf{Emacs} text editor, mainly because it provides a uniformity which supports various working flows, since it is not focused on a specific programming language, like PyCharm or Eclipse, for example. The editor is highly customizable and it provides structured, powerful commands for text editing, file searching, in-place code versioning and many more.
 	
 	\subsection{Programming language}
 	\label{seq:programminglang}
@@ -950,7 +940,7 @@ hue represents the direction of this vector, as represented in Figure~\ref{fig:h
 	overlapped and colourized such that orange areas of snow that are predicted to melt,
 	while cyan represents areas which are predicted to develop snow build up.
 	
-	\par The first glacier region which will be analysed is named \textbf{Jungfrau-Aletsch-Bietschhorn}, located in the \textbf{Swiss Alps}, specifically at latitude 46.47735081308319 and longitude 8.056887228860798, with an elevation which varies between 809 and 4,274 m. This location is at the intersection of multiple WRS-2 coordinates, therefore we will have different sets of \(path, row, month\) which we will be focusing on.
+	\par The first glacier region which is picked for analysing is named \textbf{Jungfrau-Aletsch-Bietschhorn}, located in the \textbf{Swiss Alps}, specifically at latitude 46.47735081308319 and longitude 8.056887228860798, with an elevation which varies between 809 and 4,274 m. This location is at the intersection of multiple WRS-2 coordinates, therefore we will have different sets of \(path, row, month\) which we will be focusing on.
 	
 	\subsection{Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}
 	
@@ -1039,7 +1029,7 @@ hue represents the direction of this vector, as represented in Figure~\ref{fig:h
 	\vfill
 	\newpage{}
 	
-	\par The second glacier which we have taken into consideration is named \textbf{Parvati} and it is located in \textbf{India}, at latitude 31.754 and longitude 77.675, with a maximum elevation of 5599 meters. We have chosen this glacier such that we can compare our results with the ones provided in \cite{parvati}. They have chosen a dataset of images located at WRS-2 path 147, row 38. However, we could not fetch the same images for that specific path and row in order to be able to make this comparison. The result that were achieved are however listed below for the available path and row.
+	\par The second glacier which we have taken into consideration is named \textbf{Parvati} and it is located in \textbf{India}, at latitude 31.754 and longitude 77.675, with a maximum elevation of 5599 meters. We have chosen this glacier such that we can compare our results with the ones provided in \cite{TAK2020}. They have chosen a dataset of images located at WRS-2 path 147, row 38. However, we could not fetch the same images for that specific path and row in order to be able to make this comparison. The result that were achieved are however listed below for the available path and row.
 	
 	\subsection{PARVATI (146, 38, 4)}
 		
@@ -1069,6 +1059,7 @@ hue represents the direction of this vector, as represented in Figure~\ref{fig:h
 	\par The best and consistent results were obtained for scenes which were acquired between April and September, due to lower snow fall and better glacier exposure. We have found that scenes which are taken during the winter months are prone to erroneous results due to higher snow coverage which creates high fluctuations and outliers. In \cite{TAK2020}, only September was taken into consideration when conducting the experiments, mainly because it is the month which has the lowest recorded snow coverage of the area. Also, in In \cite{RACOVITEANU2019}, the experiments were performed on seasonal organized data and the scenes with higher snow coverage proved problematic as well. Another factor which influenced the results is cloud coverage, since even if the shortwave infrared band filters out most of the clouds found in a scene, still there are some cases when the coverage is very dense and the land underneath cannot be analysed. Since the terrain is not visible, the glacier pixels cannot be properly extracted, resulting in erroneous snow coverage and distorted motion generated images at the locations where the clouds have appeared or disappeared.
 	
 	\section{Future development}
+	\label{seq:future_development}
 	
 	\par During the process of creating the application, multiple problems were met. One of them was that even though the number of available aerial images collected in the Landsat 8 archive are high, most of them have very high cloud coverages. Filtering out results which have lower percentages create datasets with low number of entities, which means that we cannot test our results on longer time series. Since clouds interfere both with extracting glacier pixels from a scene and analysing motion, two approaches on solving this problem would be:
 	

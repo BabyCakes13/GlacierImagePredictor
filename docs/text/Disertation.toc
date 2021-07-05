@@ -5,16 +5,16 @@
 \contentsline {section}{\numberline {1.1}Motivation and goals}{7}%
 \contentsline {section}{\numberline {1.2}Related work}{7}%
 \contentsline {section}{\numberline {1.3}Our Contribution}{9}%
-\contentsline {chapter}{\numberline {2}Application}{11}%
+\contentsline {chapter}{\numberline {2}Glacier Satellite Imagery Processing}{11}%
 \contentsline {section}{\numberline {2.1}Dataset}{11}%
 \contentsline {subsection}{\numberline {2.1.1}Landsat 8}{11}%
-\contentsline {paragraph}{Worldwide Reference System-2}{11}%
+\contentsline {subsubsection}{Worldwide Reference System-2}{11}%
 \contentsline {subsubsection}{Landsat scene naming convention}{12}%
 \contentsline {subsubsection}{Operational Land Imager}{12}%
 \contentsline {subsubsection}{Thermal Infrared Sensor}{13}%
 \contentsline {subsection}{\numberline {2.1.2}World Glacier Inventory}{14}%
-\contentsline {subsection}{\numberline {2.1.3}Asset Acquisition}{16}%
-\contentsline {subsubsection}{USGS Earth Explorer}{16}%
+\contentsline {subsection}{\numberline {2.1.3}Asset Acquisition}{15}%
+\contentsline {subsubsection}{USGS Earth Explorer}{15}%
 \contentsline {subsubsection}{SpatioTemporal Asset Catalog API}{17}%
 \contentsline {subsubsection}{Landsat 8 Collection 1, Tier 1}{18}%
 \contentsline {section}{\numberline {2.2}Dataset entities}{18}%
@@ -23,36 +23,36 @@
 \contentsline {subsubsection}{Band 6 - SWIR1 Band}{19}%
 \contentsline {subsection}{\numberline {2.2.2}Normalized Snow Difference Index}{20}%
 \contentsline {section}{\numberline {2.3}Alignment}{21}%
-\contentsline {subsection}{\numberline {2.3.1}Movement extraction through optical flow}{23}%
-\contentsline {subsection}{\numberline {2.3.2}Generating predicted images based on motion}{25}%
-\contentsline {chapter}{\numberline {3}User Interface}{27}%
-\contentsline {section}{\numberline {3.1}Search and Download}{27}%
-\contentsline {section}{\numberline {3.2}Processing}{28}%
-\contentsline {chapter}{\numberline {4}Design and Implementation}{31}%
-\contentsline {section}{\numberline {4.1}Search and Download}{32}%
-\contentsline {subsection}{\numberline {4.1.1}Data corruption verification}{32}%
-\contentsline {section}{\numberline {4.2}Processing}{34}%
-\contentsline {subsection}{\numberline {4.2.1}Alignment}{34}%
-\contentsline {subsection}{\numberline {4.2.2}Normalized Snow Difference Index}{37}%
-\contentsline {subsection}{\numberline {4.2.3}Motion extraction through optical flow}{38}%
-\contentsline {subsection}{\numberline {4.2.4}Motion generated NDSI}{39}%
-\contentsline {subsection}{\numberline {4.2.5}Generated image filtering}{43}%
-\contentsline {section}{\numberline {4.3}Tools and libraries}{45}%
-\contentsline {subsection}{\numberline {4.3.1}Programming environment}{45}%
-\contentsline {subsection}{\numberline {4.3.2}Programming language}{45}%
-\contentsline {subsection}{\numberline {4.3.3}Libraries}{45}%
+\contentsline {subsection}{\numberline {2.3.1}Movement extraction through optical flow}{22}%
+\contentsline {subsection}{\numberline {2.3.2}Generating predicted images based on motion}{24}%
+\contentsline {chapter}{\numberline {3}Glacier Image Predictor}{28}%
+\contentsline {section}{\numberline {3.1}User Interface}{29}%
+\contentsline {subsection}{\numberline {3.1.1}Search and Download}{29}%
+\contentsline {subsection}{\numberline {3.1.2}Processing}{29}%
+\contentsline {section}{\numberline {3.2}Search and Download}{32}%
+\contentsline {subsection}{\numberline {3.2.1}Data corruption verification}{34}%
+\contentsline {section}{\numberline {3.3}Processing}{34}%
+\contentsline {subsection}{\numberline {3.3.1}Alignment}{34}%
+\contentsline {subsection}{\numberline {3.3.2}Normalized Snow Difference Index}{36}%
+\contentsline {subsection}{\numberline {3.3.3}Motion extraction through optical flow}{38}%
+\contentsline {subsection}{\numberline {3.3.4}Motion generated NDSI}{39}%
+\contentsline {subsection}{\numberline {3.3.5}Generated image filtering}{43}%
+\contentsline {section}{\numberline {3.4}Tools and libraries}{44}%
+\contentsline {subsection}{\numberline {3.4.1}Programming language}{44}%
+\contentsline {subsection}{\numberline {3.4.2}Libraries}{45}%
 \contentsline {subsubsection}{NumPy}{45}%
 \contentsline {subsubsection}{Open Source Computer Vision Library (OpenCV)}{46}%
 \contentsline {subsubsection}{Geospatial Data Abstraction Library (GDAL)}{46}%
-\contentsline {subsection}{\numberline {4.3.4}Version-control}{46}%
-\contentsline {chapter}{\numberline {5}Performance and experiments}{47}%
-\contentsline {section}{\numberline {5.1}Performance}{47}%
-\contentsline {section}{\numberline {5.2}Experiments}{48}%
-\contentsline {subsection}{\numberline {5.2.1}Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}{48}%
-\contentsline {subsection}{\numberline {5.2.2}Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}{49}%
-\contentsline {subsection}{\numberline {5.2.3}Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}{50}%
-\contentsline {subsection}{\numberline {5.2.4}Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}{51}%
-\contentsline {subsection}{\numberline {5.2.5}PARVATI (146, 38, 4)}{52}%
-\contentsline {chapter}{\numberline {6}Conclusions}{54}%
-\contentsline {chapter}{\numberline {7}Glossary}{57}%
-\contentsline {section}{\numberline {7.1}Acronyms}{57}%
+\contentsline {subsection}{\numberline {3.4.3}Version-control}{46}%
+\contentsline {chapter}{\numberline {4}Performance and experiments}{47}%
+\contentsline {section}{\numberline {4.1}Performance}{47}%
+\contentsline {section}{\numberline {4.2}Experiments}{48}%
+\contentsline {subsection}{\numberline {4.2.1}Jungfrau-Aletsch-Bietschhorn (194, 28, 4)}{48}%
+\contentsline {subsection}{\numberline {4.2.2}Jungfrau-Aletsch-Bietschhorn (194, 28, 7)}{49}%
+\contentsline {subsection}{\numberline {4.2.3}Jungfrau-Aletsch-Bietschhorn (194, 28, 8)}{50}%
+\contentsline {subsection}{\numberline {4.2.4}Jungfrau-Aletsch-Bietschhorn (195, 28, 9)}{51}%
+\contentsline {subsection}{\numberline {4.2.5}PARVATI (146, 38, 4)}{52}%
+\contentsline {chapter}{\numberline {5}Conclusions}{54}%
+\contentsline {section}{\numberline {5.1}Future development}{54}%
+\contentsline {chapter}{\numberline {6}Glossary}{57}%
+\contentsline {section}{\numberline {6.1}Acronyms}{57}%

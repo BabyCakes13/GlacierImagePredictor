@@ -1,80 +1,12 @@
 \begin{thebibliography}{}
 
-\bibitem[cud, ]{cuda}
-Cuda.
+\bibitem[Catalog, 2018]{STAC}
+Catalog, S.~A. (2018).
+\newblock Stac api endpoint.
 
-\bibitem[l8o, ]{l8otb}
-Different band combinations of landsat.
-\newblock \url{https://gisgeography.com/landsat-8-bands-combinations/}.
-\newblock Accessed: 2021-06-22.
-
-\bibitem[gda, ]{gdal}
-Gdal.
-\newblock https://gdal.org/.
-
-\bibitem[bd, ]{bd}
-Landsat 8 bands specifications.
-\newblock \url{https://landsat.gsfc.nasa.gov/landsat-8/landsat-8-bands/}.
-\newblock Accessed: 2021-06-22.
-
-\bibitem[lc1, ]{lc1l1}
-Landsat collection 1 product definition.
-\newblock
-  \url{https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1656_%20Landsat_Collection1_L1_Product_Definition-v2.pdf}.
-\newblock Accessed: 2021-06-22.
-
-\bibitem[sn, ]{sn}
-Landsat file naming convention.
-\newblock \url{https://gisgeography.com/landsat-file-naming-convention/}.
-\newblock Accessed: 2021-06-22.
-
-\bibitem[LAN, a]{LANDSAT}
-Landsat satellite specifications.
-\newblock
-  \url{https://www.usgs.gov/core-science-systems/nli/landsat/landsat-8?qt-science_support_page_related_con=0#}.
-\newblock Accessed: 2021-06-21.
-
-\bibitem[lgn, ]{lgng}
-Nasa on the landsat satellite.
-\newblock \url{https://landsat.gsfc.nasa.gov/}.
-\newblock Accessed: 2021-06-21.
-
-\bibitem[NAS, ]{NASA2020}
-Nasa report on 2020 average temperatures.
-\newblock
-  https://www.nasa.gov/press-release/2020-tied-for-warmest-year-on-record-nasa-analysis-shows.
-
-\bibitem[nds, ]{ndsi}
-ndsi.
-\newblock
-  \url{https://nsidc.org/support/faq/what-ndsi-snow-cover-and-how-does-it-compare-fsc}.
-\newblock Accessed: 2021-06-22.
-
-\bibitem[LAN, b]{LANDSATPIC}
-Picture of the landsat satellite.
-\newblock \url{https://landsat.gsfc.nasa.gov/sites/landsat/files/2013/01}.
-\newblock Accessed: 2021-06-21.
-
-\bibitem[STA, ]{STAC}
-Stac api endpoint.
-\newblock \url{https://stacspec.org/STAC-api.html}.
-\newblock Accessed: 2021-06-20.
-
-\bibitem[USG, ]{USGS}
-Usgs.
-\newblock \url{https://earthexplorer.usgs.gov/}.
-\newblock Accessed: 2021-06-21.
-
-\bibitem[WGI, ]{WGI}
-World glacier inventory.
-\newblock \url{http://nsidc.org/data/glacier_inventory/index.html}.
-\newblock Accessed: 2021-06-20.
-
-\bibitem[wrs, ]{wrs}
-Worldwide reference system-2.
-\newblock
-  \url{https://landsat.gsfc.nasa.gov/about/worldwide-reference-system/}.
-\newblock Accessed: 2021-06-22.
+\bibitem[Center, 2019]{WGI}
+Center, N. S. . I.~D. (2019).
+\newblock World glacier inventory.
 
 \bibitem[Farneb{\"a}ck, 2003]{GUNNAR2003}
 Farneb{\"a}ck, G. (2003).
@@ -87,6 +19,23 @@ Fischler, M.~A. and Bolles, R.~C. (1981).
 \newblock Random sample consensus: A paradigm for model fitting with
   applications to image analysis and automated cartography.
 \newblock {\em Commun. ACM}, 24(6):381–395.
+
+\bibitem[George~Riggs and Román, 2015]{ndsi}
+George~Riggs, D.~H. and Román, M.~O. (2015).
+\newblock Viirs snow cover algorithm theoretical basis document (atbd).
+\newblock page~38.
+
+\bibitem[GISGeography, 2021a]{l8otb}
+GISGeography (2021a).
+\newblock Different band combinations of landsat.
+
+\bibitem[GISGeography, 2021b]{sn}
+GISGeography (2021b).
+\newblock Landsat file naming convention.
+
+\bibitem[Greene and Jacobs, 2021]{NASA2020}
+Greene, T. and Jacobs, P. (2021).
+\newblock Nasa report on 2020 average temperatures.
 
 \bibitem[Hall and Riggs, 2001]{Hall2001}
 Hall, D. and Riggs, G. (2001).
@@ -109,6 +58,10 @@ Knight, E.~J. and Kvaran, G. (2014).
   performance.
 \newblock {\em Landsat-8 Sensor Characterization and Calibration}.
 
+\bibitem[Loyd, 2013]{bd}
+Loyd, C. (2013).
+\newblock Landsat 8 bands specifications.
+
 \bibitem[Lucas and Kanade, 1981]{KANADE1981}
 Lucas, B.~D. and Kanade, T. (1981).
 \newblock An iterative image registration technique with an application to
@@ -117,11 +70,30 @@ Lucas, B.~D. and Kanade, T. (1981).
   Artificial Intelligence - Volume 2}, IJCAI'81, page 674–679, San Francisco,
   CA, USA. Morgan Kaufmann Publishers Inc.
 
+\bibitem[Markham, 2013]{lgng}
+Markham, B. (2013).
+
+\bibitem[Masek, 2018]{wrs}
+Masek, J.~G. (2018).
+\newblock Worldwide reference system-2.
+
+\bibitem[of~the InteriorU.S. Geological~Survey, 2021]{lc1l1}
+of~the InteriorU.S. Geological~Survey, D. (2021).
+\newblock Landsat collection 1 product definition.
+
+\bibitem[OpenCV, 2021]{cuda}
+OpenCV (2021).
+\newblock Cuda.
+
 \bibitem[Racoviteanu et~al., 2019]{RACOVITEANU2019}
 Racoviteanu, A.~E., Rittger, K., and Armstrong, R. (2019).
 \newblock An automated approach for estimating snowline altitudes in the
   karakoram and eastern himalaya from remote sensing.
 \newblock {\em Front. Earth Sci.}, 7:220.
+
+\bibitem[Science, 2021]{olitris}
+Science, N.~L. (2021).
+\newblock Wavelenghts of all sensors on the landsat satellites.
 
 \bibitem[Solveig H.~Winsvold and Schellenberger, 2017]{WINSVOLD2017}
 Solveig H.~Winsvold, Andreas~Kääb, C. N. L. M. A. W. J. J. v.~P. and
@@ -135,12 +107,23 @@ Tak, S., K.~A. (2020).
   satellite imagery based model.
 \newblock {\em Scientific Reports}, 10:12211.
 
+\bibitem[USGS, 2021a]{LANDSAT}
+USGS (2021a).
+\newblock Landsat satellite specifications.
+
+\bibitem[USGS, 2021b]{USGS}
+USGS (2021b).
+\newblock Usgs earth explorer.
+
 \bibitem[Wang et~al., 2017]{WANG2017}
 Wang, H., Yang, R., LI, X., and CAO, S. (2017).
 \newblock Glacier parameter extraction using landsat 8 images in the eastern
   karakorum.
 \newblock {\em {IOP} Conference Series: Earth and Environmental Science},
   57:012004.
+
+\bibitem[Warmerdam and Rouault, 2021]{gdal}
+Warmerdam, F. and Rouault, E. (2021).
 
 \bibitem[Winsvold et~al., 2016]{WINSVOLD2016}
 Winsvold, S.~H., Kääb, A., and Nuth, C. (2016).
