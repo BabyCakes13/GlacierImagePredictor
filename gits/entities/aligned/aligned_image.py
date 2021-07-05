@@ -43,7 +43,7 @@ class AlignedImage(Image):
             self.__aligned_ndarray = tifffile.imread(path)
         else:
             self.__align()
-            if self.__aligned_ndarray.shape[2] < 3:
+            if len(self.__aligned_ndarray.shape) < 3:
                 self.__aligned_ndarray = self.__resize_aligned_to_reference()
             logger.notice("Write cached file: " + path)
             tifffile.imwrite(path, self.__aligned_ndarray)
